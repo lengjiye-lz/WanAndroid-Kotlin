@@ -25,11 +25,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation lib.junit
+    androidTestImplementation lib.test_runner
+    androidTestImplementation lib.test_core
     implementation lib.kotlin_jdk7
     implementation lib.appcompat
     implementation lib.constraintlayout
     implementation lib.android_ktx
-    testImplementation lib.junit
-    androidTestImplementation lib.test_runner
-    androidTestImplementation lib.test_core
+    implementation lib.rxjava2
+    implementation lib.rxandroid2
+    implementation lib.retrofit2
+    implementation lib.retrofit2_gson
+    implementation lib.retrofit2_rxjava
+    implementation lib.gson
 }
