@@ -38,4 +38,5 @@ dependencies {
     implementation lib.retrofit2_gson
     implementation lib.retrofit2_rxjava
     implementation lib.gson
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha05'
 }
