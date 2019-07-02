@@ -1,7 +1,8 @@
-package com.lengjiye.codelibrarykotlin
+package com.lengjiye.codelibrarykotlin.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.adapter.ViewpagerAdapter
 import com.lengjiye.codelibrarykotlin.view.VerticalViewPager
 
