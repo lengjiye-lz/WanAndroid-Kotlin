@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        tools:ignore="MissingConstraints"
-        android:layout_height="match_parent">
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <com.lengjiye.codelibrarykotlin.view.SecondBezierView
-            android:id="@+id/second"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/wave"
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.lengjiye.codelibrarykotlin.viewmode.BesselViewMode"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-
-    <com.lengjiye.codelibrarykotlin.view.WaveBezierView
-            android:id="@+id/wave"
-            app:layout_constraintTop_toBottomOf="@+id/second"
-            android:layout_width="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_height="0dp"/>
+            tools:ignore="MissingConstraints"
+            android:layout_height="match_parent">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.lengjiye.codelibrarykotlin.view.SecondBezierView
+                android:id="@+id/second"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/wave"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+
+        <com.lengjiye.codelibrarykotlin.view.WaveBezierView
+                android:id="@+id/wave"
+                app:layout_constraintTop_toBottomOf="@+id/second"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="0dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

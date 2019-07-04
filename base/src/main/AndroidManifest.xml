@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.lengjiye.base">
+
+    <application>
+        <activity android:name=".MActivity"/>
+    </application>
+</manifest>

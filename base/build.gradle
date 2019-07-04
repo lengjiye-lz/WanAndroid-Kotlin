@@ -1,8 +1,4 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.android.library'
 
 android {
 
@@ -10,12 +6,12 @@ android {
     buildToolsVersion cfgs.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.lengjiye.codelibrarykotlin"
         minSdkVersion cfgs.minSdkVersion
         targetSdkVersion cfgs.targetSdkVersion
         versionCode cfgs.versionCode
         versionName cfgs.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     dataBinding {
@@ -28,26 +24,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     testImplementation lib.junit
     androidTestImplementation lib.test_runner
     androidTestImplementation lib.test_core
     implementation lib.kotlin_jdk7
+
     implementation lib.appcompat
-    implementation lib.constraintlayout
-    implementation lib.android_ktx
-    implementation lib.rxjava2
-    implementation lib.rxandroid2
-    implementation lib.retrofit2
-    implementation lib.retrofit2_gson
-    implementation lib.retrofit2_rxjava
-    implementation lib.gson
-
-    implementation project(':base')
-
-    implementation "androidx.viewpager2:viewpager2:$cfgs.viewpager2_version"
-    implementation "com.airbnb.android:lottie:$cfgs.lottie_version"
+    api "androidx.lifecycle:lifecycle-viewmodel:$cfgs.lifecycle_version"
+    api "androidx.lifecycle:lifecycle-extensions:$cfgs.lifecycle_version"
 }

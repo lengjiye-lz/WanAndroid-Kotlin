@@ -31,7 +31,7 @@ import org.junit.runner.RunWith
  */
 @Suppress("DEPRECATION")
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class ExampleInstrumentedIApp {
 
 
     @Test
