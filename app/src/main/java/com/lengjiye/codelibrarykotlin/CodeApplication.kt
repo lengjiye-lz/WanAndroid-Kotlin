@@ -8,7 +8,7 @@ import com.lengjiye.base.application.MasterApplication
 class CodeApplication : Application(), IApp {
 
     override val application = this
-    override val applicationId = BuildConfig.APPLICATION_ID
+    override var applicationId = BuildConfig.APPLICATION_ID
     override val versionCode = BuildConfig.VERSION_CODE
     override val versionName = BuildConfig.VERSION_NAME
     override val isDebug = BuildConfig.DEBUG
