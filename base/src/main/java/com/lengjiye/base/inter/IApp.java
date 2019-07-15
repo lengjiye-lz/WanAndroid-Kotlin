@@ -1,11 +1,18 @@
 package com.lengjiye.base.inter;
 
-import android.app.Application;
 import android.content.Context;
 
 public interface IApp {
 
-    Context getApplicationContext();
+    Context getApplication();
 
-    Application getApplication();
+    String getApplicationId();
+
+    int getVersionCode();
+
+    String getVersionName();
+
+    Boolean isDebug();
+
+    String getBuildType();
 }

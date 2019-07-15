@@ -2,6 +2,5 @@
           package="com.lengjiye.base">
 
     <application>
-        <activity android:name=".MActivity"/>
     </application>
 </manifest>

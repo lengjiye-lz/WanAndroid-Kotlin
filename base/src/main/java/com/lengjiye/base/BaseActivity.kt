@@ -7,25 +7,27 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
 import com.lengjiye.base.viewmode.BaseViewMode
 
-abstract class BaseActivity<out T : ViewDataBinding, out M : BaseViewMode> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, M : BaseViewMode> : AppCompatActivity() {
 
-    private lateinit var mBinding: T
-    private lateinit var mViewModel: M
+    lateinit var mBinding: T
+    lateinit var mViewModel: M
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
         mViewModel = ViewModelProviders.of(this).get(getViewModel()::class.java)
-        mBinding.setLifecycleOwner(this)
-//        mBinding.viewModel = mViewModel
+        mBinding.lifecycleOwner = this
+
+        bindViewModel()
+
+        initView()
     }
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel() : M
+    abstract fun getViewModel(): M
 
-    abstract fun getViewDataBinding(): T
+    abstract fun bindViewModel()
 
-
+    open fun initView() = Unit
 }
