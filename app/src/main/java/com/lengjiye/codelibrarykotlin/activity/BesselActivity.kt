@@ -2,6 +2,7 @@ package com.lengjiye.codelibrarykotlin.activity
 
 import androidx.databinding.ViewDataBinding
 import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.ActivityBesselBinding
 import com.lengjiye.codelibrarykotlin.viewmode.BesselViewMode
@@ -36,7 +37,9 @@ open class BesselActivity : BaseActivity<ViewDataBinding, BesselViewMode>() {
         getBinding()?.tvText?.text = "测试  测试  测试"
         getBinding()?.tvText?.setOnClickListener {
             i++
-            getBinding()?.tvText?.text = "测试  测试  测试:$i"
+            getBinding()?.tvText?.text = "测试  测试  测试:$i applicationId: ${MasterApplication.instance.applicationId}"
+
+
         }
     }
 
