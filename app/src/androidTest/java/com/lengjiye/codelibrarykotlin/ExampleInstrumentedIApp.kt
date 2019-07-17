@@ -131,5 +131,36 @@ class ExampleInstrumentedIApp {
         }
     }
 
+    @Test
+    fun arrayTest() {
+        val array = Array(10) { num -> num * 10 }
+        array.forEach {
+            Log.e("lz", "it:$it")
+        }
+    }
 
+    @Test
+    fun testFor() {
+        val i = 0
+        when (i) {
+            // 单个条件判断
+            1 -> {
+
+            }
+            // 多个条件判断
+            2, 3, 4 -> {
+
+            }
+            // range 判断
+            in 5..7 -> {
+
+            }
+            !in 8..10 -> {
+
+            }
+            else -> {
+
+            }
+        }
+    }
 }
