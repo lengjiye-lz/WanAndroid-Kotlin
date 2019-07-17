@@ -163,4 +163,32 @@ class ExampleInstrumentedIApp {
             }
         }
     }
+
+    /**
+     * 数组测试
+     */
+    @Test
+    fun testArray() {
+        // 创建一个不可变的 map 集合
+        val map = mapOf("1" to "sdcsd1", "2" to "sdcsd2", "3" to "sdcsd3")
+        // 创建一个可变的 MutableMap 集合
+        val mutableMap = mutableMapOf(1 to "sdc1", 2 to "sdc2", 3 to "sdc3")
+        // 创建一个可变的 HashMap 集合
+        val hashMap = hashMapOf(1 to "sdc1", 2 to "sdc2", 3 to "sdc3")
+        // 判断所有的元素 key>2, value.length > 2则返回 true,否则返回false
+        mutableMap.all { it.key > 2 && it.value.length > 2 }
+
+        // 遍历
+        for (en in map.entries) {
+            Log.e("test", "en:key:${en.key} value:${en.value}")
+        }
+        // 遍历 key
+        for (key in map.keys) {
+            Log.e("test", "key:$key")
+        }
+        // 遍历 value
+        for (value in map.values) {
+            Log.e("test", "value:$value")
+        }
+    }
 }
