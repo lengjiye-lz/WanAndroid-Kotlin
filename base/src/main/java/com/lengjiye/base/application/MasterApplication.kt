@@ -3,6 +3,9 @@ package com.lengjiye.base.application
 import android.content.Context
 import com.lengjiye.base.inter.IApp
 
+/**
+ * 在 model 中使用 application
+ */
 class MasterApplication : IApp {
 
     private lateinit var iApp: IApp

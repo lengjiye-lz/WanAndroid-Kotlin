@@ -1,6 +1,5 @@
 package com.lengjiye.codelibrarykotlin.activity
 
-import androidx.databinding.ViewDataBinding
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.codelibrarykotlin.R
@@ -10,7 +9,7 @@ import com.lengjiye.codelibrarykotlin.viewmode.BesselViewMode
 /**
  * 贝塞尔曲线测试 demo
  */
-open class BesselActivity : BaseActivity<ViewDataBinding, BesselViewMode>() {
+open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewMode>() {
 
     private var i: Int = 0
 
@@ -23,23 +22,21 @@ open class BesselActivity : BaseActivity<ViewDataBinding, BesselViewMode>() {
     }
 
     override fun bindViewModel() {
-        getBinding()?.viewModel = mViewModel
+        getBinding().viewModel = mViewModel
     }
 
     /**
      * 获取 mBinding
      */
-    private fun getBinding(): ActivityBesselBinding? {
-        return mBinding as ActivityBesselBinding
+    private fun getBinding(): ActivityBesselBinding {
+        return mBinding
     }
 
     override fun initView() {
-        getBinding()?.tvText?.text = "测试  测试  测试"
-        getBinding()?.tvText?.setOnClickListener {
+        getBinding().tvText.text = "测试  测试  测试"
+        getBinding().tvText.setOnClickListener {
             i++
-            getBinding()?.tvText?.text = "测试  测试  测试:$i applicationId: ${MasterApplication.instance.applicationId}"
-
-
+            getBinding().tvText.text = "测试  测试  测试:$i applicationId: ${MasterApplication.instance.applicationId}"
         }
     }
 

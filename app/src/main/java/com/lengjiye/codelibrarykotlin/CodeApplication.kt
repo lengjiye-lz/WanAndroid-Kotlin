@@ -5,6 +5,10 @@ import android.content.Context
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.base.application.MasterApplication
 
+/**
+ * application
+ * 也可以通过 MasterApplication.instance 获取
+ */
 class CodeApplication : Application(), IApp {
 
     override val application = this

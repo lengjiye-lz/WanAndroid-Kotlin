@@ -27,6 +27,9 @@ abstract class BaseActivity<T : ViewDataBinding, M : BaseViewMode> : AppCompatAc
 
     abstract fun getViewModel(): M
 
+    /**
+     * 绑定 ViewModel
+     */
     abstract fun bindViewModel()
 
     open fun initView() = Unit
