@@ -7,10 +7,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
 import com.lengjiye.base.viewmode.BaseViewMode
 
-abstract class BaseActivity<T : ViewDataBinding, M : BaseViewMode> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode<*>> : AppCompatActivity() {
 
     lateinit var mBinding: T
-    lateinit var mViewModel: M
+    lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,17 +20,22 @@ abstract class BaseActivity<T : ViewDataBinding, M : BaseViewMode> : AppCompatAc
 
         bindViewModel()
 
-        initView()
+        initView(savedInstanceState)
     }
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel(): M
+    abstract fun getViewModel(): VM
 
     /**
      * 绑定 ViewModel
      */
     abstract fun bindViewModel()
 
-    open fun initView() = Unit
+    /**
+     * 初始化 view
+     */
+    open fun initView(savedInstanceState: Bundle?) = Unit
+
+    open fun initData() = Unit
 }
