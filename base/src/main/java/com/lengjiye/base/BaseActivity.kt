@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
 import com.lengjiye.base.viewmode.BaseViewMode
 
-abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode<*>> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode> : AppCompatActivity() {
 
     lateinit var mBinding: T
     lateinit var mViewModel: VM

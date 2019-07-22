@@ -7,6 +7,6 @@ import com.lengjiye.base.viewmode.BaseViewMode
 /**
  * Bessel
  */
-class BesselViewMode<M : BaseModel>(application: Application, m: M) : BaseViewMode<M>(application, m) {
+class BesselViewMode(application: Application) : BaseViewMode(application) {
 
 }

@@ -11,12 +11,12 @@ import com.lengjiye.codelibrarykotlin.viewmode.BesselViewMode
 /**
  * 贝塞尔曲线测试 demo
  */
-open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewMode<BesselModel>>() {
+open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewMode>() {
 
     private var i: Int = 0
 
-    override fun getViewModel(): BesselViewMode<BesselModel> {
-        return BesselViewMode(application, BesselModel())
+    override fun getViewModel(): BesselViewMode {
+        return BesselViewMode(application)
     }
 
     override fun getLayoutId(): Int {
