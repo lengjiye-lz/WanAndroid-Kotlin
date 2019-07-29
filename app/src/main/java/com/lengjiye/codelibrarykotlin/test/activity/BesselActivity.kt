@@ -1,12 +1,11 @@
-package com.lengjiye.codelibrarykotlin.activity
+package com.lengjiye.codelibrarykotlin.test.activity
 
 import android.os.Bundle
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.ActivityBesselBinding
-import com.lengjiye.codelibrarykotlin.model.BesselModel
-import com.lengjiye.codelibrarykotlin.viewmode.BesselViewMode
+import com.lengjiye.codelibrarykotlin.test.viewmode.BesselViewMode
 
 /**
  * 贝塞尔曲线测试 demo

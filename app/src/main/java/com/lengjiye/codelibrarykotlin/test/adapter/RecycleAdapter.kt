@@ -1,10 +1,9 @@
-package com.lengjiye.codelibrarykotlin.adapter
+package com.lengjiye.codelibrarykotlin.test.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.lengjiye.codelibrarykotlin.R

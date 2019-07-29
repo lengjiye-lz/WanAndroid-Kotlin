@@ -1,4 +1,4 @@
-package com.lengjiye.codelibrarykotlin
+package com.lengjiye.codelibrarykotlin.test
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lengjiye.codelibrarykotlin.adapter.RecycleAdapter
+import com.lengjiye.codelibrarykotlin.R
+import com.lengjiye.codelibrarykotlin.test.adapter.RecycleAdapter
 
 class TestFragment : Fragment() {
     private lateinit var s: String

@@ -1,4 +1,4 @@
-package com.lengjiye.codelibrarykotlin.activity
+package com.lengjiye.codelibrarykotlin.test.activity
 
 import android.os.Bundle
 import android.util.Log

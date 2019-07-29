@@ -1,7 +1,6 @@
-package com.lengjiye.codelibrarykotlin.viewmode
+package com.lengjiye.codelibrarykotlin.test.viewmode
 
 import android.app.Application
-import com.lengjiye.base.model.BaseModel
 import com.lengjiye.base.viewmode.BaseViewMode
 
 /**

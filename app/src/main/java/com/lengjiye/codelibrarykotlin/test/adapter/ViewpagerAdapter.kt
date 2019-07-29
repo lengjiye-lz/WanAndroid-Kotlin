@@ -1,11 +1,11 @@
-package com.lengjiye.codelibrarykotlin.adapter
+package com.lengjiye.codelibrarykotlin.test.adapter
 
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.lengjiye.codelibrarykotlin.TestFragment
+import com.lengjiye.codelibrarykotlin.test.TestFragment
 import kotlin.collections.ArrayList
 
 class ViewpagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {

@@ -21,6 +21,8 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode> : AppCompatA
         bindViewModel()
 
         initView(savedInstanceState)
+
+        initData()
     }
 
     abstract fun getLayoutId(): Int

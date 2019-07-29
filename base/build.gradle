@@ -40,6 +40,6 @@ dependencies {
     implementation lib.kotlin_jdk7
 
     implementation lib.appcompat
-    api "androidx.lifecycle:lifecycle-viewmodel:$cfgs.lifecycle_version"
-    api "androidx.lifecycle:lifecycle-extensions:$cfgs.lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel:$cfgs.lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-extensions:$cfgs.lifecycleVersion"
 }

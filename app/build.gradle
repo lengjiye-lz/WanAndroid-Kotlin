@@ -16,6 +16,11 @@ android {
         versionCode cfgs.versionCode
         versionName cfgs.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
 
     dataBinding {
@@ -48,6 +53,10 @@ dependencies {
 
     implementation project(':base')
 
-    implementation "androidx.viewpager2:viewpager2:$cfgs.viewpager2_version"
-    implementation "com.airbnb.android:lottie:$cfgs.lottie_version"
+    implementation "androidx.viewpager2:viewpager2:$cfgs.viewpager2Version"
+    implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
+    // AutoDispose  防止rxJava内存泄漏
+    implementation "com.uber.autodispose:autodispose-android:$cfgs.autodisposeVersion"
+    implementation "com.uber.autodispose:autodispose-android-archcomponents:$cfgs.autodisposeVersion"
+    implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
 }

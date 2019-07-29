@@ -3,20 +3,20 @@
           package="com.lengjiye.codelibrarykotlin">
 
     <application
-            android:name=".CodeApplication"
+            android:name=".application.CodeApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <!--<activity android:name=".activity.MainActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
+        <activity android:name=".home.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
         <!--<activity android:name=".activity.LottieActivity">-->
             <!--<intent-filter>-->
@@ -26,13 +26,13 @@
             <!--</intent-filter>-->
         <!--</activity>-->
 
-        <activity android:name=".activity.BesselActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+        <!--<activity android:name="com.lengjiye.codelibrarykotlin.test.activity.BesselActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
     </application>
 
 </manifest>

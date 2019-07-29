@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.codelibrarykotlin.viewmode.BesselViewMode"/>
+                type="com.lengjiye.codelibrarykotlin.test.viewmode.BesselViewMode"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
