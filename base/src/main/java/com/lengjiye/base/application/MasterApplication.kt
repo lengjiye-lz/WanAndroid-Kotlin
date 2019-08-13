@@ -4,7 +4,7 @@ import android.content.Context
 import com.lengjiye.base.inter.IApp
 
 /**
- * 在 model 中使用 application
+ * 在 model 中使用 applicationContext
  */
 class MasterApplication : IApp {
 
@@ -14,8 +14,8 @@ class MasterApplication : IApp {
     override val applicationId: String?
         get() = iApp.applicationId
 
-    override val application: Context?
-        get() = iApp.application
+    override val applicationContext: Context?
+        get() = iApp.applicationContext
 
     override val versionCode: Int?
         get() = iApp.versionCode

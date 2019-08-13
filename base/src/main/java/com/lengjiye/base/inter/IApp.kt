@@ -4,7 +4,7 @@ import android.content.Context
 
 interface IApp {
 
-    val application: Context?
+    val applicationContext: Context?
 
     val applicationId: String?
 

@@ -7,13 +7,13 @@ import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.codelibrarykotlin.BuildConfig
 
 /**
- * application
+ * applicationContext
  * 也可以通过 MasterApplication.instance 获取
  */
 class CodeApplication : Application(), IApp {
 
-    override val application = this
-    override var applicationId = BuildConfig.APPLICATION_ID
+    override val applicationContext = this
+    override val applicationId = BuildConfig.APPLICATION_ID
     override val versionCode = BuildConfig.VERSION_CODE
     override val versionName = BuildConfig.VERSION_NAME
     override val isDebug = BuildConfig.DEBUG
@@ -25,9 +25,7 @@ class CodeApplication : Application(), IApp {
     }
 
     companion object {
-        fun getApplicationContext(): Context? {
-            return null
-        }
+        val application = this
     }
-
 }
+
