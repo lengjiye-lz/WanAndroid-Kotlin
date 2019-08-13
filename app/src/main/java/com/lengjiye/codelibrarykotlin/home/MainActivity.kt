@@ -1,7 +1,6 @@
 package com.lengjiye.codelibrarykotlin.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
@@ -27,13 +26,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
     }
 
     override fun bindViewModel() {
-        getBinding()?.viewModel = mViewModel
+        getBinding().viewModel = mViewModel
     }
 
     /**
      * 获取 mBinding
      */
-    private fun getBinding(): ActivityMainBinding? {
+    override fun getBinding(): ActivityMainBinding {
         return mBinding
     }
 
@@ -44,7 +43,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
 
     override fun initData() {
         super.initData()
-//        switchFragment(0)
         mTempFragment = MainFragmentManager.instance.getHomeFragment()
         supportFragmentManager.beginTransaction()
             .add(R.id.f_container, mTempFragment as HomeFragment).commit()
@@ -66,43 +64,44 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
      * 初始化底部按钮
      */
     private fun initBottomNavigation() {
-        getBinding()?.bnBar?.setBarBackgroundColor(R.color.color_1)
-            ?.addItem(
-                BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_1)
-                    .setInactiveIconResource(R.mipmap.ic_launcher)
-                    .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
-            )
-            ?.addItem(
-                BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_2)
-                    .setInactiveIconResource(R.mipmap.ic_launcher)
-                    .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
-            )
-            ?.addItem(
-                BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_3)
-                    .setInactiveIconResource(R.mipmap.ic_launcher)
-                    .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
-            )
-            ?.addItem(
-                BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_4)
-                    .setInactiveIconResource(R.mipmap.ic_launcher)
-                    .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
-            )
-        getBinding()?.bnBar?.initialise()
+        getBinding().bnBar.let {
+            it.setBarBackgroundColor(R.color.color_1)
+                .addItem(
+                    BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_1)
+                        .setInactiveIconResource(R.mipmap.ic_launcher)
+                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                )
+                .addItem(
+                    BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_2)
+                        .setInactiveIconResource(R.mipmap.ic_launcher)
+                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                )
+                .addItem(
+                    BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_3)
+                        .setInactiveIconResource(R.mipmap.ic_launcher)
+                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                )
+                .addItem(
+                    BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_4)
+                        .setInactiveIconResource(R.mipmap.ic_launcher)
+                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                )
+                .initialise()
 
-        getBinding()?.bnBar?.setMode(BottomNavigationBar.MODE_FIXED)
+            it.setMode(BottomNavigationBar.MODE_FIXED)
 
-        getBinding()?.bnBar?.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
-            override fun onTabReselected(position: Int) {
-            }
+            it.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
+                override fun onTabReselected(position: Int) {
+                }
 
-            override fun onTabUnselected(position: Int) {
-            }
+                override fun onTabUnselected(position: Int) {
+                }
 
-            override fun onTabSelected(position: Int) {
-                Log.e("lz", "onTabSelected:$position")
-//                switchFragment(position)
-            }
-        })
+                override fun onTabSelected(position: Int) {
+                    switchFragment(position)
+                }
+            })
+        }
     }
 
     private fun switchFragment(position: Int) {
@@ -128,6 +127,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
         fragment?.let {
             switchFragment(it)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MainFragmentManager.instance.destroy()
     }
 
 }

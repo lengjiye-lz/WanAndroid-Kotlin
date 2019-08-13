@@ -38,6 +38,11 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment()
     abstract fun bindViewModel()
 
     /**
+     * 获取 mBinding
+     */
+    abstract fun getBinding(): T
+    
+    /**
      * 初始化 view
      */
     open fun initView(savedInstanceState: Bundle?) = Unit

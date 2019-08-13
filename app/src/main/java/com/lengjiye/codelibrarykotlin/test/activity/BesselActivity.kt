@@ -29,7 +29,7 @@ open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewMode>(
     /**
      * 获取 mBinding
      */
-    private fun getBinding(): ActivityBesselBinding {
+    override fun getBinding(): ActivityBesselBinding {
         return mBinding
     }
 

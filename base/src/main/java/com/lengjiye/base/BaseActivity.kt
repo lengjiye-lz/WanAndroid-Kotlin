@@ -35,6 +35,11 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode> : AppCompatA
     abstract fun bindViewModel()
 
     /**
+     * 获取 mBinding
+     */
+    abstract fun getBinding(): T
+
+    /**
      * 初始化 view
      */
     open fun initView(savedInstanceState: Bundle?) = Unit

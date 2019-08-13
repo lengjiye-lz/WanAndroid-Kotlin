@@ -16,15 +16,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
     }
 
     override fun bindViewModel() {
-        getBinding()?.viewModel = mViewModel
+        getBinding().viewModel = mViewModel
     }
 
-    private fun getBinding(): FragmentHomeBinding? {
+    override fun getBinding(): FragmentHomeBinding {
         return mBinding
     }
 
     override fun initData() {
         super.initData()
-        getBinding()?.tvText?.text = "这是 home"
+        getBinding().tvText.text = "这是 home"
     }
 }

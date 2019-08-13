@@ -16,10 +16,10 @@ class MeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
     }
 
     override fun bindViewModel() {
-        getBinding()?.viewModel = mViewModel
+        getBinding().viewModel = mViewModel
     }
 
-    private fun getBinding(): FragmentHomeBinding? {
+    override fun getBinding(): FragmentHomeBinding {
         return mBinding
     }
 }
