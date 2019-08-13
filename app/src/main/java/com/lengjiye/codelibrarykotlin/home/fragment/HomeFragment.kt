@@ -1,11 +1,16 @@
 package com.lengjiye.codelibrarykotlin.home.fragment
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseFragment
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.FragmentHomeBinding
+import com.lengjiye.codelibrarykotlin.home.adapter.HomeFragmentAdapter
+import com.lengjiye.codelibrarykotlin.home.model.HomeModel
 import com.lengjiye.codelibrarykotlin.home.viewmodel.HomeViewMode
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
+
+    private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
@@ -25,6 +30,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
 
     override fun initData() {
         super.initData()
-        getBinding().tvText.text = "这是 home"
+        getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
+        getBinding().rlList.adapter = adapter
+
+        test()
+    }
+
+    private fun test() {
+        val list: MutableList<HomeModel> = ArrayList()
+        var homeModel: HomeModel
+        listOf("1", "2", "3", "4", "5", "6", "7", "8").forEach {
+            homeModel = HomeModel(it)
+            list.add(homeModel)
+        }
+        adapter.addAll(list)
     }
 }

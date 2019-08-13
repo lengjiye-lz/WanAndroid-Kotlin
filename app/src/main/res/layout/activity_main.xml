@@ -15,19 +15,20 @@
             tools:ignore="MissingConstraints"
             android:layout_height="match_parent">
 
+        <include layout="@layout/widget_search"/>
+
         <FrameLayout
                 android:id="@+id/f_container"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_search"
                 app:layout_constraintBottom_toTopOf="@+id/bn_bar"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
 
-        <View
-                android:id="@+id/divider"
+        <include
+                layout="@layout/widget_line"
                 android:layout_width="match_parent"
                 android:layout_height="0.5px"
-                app:layout_constraintBottom_toTopOf="@+id/bn_bar"
-                android:background="#E1E1E1"/>
+                app:layout_constraintBottom_toTopOf="@+id/bn_bar"/>
 
         <com.ashokvarma.bottomnavigation.BottomNavigationBar
                 android:id="@+id/bn_bar"

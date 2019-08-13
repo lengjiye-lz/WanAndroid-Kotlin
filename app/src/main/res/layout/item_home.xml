@@ -13,12 +13,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             tools:ignore="MissingConstraints"
-            android:layout_height="match_parent">
+            android:padding="20dp"
+            android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rl_list"
+        <TextView
+                android:id="@+id/tv_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,5 +30,6 @@ ext {
             retrofit2_gson  : "com.squareup.retrofit2:converter-gson:2.2.0",
             retrofit2_rxjava: "com.squareup.retrofit2:adapter-rxjava2:2.3.0",
             gson            : "com.google.code.gson:gson:2.8.3",
+            recycleview     : "androidx.recyclerview:recyclerview:1.0.0",
     ]
 }

@@ -40,8 +40,6 @@ dependencies {
     testImplementation lib.junit
     androidTestImplementation lib.test_runner
     androidTestImplementation lib.test_core
-    implementation lib.kotlin_jdk7
-    implementation lib.appcompat
     implementation lib.constraintlayout
     implementation lib.android_ktx
     implementation lib.rxjava2
@@ -53,7 +51,7 @@ dependencies {
 
     implementation project(':base')
 
-    implementation "androidx.viewpager2:viewpager2:$cfgs.viewpager2Version"
+//    implementation "androidx.viewpager2:viewpager2:$cfgs.viewpager2Version"
     implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
     // AutoDispose  防止rxJava内存泄漏
     implementation "com.uber.autodispose:autodispose-android:$cfgs.autodisposeVersion"

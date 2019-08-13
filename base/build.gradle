@@ -37,9 +37,10 @@ dependencies {
     testImplementation lib.junit
     androidTestImplementation lib.test_runner
     androidTestImplementation lib.test_core
-    implementation lib.kotlin_jdk7
+    api lib.kotlin_jdk7
 
-    implementation lib.appcompat
+    api lib.appcompat
+    api lib.recycleview
     api "androidx.lifecycle:lifecycle-viewmodel:$cfgs.lifecycleVersion"
     api "androidx.lifecycle:lifecycle-extensions:$cfgs.lifecycleVersion"
 }

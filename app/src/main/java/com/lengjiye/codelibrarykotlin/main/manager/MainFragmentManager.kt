@@ -2,9 +2,9 @@ package com.lengjiye.codelibrarykotlin.main.manager
 
 import androidx.fragment.app.Fragment
 import com.lengjiye.codelibrarykotlin.home.fragment.HomeFragment
-import com.lengjiye.codelibrarykotlin.home.fragment.MeFragment
-import com.lengjiye.codelibrarykotlin.home.fragment.ProjectFragment
-import com.lengjiye.codelibrarykotlin.home.fragment.SystemFragment
+import com.lengjiye.codelibrarykotlin.me.MeFragment
+import com.lengjiye.codelibrarykotlin.project.ProjectFragment
+import com.lengjiye.codelibrarykotlin.system.SystemFragment
 import java.lang.ref.WeakReference
 
 class MainFragmentManager private constructor() {
@@ -20,7 +20,7 @@ class MainFragmentManager private constructor() {
 
     private fun getFragmentMap(): MutableMap<String, WeakReference<Fragment>> {
         if (map == null) {
-            map = mutableMapOf()
+            map = hashMapOf()
         }
         return map as MutableMap<String, WeakReference<Fragment>>
     }

@@ -66,26 +66,26 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
      */
     private fun initBottomNavigation() {
         getBinding().bnBar.let {
-            it.setBarBackgroundColor(R.color.color_1)
+            it.setBarBackgroundColor(R.color.c_ff)
                 .addItem(
                     BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_1)
                         .setInactiveIconResource(R.mipmap.ic_launcher)
-                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                        .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
                 )
                 .addItem(
                     BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_2)
                         .setInactiveIconResource(R.mipmap.ic_launcher)
-                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                        .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
                 )
                 .addItem(
                     BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_3)
                         .setInactiveIconResource(R.mipmap.ic_launcher)
-                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                        .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
                 )
                 .addItem(
                     BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_4)
                         .setInactiveIconResource(R.mipmap.ic_launcher)
-                        .setActiveColor(R.color.color_2).setInActiveColor(R.color.color_3)
+                        .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
                 )
                 .initialise()
 
