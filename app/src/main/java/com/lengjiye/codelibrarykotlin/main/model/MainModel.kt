@@ -1,4 +1,4 @@
-package com.lengjiye.codelibrarykotlin.home.model
+package com.lengjiye.codelibrarykotlin.main.model
 
 import com.lengjiye.base.model.BaseModel
 

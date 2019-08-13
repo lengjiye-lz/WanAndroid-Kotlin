@@ -1,4 +1,4 @@
-package com.lengjiye.codelibrarykotlin.home
+package com.lengjiye.codelibrarykotlin.main.manager
 
 import androidx.fragment.app.Fragment
 import com.lengjiye.codelibrarykotlin.home.fragment.HomeFragment

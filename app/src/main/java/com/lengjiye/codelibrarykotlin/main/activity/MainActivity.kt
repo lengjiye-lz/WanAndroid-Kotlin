@@ -1,4 +1,4 @@
-package com.lengjiye.codelibrarykotlin.home
+package com.lengjiye.codelibrarykotlin.main.activity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,8 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.ActivityMainBinding
 import com.lengjiye.codelibrarykotlin.home.fragment.HomeFragment
-import com.lengjiye.codelibrarykotlin.home.viewmodel.MainViewMode
+import com.lengjiye.codelibrarykotlin.main.manager.MainFragmentManager
+import com.lengjiye.codelibrarykotlin.main.viewmodel.MainViewMode
 
 /**
  * mainActivity

@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.codelibrarykotlin.home.viewmodel.MainViewMode"/>
+                type="com.lengjiye.codelibrarykotlin.main.viewmodel.MainViewMode"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
