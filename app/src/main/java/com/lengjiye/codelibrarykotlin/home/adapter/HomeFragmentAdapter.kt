@@ -7,10 +7,11 @@ import com.lengjiye.base.recycleview.BaseAdapter
 import com.lengjiye.base.recycleview.BaseViewHolder
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.ItemHomeBinding
+import com.lengjiye.codelibrarykotlin.home.HomeBean
 import com.lengjiye.codelibrarykotlin.home.model.HomeModel
 
-class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeModel>?) :
-    BaseAdapter<HomeModel, HomeFragmentAdapter.HomeModelHolder>(context, models) {
+class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
+    BaseAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolder>(context, models) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeModelHolder {
         val binding = DataBindingUtil.inflate<ItemHomeBinding>(
@@ -19,9 +20,9 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
         return HomeModelHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HomeModelHolder, position: Int, item: HomeModel?) {
+    override fun onBindViewHolder(holder: HomeModelHolder, position: Int, item: HomeBean?) {
         item?.let {
-            holder.binding.tvText.text = item.title
+            holder.binding.tvText.text = "测试:$position"
         }
     }
 

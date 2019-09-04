@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.lengjiye.base.viewmode.BaseViewMode
 
 abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment() {
@@ -16,7 +16,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        mViewModel = ViewModelProviders.of(getBaseActivity()).get(getViewModel()::class.java)
+        mViewModel = ViewModelProvider(getBaseActivity()).get(getViewModel()::class.java)
         mBinding.lifecycleOwner = this
         bindViewModel()
         initView(savedInstanceState)
@@ -41,7 +41,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment()
      * 获取 mBinding
      */
     abstract fun getBinding(): T
-    
+
     /**
      * 初始化 view
      */
