@@ -1,5 +1,7 @@
 package com.lengjiye.network
 
+import java.util.*
+
 class ServiceHolder {
     companion object {
         var singleton = Instance.holder
@@ -11,14 +13,16 @@ class ServiceHolder {
         val holder = ServiceHolder()
     }
 
-    private var list: MutableMap<String, Any>? = null
-
-    constructor() {
-        list = mutableMapOf()
-    }
+    private var list: HashMap<String, *>? = null
 
     private fun <T> getService(c: Class<T>, type: Int): T? {
+
+        if (list == null) {
+            list = HashMap<String, T>()
+        }
+
         var t: T? = null
+
         list?.let {
             t = it[c.simpleName] as T
         }
@@ -34,7 +38,7 @@ class ServiceHolder {
                 }
             }
             t?.let {
-                list?.put(c.simpleName, it)
+                (list as HashMap<String, T>).put(c.simpleName, it)
             }
         }
         return t

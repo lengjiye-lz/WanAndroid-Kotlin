@@ -7,7 +7,7 @@ import java.lang.Exception
 class HttpResultFunc<T> : Function<BaseHttpResult<T>, T> {
 
     override fun apply(t: BaseHttpResult<T>): T? {
-        var errorCode = t.errcode
+        var errorCode = t.errorCode
         return if (errorCode == 0) {
             t.data
         } else {
@@ -16,7 +16,7 @@ class HttpResultFunc<T> : Function<BaseHttpResult<T>, T> {
                 originalData = Gson().toJson(t)
             } catch (e: Exception) {
             }
-            ApiException(errorCode, t.errmsg, originalData) as T
+            ApiException(errorCode, t.errorMsg, originalData) as T
         }
     }
 

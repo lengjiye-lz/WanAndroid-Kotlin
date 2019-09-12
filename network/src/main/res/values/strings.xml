@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">network</string>
+
+    <string name="net_0001">网络不给力</string>
+    <string name="net_0002">网络中断，请检查您的网络状态</string>
 </resources>

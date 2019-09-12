@@ -11,17 +11,34 @@ import com.lengjiye.codelibrarykotlin.BuildConfig
  * 也可以通过 MasterApplication.instance 获取
  */
 class CodeApplication : Application(), IApp {
+    
+    override fun applicationContext(): Context {
+        return this
+    }
 
-    override val applicationContext = this
-    override val applicationId = BuildConfig.APPLICATION_ID
-    override val versionCode = BuildConfig.VERSION_CODE
-    override val versionName = BuildConfig.VERSION_NAME
-    override val isDebug = BuildConfig.DEBUG
-    override val buildType = BuildConfig.BUILD_TYPE
+    override fun applicationId(): String {
+        return BuildConfig.APPLICATION_ID
+    }
+
+    override fun versionCode(): Int {
+        return BuildConfig.VERSION_CODE
+    }
+
+    override fun versionName(): String {
+        return BuildConfig.VERSION_NAME
+    }
+
+    override fun isDebug(): Boolean {
+        return BuildConfig.DEBUG
+    }
+
+    override fun buildType(): String {
+        return BuildConfig.BUILD_TYPE
+    }
 
     override fun onCreate() {
         super.onCreate()
-        MasterApplication.instance.setIApp(this)
+        MasterApplication.getInstance().setIApp(this)
     }
 
     companion object {

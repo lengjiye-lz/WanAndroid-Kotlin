@@ -46,5 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
             list.add(homeBean)
         }
         adapter.addAll(list)
+        mViewModel.getHomeData(this)
     }
+
 }

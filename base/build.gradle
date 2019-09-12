@@ -37,8 +37,7 @@ dependencies {
     testImplementation "junit:junit:$cfgs.junit"
     androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     api "androidx.appcompat:appcompat:$cfgs.appcompat"
     api "androidx.recyclerview:recyclerview:$cfgs.recycleview"
