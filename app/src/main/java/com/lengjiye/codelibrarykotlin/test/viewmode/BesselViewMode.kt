@@ -8,4 +8,11 @@ import com.lengjiye.base.viewmode.BaseViewMode
  */
 class BesselViewMode(application: Application) : BaseViewMode(application) {
 
+
+    override fun onCreate() {
+    }
+
+    override fun onDestroy() {
+    }
+
 }

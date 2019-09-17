@@ -65,11 +65,7 @@ public class MasterApplication implements IApp {
     }
 
     private static class Instance {
-        private static MasterApplication masterApplication;
-
-        private void Instance() {
-            masterApplication = new MasterApplication();
-        }
+        private static MasterApplication masterApplication = new MasterApplication();
     }
 
 }

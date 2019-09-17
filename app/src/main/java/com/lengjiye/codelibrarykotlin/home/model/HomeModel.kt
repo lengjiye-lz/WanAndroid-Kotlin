@@ -1,7 +1,7 @@
 package com.lengjiye.codelibrarykotlin.home.model
 
 import androidx.lifecycle.LifecycleOwner
-import com.lengjiye.codelibrarykotlin.home.HomeBean
+import com.lengjiye.codelibrarykotlin.home.bean.Article
 import com.lengjiye.codelibrarykotlin.home.service.HomeService
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
@@ -21,8 +21,8 @@ class HomeModel : BaseModel() {
         return ServiceHolder.singleton.getService(HomeService::class.java)
     }
 
-    fun getHomeData(lifecycleOwner: LifecycleOwner, observer: Observer<HomeBean>) {
-        val observable = getService()?.getsdc()?.map(HttpResultFunc())
+    fun getHomeData(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<Article>) {
+        val observable = getService()?.getArticleList(page)?.map(HttpResultFunc())
         observable?.let {
             makeSubscribe(lifecycleOwner, it, observer)
         }

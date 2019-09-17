@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.test.adapter.RecycleAdapter
+import com.lengjiye.tools.LogTool
 
 class TestFragment : Fragment() {
     private lateinit var s: String
@@ -21,7 +22,6 @@ class TestFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("lz", "onCreate")
         arguments?.let {
             s = it.getString("String").toString()
         }

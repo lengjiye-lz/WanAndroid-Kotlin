@@ -20,6 +20,8 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode> : AppCompatA
 
         bindViewModel()
 
+        mViewModel.onCreate()
+
         initView(savedInstanceState)
 
         initData()
@@ -45,4 +47,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewMode> : AppCompatA
     open fun initView(savedInstanceState: Bundle?) = Unit
 
     open fun initData() = Unit
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewModel.onDestroy()
+    }
 }

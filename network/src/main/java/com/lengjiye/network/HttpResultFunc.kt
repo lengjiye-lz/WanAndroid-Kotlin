@@ -4,19 +4,23 @@ import com.google.gson.Gson
 import io.reactivex.functions.Function
 import java.lang.Exception
 
+/**
+ * 统一处理Http请求中，如果errorCode不为0，则抛出Api异常
+ * 如果errorCode为0，返回data部分数据
+ */
 class HttpResultFunc<T> : Function<BaseHttpResult<T>, T> {
 
     override fun apply(t: BaseHttpResult<T>): T? {
-        var errorCode = t.errorCode
-        return if (errorCode == 0) {
-            t.data
+        val errorCode = t.errorCode
+        if (errorCode == ErrorCodeConstant.REQUEST_SUCCESS) {
+            return t.data
         } else {
             var originalData = ""
             try {
                 originalData = Gson().toJson(t)
             } catch (e: Exception) {
             }
-            ApiException(errorCode, t.errorMsg, originalData) as T
+            throw ApiException(errorCode, t.errorMsg, originalData)
         }
     }
 

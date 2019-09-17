@@ -19,6 +19,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment()
         mViewModel = ViewModelProvider(getBaseActivity()).get(getViewModel()::class.java)
         mBinding.lifecycleOwner = this
         bindViewModel()
+        mViewModel.onCreate()
         initView(savedInstanceState)
         return mBinding.root
     }
@@ -51,5 +52,10 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment()
 
     fun getBaseActivity(): BaseActivity<*, *> {
         return activity as BaseActivity<*, *>
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mViewModel.onDestroy()
     }
 }

@@ -37,7 +37,7 @@ open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewMode>(
         getBinding().tvText.text = "测试  测试  测试"
         getBinding().tvText.setOnClickListener {
             i++
-            getBinding().tvText.text = "测试  测试  测试:$i applicationId: ${MasterApplication.instance.applicationId}"
+            getBinding().tvText.text = "测试  测试  测试:$i applicationId: ${MasterApplication.getInstance().applicationId()}"
         }
     }
 

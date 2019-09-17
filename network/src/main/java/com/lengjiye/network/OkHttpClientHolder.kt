@@ -23,6 +23,7 @@ class OkHttpClientHolder {
 
     private fun createClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(SignInterceptor())
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)

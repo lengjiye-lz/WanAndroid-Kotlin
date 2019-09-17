@@ -2,8 +2,8 @@ package com.lengjiye.codelibrarykotlin.application
 
 import android.app.Application
 import android.content.Context
-import com.lengjiye.base.inter.IApp
 import com.lengjiye.base.application.MasterApplication
+import com.lengjiye.base.inter.IApp
 import com.lengjiye.codelibrarykotlin.BuildConfig
 
 /**

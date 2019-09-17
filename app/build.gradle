@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+//#定义混淆代码的路径
+def proguardPath = "../proguard/code/proguard-rules.pro"
+
 android {
 
     compileSdkVersion cfgs.compileSdkVersion
@@ -23,14 +26,52 @@ android {
         }
     }
 
+    signingConfigs {
+        wanAndroid {
+            //绝对路径和相对路径都可以
+            storeFile file("../keystores/lengjiye.keystore")  //签名文件
+            storePassword "ljy019916"                       //密码
+            keyAlias "lengjiye"
+            keyPassword "ljy019916"
+        }
+
+    }
+
     dataBinding {
         enabled = true
     }
 
     buildTypes {
-        release {
+
+        debug{
+            debuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles proguardPath
+            signingConfig signingConfigs.wanAndroid
+        }
+
+        qa{
+            debuggable true
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles proguardPath
+            signingConfig signingConfigs.wanAndroid
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles proguardPath
+            signingConfig signingConfigs.wanAndroid
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -56,6 +97,7 @@ dependencies {
 
     implementation project(':base')
     implementation project(':network')
+    implementation project(':tools')
 
 //    implementation "androidx.viewpager2:viewpager2:$cfgs.viewpager2Version"
     implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"

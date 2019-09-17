@@ -7,8 +7,7 @@ import com.lengjiye.base.recycleview.BaseAdapter
 import com.lengjiye.base.recycleview.BaseViewHolder
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.ItemHomeBinding
-import com.lengjiye.codelibrarykotlin.home.HomeBean
-import com.lengjiye.codelibrarykotlin.home.model.HomeModel
+import com.lengjiye.codelibrarykotlin.home.bean.HomeBean
 
 class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
     BaseAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolder>(context, models) {

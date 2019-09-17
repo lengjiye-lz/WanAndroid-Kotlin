@@ -13,6 +13,9 @@ import com.lengjiye.base.application.MasterApplication;
 public class ResTool {
 
     public static String getString(int resId) {
+        if (MasterApplication.getInstance().applicationContext() == null) {
+            return "";
+        }
         return MasterApplication.getInstance().applicationContext().getString(resId);
     }
 
@@ -21,6 +24,9 @@ public class ResTool {
     }
 
     public static String getString(int resId, Object... formatArgs) {
+        if (MasterApplication.getInstance().applicationContext() == null) {
+            return "";
+        }
         return MasterApplication.getInstance().applicationContext().getString(resId, formatArgs);
     }
 
@@ -29,6 +35,9 @@ public class ResTool {
     }
 
     public static String getStringFormat(int resId, Object... formatArgs) {
+        if (MasterApplication.getInstance().applicationContext() == null) {
+            return "";
+        }
         return String.format(MasterApplication.getInstance().applicationContext().getResources().getString(resId), formatArgs);
     }
 
@@ -37,6 +46,9 @@ public class ResTool {
     }
 
     public static int getColor(int resId) {
+        if (MasterApplication.getInstance().applicationContext() == null) {
+            return 0;
+        }
         return ContextCompat.getColor(MasterApplication.getInstance().applicationContext(), resId);
     }
 
@@ -45,6 +57,9 @@ public class ResTool {
     }
 
     public static Drawable getDrawable(int resId) {
+        if (MasterApplication.getInstance().applicationContext() == null) {
+            return null;
+        }
         return ContextCompat.getDrawable(MasterApplication.getInstance().applicationContext(), resId);
     }
 
@@ -53,6 +68,9 @@ public class ResTool {
     }
 
     public static int getDimens(int resId) {
+        if (MasterApplication.getInstance().applicationContext() == null) {
+            return 0;
+        }
         return MasterApplication.getInstance().applicationContext().getResources().getDimensionPixelSize(resId);
     }
 

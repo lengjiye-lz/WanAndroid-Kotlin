@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.lengjiye.codelibrarykotlin.R
+import com.lengjiye.tools.LogTool
 
 /**
  * Lottie动画 demo
@@ -38,7 +39,7 @@ class LottieActivity : AppCompatActivity() {
     }
 
     private fun times(i: Float) {
-        Log.e("lz", "动画执行进度:${i * 100}")
+        LogTool.e("lz", "动画执行进度:${i * 100}")
     }
 
 }
