@@ -7,6 +7,9 @@ apply plugin: 'kotlin-android-extensions'
 //#定义混淆代码的路径
 def proguardPath = "../proguard/code/proguard-rules.pro"
 
+// 服务器地址
+def String base_url_release = "\"https://www.wanandroid.com\""
+
 android {
 
     compileSdkVersion cfgs.compileSdkVersion
@@ -51,6 +54,7 @@ android {
             shrinkResources false
             proguardFiles proguardPath
             signingConfig signingConfigs.wanAndroid
+            buildConfigField("String", "BASE_URL", base_url_release)
         }
 
         qa{
@@ -61,6 +65,7 @@ android {
             shrinkResources false
             proguardFiles proguardPath
             signingConfig signingConfigs.wanAndroid
+            buildConfigField("String", "BASE_URL", base_url_release)
         }
 
         release {
@@ -72,6 +77,8 @@ android {
             proguardFiles proguardPath
             signingConfig signingConfigs.wanAndroid
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField("String", "BASE_URL", base_url_release)
         }
     }
 }

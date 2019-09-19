@@ -11,7 +11,7 @@ import com.lengjiye.codelibrarykotlin.BuildConfig
  * 也可以通过 MasterApplication.instance 获取
  */
 class CodeApplication : Application(), IApp {
-    
+
     override fun applicationContext(): Context {
         return this
     }
@@ -34,6 +34,10 @@ class CodeApplication : Application(), IApp {
 
     override fun buildType(): String {
         return BuildConfig.BUILD_TYPE
+    }
+
+    override fun baseUrl(): String {
+        return BuildConfig.BASE_URL
     }
 
     override fun onCreate() {

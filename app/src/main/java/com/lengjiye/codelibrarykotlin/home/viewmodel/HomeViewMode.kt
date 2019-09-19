@@ -3,6 +3,7 @@ package com.lengjiye.codelibrarykotlin.home.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmode.BaseViewMode
 import com.lengjiye.codelibrarykotlin.home.bean.Article
 import com.lengjiye.codelibrarykotlin.home.bean.HomeBean
@@ -17,12 +18,14 @@ import com.lengjiye.tools.LogTool
  */
 class HomeViewMode(application: Application) : BaseViewMode(application) {
 
+    var article = MutableLiveData<Article>()
+
     private var loadingObserver: LoadingObserver<Article>? = null
 
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : ObserverListener<Article> {
             override fun observerOnNext(data: Article?) {
-                LogTool.e("data:${data}")
+                article.value = data
             }
 
             override fun observerOnError(e: ApiException) {

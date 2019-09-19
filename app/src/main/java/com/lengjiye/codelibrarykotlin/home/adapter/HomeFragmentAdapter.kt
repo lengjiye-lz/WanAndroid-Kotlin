@@ -21,7 +21,7 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
 
     override fun onBindViewHolder(holder: HomeModelHolder, position: Int, item: HomeBean?) {
         item?.let {
-            holder.binding.tvText.text = "测试:$position"
+            holder.binding.tvText.text = it.title
         }
     }
 

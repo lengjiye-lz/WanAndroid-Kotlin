@@ -12,10 +12,6 @@ import retrofit2.http.Path
 
 interface HomeService {
 
-    @POST()
-    @FormUrlEncoded
-    fun getsdc(): Observable<BaseHttpResult<HomeBean>>
-
     @GET(ServerConstants.ARTICLE_LIST)
     fun getArticleList(@Path("page") page: Int): Observable<BaseHttpResult<Article>>
 

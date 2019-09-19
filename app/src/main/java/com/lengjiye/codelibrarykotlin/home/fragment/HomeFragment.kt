@@ -1,5 +1,6 @@
 package com.lengjiye.codelibrarykotlin.home.fragment
 
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseFragment
 import com.lengjiye.codelibrarykotlin.R
@@ -32,10 +33,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
         getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
         getBinding().rlList.adapter = adapter
 
-        test()
+        mViewModel.article.observe(this, Observer {
+            val datas = it.datas
+            if (datas.isEmpty()) {
+                return@Observer
+            }
+            adapter.replaceAll(datas.toMutableList())
+        })
+        getHomeData()
     }
 
-    private fun test() {
+    private fun getHomeData() {
         mViewModel.getHomeData(this, 0)
     }
 

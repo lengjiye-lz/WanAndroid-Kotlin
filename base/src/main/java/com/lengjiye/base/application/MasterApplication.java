@@ -56,6 +56,14 @@ public class MasterApplication implements IApp {
         return iApp.buildType();
     }
 
+    @Override
+    public String baseUrl() {
+        if (iApp == null) {
+            return null;
+        }
+        return iApp.baseUrl();
+    }
+
     public void setIApp(IApp iApp) {
         this.iApp = iApp;
     }

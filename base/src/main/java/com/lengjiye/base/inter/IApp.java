@@ -15,4 +15,6 @@ public interface IApp {
     Boolean isDebug();
 
     String buildType();
+
+    String baseUrl();
 }
