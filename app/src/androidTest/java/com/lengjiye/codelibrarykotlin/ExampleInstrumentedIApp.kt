@@ -33,11 +33,11 @@ import org.junit.runner.RunWith
 @Suppress("DEPRECATION")
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedIApp {
-
+    var list = arrayListOf<String>()
 
     @Test
     fun useAppContext() {
-        whileTest()
+        testList()
     }
 
     /**
@@ -170,26 +170,46 @@ class ExampleInstrumentedIApp {
      */
     @Test
     fun testArray() {
-        // 创建一个不可变的 map 集合
-        val map = mapOf("1" to "sdcsd1", "2" to "sdcsd2", "3" to "sdcsd3")
-        // 创建一个可变的 MutableMap 集合
-        val mutableMap = mutableMapOf(1 to "sdc1", 2 to "sdc2", 3 to "sdc3")
-        // 创建一个可变的 HashMap 集合
-        val hashMap = hashMapOf(1 to "sdc1", 2 to "sdc2", 3 to "sdc3")
-        // 判断所有的元素 key>2, value.length > 2则返回 true,否则返回false
-        mutableMap.all { it.key > 2 && it.value.length > 2 }
-
-        // 遍历
-        for (en in map.entries) {
-            LogTool.e("test", "en:key:${en.key} value:${en.value}")
-        }
-        // 遍历 key
-        for (key in map.keys) {
-            LogTool.e("test", "key:$key")
-        }
-        // 遍历 value
-        for (value in map.values) {
-            LogTool.e("test", "value:$value")
-        }
+//        // 创建一个不可变的 map 集合
+//        val map = mapOf("1" to "sdcsd1", "2" to "sdcsd2", "3" to "sdcsd3")
+//        // 创建一个可变的 MutableMap 集合
+//        val mutableMap = mutableMapOf(1 to "sdc1", 2 to "sdc2", 3 to "sdc3")
+//        // 创建一个可变的 HashMap 集合
+//        val hashMap = hashMapOf(1 to "sdc1", 2 to "sdc2", 3 to "sdc3")
+//        // 判断所有的元素 key>2, value.length > 2则返回 true,否则返回false
+//        mutableMap.all { it.key > 2 && it.value.length > 2 }
+//
+//        // 遍历
+//        for (en in map.entries) {
+//            LogTool.e("test", "en:key:${en.key} value:${en.value}")
+//        }
+//        // 遍历 key
+//        for (key in map.keys) {
+//            LogTool.e("test", "key:$key")
+//        }
+//        // 遍历 value
+//        for (value in map.values) {
+//            LogTool.e("test", "value:$value")
+//        }
+        testList()
     }
+
+    fun testList() {
+
+        Thread(Runnable {
+            for (i in 1..200) {
+                LogTool.e("add list $i")
+                list.add("a$i")
+            }
+        }).start()
+
+        Thread(Runnable {
+            Thread.sleep(1)
+            for (i in 0..100) {
+                LogTool.e("list${list[i]}")
+            }
+        }).start()
+    }
+
+
 }
