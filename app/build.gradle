@@ -105,6 +105,7 @@ dependencies {
     implementation project(':base')
     implementation project(':network')
     implementation project(':tools')
+    implementation project(':test')
 
     implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
     implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
