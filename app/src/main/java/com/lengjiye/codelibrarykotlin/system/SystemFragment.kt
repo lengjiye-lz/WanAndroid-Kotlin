@@ -4,6 +4,7 @@ import com.lengjiye.base.BaseFragment
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.FragmentHomeTestBinding
 import com.lengjiye.codelibrarykotlin.home.viewmodel.HomeViewMode
+import com.lengjiye.tools.LogTool
 
 class SystemFragment : BaseFragment<FragmentHomeTestBinding, HomeViewMode>() {
 

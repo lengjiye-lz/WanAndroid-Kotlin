@@ -3,12 +3,13 @@ package com.lengjiye.codelibrarykotlin.home.fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseFragment
+import com.lengjiye.base.LazyBaseFragment
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.FragmentHomeBinding
 import com.lengjiye.codelibrarykotlin.home.adapter.HomeFragmentAdapter
 import com.lengjiye.codelibrarykotlin.home.viewmodel.HomeViewMode
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
+class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
 
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
 
@@ -28,6 +29,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
         return mBinding
     }
 
+    override fun isNeedReload(): Boolean {
+        return true
+    }
+
     override fun initData() {
         super.initData()
         getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
@@ -40,11 +45,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewMode>() {
             }
             adapter.replaceAll(datas.toMutableList())
         })
-        getHomeData()
     }
 
-    private fun getHomeData() {
+    override fun loadData() {
         mViewModel.getHomeData(this, 0)
     }
-
 }

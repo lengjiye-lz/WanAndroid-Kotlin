@@ -1,6 +1,7 @@
 package com.lengjiye.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.lengjiye.base.viewmode.BaseViewMode
 
+/**
+ * 基类
+ */
 abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment() {
     lateinit var mBinding: T
     lateinit var mViewModel: VM
@@ -24,8 +28,8 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewMode> : Fragment()
         return mBinding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initData()
     }
 

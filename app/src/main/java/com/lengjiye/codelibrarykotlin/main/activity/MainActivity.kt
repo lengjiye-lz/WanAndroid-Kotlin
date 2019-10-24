@@ -46,7 +46,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
         super.initData()
         mTempFragment = MainFragmentManager.instance.getHomeFragment()
         supportFragmentManager.beginTransaction()
-            .add(R.id.f_container, mTempFragment as HomeFragment).commit()
+            .add(R.id.f_container, mTempFragment as HomeFragment)
+            .show(mTempFragment as HomeFragment).commit()
     }
 
     private fun switchFragment(fragment: Fragment) {
