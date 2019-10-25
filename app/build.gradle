@@ -105,8 +105,11 @@ dependencies {
     implementation project(':base')
     implementation project(':network')
     implementation project(':tools')
-    implementation project(':test')
 
     implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
     implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
+    // 查看数据库
+    debugImplementation 'com.facebook.stetho:stetho:1.5.1'
+    // stetho 不实现版本，只是为了防止编译失败
+    releaseImplementation 'com.github.qiduzao:test:v3.0'
 }

@@ -2,7 +2,6 @@ package com.lengjiye.codelibrarykotlin.home.fragment
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.BaseFragment
 import com.lengjiye.base.LazyBaseFragment
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.FragmentHomeBinding
