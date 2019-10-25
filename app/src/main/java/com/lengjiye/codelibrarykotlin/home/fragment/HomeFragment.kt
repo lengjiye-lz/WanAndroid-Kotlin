@@ -1,5 +1,6 @@
 package com.lengjiye.codelibrarykotlin.home.fragment
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.LazyBaseFragment
@@ -28,14 +29,14 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
         return mBinding
     }
 
-    override fun isNeedReload(): Boolean {
-        return true
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
+        getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
+        getBinding().rlList.adapter = adapter
     }
 
     override fun initData() {
         super.initData()
-        getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
-        getBinding().rlList.adapter = adapter
 
         mViewModel.article.observe(this, Observer {
             val datas = it.datas

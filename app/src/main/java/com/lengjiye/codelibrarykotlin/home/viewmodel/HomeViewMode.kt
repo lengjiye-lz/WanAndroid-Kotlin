@@ -34,7 +34,9 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
         })
     }
 
-
+    /**
+     * 获取首页列表数据
+     */
     fun getHomeData(lifecycleOwner: LifecycleOwner, page: Int) {
         loadingObserver?.cancelRequest()
         loadingObserver?.let {

@@ -2,6 +2,7 @@ package com.lengjiye.codelibrarykotlin.widgets
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,7 +14,7 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?) : this(context, null, 0)
 
-    private var tagList: ArrayList<Tag>? = null
+    private var tagList: List<Tag>? = null
 
     init {
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
@@ -21,8 +22,9 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
         setPadding(0, 0, ResTool.getDimens(R.dimen.d_5), 0)
     }
 
-    fun setTag(tagList: ArrayList<Tag>) {
+    fun setTag(tagList: List<Tag>) {
         this.tagList = tagList
+        removeAllViews()
         add()
     }
 
@@ -64,7 +66,7 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
         layoutParams.setMargins(0, 0, ResTool.getDimens(R.dimen.d_5), 0)
         textView.layoutParams = layoutParams
         textView.text = text
-        textView.textSize = ResTool.getDimens(R.dimen.d_14).toFloat()
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResTool.getDimens(R.dimen.d_14).toFloat())
         textView.setTextColor(ResTool.getColor(color))
         textView.setBackgroundResource(bg)
         textView.setPadding(ResTool.getDimens(R.dimen.d_5), ResTool.getDimens(R.dimen.d_2), ResTool.getDimens(R.dimen.d_5), ResTool.getDimens(R.dimen.d_2))
