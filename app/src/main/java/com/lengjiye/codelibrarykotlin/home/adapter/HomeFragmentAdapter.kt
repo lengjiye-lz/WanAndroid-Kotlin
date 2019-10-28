@@ -9,6 +9,7 @@ import com.lengjiye.base.recycleview.BaseViewHolder
 import com.lengjiye.codelibrarykotlin.R
 import com.lengjiye.codelibrarykotlin.databinding.ItemHomeBinding
 import com.lengjiye.codelibrarykotlin.home.bean.HomeBean
+import com.lengjiye.tools.LogTool
 
 class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
     BaseAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolder>(context, models) {
@@ -26,8 +27,8 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvCategory.text = getCategory(it)
             holder.binding.tvTime.text = it.niceDate
-            holder.binding.tgList.visibility = if (it.tags.isEmpty()) View.GONE else View.VISIBLE
-            holder.binding.tgList.setTag(it.tags)
+            holder.binding.tgList.setTag(it.type, it.publishTime, it.tags)
+            holder.binding.tgList.visibility = if (holder.binding.tgList.childCount == 0) View.GONE else View.VISIBLE
         }
     }
 

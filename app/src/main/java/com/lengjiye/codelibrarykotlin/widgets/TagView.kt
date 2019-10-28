@@ -19,42 +19,32 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
     init {
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         orientation = HORIZONTAL
-        setPadding(0, 0, ResTool.getDimens(R.dimen.d_5), 0)
     }
 
-    fun setTag(tagList: List<Tag>) {
+    fun setTag(type: Int, time: Long, tagList: List<Tag>) {
         this.tagList = tagList
         removeAllViews()
-        add()
+        add(type, time)
     }
 
-    private fun add() {
+    private fun add(type: Int, time: Long) {
+        var view: View
+        // 置顶
+        if (type == 1) {
+            view = itemView("置顶", R.color.c_E24333, R.drawable.bg_rectangle_white_stroke_e24333)
+            addView(view)
+        }
+        // 新
+        val nowTime = System.currentTimeMillis() - 24 * 60 * 60 * 1000
+        if (time >= nowTime) {
+            view = itemView("新", R.color.c_FF2B33, R.drawable.bg_rectangle_white_stroke_ff2b33)
+            addView(view)
+        }
+
+        // 公众号
         tagList?.let {
-            var view: View
-            var tagName: String
             it.forEach { tag ->
-                tagName = tag.name
-                when (tagName) {
-                    "置顶" -> {
-                        view = itemView(tagName, R.color.c_E24333, R.drawable.bg_rectangle_white_stroke_e24333)
-                    }
-
-                    "新" -> {
-                        view = itemView(tagName, R.color.c_FF2B33, R.drawable.bg_rectangle_white_stroke_ff2b33)
-                    }
-
-//                    "问答" -> {
-//                        view = itemView(tagName, R.color.c_E24333, R.drawable.bg_rectangle_white_stroke_e24333)
-//                    }
-//
-//                    "项目" -> {
-//                        view = itemView(tagName, R.color.c_E24333, R.drawable.bg_rectangle_white_stroke_e24333)
-//                    }
-
-                    else -> {
-                        view = itemView(tagName, R.color.c_009A61, R.drawable.bg_rectangle_white_stroke_009a61)
-                    }
-                }
+                view = itemView(tag.name, R.color.c_009A61, R.drawable.bg_rectangle_white_stroke_009a61)
                 addView(view)
             }
         }
@@ -66,10 +56,10 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
         layoutParams.setMargins(0, 0, ResTool.getDimens(R.dimen.d_5), 0)
         textView.layoutParams = layoutParams
         textView.text = text
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResTool.getDimens(R.dimen.d_14).toFloat())
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResTool.getDimens(R.dimen.d_12).toFloat())
         textView.setTextColor(ResTool.getColor(color))
         textView.setBackgroundResource(bg)
-        textView.setPadding(ResTool.getDimens(R.dimen.d_5), ResTool.getDimens(R.dimen.d_2), ResTool.getDimens(R.dimen.d_5), ResTool.getDimens(R.dimen.d_2))
+        textView.setPadding(ResTool.getDimens(R.dimen.d_5), ResTool.getDimens(R.dimen.d_1), ResTool.getDimens(R.dimen.d_5), ResTool.getDimens(R.dimen.d_3))
         return textView
     }
 

@@ -46,7 +46,7 @@ android {
 
     buildTypes {
 
-        debug{
+        debug {
             debuggable true
             minifyEnabled false
             zipAlignEnabled true
@@ -57,7 +57,7 @@ android {
             buildConfigField("String", "BASE_URL", base_url_release)
         }
 
-        qa{
+        qa {
             debuggable true
             minifyEnabled true
             zipAlignEnabled true
@@ -109,7 +109,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
     implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
     // 查看数据库
-    debugImplementation 'com.facebook.stetho:stetho:1.5.1'
+    debugImplementation "com.facebook.stetho:stetho:$cfgs.stetho"
     // stetho 不实现版本，只是为了防止编译失败
     releaseImplementation 'com.github.qiduzao:test:v3.0'
+    implementation "androidx.cardview:cardview:$cfgs.cardview"
 }

@@ -13,6 +13,8 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
 
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
 
+    private var pager = 0
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
@@ -39,15 +41,32 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
         super.initData()
 
         mViewModel.article.observe(this, Observer {
-            val datas = it.datas
-            if (datas.isEmpty()) {
+            val dates = it.datas
+            if (dates.isEmpty()) {
                 return@Observer
             }
-            adapter.replaceAll(datas.toMutableList())
+            adapter.addAll(dates.toMutableList())
+            pager++
         })
+
+        mViewModel.homeBeanList.observe(this, Observer {
+            if (pager == 0) {
+                adapter.removeAll()
+            }
+            adapter.addAll(it.toMutableList())
+            pager = 1
+        })
+
     }
 
     override fun loadData() {
-        mViewModel.getHomeData(this, 0)
+        refresh()
+//        mViewModel.getHomeData(this, pager)
     }
+
+    private fun refresh() {
+        pager = 0
+        mViewModel.getHomeTopAndFirstListData(this)
+    }
+
 }

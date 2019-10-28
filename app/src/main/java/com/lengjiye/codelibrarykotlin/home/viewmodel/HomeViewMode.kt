@@ -1,7 +1,6 @@
 package com.lengjiye.codelibrarykotlin.home.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmode.BaseViewMode
@@ -19,12 +18,15 @@ import com.lengjiye.tools.LogTool
 class HomeViewMode(application: Application) : BaseViewMode(application) {
 
     var article = MutableLiveData<Article>()
+    var homeBeanList = MutableLiveData<List<HomeBean>>()
 
     private var loadingObserver: LoadingObserver<Article>? = null
+    private var loadingObserverTopAndFirst: LoadingObserver<List<HomeBean>>? = null
 
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : ObserverListener<Article> {
             override fun observerOnNext(data: Article?) {
+                LogTool.e("lz", "data:${data?.datas?.size}")
                 article.value = data
             }
 
@@ -32,6 +34,18 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
 
             }
         })
+
+        loadingObserverTopAndFirst = LoadingObserver(object : ObserverListener<List<HomeBean>> {
+            override fun observerOnNext(data: List<HomeBean>?) {
+                LogTool.e("lz", "data:${data?.size}")
+                homeBeanList.value = data
+            }
+
+            override fun observerOnError(e: ApiException) {
+
+            }
+        })
+
     }
 
     /**
@@ -40,7 +54,14 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
     fun getHomeData(lifecycleOwner: LifecycleOwner, page: Int) {
         loadingObserver?.cancelRequest()
         loadingObserver?.let {
-            HomeModel.singleton.getHomeData(lifecycleOwner, page, it)
+            HomeModel.singleton.getHomeListData(lifecycleOwner, page, it)
+        }
+    }
+
+    fun getHomeTopAndFirstListData(lifecycleOwner: LifecycleOwner) {
+        loadingObserverTopAndFirst?.cancelRequest()
+        loadingObserverTopAndFirst?.let {
+            HomeModel.singleton.getHomeTopAndFirstListData(lifecycleOwner, it)
         }
     }
 

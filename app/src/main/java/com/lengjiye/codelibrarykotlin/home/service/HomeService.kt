@@ -15,4 +15,7 @@ interface HomeService {
     @GET(ServerConstants.ARTICLE_LIST)
     fun getArticleList(@Path("page") page: Int): Observable<BaseHttpResult<Article>>
 
+    @GET(ServerConstants.ARTICLE_TOP_LIST)
+    fun getArticleTopList(): Observable<BaseHttpResult<List<HomeBean>>>
+
 }

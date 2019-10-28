@@ -10,79 +10,89 @@
                 type="com.lengjiye.codelibrarykotlin.home.viewmodel.HomeViewMode" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cv_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp">
+            android:layout_marginLeft="@dimen/d_8"
+            android:layout_marginTop="@dimen/d_5"
+            android:layout_marginRight="@dimen/d_8"
+            android:layout_marginBottom="@dimen/d_5"
+            app:cardCornerRadius="@dimen/d_8">
 
-        <ImageView
-                android:id="@+id/iv_collect"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="@dimen/d_2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/collect_icon" />
-
-        <TextView
-                android:id="@+id/tv_text"
-                android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/c_2E3135"
-                android:textSize="@dimen/d_18"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@+id/iv_collect"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="文章标题" />
+                android:paddingLeft="@dimen/d_5"
+                android:paddingTop="@dimen/d_8"
+                android:paddingRight="@dimen/d_8"
+                android:paddingBottom="@dimen/d_8">
 
-        <com.lengjiye.codelibrarykotlin.widgets.TagView
-                android:id="@+id/tg_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="@+id/tv_text"
-                app:layout_constraintTop_toTopOf="@+id/tv_author" />
+            <ImageView
+                    android:id="@+id/iv_collect"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:padding="@dimen/d_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/collect_icon" />
 
-        <TextView
-                android:id="@+id/tv_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d_5"
-                android:text="作者:"
-                android:textColor="@color/c_99"
-                android:textSize="@dimen/d_14"
-                app:layout_constraintLeft_toRightOf="@+id/tg_list"
-                app:layout_constraintTop_toBottomOf="@+id/tv_text" />
+            <TextView
+                    android:id="@+id/tv_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/d_10"
+                    android:maxLines="2"
+                    android:textColor="@color/c_2E3135"
+                    android:textSize="@dimen/d_18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_collect"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="文章标题" />
 
-        <TextView
-                android:id="@+id/tv_category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/d_5"
-                android:layout_marginRight="@dimen/d_5"
-                android:singleLine="true"
-                android:textColor="@color/c_48"
-                android:textSize="@dimen/d_14"
-                app:layout_constraintLeft_toRightOf="@+id/tv_author"
-                app:layout_constraintRight_toLeftOf="@+id/tv_time"
-                app:layout_constraintTop_toTopOf="@+id/tv_author"
-                tools:text="分类" />
+            <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_8"
+                    android:singleLine="true"
+                    android:textColor="@color/c_48"
+                    android:textSize="@dimen/d_14"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_text"
+                    app:layout_constraintRight_toRightOf="@+id/tv_text"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_text"
+                    tools:text="分类" />
 
-        <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/c_99"
-                android:textSize="@dimen/d_14"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_author"
-                tools:text="时间" />
+            <com.lengjiye.codelibrarykotlin.widgets.TagView
+                    android:id="@+id/tg_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_text"
+                    app:layout_constraintTop_toTopOf="@+id/tv_author" />
 
+            <TextView
+                    android:id="@+id/tv_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_8"
+                    android:text="作者:"
+                    android:textColor="@color/c_99"
+                    android:textSize="@dimen/d_14"
+                    app:layout_constraintLeft_toRightOf="@+id/tg_list"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_category" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c_99"
+                    android:textSize="@dimen/d_14"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_author"
+                    tools:text="时间" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
