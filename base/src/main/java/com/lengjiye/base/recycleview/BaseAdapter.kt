@@ -1,42 +1,27 @@
 package com.lengjiye.base.recycleview
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<T, VH : BaseViewHolder<*>>(mContext: Context, items: MutableList<T>?) :
-    RecyclerView.Adapter<VH>() {
-    protected var mLayoutInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private val mItems: MutableList<T> = ArrayList()
-    private var mOnItemClickListener: (v: View, position: Int) -> Unit = { _, _ -> }
+abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() : RecyclerView.Adapter<VH>() {
 
-    private var onItemClickListener = { v: View ->
-        mOnItemClickListener.invoke(v, v.tag as Int)
-    }
-
-    init {
+    constructor(mContext: Context, items: MutableList<T>?) : this() {
+        this.mContext = mContext
         items?.let { mItems.addAll(it) }
+        mLayoutInflater = LayoutInflater.from(mContext)
     }
 
-    fun setOnItemClickListener(onItemClickListener: (v: View, position: Int) -> Unit) {
-        this.mOnItemClickListener = onItemClickListener
-    }
+    private var mContext: Context? = null
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.itemView.tag = position
-        holder.itemView.isSoundEffectsEnabled = false
-        val item = getItem(position)
+    protected lateinit var mLayoutInflater: LayoutInflater
+    private val mItems: MutableList<T> = ArrayList()
 
-        holder.itemView.setOnClickListener(onItemClickListener)
-        onBindViewHolder(holder, position, item)
-    }
 
     override fun getItemCount(): Int {
         return mItems.size
     }
-
-    protected abstract fun onBindViewHolder(holder: VH, position: Int, item: T?)
 
     open fun getItem(index: Int): T? {
         return if (index < mItems.size && index >= 0) mItems[index] else null
@@ -61,7 +46,7 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<*>>(mContext: Context, items: 
     fun addAll(items: MutableList<T>?) {
         items?.let {
             mItems.addAll(it)
-            notifyItemRangeInserted(mItems.size, it.size)
+            notifyItemRangeInserted(itemCount + getHeadersCount(), it.size)
         }
     }
 
@@ -111,6 +96,10 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<*>>(mContext: Context, items: 
     fun removeAll() {
         mItems.clear()
         notifyDataSetChanged()
+    }
+
+    open fun getHeadersCount(): Int {
+        return 0
     }
 
     operator fun contains(item: T): Boolean {

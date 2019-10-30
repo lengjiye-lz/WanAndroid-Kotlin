@@ -4,29 +4,32 @@ import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmode.BaseViewMode
-import com.lengjiye.codelibrarykotlin.home.bean.Article
+import com.lengjiye.codelibrarykotlin.home.bean.ArticleBean
+import com.lengjiye.codelibrarykotlin.home.bean.BannerBean
 import com.lengjiye.codelibrarykotlin.home.bean.HomeBean
 import com.lengjiye.codelibrarykotlin.home.model.HomeModel
 import com.lengjiye.network.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.network.LoadingObserver.ObserverListener
-import com.lengjiye.tools.LogTool
 
 /**
  * Bessel
  */
 class HomeViewMode(application: Application) : BaseViewMode(application) {
 
-    var article = MutableLiveData<Article>()
+    var article = MutableLiveData<ArticleBean>()
     var homeBeanList = MutableLiveData<List<HomeBean>>()
+    var bannerList = MutableLiveData<List<BannerBean>>()
 
-    private var loadingObserver: LoadingObserver<Article>? = null
+    var homeBeanTopAndFirstList: MutableList<HomeBean>? = null
+
+    private var loadingObserver: LoadingObserver<ArticleBean>? = null
     private var loadingObserverTopAndFirst: LoadingObserver<List<HomeBean>>? = null
+    private var loadingObserverBannerBean: LoadingObserver<List<BannerBean>>? = null
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<Article> {
-            override fun observerOnNext(data: Article?) {
-                LogTool.e("lz", "data:${data?.datas?.size}")
+        loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean> {
+            override fun observerOnNext(data: ArticleBean?) {
                 article.value = data
             }
 
@@ -35,10 +38,18 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
             }
         })
 
-        loadingObserverTopAndFirst = LoadingObserver(object : ObserverListener<List<HomeBean>> {
+        homeBeanTopAndFirstList = arrayListOf()
+
+        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener1<List<HomeBean>> {
+
+            override fun observerOnComplete() {
+                homeBeanList.value = homeBeanTopAndFirstList
+            }
+
             override fun observerOnNext(data: List<HomeBean>?) {
-                LogTool.e("lz", "data:${data?.size}")
-                homeBeanList.value = data
+                data?.let {
+                    homeBeanTopAndFirstList?.addAll(it)
+                }
             }
 
             override fun observerOnError(e: ApiException) {
@@ -46,6 +57,15 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
             }
         })
 
+        loadingObserverBannerBean = LoadingObserver(object : ObserverListener<List<BannerBean>> {
+            override fun observerOnNext(data: List<BannerBean>?) {
+                bannerList.value = data
+            }
+
+            override fun observerOnError(e: ApiException) {
+
+            }
+        })
     }
 
     /**
@@ -58,6 +78,9 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
         }
     }
 
+    /**
+     * 获取置顶和首页数据
+     */
     fun getHomeTopAndFirstListData(lifecycleOwner: LifecycleOwner) {
         loadingObserverTopAndFirst?.cancelRequest()
         loadingObserverTopAndFirst?.let {
@@ -65,8 +88,21 @@ class HomeViewMode(application: Application) : BaseViewMode(application) {
         }
     }
 
+    /**
+     * 获取banner
+     */
+    fun getBanner(lifecycleOwner: LifecycleOwner) {
+        loadingObserverBannerBean?.cancelRequest()
+        loadingObserverBannerBean?.let {
+            HomeModel.singleton.getBanner(lifecycleOwner, it)
+        }
+    }
+
+
     override fun onDestroy() {
         loadingObserver?.cancelRequest()
+        loadingObserverTopAndFirst?.cancelRequest()
+        loadingObserverBannerBean?.cancelRequest()
     }
 
 }

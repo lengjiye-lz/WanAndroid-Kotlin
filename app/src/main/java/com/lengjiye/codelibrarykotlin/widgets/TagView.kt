@@ -7,27 +7,24 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.lengjiye.codelibrarykotlin.R
-import com.lengjiye.codelibrarykotlin.home.bean.Tag
+import com.lengjiye.codelibrarykotlin.home.bean.TagBean
 import com.lengjiye.tools.ResTool
 
 class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?) : this(context, null, 0)
 
-    private var tagList: List<Tag>? = null
-
     init {
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         orientation = HORIZONTAL
     }
 
-    fun setTag(type: Int, time: Long, tagList: List<Tag>) {
-        this.tagList = tagList
+    fun setTag(type: Int, time: Long, tagBeanList: List<TagBean>?) {
         removeAllViews()
-        add(type, time)
+        add(type, time, tagBeanList)
     }
 
-    private fun add(type: Int, time: Long) {
+    private fun add(type: Int, time: Long, tagBeanList: List<TagBean>?) {
         var view: View
         // 置顶
         if (type == 1) {
@@ -42,7 +39,7 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
         }
 
         // 公众号
-        tagList?.let {
+        tagBeanList?.let {
             it.forEach { tag ->
                 view = itemView(tag.name, R.color.c_009A61, R.drawable.bg_rectangle_white_stroke_009a61)
                 addView(view)

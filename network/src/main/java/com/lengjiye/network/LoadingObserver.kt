@@ -17,7 +17,17 @@ import java.net.UnknownHostException
  *
  * code 拦截
  */
-class LoadingObserver<T>(private var observerListener: ObserverListener<T>?) : Observer<T> {
+class LoadingObserver<T>() : Observer<T> {
+    private var observerListener: ObserverListener<T>? = null
+    private var observerListener1: ObserverListener1<T>? = null
+
+    constructor(observerListener: ObserverListener<T>?) : this() {
+        this.observerListener = observerListener
+    }
+
+    constructor(observerListener1: ObserverListener1<T>?) : this() {
+        this.observerListener1 = observerListener1
+    }
 
     private var disposable: Disposable? = null
 
@@ -28,15 +38,18 @@ class LoadingObserver<T>(private var observerListener: ObserverListener<T>?) : O
             val errorMsg = ResTool.getString(R.string.net_0001)
             val apiException = ApiException(errorCode, errorMsg, null)
             observerListener?.observerOnError(apiException)
+            observerListener1?.observerOnError(apiException)
             disposable?.dispose()
         }
     }
 
     override fun onNext(t: T) {
         observerListener?.observerOnNext(t)
+        observerListener1?.observerOnNext(t)
     }
 
     override fun onComplete() {
+        observerListener1?.observerOnComplete()
     }
 
     override fun onError(e: Throwable) {
@@ -53,6 +66,7 @@ class LoadingObserver<T>(private var observerListener: ObserverListener<T>?) : O
             }
             is NullPointerException -> {
                 observerListener?.observerOnNext(null)
+                observerListener1?.observerOnNext(null)
                 return
             }
             is SocketTimeoutException -> {
@@ -83,6 +97,7 @@ class LoadingObserver<T>(private var observerListener: ObserverListener<T>?) : O
             }
         }
         observerListener?.observerOnError(apiException)
+        observerListener1?.observerOnError(apiException)
     }
 
     /**
@@ -113,6 +128,12 @@ class LoadingObserver<T>(private var observerListener: ObserverListener<T>?) : O
     interface ObserverListener<T> {
         fun observerOnNext(data: T?)
         fun observerOnError(e: ApiException)
+    }
+
+    interface ObserverListener1<T> {
+        fun observerOnNext(data: T?)
+        fun observerOnError(e: ApiException)
+        fun observerOnComplete()
     }
 
 }

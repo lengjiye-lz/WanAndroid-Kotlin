@@ -4,7 +4,7 @@ package com.lengjiye.codelibrarykotlin.home.bean
  * 首页
  */
 
-data class Article(
+data class ArticleBean(
     val curPage: Int, // 1
     val datas: List<HomeBean>,
     val offset: Int, // 0
@@ -37,7 +37,7 @@ data class HomeBean(
     val shareUser: String,
     val superChapterId: Int, // 408
     val superChapterName: String, // 公众号
-    val tags: List<Tag>,
+    val tagBeans: List<TagBean>,
     val title: String, // catch 住 OOM，行吗？
     val type: Int, // 0
     val userId: Int, // -1
@@ -45,7 +45,17 @@ data class HomeBean(
     val zan: Int // 0
 )
 
-data class Tag(
+data class TagBean(
     val name: String, // 公众号
     val url: String // /wxarticle/list/408/1
+)
+data class BannerBean(
+    val desc: String, // Android高级进阶直播课免费学习
+    val id: Int, // 23
+    val imagePath: String, // https://wanandroid.com/blogimgs/67c28e8c-2716-4b78-95d3-22cbde65d924.jpeg
+    val isVisible: Int, // 1
+    val order: Int, // 0
+    val title: String, // Android高级进阶直播课免费学习
+    val type: Int, // 0
+    val url: String // https://url.163.com/4bj
 )
