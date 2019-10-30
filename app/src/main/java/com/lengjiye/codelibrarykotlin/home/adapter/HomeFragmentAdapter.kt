@@ -1,6 +1,7 @@
 package com.lengjiye.codelibrarykotlin.home.adapter
 
 import android.content.Context
+import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -22,7 +23,7 @@ class HomeFragmentAdapter constructor(context: Context, models: ArrayList<HomeBe
 
     override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
         item?.let {
-            holder.binding.tvText.text = it.title
+            holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvCategory.text = getCategory(it)
             holder.binding.tvTime.text = it.niceDate

@@ -40,7 +40,7 @@
                     app:srcCompat="@drawable/collect_icon" />
 
             <TextView
-                    android:id="@+id/tv_text"
+                    android:id="@+id/tv_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/d_10"
@@ -61,16 +61,16 @@
                     android:singleLine="true"
                     android:textColor="@color/c_48"
                     android:textSize="@dimen/d_14"
-                    app:layout_constraintLeft_toLeftOf="@+id/tv_text"
-                    app:layout_constraintRight_toRightOf="@+id/tv_text"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_text"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_title"
+                    app:layout_constraintRight_toRightOf="@+id/tv_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
                     tools:text="分类" />
 
             <com.lengjiye.codelibrarykotlin.widgets.TagView
                     android:id="@+id/tg_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@+id/tv_text"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_title"
                     app:layout_constraintTop_toTopOf="@+id/tv_author" />
 
             <TextView
