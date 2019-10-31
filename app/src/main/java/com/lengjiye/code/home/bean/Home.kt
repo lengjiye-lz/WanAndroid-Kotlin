@@ -37,7 +37,7 @@ data class HomeBean(
     val shareUser: String,
     val superChapterId: Int, // 408
     val superChapterName: String, // 公众号
-    val tagBeans: List<TagBean>,
+    val tags: List<TagBean>,
     val title: String, // catch 住 OOM，行吗？
     val type: Int, // 0
     val userId: Int, // -1

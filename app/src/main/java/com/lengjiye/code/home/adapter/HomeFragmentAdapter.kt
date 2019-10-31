@@ -27,7 +27,7 @@ class HomeFragmentAdapter constructor(context: Context, models: ArrayList<HomeBe
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvCategory.text = getCategory(it)
             holder.binding.tvTime.text = it.niceDate
-            holder.binding.tgList.setTag(it.type, it.publishTime, it.tagBeans)
+            holder.binding.tgList.setTag(it.type, it.publishTime, it.tags)
             holder.binding.tgList.visibility = if (holder.binding.tgList.childCount == 0) View.GONE else View.VISIBLE
         }
     }
