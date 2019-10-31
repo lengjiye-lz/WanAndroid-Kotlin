@@ -35,6 +35,7 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:$cfgs.android_ktx"
 
     api "androidx.appcompat:appcompat:$cfgs.appcompat"
     api "androidx.lifecycle:lifecycle-viewmodel:$cfgs.lifecycleVersion"

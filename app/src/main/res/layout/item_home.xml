@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.codelibrarykotlin.home.viewmodel.HomeViewMode" />
+                type="com.lengjiye.code.home.viewmodel.HomeViewMode" />
     </data>
 
 
@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_title"
                     tools:text="分类" />
 
-            <com.lengjiye.codelibrarykotlin.widgets.TagView
+            <com.lengjiye.code.widgets.TagView
                     android:id="@+id/tg_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

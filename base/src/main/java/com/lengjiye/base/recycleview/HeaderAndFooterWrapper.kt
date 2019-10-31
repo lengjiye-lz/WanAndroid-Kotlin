@@ -72,7 +72,7 @@ open class HeaderAndFooterWrapper<T>(val adapter: BaseAdapter<T, RecyclerView.Vi
         mHeaderViews.clear()
     }
 
-    override fun getHeadersCount(): Int {
+    fun getHeadersCount(): Int {
         return mHeaderViews.size()
     }
 

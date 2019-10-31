@@ -16,7 +16,7 @@ android {
     buildToolsVersion cfgs.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.lengjiye.codelibrarykotlin"
+        applicationId "com.lengjiye.kotlincode"
         minSdkVersion cfgs.minSdkVersion
         targetSdkVersion cfgs.targetSdkVersion
         versionCode cfgs.versionCode
@@ -100,7 +100,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
 
     implementation "androidx.constraintlayout:constraintlayout:$cfgs.constraintlayout"
-    implementation "androidx.core:core-ktx:$cfgs.android_ktx"
 
     implementation project(':base')
     implementation project(':network')
@@ -122,4 +121,6 @@ dependencies {
     implementation "com.scwang.smart:refresh-layout-kernel:$cfgs.smart_refresh_layout"      //核心必须依赖
     implementation "com.scwang.smart:refresh-header-material:$cfgs.smart_refresh_layout"    //谷歌刷新头
     implementation "com.scwang.smart:refresh-footer-ball:$cfgs.smart_refresh_layout"    //球脉冲加载
+    // webview
+    implementation "com.just.agentweb:agentweb:$cfgs.agentweb"
 }

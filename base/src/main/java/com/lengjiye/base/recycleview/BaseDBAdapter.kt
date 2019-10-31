@@ -6,20 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseDBAdapter<T, VH : RecyclerView.ViewHolder>(mContext: Context, items: MutableList<T>?) : BaseAdapter<T, VH>(mContext, items) {
 
-    private var mOnItemClickListener: (v: View, position: Int) -> Unit = { _, _ -> }
+    private var mOnItemClickListener: (v: View, position: Int, item: T?) -> Unit = { _, _, _ -> }
 
-    private var onItemClickListener = { v: View ->
-        mOnItemClickListener.invoke(v, v.tag as Int)
-    }
-
-    fun setOnItemClickListener(onItemClickListener: (v: View, position: Int) -> Unit) {
+    fun setOnItemClickListener(onItemClickListener: (v: View, position: Int, item: T?) -> Unit) {
         this.mOnItemClickListener = onItemClickListener
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.itemView.tag = position
         val item = getItem(position)
-        holder.itemView.setOnClickListener(onItemClickListener)
+        holder.itemView.setOnClickListener {
+            mOnItemClickListener.invoke(it, position, item)
+        }
         onBindViewHolder(holder, position, item)
     }
 

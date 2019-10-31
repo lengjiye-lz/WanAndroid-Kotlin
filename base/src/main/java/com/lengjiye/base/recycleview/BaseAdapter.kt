@@ -46,7 +46,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() : RecyclerView.Ada
     fun addAll(items: MutableList<T>?) {
         items?.let {
             mItems.addAll(it)
-            notifyItemRangeInserted(itemCount + getHeadersCount(), it.size)
+            notifyItemRangeInserted(itemCount, it.size)
         }
     }
 
@@ -96,10 +96,6 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() : RecyclerView.Ada
     fun removeAll() {
         mItems.clear()
         notifyDataSetChanged()
-    }
-
-    open fun getHeadersCount(): Int {
-        return 0
     }
 
     operator fun contains(item: T): Boolean {

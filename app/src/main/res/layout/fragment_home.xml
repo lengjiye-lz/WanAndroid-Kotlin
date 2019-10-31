@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.codelibrarykotlin.home.viewmodel.HomeViewMode" />
+                type="com.lengjiye.code.home.viewmodel.HomeViewMode" />
     </data>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout

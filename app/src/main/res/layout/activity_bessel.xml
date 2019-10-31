@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.codelibrarykotlin.test.viewmode.BesselViewMode"/>
+                type="com.lengjiye.code.test.viewmode.BesselViewMode"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,14 +16,14 @@
             android:layout_height="match_parent">
 
 
-        <com.lengjiye.codelibrarykotlin.view.SecondBezierView
+        <com.lengjiye.code.view.SecondBezierView
                 android:id="@+id/second"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/wave"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
 
-        <com.lengjiye.codelibrarykotlin.view.WaveBezierView
+        <com.lengjiye.code.view.WaveBezierView
                 android:id="@+id/wave"
                 app:layout_constraintTop_toBottomOf="@+id/second"
                 android:layout_width="match_parent"
