@@ -1,12 +1,16 @@
 package com.lengjiye.base.recycleview
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.collection.SparseArrayCompat
 import androidx.recyclerview.widget.RecyclerView
 
-open class HeaderAndFooterWrapper<T>(val adapter: BaseAdapter<T, RecyclerView.ViewHolder>) : BaseAdapter<T, RecyclerView.ViewHolder>() {
+/**
+ * Created by zhy on 16/6/23.
+ *
+ * https://github.com/hongyangAndroid/baseAdapter/blob/master/baseadapter-recyclerview/src/main/java/com/zhy/adapter/recyclerview/wrapper/HeaderAndFooterWrapper.java
+ */
+open class HeaderAndFooterWrapper(val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val BASE_ITEM_TYPE_HEADER = 100000
     private val BASE_ITEM_TYPE_FOOTER = 200000
@@ -39,7 +43,7 @@ open class HeaderAndFooterWrapper<T>(val adapter: BaseAdapter<T, RecyclerView.Vi
         if (isFooterViewPos(position)) {
             return
         }
-        adapter.onBindViewHolder(holder, position)
+        adapter.onBindViewHolder(holder, position - getHeadersCount())
     }
 
     override fun getItemCount(): Int {
@@ -60,16 +64,17 @@ open class HeaderAndFooterWrapper<T>(val adapter: BaseAdapter<T, RecyclerView.Vi
 
     fun addHeaderView(view: View) {
         mHeaderViews.put(mHeaderViews.size() + BASE_ITEM_TYPE_HEADER, view)
-        adapter.notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     fun addFootView(view: View) {
         mFootViews.put(mFootViews.size() + BASE_ITEM_TYPE_FOOTER, view)
-        adapter.notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     fun removeAllHeaderView() {
         mHeaderViews.clear()
+        notifyDataSetChanged()
     }
 
     fun getHeadersCount(): Int {

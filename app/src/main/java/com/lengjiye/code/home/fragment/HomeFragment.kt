@@ -9,15 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lengjiye.base.LazyBaseFragment
-import com.lengjiye.base.recycleview.BaseAdapter
 import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentHomeBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.home.viewmodel.HomeViewMode
-import com.lengjiye.code.utils.Constant
+import com.lengjiye.code.utils.ConstantKey
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.webview.WebViewActivity
 import com.lengjiye.tools.LogTool
@@ -30,7 +28,7 @@ import com.youth.banner.loader.ImageLoader
 class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
 
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
-    private val header by lazy { HeaderAndFooterWrapper(adapter as BaseAdapter<HomeBean, RecyclerView.ViewHolder>) }
+    private val header by lazy { HeaderAndFooterWrapper(adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>) }
     private var pager = 0
     private var banner: Banner? = null
 
@@ -81,7 +79,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
                 return@Observer
             }
             adapter.addAll(dates.toMutableList())
-            header.notifyDataSetChanged()
+            header.notifyItemRangeInserted(header.itemCount, dates.size)
             pager++
         })
 
@@ -91,7 +89,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
                 adapter.removeAll()
             }
             adapter.addAll(it.toMutableList())
-            header.notifyDataSetChanged()
+            header.notifyItemRangeInserted(header.itemCount, it.size)
             pager = 1
         })
 
@@ -106,9 +104,18 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
                 getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
-                    putString(Constant.KEY_WEB_URL, it.link)
+                    putString(ConstantKey.KEY_WEB_URL, it.link)
                 })
             }
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) {
+            banner?.stopAutoPlay()
+        } else {
+            banner?.startAutoPlay()
         }
     }
 
@@ -139,7 +146,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
                 LogTool.e("value:${value?.title}")
                 value?.let {
                     getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
-                        putString(Constant.KEY_WEB_URL, it.url)
+                        putString(ConstantKey.KEY_WEB_URL, it.url)
                     })
                 }
 

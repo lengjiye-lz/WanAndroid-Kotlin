@@ -9,7 +9,6 @@ import android.view.KeyEvent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
 import com.just.agentweb.WebChromeClient
@@ -17,7 +16,7 @@ import com.just.agentweb.WebViewClient
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
-import com.lengjiye.code.utils.Constant
+import com.lengjiye.code.utils.ConstantKey
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewMode>() {
 
@@ -50,7 +49,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewMode>() {
     override fun initData() {
         super.initData()
         mBinding.toolbar.setNavigationOnClickListener { finish() }
-        val url = intent.extras?.getString(Constant.KEY_WEB_URL) ?: return
+        val url = intent.extras?.getString(ConstantKey.KEY_WEB_URL) ?: return
 
         val p = System.currentTimeMillis()
         mAgentWeb = AgentWeb.with(this)
