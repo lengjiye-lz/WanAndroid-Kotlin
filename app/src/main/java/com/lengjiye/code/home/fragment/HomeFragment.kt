@@ -80,7 +80,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
             }
             adapter.addAll(dates.toMutableList())
             header.notifyItemRangeInserted(header.itemCount, dates.size)
-            pager++
+            pager = it.curPage + 1
         })
 
         mViewModel.homeBeanList.observe(this, Observer {
