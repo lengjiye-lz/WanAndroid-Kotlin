@@ -10,16 +10,15 @@
                 type="com.lengjiye.code.home.viewmodel.HomeViewModel" />
     </data>
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-            android:id="@+id/srl_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rl_list"
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

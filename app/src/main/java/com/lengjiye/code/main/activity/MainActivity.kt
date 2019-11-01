@@ -9,13 +9,12 @@ import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
-import com.lengjiye.code.main.viewmodel.MainViewMode
-import com.lengjiye.code.utils.startActivity
+import com.lengjiye.code.main.viewmodel.MainViewModel
 
 /**
  * mainActivity
  */
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var mTempFragment: Fragment
 
@@ -23,8 +22,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewMode>() {
         return R.layout.activity_main
     }
 
-    override fun getViewModel(): MainViewMode {
-        return MainViewMode(application)
+    override fun getViewModel(): MainViewModel {
+        return MainViewModel(application)
     }
 
     override fun bindViewModel() {

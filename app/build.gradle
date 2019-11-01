@@ -16,7 +16,7 @@ android {
     buildToolsVersion cfgs.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.lengjiye.kotlincode"
+        applicationId "com.lengjiye.code"
         minSdkVersion cfgs.minSdkVersion
         targetSdkVersion cfgs.targetSdkVersion
         versionCode cfgs.versionCode
@@ -81,6 +81,10 @@ android {
             buildConfigField("String", "BASE_URL", base_url_release)
         }
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -123,4 +127,6 @@ dependencies {
     implementation "com.scwang.smart:refresh-footer-ball:$cfgs.smart_refresh_layout"    //球脉冲加载
     // webview
     implementation "com.just.agentweb:agentweb:$cfgs.agentweb"
+
+    implementation "com.google.android.material:material:$cfgs.material"
 }

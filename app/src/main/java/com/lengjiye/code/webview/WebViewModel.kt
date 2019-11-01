@@ -1,9 +1,9 @@
 package com.lengjiye.code.webview
 
 import android.app.Application
-import com.lengjiye.base.viewmode.BaseViewMode
+import com.lengjiye.base.viewmodel.BaseViewModel
 
-class WebViewMode(application: Application) : BaseViewMode(application) {
+class WebViewModel(application: Application) : BaseViewModel(application) {
 
     override fun onCreate() {
 

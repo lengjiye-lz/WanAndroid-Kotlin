@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.me.MeFragment
 import com.lengjiye.code.project.ProjectFragment
-import com.lengjiye.code.system.SystemFragment
+import com.lengjiye.code.system.fragment.SystemFragment
 import java.lang.ref.WeakReference
 
 class MainFragmentManager private constructor() {

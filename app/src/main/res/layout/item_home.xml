@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.code.home.viewmodel.HomeViewMode" />
+                type="com.lengjiye.code.home.viewmodel.HomeViewModel" />
     </data>
 
 

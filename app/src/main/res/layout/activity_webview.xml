@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.code.webview.WebViewMode" />
+                type="com.lengjiye.code.webview.WebViewModel" />
     </data>
 
     <LinearLayout

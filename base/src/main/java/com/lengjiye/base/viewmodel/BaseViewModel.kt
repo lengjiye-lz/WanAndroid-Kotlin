@@ -1,9 +1,9 @@
-package com.lengjiye.base.viewmode
+package com.lengjiye.base.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 
-abstract class BaseViewMode(application: Application) : AndroidViewModel(application) {
+abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
     val mApplication by lazy { getApplication<Application>() }
 

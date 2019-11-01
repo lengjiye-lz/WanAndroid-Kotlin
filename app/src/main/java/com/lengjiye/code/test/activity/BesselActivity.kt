@@ -5,17 +5,17 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityBesselBinding
-import com.lengjiye.code.test.viewmode.BesselViewMode
+import com.lengjiye.code.test.viewmode.BesselViewModel
 
 /**
  * 贝塞尔曲线测试 demo
  */
-open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewMode>() {
+open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewModel>() {
 
     private var i: Int = 0
 
-    override fun getViewModel(): BesselViewMode {
-        return BesselViewMode(application)
+    override fun getViewModel(): BesselViewModel {
+        return BesselViewModel(application)
     }
 
     override fun getLayoutId(): Int {

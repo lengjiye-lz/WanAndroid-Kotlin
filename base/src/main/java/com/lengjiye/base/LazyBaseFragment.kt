@@ -3,13 +3,13 @@ package com.lengjiye.base
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.ViewDataBinding
-import com.lengjiye.base.viewmode.BaseViewMode
+import com.lengjiye.base.viewmodel.BaseViewModel
 
 
 /**
  * 懒加载基类
  */
-abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewMode> : BaseFragment<T, VM>() {
+abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseFragment<T, VM>() {
     // view是否创建成功  配合viewpager使用
     private var isViewCreated = false
     // fragment是否可见  配合viewpager使用

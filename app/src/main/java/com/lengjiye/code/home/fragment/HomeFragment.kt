@@ -14,8 +14,8 @@ import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentHomeBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
-import com.lengjiye.code.home.viewmodel.HomeViewMode
-import com.lengjiye.code.utils.ConstantKey
+import com.lengjiye.code.home.viewmodel.HomeViewModel
+import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.webview.WebViewActivity
 import com.lengjiye.tools.LogTool
@@ -25,7 +25,7 @@ import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
 import com.youth.banner.loader.ImageLoader
 
-class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
+class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
     private val header by lazy { HeaderAndFooterWrapper(adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>) }
@@ -36,8 +36,8 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
         return R.layout.fragment_home
     }
 
-    override fun getViewModel(): HomeViewMode {
-        return HomeViewMode(getBaseActivity().application)
+    override fun getViewModel(): HomeViewModel {
+        return HomeViewModel(getBaseActivity().application)
     }
 
     override fun bindViewModel() {
@@ -56,10 +56,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
         getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
         getBinding().rlList.adapter = header
         initBanner()
-    }
 
-    override fun initData() {
-        super.initData()
         mBinding.srlLayout.setOnRefreshListener {
             refresh()
         }
@@ -68,6 +65,17 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
             mViewModel.getHomeData(this, pager)
         }
 
+        adapter.setOnItemClickListener { v, position, item ->
+            item?.let {
+                getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
+                    putString(ConstantKey.KEY_WEB_URL, it.link)
+                })
+            }
+        }
+    }
+
+    override fun initData() {
+        super.initData()
         mViewModel.article.observe(this, Observer {
             if (it.over) {
                 mBinding.srlLayout.finishLoadMoreWithNoMoreData()
@@ -101,13 +109,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewMode>() {
             banner?.start()
         })
 
-        adapter.setOnItemClickListener { v, position, item ->
-            item?.let {
-                getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
-                    putString(ConstantKey.KEY_WEB_URL, it.link)
-                })
-            }
-        }
+
     }
 
     override fun onHiddenChanged(hidden: Boolean) {

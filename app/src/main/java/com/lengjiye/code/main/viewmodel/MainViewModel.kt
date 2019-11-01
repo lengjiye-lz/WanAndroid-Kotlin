@@ -1,12 +1,12 @@
 package com.lengjiye.code.main.viewmodel
 
 import android.app.Application
-import com.lengjiye.base.viewmode.BaseViewMode
+import com.lengjiye.base.viewmodel.BaseViewModel
 
 /**
  * Bessel
  */
-class MainViewMode(application: Application) : BaseViewMode(application) {
+class MainViewModel(application: Application) : BaseViewModel(application) {
 
     override fun onCreate() {
 

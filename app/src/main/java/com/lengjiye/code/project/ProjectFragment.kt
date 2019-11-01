@@ -2,24 +2,24 @@ package com.lengjiye.code.project
 
 import com.lengjiye.base.BaseFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.databinding.FragmentHomeTestBinding
-import com.lengjiye.code.home.viewmodel.HomeViewMode
+import com.lengjiye.code.databinding.FragmentProjectBinding
+import com.lengjiye.code.home.viewmodel.HomeViewModel
 
-class ProjectFragment : BaseFragment<FragmentHomeTestBinding, HomeViewMode>() {
+class ProjectFragment : BaseFragment<FragmentProjectBinding, HomeViewModel>() {
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_home_test
+        return R.layout.fragment_project
     }
 
-    override fun getViewModel(): HomeViewMode {
-        return HomeViewMode(getBaseActivity().application)
+    override fun getViewModel(): HomeViewModel {
+        return HomeViewModel(getBaseActivity().application)
     }
 
     override fun bindViewModel() {
         getBinding().viewModel = mViewModel
     }
 
-    override fun getBinding(): FragmentHomeTestBinding {
+    override fun getBinding(): FragmentProjectBinding {
         return mBinding
     }
 }

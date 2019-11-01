@@ -3,7 +3,7 @@ package com.lengjiye.code.home.viewmodel
 import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import com.lengjiye.base.viewmode.BaseViewMode
+import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.bean.HomeBean
@@ -13,9 +13,9 @@ import com.lengjiye.network.LoadingObserver
 import com.lengjiye.network.LoadingObserver.ObserverListener
 
 /**
- * Bessel
+ * 数据请求接口
  */
-class HomeViewMode(application: Application) : BaseViewMode(application) {
+class HomeViewModel(application: Application) : BaseViewModel(application) {
 
     var article = MutableLiveData<ArticleBean>()
     var homeBeanList = MutableLiveData<List<HomeBean>>()

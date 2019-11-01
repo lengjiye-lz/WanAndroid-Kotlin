@@ -16,9 +16,9 @@ import com.just.agentweb.WebViewClient
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
-import com.lengjiye.code.utils.ConstantKey
+import com.lengjiye.code.constant.ConstantKey
 
-class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewMode>() {
+class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
     private var mAgentWeb: AgentWeb? = null
 
@@ -26,8 +26,8 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewMode>() {
         return R.layout.activity_webview
     }
 
-    override fun getViewModel(): WebViewMode {
-        return WebViewMode(application)
+    override fun getViewModel(): WebViewModel {
+        return WebViewModel(application)
     }
 
     override fun bindViewModel() {
