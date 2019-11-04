@@ -5,16 +5,19 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.base.fragment.ViewPagerLazyBaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.SystemItemFragmentBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -68,6 +71,7 @@ class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, 
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
         mBinding.rvView.layoutManager = LinearLayoutManager(getBaseActivity())
+        adapter.type = HomeFragmentAdapterType.TYPE_2
         mBinding.rvView.adapter = adapter
 
         setDivider()
@@ -116,8 +120,13 @@ class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, 
             } else {
                 mBinding.srlLayout.finishLoadMore()
             }
+
+            if (it.datas.isEmpty()) {
+                ResTool.getString(R.string.s_5).toast()
+                return@Observer
+            }
             adapter.addAll(it.datas.toMutableList())
-            pager = it.curPage + 1
+            pager = it.curPage
         })
 
     }

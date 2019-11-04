@@ -17,8 +17,10 @@ import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.utils.startActivity
+import com.lengjiye.code.utils.toast
 import com.lengjiye.code.webview.WebViewActivity
 import com.lengjiye.tools.LogTool
+import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.youth.banner.Banner
@@ -84,11 +86,12 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
             mBinding.srlLayout.finishLoadMore()
             val dates = it.datas
             if (dates.isEmpty()) {
+                ResTool.getString(R.string.s_5).toast()
                 return@Observer
             }
             adapter.addAll(dates.toMutableList())
             header.notifyItemRangeInserted(header.itemCount, dates.size)
-            pager = it.curPage + 1
+            pager = it.curPage
         })
 
         mViewModel.homeBeanList.observe(this, Observer {

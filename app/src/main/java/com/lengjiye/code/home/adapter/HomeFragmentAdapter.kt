@@ -8,11 +8,14 @@ import androidx.databinding.DataBindingUtil
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
+import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.home.bean.HomeBean
 
 class HomeFragmentAdapter constructor(context: Context, models: ArrayList<HomeBean>?) :
     BaseDBAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolderDB>(context, models) {
+
+    var type: Int = HomeFragmentAdapterType.TYPE_1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeModelHolderDB {
         val binding = DataBindingUtil.inflate<ItemHomeBinding>(
@@ -26,6 +29,7 @@ class HomeFragmentAdapter constructor(context: Context, models: ArrayList<HomeBe
             holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvCategory.text = getCategory(it)
+            holder.binding.tvCategory.visibility = if (type == HomeFragmentAdapterType.TYPE_2) View.GONE else View.VISIBLE
             holder.binding.tvTime.text = it.niceDate
             holder.binding.tgList.setTag(it.type, it.publishTime, it.tags)
             holder.binding.tgList.visibility = if (holder.binding.tgList.childCount == 0) View.GONE else View.VISIBLE
