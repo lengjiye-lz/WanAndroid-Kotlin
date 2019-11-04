@@ -4,16 +4,11 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.LinearLayout
-import androidx.constraintlayout.motion.widget.DesignTool
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import com.airbnb.lottie.animation.content.Content
-import com.google.android.material.tabs.TabLayout
-import com.lengjiye.base.LazyBaseFragment
+import com.lengjiye.base.fragment.LazyBaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentSystemBinding
 import com.lengjiye.code.system.adapter.SystemAdapter
-import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.tools.ResTool
 

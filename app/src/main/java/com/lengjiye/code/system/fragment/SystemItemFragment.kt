@@ -8,23 +8,27 @@ import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.lengjiye.base.LazyBaseFragment
+import com.lengjiye.base.fragment.ViewPagerLazyBaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.SystemItemFragmentBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemViewModel>() {
+class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, SystemViewModel>() {
 
     private var treeBean: TreeBean? = null
     private var secondTree: TreeBean? = null
     private var pager = 0
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
+
+    // 第一次不加载数据
+    private var isFirst = false
 
     override fun getLayoutId(): Int {
         return R.layout.system_item_fragment
@@ -53,7 +57,7 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
         refresh()
     }
 
-    private fun load() {
+    private fun loadMore() {
         mViewModel.getTreeArticleList(this, pager, secondTree?.id ?: 0)
     }
 
@@ -79,16 +83,19 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 val position = p0?.position
                 secondTree = position?.let { treeBean?.children?.get(it) }
-                refresh()
+                if (isFirst) {
+                    refresh()
+                }
+                isFirst = true
             }
         })
 
         mBinding.srlLayout.setOnRefreshListener {
-            load()
+            refresh()
         }
 
         mBinding.srlLayout.setOnLoadMoreListener {
-            load()
+            loadMore()
         }
 
 
@@ -103,10 +110,11 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
         initTitle(treeBean)
 
         mViewModel.articleBean.observe(this, Observer {
-            mBinding.srlLayout.finishLoadMoreWithNoMoreData()
-            mBinding.srlLayout.finishRefreshWithNoMoreData()
             if (pager == 0) {
+                mBinding.srlLayout.finishRefresh()
                 adapter.removeAll()
+            } else {
+                mBinding.srlLayout.finishLoadMore()
             }
             adapter.addAll(it.datas.toMutableList())
             pager = it.curPage + 1
@@ -116,7 +124,8 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
 
     private fun refresh() {
         pager = 0
-        mBinding.srlLayout.autoRefresh()
+        mBinding.srlLayout.autoRefreshAnimationOnly()
+        loadMore()
     }
 
     private fun initTitle(treeBean: TreeBean?) {

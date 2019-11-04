@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.lengjiye.base.LazyBaseFragment
+import com.lengjiye.base.fragment.LazyBaseFragment
 import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentHomeBinding

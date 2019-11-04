@@ -1,6 +1,6 @@
 package com.lengjiye.code.me
 
-import com.lengjiye.base.BaseFragment
+import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.home.viewmodel.HomeViewModel

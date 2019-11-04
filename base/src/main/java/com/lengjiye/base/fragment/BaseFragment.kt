@@ -1,4 +1,4 @@
-package com.lengjiye.base
+package com.lengjiye.base.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.lengjiye.base.BaseActivity
 import com.lengjiye.base.viewmodel.BaseViewModel
 
 /**
