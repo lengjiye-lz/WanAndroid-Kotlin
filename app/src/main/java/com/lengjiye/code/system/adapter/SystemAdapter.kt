@@ -26,4 +26,9 @@ class SystemAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RES
     override fun getCount(): Int {
         return treeBeans?.size ?: 0
     }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        val secondTrees = treeBeans?.get(position)
+        return secondTrees?.name
+    }
 }

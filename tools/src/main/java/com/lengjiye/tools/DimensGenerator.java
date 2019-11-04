@@ -16,6 +16,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * 直接运行，用于生成对应比例的dimens文件
+ * <p>
+ * 用于屏幕适配
+ */
 public class DimensGenerator {
 
     private String mainDirectory = "app/src/main/res/";

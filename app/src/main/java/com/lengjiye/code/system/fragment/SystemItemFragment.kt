@@ -1,7 +1,10 @@
 package com.lengjiye.code.system.fragment
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -12,6 +15,7 @@ import com.lengjiye.code.databinding.SystemItemFragmentBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -62,6 +66,8 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
         mBinding.rvView.layoutManager = LinearLayoutManager(getBaseActivity())
         mBinding.rvView.adapter = adapter
 
+        setDivider()
+
         mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
 
@@ -84,6 +90,8 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
         mBinding.srlLayout.setOnLoadMoreListener {
             load()
         }
+
+
     }
 
     override fun initData() {
@@ -127,5 +135,13 @@ class SystemItemFragment : LazyBaseFragment<SystemItemFragmentBinding, SystemVie
                 mBinding.tabLayout.addTab(tab)
             }
         }
+    }
+
+    @SuppressLint("ResourceType")
+    private fun setDivider() {
+        val linearLayout = mBinding.tabLayout.getChildAt(0) as LinearLayout
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE)
+        linearLayout.setDividerDrawable(Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider)))
+        linearLayout.setDividerPadding(ResTool.getDimens(R.dimen.d_16))
     }
 }

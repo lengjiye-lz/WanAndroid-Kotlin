@@ -1,7 +1,13 @@
 package com.lengjiye.code.system.fragment
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.LinearLayout
+import androidx.constraintlayout.motion.widget.DesignTool
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.airbnb.lottie.animation.content.Content
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.base.LazyBaseFragment
 import com.lengjiye.code.R
@@ -9,6 +15,7 @@ import com.lengjiye.code.databinding.FragmentSystemBinding
 import com.lengjiye.code.system.adapter.SystemAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.tools.ResTool
 
 class SystemFragment : LazyBaseFragment<FragmentSystemBinding, SystemViewModel>() {
 
@@ -39,41 +46,24 @@ class SystemFragment : LazyBaseFragment<FragmentSystemBinding, SystemViewModel>(
         mBinding.viewPager.adapter = adapter
         mBinding.viewPager.offscreenPageLimit = 1
         mBinding.viewPager.currentItem = 0
-//        mBinding.tabLayout.setupWithViewPager(mBinding.viewPager)
-
-        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-                val position = p0?.position
-                position?.let {
-                    mBinding.viewPager.currentItem = it
-                }
-            }
-        })
+        mBinding.tabLayout.setupWithViewPager(mBinding.viewPager)
+        setDivider()
     }
 
     override fun initData() {
         super.initData()
         mViewModel.tree.observe(this, Observer {
-            initTitle(it)
             adapter.setDatas(it)
             adapter.notifyDataSetChanged()
         })
     }
 
-    private fun initTitle(treeBeans: List<TreeBean>) {
-        var tab: TabLayout.Tab
-        treeBeans.forEachIndexed { index, tree ->
-            tab = mBinding.tabLayout.newTab()
-            tab.tag = index
-            tab.text = tree.name
-            mBinding.tabLayout.addTab(tab)
-        }
-    }
 
+    @SuppressLint("ResourceType")
+    private fun setDivider() {
+        val linearLayout = mBinding.tabLayout.getChildAt(0) as LinearLayout
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE)
+        linearLayout.setDividerDrawable(Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider)))
+        linearLayout.setDividerPadding(ResTool.getDimens(R.dimen.d_16))
+    }
 }
