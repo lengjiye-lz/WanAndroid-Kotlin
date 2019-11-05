@@ -17,6 +17,7 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
 
     var tree = MutableLiveData<List<TreeBean>>()
     var articleBean = MutableLiveData<ArticleBean>()
+    private var cid = 0
 
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>> {
@@ -31,6 +32,7 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
 
         loadingObserverArticleBean = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean> {
             override fun observerOnNext(data: ArticleBean?) {
+                data?.cid = cid
                 articleBean.value = data
             }
 
@@ -49,6 +51,7 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun getTreeArticleList(lifecycleOwner: LifecycleOwner, pager: Int, cid: Int) {
+        this.cid = cid
         loadingObserverArticleBean?.cancelRequest()
         loadingObserverArticleBean?.let {
             SystemModel.singleton.getTreeArticleList(lifecycleOwner, pager, cid, it)

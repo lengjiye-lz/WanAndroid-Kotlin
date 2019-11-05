@@ -20,6 +20,7 @@ import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.webview.WebViewActivity
+import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -123,6 +124,12 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
         initTitle(treeBean)
 
         mViewModel.articleBean.observe(this, Observer {
+            if (it.cid != secondTree?.id) {
+                LogTool.e("it.cid:${it.cid}")
+                LogTool.e("secondTree?.id:${secondTree?.id}")
+                return@Observer
+            }
+
             if (pager == 0) {
                 mBinding.srlLayout.finishRefresh()
                 adapter.removeAll()

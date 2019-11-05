@@ -11,7 +11,8 @@ data class ArticleBean(
     val over: Boolean, // false
     val pageCount: Int, // 358
     val size: Int, // 20
-    val total: Int // 7141
+    val total: Int, // 7141
+    var cid: Int // 7141
 )
 
 data class HomeBean(

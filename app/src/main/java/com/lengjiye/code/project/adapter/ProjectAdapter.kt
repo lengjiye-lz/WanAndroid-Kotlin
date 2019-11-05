@@ -8,6 +8,11 @@ import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.project.fragment.ProjectFragmentItem
 import com.lengjiye.code.system.bean.TreeBean
 
+/**
+ * viewpager适配器
+ *
+ * 采用的新的加载方式
+ */
 class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private var treeBeans: List<TreeBean>? = null

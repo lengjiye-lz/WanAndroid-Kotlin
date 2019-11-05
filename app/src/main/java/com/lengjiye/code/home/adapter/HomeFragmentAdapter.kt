@@ -12,6 +12,9 @@ import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.home.bean.HomeBean
 
+/**
+ * 文章列表适配器
+ */
 class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
     BaseDBAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolderDB>(context, models) {
 

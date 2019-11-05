@@ -15,6 +15,7 @@ import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.webview.WebViewActivity
+import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -99,7 +100,12 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
             cid = it.id
         }
 
-        mViewModel.projectArtice.observe(this, Observer {
+        mViewModel.projectArticle.observe(this, Observer {
+            if (it.cid != cid) {
+                LogTool.e("it.cid:${it.cid}")
+                LogTool.e("cid:${cid}")
+                return@Observer
+            }
             val datas = it.datas
             if (pager == 1) {
                 mBinding.srlLayout.finishRefresh()
