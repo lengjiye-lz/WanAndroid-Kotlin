@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -14,19 +13,18 @@ import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
-import com.lengjiye.code.databinding.SystemItemFragmentBinding
+import com.lengjiye.code.databinding.FragmentSystemItemBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.webview.WebViewActivity
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, SystemViewModel>() {
+class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, SystemViewModel>() {
 
     private var treeBean: TreeBean? = null
     private var secondTree: TreeBean? = null
@@ -37,7 +35,7 @@ class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, 
     private var isFirst = false
 
     override fun getLayoutId(): Int {
-        return R.layout.system_item_fragment
+        return R.layout.fragment_system_item
     }
 
     override fun getViewModel(): SystemViewModel {
@@ -48,13 +46,13 @@ class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, 
         getBinding().viewModel = mViewModel
     }
 
-    override fun getBinding(): SystemItemFragmentBinding {
+    override fun getBinding(): FragmentSystemItemBinding {
         return mBinding
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(extras: Bundle?) = SystemItemFragment().apply {
+        fun newInstance(extras: Bundle?) = SystemFragmentItem().apply {
             arguments = extras
         }
     }

@@ -1,10 +1,8 @@
 package com.lengjiye.code.webview
 
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -17,6 +15,7 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.tools.LogTool
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
@@ -59,15 +58,17 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
             .setWebViewClient(mWebViewClient)
             .setMainFrameErrorView(R.layout.agentweb_error_page, -1)
             .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)
-            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)//打开其他应用时，弹窗咨询用户是否前往其他应用
-            .interceptUnkownUrl() //拦截找不到相关页面的Scheme
+            //打开其他应用时，弹窗咨询用户是否前往其他应用
+            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)
+            //拦截找不到相关页面的Scheme
+            .interceptUnkownUrl()
             .createAgentWeb()
             .ready()
             .go(url)
 
 
         val n = System.currentTimeMillis()
-        Log.i("Info", "init used time:" + (n - p))
+        LogTool.i("Info", "init used time:" + (n - p))
     }
 
     private val mWebViewClient = object : WebViewClient() {
@@ -77,7 +78,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             //do you  work
-            Log.i("Info", "BaseWebActivity onPageStarted")
+            LogTool.i("Info", "BaseWebActivity onPageStarted")
         }
     }
 
@@ -89,7 +90,6 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-
         return if (mAgentWeb?.handleKeyEvent(keyCode, event) == true) {
             true
         } else super.onKeyDown(keyCode, event)
@@ -105,11 +105,6 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
         mAgentWeb?.getWebLifeCycle()?.onResume()
         super.onResume()
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

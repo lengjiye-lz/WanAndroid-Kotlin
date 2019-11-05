@@ -83,10 +83,6 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override fun initData() {
         super.initData()
         mViewModel.article.observe(this, Observer {
-            if (it.over) {
-                mBinding.srlLayout.finishLoadMoreWithNoMoreData()
-                return@Observer
-            }
             mBinding.srlLayout.finishLoadMore()
             val dates = it.datas
             if (dates.isEmpty()) {

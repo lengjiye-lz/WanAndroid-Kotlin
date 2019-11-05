@@ -13,5 +13,12 @@ public interface ServerConstants {
      * 体系
      */
     String TREE = "tree/json";
-    String TREE_ARTICLE_LIST = "article/list/{page}/json";
+    String TREE_ARTICLE = "article/list/{page}/json";
+
+
+    /**
+     * 项目
+     */
+    String PROJECT_TREE = "project/tree/json";
+    String PROJECT_TREE_ARTICLE = "project/list/{page}/json";
 }

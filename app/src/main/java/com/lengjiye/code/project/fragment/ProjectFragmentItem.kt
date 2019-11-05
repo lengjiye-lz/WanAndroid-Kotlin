@@ -1,0 +1,131 @@
+package com.lengjiye.code.project.fragment
+
+import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.lengjiye.base.fragment.BaseFragment
+import com.lengjiye.code.R
+import com.lengjiye.code.application.CodeApplication
+import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.HomeFragmentAdapterType
+import com.lengjiye.code.databinding.FragmentProjectItemBinding
+import com.lengjiye.code.home.adapter.HomeFragmentAdapter
+import com.lengjiye.code.project.viewmodel.ProjectViewModel
+import com.lengjiye.code.system.bean.TreeBean
+import com.lengjiye.code.utils.startActivity
+import com.lengjiye.code.utils.toast
+import com.lengjiye.code.webview.WebViewActivity
+import com.lengjiye.tools.ResTool
+import com.scwang.smart.refresh.footer.BallPulseFooter
+import com.scwang.smart.refresh.header.MaterialHeader
+
+/**
+ * @Author: lz
+ * @Date: 2019-11-05
+ * @Description: 项目
+ */
+class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectViewModel>() {
+
+    private var projectTree: TreeBean? = null
+    private var pager = 1
+    private var cid = 0
+    private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
+    // 数据只请求一次
+    private var isFirst = true
+
+    companion object {
+        @JvmStatic
+        fun newInstance(extras: Bundle?) = ProjectFragmentItem().apply {
+            arguments = extras
+        }
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_project_item
+    }
+
+    override fun getViewModel(): ProjectViewModel {
+        return ProjectViewModel(CodeApplication.instance)
+    }
+
+    override fun bindViewModel() {
+        getBinding().viewModel = mViewModel
+    }
+
+    override fun getBinding(): FragmentProjectItemBinding {
+        return mBinding
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
+        mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
+        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
+
+        mBinding.rlList.layoutManager = LinearLayoutManager(getBaseActivity())
+        adapter.type = HomeFragmentAdapterType.TYPE_2
+        mBinding.rlList.adapter = adapter
+
+        mBinding.srlLayout.setOnRefreshListener {
+            refresh()
+        }
+
+        mBinding.srlLayout.setOnLoadMoreListener {
+            loadMore()
+        }
+
+        adapter.setOnItemClickListener { v, position, item ->
+            item?.let {
+                getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
+                    putString(ConstantKey.KEY_WEB_URL, it.link)
+                })
+            }
+        }
+    }
+
+    private fun loadMore() {
+        mViewModel.getProjectArticle(this, pager, cid)
+    }
+
+    private fun refresh() {
+        pager = 1
+        mBinding.srlLayout.autoRefreshAnimationOnly()
+        loadMore()
+    }
+
+    override fun initData() {
+        super.initData()
+        projectTree = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
+        projectTree?.let {
+            cid = it.id
+        }
+
+        mViewModel.projectArtice.observe(this, Observer {
+            val datas = it.datas
+            if (pager == 1) {
+                mBinding.srlLayout.finishRefresh()
+                adapter.removeAll()
+            } else {
+                mBinding.srlLayout.finishLoadMore()
+            }
+
+            if (datas.isEmpty()) {
+                if (pager == 1) {
+                    // 显示空view
+                } else {
+                    ResTool.getString(R.string.s_5).toast()
+                }
+                return@Observer
+            }
+            adapter.addAll(datas.toMutableList())
+            pager = it.curPage + 1
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isFirst) {
+            refresh()
+        }
+        isFirst = false
+    }
+}

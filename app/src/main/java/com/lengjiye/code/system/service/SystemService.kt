@@ -14,6 +14,6 @@ interface SystemService {
     @GET(ServerConstants.TREE)
     fun getTree(): Observable<BaseHttpResult<List<TreeBean>>>
 
-    @GET(ServerConstants.TREE_ARTICLE_LIST)
+    @GET(ServerConstants.TREE_ARTICLE)
     fun getTreeArticleList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<BaseHttpResult<ArticleBean>>
 }

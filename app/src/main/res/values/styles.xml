@@ -15,4 +15,13 @@
 
     </style>
 
+    <style name="first_tab_text_style">
+        <item name="android:textSize">@dimen/d_15</item>
+    </style>
+
+    <style name="second_tab_text_style">
+        <item name="android:textSize">@dimen/d_12</item>
+    </style>
+
+
 </resources>

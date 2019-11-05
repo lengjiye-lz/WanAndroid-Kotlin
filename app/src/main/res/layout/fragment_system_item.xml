@@ -21,8 +21,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:tabIndicatorColor="@color/c_E24333"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/c_FF2B33"
+                app:tabTextAppearance="@style/second_tab_text_style"
                 app:tabTextColor="@color/c_1a" />
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout

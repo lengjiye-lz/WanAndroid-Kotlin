@@ -22,7 +22,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:tabMode="scrollable"
+                app:tabTextAppearance="@style/first_tab_text_style"
                 app:tabSelectedTextColor="@color/c_FF2B33"
+                app:tabIndicatorColor="@color/c_E24333"
                 app:tabTextColor="@color/c_1a" />
 
         <androidx.viewpager.widget.ViewPager
