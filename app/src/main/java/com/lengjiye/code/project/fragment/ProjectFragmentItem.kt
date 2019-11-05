@@ -7,9 +7,8 @@ import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.ConstantKey
-import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentProjectItemBinding
-import com.lengjiye.code.home.adapter.HomeFragmentAdapter
+import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.utils.startActivity
@@ -30,7 +29,7 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
     private var projectTree: TreeBean? = null
     private var pager = 1
     private var cid = 0
-    private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
+    private val adapter by lazy { ProjectFragmentItemAdapter(getBaseActivity(), null) }
     // 数据只请求一次
     private var isFirst = true
 
@@ -63,7 +62,6 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
         mBinding.rlList.layoutManager = LinearLayoutManager(getBaseActivity())
-        adapter.type = HomeFragmentAdapterType.TYPE_2
         mBinding.rlList.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
@@ -102,8 +100,8 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
 
         mViewModel.projectArticle.observe(this, Observer {
             if (it.cid != cid) {
-                LogTool.e("it.cid:${it.cid}")
-                LogTool.e("cid:${cid}")
+                mBinding.srlLayout.finishRefresh()
+                mBinding.srlLayout.finishLoadMore()
                 return@Observer
             }
             val datas = it.datas

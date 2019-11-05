@@ -125,8 +125,8 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
 
         mViewModel.articleBean.observe(this, Observer {
             if (it.cid != secondTree?.id) {
-                LogTool.e("it.cid:${it.cid}")
-                LogTool.e("secondTree?.id:${secondTree?.id}")
+                mBinding.srlLayout.finishRefresh()
+                mBinding.srlLayout.finishLoadMore()
                 return@Observer
             }
 
