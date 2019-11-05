@@ -1,0 +1,17 @@
+package ${applicaitionId}.${packageName}.viewmodel
+
+import android.app.Application
+import com.lengjiye.base.viewmodel.BaseViewModel
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description:
+ */
+class ${functionName}ViewModel(application: Application) : BaseViewModel(application) {
+    override fun onCreate() {
+    }
+
+    override fun onDestroy() {
+    }
+}

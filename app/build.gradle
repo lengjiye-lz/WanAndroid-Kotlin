@@ -4,6 +4,19 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+// 自定义插件 生成mvvm文件
+apply plugin: com.lengjiye.mvvm.MVVMPlugin
+
+def mvvmGeneratorProperties = new Properties()
+mvvmGeneratorProperties.load(new FileInputStream(file("mvvmGenerator.properties")))
+
+mvvm {
+    applicationId mvvmGeneratorProperties.applicationId
+    functionName mvvmGeneratorProperties.functionName
+    author mvvmGeneratorProperties.author
+    isActivity Boolean.parseBoolean(mvvmGeneratorProperties.isActivity)
+}
+
 //#定义混淆代码的路径
 def proguardPath = "../proguard/code/proguard-rules.pro"
 

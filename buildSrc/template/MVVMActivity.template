@@ -1,0 +1,33 @@
+package ${applicaitionId}.${packageName}.activity
+
+import com.lengjiye.base.BaseActivity
+import ${applicaitionId}.R
+import ${applicaitionId}.databinding.Activity${functionName}Binding
+import ${applicaitionId}.${packageName}.viewmodel.${functionName}ViewModel
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description:
+ */
+class ${functionName}Activity : BaseActivity<Activity${functionName}Binding, ${functionName}ViewModel>() {
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_${packageName}
+    }
+
+    override fun getViewModel(): ${functionName}ViewModel {
+        return ${functionName}ViewModel(application)
+    }
+
+    override fun bindViewModel() {
+        getBinding().viewModel = mViewModel
+    }
+
+    /**
+     * 获取 mBinding
+     */
+    override fun getBinding(): Activity${functionName}Binding {
+        return mBinding
+    }
+}

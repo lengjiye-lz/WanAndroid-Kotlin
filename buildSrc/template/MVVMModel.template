@@ -1,0 +1,24 @@
+package ${applicaitionId}.${packageName}.model
+
+import ${applicaitionId}.${packageName}.service.${functionName}Service
+import com.lengjiye.network.BaseModel
+import com.lengjiye.network.ServiceHolder
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description:
+ */
+class ${functionName}Model : BaseModel() {
+    companion object {
+        val singleton = Instance.instance
+    }
+
+    private object Instance {
+        val instance = ${functionName}Model()
+    }
+
+    private fun getService(): ${functionName}Service? {
+        return ServiceHolder.singleton.getService(${functionName}Service::class.java)
+    }
+}

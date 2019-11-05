@@ -1,0 +1,31 @@
+package ${applicaitionId}.${packageName}.fragment
+
+import com.lengjiye.base.fragment.BaseFragment
+import ${applicaitionId}.R
+import ${applicaitionId}.application.CodeApplication
+import ${applicaitionId}.databinding.Fragment${functionName}Binding
+import ${applicaitionId}.${packageName}.viewmodel.${functionName}ViewModel
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description:
+ */
+class ${functionName}Fragment : BaseFragment<Fragment${functionName}Binding, ${functionName}ViewModel>() {
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_${packageName}
+    }
+
+    override fun getViewModel(): ${functionName}ViewModel {
+        return ${functionName}ViewModel(CodeApplication.instance)
+    }
+
+    override fun bindViewModel() {
+        getBinding().viewModel = mViewModel
+    }
+
+    override fun getBinding(): Fragment${functionName}Binding {
+        return mBinding
+    }
+}

@@ -1,0 +1,10 @@
+package ${applicaitionId}.${packageName}.service
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description:
+ */
+interface ${functionName}Service {
+
+}

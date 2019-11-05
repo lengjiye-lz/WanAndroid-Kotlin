@@ -5,6 +5,9 @@ import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 
+/**
+ * 我
+ */
 class MeFragment : BaseFragment<FragmentMeBinding, HomeViewModel>() {
 
     override fun getLayoutId(): Int {

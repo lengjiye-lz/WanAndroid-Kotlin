@@ -11,13 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.base.fragment.ViewPagerLazyBaseFragment
 import com.lengjiye.code.R
+import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.SystemItemFragmentBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
+import com.lengjiye.code.webview.WebViewActivity
 import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -38,7 +41,7 @@ class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, 
     }
 
     override fun getViewModel(): SystemViewModel {
-        return SystemViewModel(getBaseActivity().application)
+        return SystemViewModel(CodeApplication.instance)
     }
 
     override fun bindViewModel() {
@@ -102,6 +105,14 @@ class SystemItemFragment : ViewPagerLazyBaseFragment<SystemItemFragmentBinding, 
             loadMore()
         }
 
+
+        adapter.setOnItemClickListener { v, position, item ->
+            item?.let {
+                getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
+                    putString(ConstantKey.KEY_WEB_URL, it.link)
+                })
+            }
+        }
 
     }
 

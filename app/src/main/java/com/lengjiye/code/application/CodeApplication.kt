@@ -6,6 +6,7 @@ import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
 import com.lengjiye.code.main.activity.MainActivity
+import com.lengjiye.tools.LogTool
 
 /**
  * applicationContext
@@ -13,8 +14,12 @@ import com.lengjiye.code.main.activity.MainActivity
  */
 class CodeApplication : Application(), IApp {
 
+    init {
+        instance = this
+    }
+
     override fun applicationContext(): Context {
-        return this
+        return applicationContext
     }
 
     override fun applicationId(): String {
@@ -47,7 +52,7 @@ class CodeApplication : Application(), IApp {
     }
 
     companion object {
-        val application = this
+        lateinit var instance: CodeApplication
     }
 }
 

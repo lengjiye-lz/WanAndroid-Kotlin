@@ -1,0 +1,8 @@
+package ${applicaitionId}.${packageName}.bean
+
+/**
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description: id 是默认属性，不用可以删除，为了防止报错
+ */
+data class ${functionName}Bean(val id:Int)

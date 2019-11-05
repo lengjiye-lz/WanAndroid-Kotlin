@@ -27,7 +27,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun bindViewModel() {
-
         getBinding().viewModel = mViewModel
     }
 
