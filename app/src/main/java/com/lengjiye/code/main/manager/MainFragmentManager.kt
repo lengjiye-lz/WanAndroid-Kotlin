@@ -2,7 +2,7 @@ package com.lengjiye.code.main.manager
 
 import androidx.fragment.app.Fragment
 import com.lengjiye.code.home.fragment.HomeFragment
-import com.lengjiye.code.me.MeFragment
+import com.lengjiye.code.me.fragment.MeFragment
 import com.lengjiye.code.project.fragment.ProjectFragment
 import com.lengjiye.code.system.fragment.SystemFragment
 import java.lang.ref.WeakReference

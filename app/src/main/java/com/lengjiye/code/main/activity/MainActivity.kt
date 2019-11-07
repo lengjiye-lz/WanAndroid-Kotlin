@@ -10,6 +10,8 @@ import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
+import com.lengjiye.code.utils.ToolBarUtil
+
 
 /**
  * mainActivity
@@ -44,6 +46,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initData() {
         super.initData()
+        setSupportActionBar(
+            ToolBarUtil.Builder(findViewById(R.id.toolbar))
+                .setType(ToolBarUtil.SEARCH_TYPE)
+                .setSearchLogoRes(R.mipmap.logo)
+                .setSearchTitle("经常搜索的几个关键词")
+                .builder()
+        )
         mTempFragment = MainFragmentManager.instance.getHomeFragment()
         supportFragmentManager.beginTransaction()
             .add(R.id.f_container, mTempFragment as HomeFragment)

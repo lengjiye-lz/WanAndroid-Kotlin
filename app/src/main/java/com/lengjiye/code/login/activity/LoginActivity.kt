@@ -1,5 +1,6 @@
 package com.lengjiye.code.login.activity
 
+import android.os.Bundle
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityLoginBinding
@@ -8,7 +9,7 @@ import com.lengjiye.code.login.viewmodel.LoginViewModel
 /**
  * @Author: lz
  * @Date: 2019-11-05
- * @Description:
+ * @Description: 登录注册
  */
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
@@ -29,5 +30,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
      */
     override fun getBinding(): ActivityLoginBinding {
         return mBinding
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
+        
+    }
+
+    override fun initData() {
+        super.initData()
+
     }
 }

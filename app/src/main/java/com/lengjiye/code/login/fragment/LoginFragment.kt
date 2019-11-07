@@ -1,21 +1,24 @@
-package com.lengjiye.code.me
+package com.lengjiye.code.login.fragment
 
 import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
+import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.FragmentMeBinding
-import com.lengjiye.code.home.viewmodel.HomeViewModel
+import com.lengjiye.code.me.viewmodel.MeViewModel
 
 /**
- * 我
+ * @Author: lz
+ * @Date: 2019-11-05
+ * @Description: 登录
  */
-class MeFragment : BaseFragment<FragmentMeBinding, HomeViewModel>() {
+class LoginFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_me
     }
 
-    override fun getViewModel(): HomeViewModel {
-        return HomeViewModel(getBaseActivity().application)
+    override fun getViewModel(): MeViewModel {
+        return MeViewModel(CodeApplication.instance)
     }
 
     override fun bindViewModel() {

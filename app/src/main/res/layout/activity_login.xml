@@ -15,5 +15,20 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints">
 
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+                android:id="@+id/fl_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

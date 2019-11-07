@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            app:contentInsetStart="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Group
+                    android:id="@+id/tool_g_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="tool_iv_back,tool_tv_title,tool_iv_close" />
+
+            <ImageView
+                    android:id="@+id/tool_iv_back"
+                    android:layout_width="@dimen/d_45"
+                    android:layout_height="@dimen/d_40"
+                    android:layout_marginStart="@dimen/d_10"
+                    android:paddingTop="@dimen/d_2"
+                    android:paddingBottom="@dimen/d_2"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                    android:id="@+id/tool_iv_refresh"
+                    android:layout_width="@dimen/d_45"
+                    android:layout_height="@dimen/d_40"
+                    android:paddingTop="@dimen/d_2"
+                    android:paddingBottom="@dimen/d_2"
+                    android:src="@drawable/ic_refresh_black_24dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tool_iv_back"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginStart="@dimen/d_10" />
+
+            <TextView
+                    android:id="@+id/tool_tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/d_5"
+                    android:layout_marginEnd="@dimen/d_5"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/c_1a"
+                    android:textSize="@dimen/d_20"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.72"
+                    tools:text="标题标题标题标题标题标题标题标题标题标题" />
+
+            <ImageView
+                    android:id="@+id/tool_iv_close"
+                    android:layout_width="@dimen/d_45"
+                    android:layout_height="@dimen/d_40"
+                    android:layout_marginEnd="@dimen/d_10"
+                    android:paddingTop="@dimen/d_2"
+                    android:paddingBottom="@dimen/d_2"
+                    android:src="@drawable/ic_close_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                    android:id="@+id/tool_g_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="tool_iv_search,tool_iv_logo,tool_tv_search_title,tool_v_search" />
+
+            <View
+                    android:id="@+id/tool_v_search"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/d_5"
+                    android:layout_marginTop="@dimen/d_10"
+                    android:layout_marginEnd="@dimen/d_5"
+                    android:layout_marginBottom="@dimen/d_10"
+                    android:background="@drawable/bg_rectangle_white_r4"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                    android:id="@+id/tool_iv_logo"
+                    android:layout_width="@dimen/d_40"
+                    android:layout_height="@dimen/d_40"
+                    android:layout_marginStart="@dimen/d_8"
+                    android:src="@mipmap/ic_launcher"
+                    app:layout_constraintBottom_toBottomOf="@+id/tool_v_search"
+                    app:layout_constraintStart_toStartOf="@+id/tool_v_search"
+                    app:layout_constraintTop_toTopOf="@+id/tool_v_search" />
+
+            <TextView
+                    android:id="@+id/tool_tv_search_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d_10"
+                    android:layout_marginEnd="@dimen/d_10"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textSize="@dimen/d_18"
+                    app:layout_constraintBottom_toBottomOf="@id/tool_v_search"
+                    app:layout_constraintEnd_toStartOf="@+id/tool_iv_search"
+                    app:layout_constraintStart_toEndOf="@+id/tool_iv_logo"
+                    app:layout_constraintTop_toTopOf="@+id/tool_v_search"
+                    tools:text="asdcasdc" />
+
+            <ImageView
+                    android:id="@+id/tool_iv_search"
+                    android:layout_width="@dimen/d_45"
+                    android:layout_height="@dimen/d_40"
+                    android:layout_marginEnd="@dimen/d_2"
+                    android:src="@drawable/ic_search_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tool_v_search"
+                    app:layout_constraintEnd_toEndOf="@+id/tool_v_search"
+                    app:layout_constraintTop_toTopOf="@+id/tool_v_search" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+            android:id="@+id/tool_iv_top_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_title_bar_shadow"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+</merge>
