@@ -10,31 +10,21 @@
                 type="com.lengjiye.code.webview.WebViewModel" />
     </data>
 
-    <LinearLayout
-            android:id="@+id/linear"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:titleTextColor="@android:color/white"
-                app:theme="@style/toolBar"
-                app:titleTextColor="@android:color/white">
+        <include layout="@layout/layout_tool_bar" />
 
-            <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp" />
-        </androidx.appcompat.widget.Toolbar>
-
-    </LinearLayout>
+        <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_layout"
+                app:layout_constraintEnd_toEndOf="@+id/cl_layout"
+                app:layout_constraintStart_toStartOf="@+id/cl_layout"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

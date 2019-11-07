@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
 import com.just.agentweb.WebChromeClient
@@ -15,11 +16,13 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.tools.LogTool
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
     private var mAgentWeb: AgentWeb? = null
+    private var titleView: TextView? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_webview
@@ -39,15 +42,23 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        mBinding.toolbar.setTitleTextColor(Color.WHITE)
-        mBinding.toolbar.title = ""
-        this.setSupportActionBar(mBinding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val toolbar = ToolBarUtil.Builder(findViewById(R.id.toolbar))
+            .setType(ToolBarUtil.NORMAL_TYPE)
+            .setNormalTitleColor(Color.WHITE)
+            .setBackListener {
+                val b = mAgentWeb?.back()
+                if (b == false) finish()
+            }
+            .setCloseListener {
+                finish()
+            }
+            .builder()
+        this.setSupportActionBar(toolbar)
+        titleView = ToolBarUtil.getNormalTitle(toolbar)
     }
 
     override fun initData() {
         super.initData()
-        mBinding.toolbar.setNavigationOnClickListener { finish() }
         val url = intent.extras?.getString(ConstantKey.KEY_WEB_URL) ?: return
 
         val p = System.currentTimeMillis()
@@ -85,7 +96,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
     private val mWebChromeClient = object : WebChromeClient() {
         override fun onReceivedTitle(view: WebView, title: String) {
             super.onReceivedTitle(view, title)
-            mBinding.toolbarTitle.text = title
+            titleView?.text = title
         }
     }
 

@@ -17,6 +17,7 @@ import com.lengjiye.code.databinding.FragmentSystemItemBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.webview.WebViewActivity
@@ -107,9 +108,7 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
-                    putString(ConstantKey.KEY_WEB_URL, it.link)
-                })
+                ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
             }
         }
 

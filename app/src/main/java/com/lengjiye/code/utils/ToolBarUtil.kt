@@ -16,6 +16,10 @@ class ToolBarUtil {
     companion object {
         val NORMAL_TYPE = 0
         val SEARCH_TYPE = 1
+
+        fun getNormalTitle(toolbar: Toolbar): TextView {
+            return toolbar.findViewById(R.id.tool_tv_title)
+        }
     }
 
     class Builder(val toolbar: Toolbar) {

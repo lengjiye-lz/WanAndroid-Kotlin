@@ -28,4 +28,9 @@ class MeFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
     override fun getBinding(): FragmentMeBinding {
         return mBinding
     }
+
+    override fun initData() {
+        super.initData()
+        
+    }
 }

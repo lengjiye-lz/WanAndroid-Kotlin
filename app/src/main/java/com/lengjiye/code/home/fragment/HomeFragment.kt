@@ -17,6 +17,7 @@ import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.webview.WebViewActivity
@@ -73,9 +74,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
-                    putString(ConstantKey.KEY_WEB_URL, it.link)
-                })
+                ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
             }
         }
     }
@@ -150,9 +149,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 val value = mViewModel.bannerList.value?.get(position)
                 LogTool.e("value:${value?.title}")
                 value?.let {
-                    getBaseActivity().startActivity<WebViewActivity>(Bundle().apply {
-                        putString(ConstantKey.KEY_WEB_URL, it.url)
-                    })
+                    ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.url)
                 }
 
             }
