@@ -26,5 +26,6 @@ class ActivityUtil {
                 putString(ConstantKey.KEY_WEB_URL, url)
             })
         }
+
     }
 }

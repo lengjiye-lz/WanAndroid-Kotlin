@@ -12,7 +12,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.lengjiye.code.main.activity.MainActivity">
+        <activity
+                android:name="com.lengjiye.code.main.activity.MainActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +25,14 @@
 
         <activity
                 android:name=".webview.WebViewActivity"
+                android:configChanges="keyboard|screenSize|orientation"
                 android:launchMode="singleTop" />
+
+        <activity
+                android:name=".login.activity.LoginActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop"
+                android:windowSoftInputMode="stateAlwaysHidden|stateHidden" />
 
         <!--<activity android:name=".activity.LottieActivity">-->
         <!--<intent-filter>-->

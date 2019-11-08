@@ -28,4 +28,9 @@ class LoginFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
     override fun getBinding(): FragmentMeBinding {
         return mBinding
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = LoginFragment().apply {}
+    }
 }

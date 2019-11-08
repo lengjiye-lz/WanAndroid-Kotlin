@@ -11,7 +11,7 @@ import com.lengjiye.code.me.viewmodel.MeViewModel
  * @Date: 2019-11-05
  * @Description: 注册
  */
-class RegisterLoginFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
+class RegisterFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_me
@@ -27,5 +27,10 @@ class RegisterLoginFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
 
     override fun getBinding(): FragmentMeBinding {
         return mBinding
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = RegisterFragment().apply {}
     }
 }
