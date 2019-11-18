@@ -131,7 +131,7 @@ public class LogTool {
      */
     public static String getDefaultTag(StackTraceElement stackTraceElement) {
         String fileName = stackTraceElement.getFileName();
-        String stringArray[] = fileName.split("\\.");
+        String[] stringArray = fileName.split("\\.");
         String tag = stringArray[0];
         return TAG_NAME + "-" + tag;
     }
@@ -153,8 +153,7 @@ public class LogTool {
         // code line
         int lineNumber = stackTraceElement.getLineNumber();
 
-        logInfoStringBuilder.append(""
-                + fileName).append(SEPARATOR);
+        logInfoStringBuilder.append("[").append(fileName).append(SEPARATOR);
         logInfoStringBuilder.append("line:");
         logInfoStringBuilder.append(lineNumber);
         logInfoStringBuilder.append("] ");

@@ -6,6 +6,7 @@ import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
 import com.lengjiye.code.main.activity.MainActivity
+import com.lengjiye.code.utils.CrashHandler
 import com.lengjiye.tools.LogTool
 
 /**
@@ -49,6 +50,11 @@ class CodeApplication : Application(), IApp {
     override fun onCreate() {
         super.onCreate()
         MasterApplication.getInstance().setIApp(this)
+
+        // 崩溃日志捕捉
+        val handler = CrashHandler()
+        Thread.setDefaultUncaughtExceptionHandler(handler)
+
     }
 
     companion object {
