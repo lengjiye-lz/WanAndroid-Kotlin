@@ -127,16 +127,31 @@ class ToolBarUtil {
         }
 
         fun builder(): Toolbar {
-            val gNormal = toolbar.findViewById<Group>(R.id.tool_g_normal)
-            val gSearch = toolbar.findViewById<Group>(R.id.tool_g_search)
+            val toolIvBack = toolbar.findViewById<ImageView>(R.id.tool_iv_back)
+            val toolTvTitle = toolbar.findViewById<TextView>(R.id.tool_tv_title)
+            val toolIvClose = toolbar.findViewById<ImageView>(R.id.tool_iv_close)
+
+            val toolVSearch = toolbar.findViewById<View>(R.id.tool_v_search)
+            val toolIvLogo = toolbar.findViewById<ImageView>(R.id.tool_iv_logo)
+            val toolIvSearch = toolbar.findViewById<ImageView>(R.id.tool_iv_search)
+            val toolTvSearchTitle = toolbar.findViewById<TextView>(R.id.tool_tv_search_title)
 
             if (params.type == SEARCH_TYPE) {
-                gSearch.visibility = View.VISIBLE
-                gNormal.visibility = View.GONE
+                toolIvBack.visibility = View.GONE
+                toolTvTitle.visibility = View.GONE
+                toolIvClose.visibility = View.GONE
+
+                toolVSearch.visibility = View.VISIBLE
+                toolIvLogo.visibility = View.VISIBLE
+                toolIvSearch.visibility = View.VISIBLE
+                toolTvSearchTitle.visibility = View.VISIBLE
+
                 setSearchLayout(toolbar, params)
             } else {
-                gSearch.visibility = View.GONE
-                gNormal.visibility = View.VISIBLE
+                toolVSearch.visibility = View.GONE
+                toolIvLogo.visibility = View.GONE
+                toolIvSearch.visibility = View.GONE
+                toolTvSearchTitle.visibility = View.GONE
                 setNormalLayout(toolbar, params)
             }
             return toolbar
@@ -148,6 +163,7 @@ class ToolBarUtil {
             val toolTvTitle = view.findViewById<TextView>(R.id.tool_tv_title)
             val toolIvClose = view.findViewById<ImageView>(R.id.tool_iv_close)
             params.backRes?.let {
+                toolIvBack.visibility = View.VISIBLE
                 toolIvBack.setImageResource(it)
             }
 
@@ -158,6 +174,7 @@ class ToolBarUtil {
             }
 
             params.closeRes?.let {
+                toolIvClose.visibility = View.VISIBLE
                 toolIvClose.setImageResource(it)
             }
 
@@ -168,10 +185,12 @@ class ToolBarUtil {
             }
 
             params.normalTitleRes?.let {
+                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.setText(it)
             }
 
             params.normalTitle?.let {
+                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.text = it
             }
 
@@ -191,6 +210,7 @@ class ToolBarUtil {
             val toolTvSearchTitle = view.findViewById<TextView>(R.id.tool_tv_search_title)
 
             params.searchBgRes?.let {
+                toolVSearch.visibility = View.VISIBLE
                 toolVSearch.setBackgroundResource(it)
             }
 
@@ -201,6 +221,7 @@ class ToolBarUtil {
             }
 
             params.searchLogoRes?.let {
+                toolIvLogo.visibility = View.VISIBLE
                 toolIvLogo.setImageResource(it)
             }
 
@@ -211,6 +232,7 @@ class ToolBarUtil {
             }
 
             params.searchRes?.let {
+                toolIvSearch.visibility = View.VISIBLE
                 toolIvSearch.setImageResource(it)
             }
 
@@ -221,10 +243,12 @@ class ToolBarUtil {
             }
 
             params.searchTitleRes?.let {
+                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setText(it)
             }
 
             params.searchTitle?.let {
+                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.text = it
             }
 
@@ -235,10 +259,12 @@ class ToolBarUtil {
             }
 
             params.searchTitleColor?.let {
+                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setTextColor(it)
             }
 
             params.searchTitleSize?.let {
+                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.toFloat())
             }
         }

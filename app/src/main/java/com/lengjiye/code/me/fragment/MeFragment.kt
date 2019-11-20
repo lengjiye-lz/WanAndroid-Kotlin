@@ -6,6 +6,7 @@ import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.me.viewmodel.MeViewModel
+import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.startActivity
 
 /**
@@ -34,7 +35,7 @@ class MeFragment : BaseFragment<FragmentMeBinding, MeViewModel>() {
     override fun initData() {
         super.initData()
         mBinding.login.setOnClickListener {
-            getBaseActivity().startActivity<LoginActivity>()
+            ActivityUtil.startLoginActivity(getBaseActivity())
         }
     }
 }

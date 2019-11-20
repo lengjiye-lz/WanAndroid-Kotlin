@@ -10,6 +10,7 @@ import com.lengjiye.code.databinding.ActivityLoginBinding
 import com.lengjiye.code.login.fragment.LoginFragment
 import com.lengjiye.code.login.fragment.RegisterFragment
 import com.lengjiye.code.login.viewmodel.LoginViewModel
+import com.lengjiye.code.utils.ToolBarUtil
 
 /**
  * @Author: lz
@@ -42,7 +43,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-
+        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+            .setBackRes(R.drawable.ic_arrow_back_black_24dp).setBackListener {
+                finish()
+            }.builder()
     }
 
     override fun initData() {
@@ -64,11 +68,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         val fragment = switchFragment()
         if (mTempFragment == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.f_container, fragment)
+                .add(R.id.fl_layout, fragment)
                 .show(fragment).commit()
         } else {
             supportFragmentManager.beginTransaction()
-                .add(R.id.f_container, fragment).hide(mTempFragment!!)
+                .add(R.id.fl_layout, fragment).hide(mTempFragment!!)
                 .show(fragment).commit()
         }
         mTempFragment = fragment

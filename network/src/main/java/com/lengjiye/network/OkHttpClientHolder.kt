@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit
 
 class OkHttpClientHolder {
     private var client: OkHttpClient? = null
+    private var cookieJarImpl: CookieJarImpl? = null
 
     companion object {
         var singleton = Instance.holder
@@ -24,10 +25,19 @@ class OkHttpClientHolder {
     private fun createClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(SignInterceptor())
+            .cookieJar(getCookieJarImpl())
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .build()
     }
+
+    fun getCookieJarImpl(): CookieJarImpl {
+        if (cookieJarImpl == null) {
+            cookieJarImpl = CookieJarImpl(PersistentCookieStore())
+        }
+        return cookieJarImpl as CookieJarImpl
+    }
+
 }

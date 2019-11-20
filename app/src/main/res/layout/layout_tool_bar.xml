@@ -16,13 +16,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.Group
-                    android:id="@+id/tool_g_normal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="tool_iv_back,tool_tv_title,tool_iv_close" />
-
             <ImageView
                     android:id="@+id/tool_iv_back"
                     android:layout_width="@dimen/d_45"
@@ -31,6 +24,7 @@
                     android:paddingTop="@dimen/d_2"
                     android:paddingBottom="@dimen/d_2"
                     android:src="@drawable/ic_arrow_back_black_24dp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +54,7 @@
                     android:textColor="@color/c_1a"
                     android:textSize="@dimen/d_20"
                     android:textStyle="bold"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -74,17 +69,11 @@
                     android:layout_marginEnd="@dimen/d_10"
                     android:paddingTop="@dimen/d_2"
                     android:paddingBottom="@dimen/d_2"
-                    android:src="@drawable/ic_close_black_24dp"
+                    android:src="@drawable/ic_delete_black_24dp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Group
-                    android:id="@+id/tool_g_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="tool_iv_search,tool_iv_logo,tool_tv_search_title,tool_v_search" />
 
             <View
                     android:id="@+id/tool_v_search"
@@ -96,6 +85,7 @@
                     android:layout_marginBottom="@dimen/d_10"
                     android:background="@drawable/bg_rectangle_white_r4"
                     android:orientation="horizontal"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -107,6 +97,7 @@
                     android:layout_height="@dimen/d_40"
                     android:layout_marginStart="@dimen/d_8"
                     android:src="@mipmap/ic_launcher"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/tool_v_search"
                     app:layout_constraintStart_toStartOf="@+id/tool_v_search"
                     app:layout_constraintTop_toTopOf="@+id/tool_v_search" />
@@ -121,6 +112,7 @@
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textSize="@dimen/d_18"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@id/tool_v_search"
                     app:layout_constraintEnd_toStartOf="@+id/tool_iv_search"
                     app:layout_constraintStart_toEndOf="@+id/tool_iv_logo"
@@ -133,6 +125,7 @@
                     android:layout_height="@dimen/d_40"
                     android:layout_marginEnd="@dimen/d_2"
                     android:src="@drawable/ic_search_black_24dp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/tool_v_search"
                     app:layout_constraintEnd_toEndOf="@+id/tool_v_search"
                     app:layout_constraintTop_toTopOf="@+id/tool_v_search" />

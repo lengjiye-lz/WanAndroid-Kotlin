@@ -12,8 +12,8 @@ import com.lengjiye.network.LoadingObserver
 
 class SystemViewModel(application: Application) : BaseViewModel(application) {
 
-    private var loadingObserver: LoadingObserver<List<TreeBean>>? = null
-    private var loadingObserverArticleBean: LoadingObserver<ArticleBean>? = null
+    private lateinit var loadingObserver: LoadingObserver<List<TreeBean>>
+    private lateinit var loadingObserverArticleBean: LoadingObserver<ArticleBean>
 
     var tree = MutableLiveData<List<TreeBean>>()
     var articleBean = MutableLiveData<ArticleBean>()
@@ -44,22 +44,18 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
 
 
     fun getTree(lifecycleOwner: LifecycleOwner) {
-        loadingObserver?.cancelRequest()
-        loadingObserver?.let {
-            SystemModel.singleton.getTree(lifecycleOwner, it)
-        }
+        loadingObserver.cancelRequest()
+        SystemModel.singleton.getTree(lifecycleOwner, loadingObserver)
     }
 
     fun getTreeArticleList(lifecycleOwner: LifecycleOwner, pager: Int, cid: Int) {
         this.cid = cid
-        loadingObserverArticleBean?.cancelRequest()
-        loadingObserverArticleBean?.let {
-            SystemModel.singleton.getTreeArticleList(lifecycleOwner, pager, cid, it)
-        }
+        loadingObserverArticleBean.cancelRequest()
+        SystemModel.singleton.getTreeArticleList(lifecycleOwner, pager, cid, loadingObserverArticleBean)
     }
 
     override fun onDestroy() {
-        loadingObserver?.cancelRequest()
-        loadingObserverArticleBean?.cancelRequest()
+        loadingObserver.cancelRequest()
+        loadingObserverArticleBean.cancelRequest()
     }
 }

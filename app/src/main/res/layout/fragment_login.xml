@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.lengjiye.code.login.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints">
+
+        <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="@dimen/d_100"
+                android:layout_height="@dimen/d_100"
+                android:layout_marginTop="@dimen/d_60"
+                android:src="@mipmap/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lengjiye.code.widgets.DeleteEditTextView
+                android:id="@+id/det_phone"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d_50"
+                android:layout_marginStart="@dimen/d_20"
+                android:layout_marginTop="@dimen/d_60"
+                android:layout_marginEnd="@dimen/d_20"
+                app:hint="@string/s_7"
+                app:icon="@drawable/ic_account_black_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+
+        <com.lengjiye.code.widgets.DeleteEditTextView
+                android:id="@+id/det_pass"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d_50"
+                android:layout_marginStart="@dimen/d_20"
+                android:layout_marginTop="@dimen/d_20"
+                android:layout_marginEnd="@dimen/d_20"
+                app:hint="@string/s_8"
+                app:icon="@drawable/ic_password_black_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/det_phone" />
+
+        <ImageView
+                android:id="@+id/iv_login"
+                android:layout_width="@dimen/d_60"
+                android:layout_height="@dimen/d_60"
+                android:layout_marginTop="@dimen/d_40"
+                android:padding="@dimen/d_10"
+                android:scaleX="-1"
+                android:src="@drawable/btn_login_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/det_pass" />
+
+        <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_20"
+                android:text="@string/s_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_login" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

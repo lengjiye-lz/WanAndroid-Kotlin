@@ -10,6 +10,9 @@ import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.TagBean
 import com.lengjiye.tools.ResTool
 
+/**
+ * 标签
+ */
 class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?) : this(context, null, 0)

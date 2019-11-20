@@ -21,4 +21,12 @@ public interface ServerConstants {
      */
     String PROJECT_TREE = "project/tree/json";
     String PROJECT_TREE_ARTICLE = "project/list/{page}/json";
+
+    /**
+     * 登录
+     */
+
+    String USER_LOGIN = "user/login";
+    String USER_REGISTER = "user/register";
+    String USER_LOGOUT = "user/logout/json";
 }

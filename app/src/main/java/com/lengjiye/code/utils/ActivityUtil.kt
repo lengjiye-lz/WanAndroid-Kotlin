@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.LoginActivityType
+import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.webview.WebViewActivity
 
 inline fun <reified T : Activity> Context.startActivity() {
@@ -27,5 +29,10 @@ class ActivityUtil {
             })
         }
 
+        fun startLoginActivity(context: Context, type: Int = LoginActivityType.TYPE_1) {
+            context.startActivity<LoginActivity>(Bundle().apply {
+                putInt(ConstantKey.KEY_TYPE, type)
+            })
+        }
     }
 }

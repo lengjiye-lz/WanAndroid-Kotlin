@@ -8,4 +8,7 @@
     <string name="s_4">个人中心</string>
 
     <string name="s_5">没有更多数据</string>
+    <string name="s_6">没有账号，去注册</string>
+    <string name="s_7">账号</string>
+    <string name="s_8">密码</string>
 </resources>

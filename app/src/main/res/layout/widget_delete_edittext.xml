@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="android.widget.RelativeLayout">
+
+    <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/d_40"
+            android:layout_height="@dimen/d_40"
+            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/d_2"
+            android:paddingBottom="@dimen/d_2"
+            android:src="@drawable/ic_phone_android_black_24dp" />
+
+    <EditText
+            android:id="@+id/et_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/line"
+            android:layout_toLeftOf="@+id/iv_delete"
+            android:layout_toRightOf="@+id/iv_icon"
+            android:background="@null"
+            android:hint="@string/s_7"
+            android:inputType="phone"
+            android:textCursorDrawable="@drawable/text_cursor"
+            android:textSize="@dimen/d_18" />
+
+    <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="@dimen/d_40"
+            android:layout_height="@dimen/d_40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/d_5"
+            android:src="@drawable/ic_delete_black_24dp"
+            android:visibility="gone" />
+
+    <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_2"
+            android:layout_alignParentBottom="true"
+            android:background="@color/c_4697fa" />
+
+</merge>
