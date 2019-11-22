@@ -168,6 +168,7 @@ class ToolBarUtil {
             }
 
             params.backListener?.let { listener ->
+                toolIvBack.visibility = View.VISIBLE
                 toolIvBack.setOnClickListener {
                     listener.invoke(it)
                 }
@@ -179,6 +180,7 @@ class ToolBarUtil {
             }
 
             params.closeListener?.let { listener ->
+                toolIvClose.visibility = View.VISIBLE
                 toolIvClose.setOnClickListener {
                     listener.invoke(it)
                 }
@@ -195,10 +197,12 @@ class ToolBarUtil {
             }
 
             params.normalTitleColor?.let {
+                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.setTextColor(it)
             }
 
             params.normalTitleSize?.let {
+                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.toFloat())
             }
         }
@@ -215,6 +219,7 @@ class ToolBarUtil {
             }
 
             params.searchBgListener?.let { listener ->
+                toolVSearch.visibility = View.VISIBLE
                 toolVSearch.setOnClickListener {
                     listener.invoke(it)
                 }
@@ -226,6 +231,7 @@ class ToolBarUtil {
             }
 
             params.searchLogoListener?.let { listener ->
+                toolIvLogo.visibility = View.VISIBLE
                 toolIvLogo.setOnClickListener {
                     listener.invoke(it)
                 }
@@ -237,6 +243,7 @@ class ToolBarUtil {
             }
 
             params.searchListener?.let { listener ->
+                toolIvSearch.visibility = View.VISIBLE
                 toolIvSearch.setOnClickListener {
                     listener.invoke(it)
                 }
@@ -253,6 +260,7 @@ class ToolBarUtil {
             }
 
             params.searchTitleListener?.let { listener ->
+                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setOnClickListener {
                     listener.invoke(it)
                 }

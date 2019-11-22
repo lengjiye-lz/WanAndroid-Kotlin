@@ -44,7 +44,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
-            .setBackRes(R.drawable.ic_arrow_back_black_24dp).setBackListener {
+            .setBackRes(R.drawable.ic_back_ffffff_24dp).setBackListener {
                 finish()
             }.builder()
     }

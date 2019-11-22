@@ -40,6 +40,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         mBinding.ivLogin.setOnClickListener {
             mViewModel.login(this, "lengjiye", "lengjiye123")
         }
-
     }
+
+
+
 }

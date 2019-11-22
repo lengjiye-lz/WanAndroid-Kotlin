@@ -5,9 +5,7 @@ import android.content.Context
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
-import com.lengjiye.code.main.activity.MainActivity
-import com.lengjiye.code.utils.CrashHandler
-import com.lengjiye.tools.LogTool
+import com.lengjiye.code.utils.CrashHandlerUtil
 
 /**
  * applicationContext
@@ -52,9 +50,8 @@ class CodeApplication : Application(), IApp {
         MasterApplication.getInstance().setIApp(this)
 
         // 崩溃日志捕捉
-        val handler = CrashHandler()
+        val handler = CrashHandlerUtil()
         Thread.setDefaultUncaughtExceptionHandler(handler)
-
     }
 
     companion object {

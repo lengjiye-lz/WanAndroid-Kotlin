@@ -33,7 +33,7 @@
                 android:layout_marginTop="@dimen/d_60"
                 android:layout_marginEnd="@dimen/d_20"
                 app:hint="@string/s_7"
-                app:icon="@drawable/ic_account_black_24dp"
+                app:icon="@drawable/ic_account_2D67E3_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
@@ -46,7 +46,7 @@
                 android:layout_marginTop="@dimen/d_20"
                 android:layout_marginEnd="@dimen/d_20"
                 app:hint="@string/s_8"
-                app:icon="@drawable/ic_password_black_24dp"
+                app:icon="@drawable/ic_password_2d67e3_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/det_phone" />
@@ -58,7 +58,7 @@
                 android:layout_marginTop="@dimen/d_40"
                 android:padding="@dimen/d_10"
                 android:scaleX="-1"
-                android:src="@drawable/btn_login_black"
+                android:src="@drawable/btn_login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/det_pass" />

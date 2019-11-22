@@ -7,7 +7,7 @@ import java.io.StringWriter
 /**
  * 崩溃日志捕捉
  */
-class CrashHandler : Thread.UncaughtExceptionHandler {
+class CrashHandlerUtil : Thread.UncaughtExceptionHandler {
 
     private var handler: Thread.UncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
 

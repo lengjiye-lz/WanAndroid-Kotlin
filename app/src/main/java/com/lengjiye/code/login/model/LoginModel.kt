@@ -31,8 +31,8 @@ class LoginModel : BaseModel() {
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 
-    fun register(lifecycleOwner: LifecycleOwner, username: String, password: String, repassword: String, observer: Observer<UserBean>) {
-        val observable = getService()?.register(username, password, repassword)?.map(HttpResultFunc())
+    fun register(lifecycleOwner: LifecycleOwner, username: String, password: String, rePassword: String, observer: Observer<UserBean>) {
+        val observable = getService()?.register(username, password, rePassword)?.map(HttpResultFunc())
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 

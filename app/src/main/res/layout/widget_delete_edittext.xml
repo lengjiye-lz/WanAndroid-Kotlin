@@ -13,7 +13,7 @@
             android:layout_centerVertical="true"
             android:paddingTop="@dimen/d_2"
             android:paddingBottom="@dimen/d_2"
-            android:src="@drawable/ic_phone_android_black_24dp" />
+            android:src="@drawable/ic_phone_android_2d67e3_24dp" />
 
     <EditText
             android:id="@+id/et_text"
@@ -35,7 +35,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/d_5"
-            android:src="@drawable/ic_delete_black_24dp"
+            android:src="@drawable/ic_delete_767676_24dp"
             android:visibility="gone" />
 
     <TextView

@@ -20,7 +20,7 @@ interface LoginService {
 
     @POST(ServerConstants.USER_REGISTER)
     @FormUrlEncoded
-    fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword") repassword: String): Observable<BaseHttpResult<UserBean>>
+    fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword") rePassword: String): Observable<BaseHttpResult<UserBean>>
 
     @GET(ServerConstants.USER_LOGOUT)
     fun logout(): Observable<BaseHttpResult<String>>

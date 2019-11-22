@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_login_1952bf_24dp_pre" android:state_pressed="true" />
+    <item android:drawable="@drawable/ic_login_2d67e3_24dp_nor" android:state_pressed="false" />
+</selector>
