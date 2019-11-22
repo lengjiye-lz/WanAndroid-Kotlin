@@ -26,14 +26,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <com.lengjiye.code.widgets.DeleteEditTextView
-                android:id="@+id/det_phone"
+                android:id="@+id/det_name"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_50"
                 android:layout_marginStart="@dimen/d_20"
                 android:layout_marginTop="@dimen/d_60"
                 android:layout_marginEnd="@dimen/d_20"
                 app:hint="@string/s_7"
-                app:icon="@drawable/ic_account_2D67E3_24dp"
+                app:icon="@drawable/ic_account_2d67e3_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
@@ -49,7 +49,7 @@
                 app:icon="@drawable/ic_password_2d67e3_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/det_phone" />
+                app:layout_constraintTop_toBottomOf="@+id/det_name" />
 
         <ImageView
                 android:id="@+id/iv_login"

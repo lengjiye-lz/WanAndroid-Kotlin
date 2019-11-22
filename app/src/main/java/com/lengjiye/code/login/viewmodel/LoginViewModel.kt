@@ -2,6 +2,7 @@ package com.lengjiye.code.login.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.constant.ErrorCode
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.login.model.LoginModel
@@ -20,12 +21,14 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private lateinit var loadingObserver: LoadingObserver<UserBean>
     private lateinit var loadingObserverRegister: LoadingObserver<UserBean>
     private lateinit var loadingObserverLogout: LoadingObserver<String>
+    var loginSuc = MutableLiveData<Boolean>()
 
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
             override fun observerOnNext(data: UserBean?) {
                 data?.let {
                     saveAccount(it)
+                    loginSuc.value = true
                 }
             }
 

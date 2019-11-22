@@ -93,4 +93,8 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
             et_text.setText("")
         }
     }
+
+    fun getText(): String {
+        return et_text.text.toString().trim()
+    }
 }

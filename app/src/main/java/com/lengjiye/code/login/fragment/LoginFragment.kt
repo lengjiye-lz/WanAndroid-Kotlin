@@ -1,6 +1,8 @@
 package com.lengjiye.code.login.fragment
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import com.lengjiye.base.constant.ErrorCode
 import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
@@ -38,10 +40,40 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.ivLogin.setOnClickListener {
-            mViewModel.login(this, "lengjiye", "lengjiye123")
+            val name = mBinding.detName.getText()
+            val pass = mBinding.detPass.getText()
+            mViewModel.login(this, name, pass)
+        }
+
+        mBinding.tvRegister.setOnClickListener {
+
         }
     }
 
+    override fun initData() {
+        super.initData()
+
+        mViewModel.loginSuc.observe(this, Observer {
+            if (it) {
+                getBaseActivity().finish()
+            }
+        })
+
+        mViewModel.errorCode.observe(this, Observer {
+            error(it)
+        })
+    }
+
+    /**
+     * 统一处理error
+     */
+    private fun error(error: Int) {
+        when (error) {
+            ErrorCode.nameError -> {
+
+            }
+        }
+    }
 
 
 }
