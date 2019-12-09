@@ -5,5 +5,13 @@
         <attr name="text" format="string" />
         <attr name="hint" format="reference" />
         <attr name="text_size" format="dimension" />
+        <attr name="inputType" format="enum">
+            <enum name="text" value="1" />
+            <enum name="pass" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="HorizontalNavigation">
+        <attr name="widgets_content" format="string" />
     </declare-styleable>
 </resources>

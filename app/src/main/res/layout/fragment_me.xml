@@ -15,19 +15,56 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints">
 
-        <Button
-                android:id="@+id/login"
-                android:layout_width="wrap_content"
+
+        <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="@dimen/d_100"
+                android:layout_height="@dimen/d_100"
+                android:layout_marginTop="@dimen/d_60"
+                android:src="@mipmap/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/tv_me_rank"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="登录" />
+                android:gravity="center"
+                android:textColor="@color/c_1a"
+                android:textSize="@dimen/d_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
-        <Button
-                android:id="@+id/register"
-                android:layout_width="wrap_content"
+        <com.lengjiye.code.widgets.HorizontalNavigation
+                android:id="@+id/hn_rank_table"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="注册"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginTop="@dimen/d_60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_me_rank"
+                app:widgets_content="@string/s_15" />
 
+        <com.lengjiye.code.widgets.HorizontalNavigation
+                android:id="@+id/hn_me_collect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hn_rank_table"
+                app:widgets_content="@string/s_16" />
 
+        <com.lengjiye.code.widgets.HorizontalNavigation
+                android:id="@+id/hn_me_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hn_me_collect"
+                app:widgets_content="@string/s_17" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

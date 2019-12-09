@@ -11,4 +11,13 @@
     <string name="s_6">没有账号，去注册</string>
     <string name="s_7">账号</string>
     <string name="s_8">密码</string>
+    <string name="s_9">账号错误</string>
+    <string name="s_10">密码错误</string>
+    <string name="s_11">两次密码不一致</string>
+    <string name="s_12">确认密码</string>
+    <string name="s_13">已有账号，去登录</string>
+    <string name="s_14">积分:%d 排名:%d</string>
+    <string name="s_15">积分榜</string>
+    <string name="s_16">我的收藏</string>
+    <string name="s_17">我的分享</string>
 </resources>

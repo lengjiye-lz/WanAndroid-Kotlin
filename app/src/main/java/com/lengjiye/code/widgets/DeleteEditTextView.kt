@@ -3,19 +3,17 @@ package com.lengjiye.code.widgets
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.TextView
 import com.lengjiye.code.R
-import com.lengjiye.code.home.bean.TagBean
 import com.lengjiye.tools.ResTool
 import kotlinx.android.synthetic.main.widget_delete_edittext.view.*
+
 
 /**
  * 带删除带edit
@@ -32,6 +30,7 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
         val text = array?.getString(R.styleable.DeleteEditTextView_text)
         val size = array?.getDimensionPixelSize(R.styleable.DeleteEditTextView_text_size, resources.getDimensionPixelSize(R.dimen.d_18))
         val hint = array?.getResourceId(R.styleable.DeleteEditTextView_hint, R.string.s_7)
+        val inputType = array?.getInt(R.styleable.DeleteEditTextView_inputType, 0)
 
         array?.recycle()
 
@@ -40,6 +39,8 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
         setTextSize(size)
         setHint(hint)
         setListener()
+        setSingleLine()
+        setInputType(inputType)
     }
 
     private fun setIcon(icon: Drawable?) {
@@ -63,6 +64,18 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
     private fun setHint(hint: Int?) {
         hint?.let {
             et_text.setHint(it)
+        }
+    }
+
+    private fun setSingleLine() {
+        et_text.setSingleLine()
+    }
+
+    private fun setInputType(type: Int?) {
+        if (type == 2) {
+            et_text.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        } else {
+            et_text.inputType = InputType.TYPE_CLASS_TEXT
         }
     }
 
@@ -96,5 +109,9 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
 
     fun getText(): String {
         return et_text.text.toString().trim()
+    }
+
+    fun setEditText(value: String) {
+        et_text.setText(value)
     }
 }

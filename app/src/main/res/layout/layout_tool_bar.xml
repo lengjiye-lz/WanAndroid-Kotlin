@@ -69,7 +69,7 @@
                     android:layout_marginEnd="@dimen/d_10"
                     android:paddingTop="@dimen/d_2"
                     android:paddingBottom="@dimen/d_2"
-                    android:src="@drawable/ic_delete_767676_24dp"
+                    android:src="@drawable/ic_close_ffffff_24dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

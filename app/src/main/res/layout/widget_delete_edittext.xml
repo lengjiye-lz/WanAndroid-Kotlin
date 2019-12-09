@@ -24,7 +24,6 @@
             android:layout_toRightOf="@+id/iv_icon"
             android:background="@null"
             android:hint="@string/s_7"
-            android:inputType="phone"
             android:textCursorDrawable="@drawable/text_cursor"
             android:textSize="@dimen/d_18" />
 

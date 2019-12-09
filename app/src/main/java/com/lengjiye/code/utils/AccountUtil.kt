@@ -29,6 +29,10 @@ object AccountUtil {
         return SPTool.getString(SPKey.KEY_NAME, SPKey.KEY_NICK_NAME, "")
     }
 
+    fun setUserName(name: String) {
+        SPTool.putString(SPKey.KEY_NAME, SPKey.KEY_USER_NAME, name)
+    }
+
     /**
      * 退出
      */

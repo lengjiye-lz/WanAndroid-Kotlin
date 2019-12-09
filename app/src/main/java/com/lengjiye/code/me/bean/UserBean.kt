@@ -19,3 +19,21 @@ data class UserBean(
     val type: Int, // 0
     val username: String // lengjiye
 )
+
+data class Rank(
+    val coinCount: Int, // 75
+    val level: Int, // 1
+    val rank: Int, // 2017
+    val userId: Int, // 1448
+    val username: String // lengjiye
+)
+
+data class RankTable(
+    val curPage: Int, // 1
+    val datas: List<Rank>,
+    val offset: Int, // 0
+    val over: Boolean, // false
+    val pageCount: Int, // 342
+    val size: Int, // 30
+    val total: Int // 10239
+)

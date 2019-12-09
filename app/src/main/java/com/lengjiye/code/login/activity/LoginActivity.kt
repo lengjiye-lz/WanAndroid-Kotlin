@@ -63,7 +63,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         }
     }
 
-    private fun selectFragment(type: Int = LoginActivityType.TYPE_1) {
+    fun selectFragment(type: Int = LoginActivityType.TYPE_1) {
         this.type = type
         val fragment = switchFragment()
         if (mTempFragment == null) {

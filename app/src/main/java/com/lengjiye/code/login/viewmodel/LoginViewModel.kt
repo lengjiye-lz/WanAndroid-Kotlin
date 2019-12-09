@@ -22,6 +22,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private lateinit var loadingObserverRegister: LoadingObserver<UserBean>
     private lateinit var loadingObserverLogout: LoadingObserver<String>
     var loginSuc = MutableLiveData<Boolean>()
+    var registerSuc = MutableLiveData<Boolean>()
 
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
@@ -42,6 +43,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             override fun observerOnNext(data: UserBean?) {
                 data?.let {
                     saveAccount(it)
+                    registerSuc.value = true
                 }
             }
 
@@ -70,7 +72,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             errorCode.value = ErrorCode.nameError
             return
         }
-
+        AccountUtil.setUserName(username)
         if (password.isNullOrEmpty()) {
             errorCode.value = ErrorCode.passError
             return
@@ -87,7 +89,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             errorCode.value = ErrorCode.nameError
             return
         }
-
+        AccountUtil.setUserName(username)
         if (password.isNullOrEmpty()) {
             errorCode.value = ErrorCode.passError
             return
