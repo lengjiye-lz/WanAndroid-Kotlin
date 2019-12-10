@@ -11,8 +11,8 @@ import com.lengjiye.tools.ResTool
 /**
  * 文章列表适配器
  */
-class RankRableAdapter constructor(context: Context, models: MutableList<Rank>?) :
-    BaseDBAdapter<Rank, RankRableAdapter.RankHolderDB, ItemRankTableBinding>(context, models) {
+class RankTableAdapter constructor(context: Context, models: MutableList<Rank>?) :
+    BaseDBAdapter<Rank, RankTableAdapter.RankHolderDB, ItemRankTableBinding>(context, models) {
 
     override fun getLayoutId(): Int {
         return R.layout.item_rank_table

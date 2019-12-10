@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityRankTableBinding
-import com.lengjiye.code.me.adapter.RankRableAdapter
+import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
@@ -15,7 +15,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 
 class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() {
 
-    private val adapter by lazy { RankRableAdapter(this, null) }
+    private val adapter by lazy { RankTableAdapter(this, null) }
 
     private var page = 0
 
