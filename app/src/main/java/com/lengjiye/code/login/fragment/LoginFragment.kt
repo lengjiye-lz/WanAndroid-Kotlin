@@ -33,11 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentLoginBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     companion object {

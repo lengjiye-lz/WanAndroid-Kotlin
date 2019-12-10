@@ -3,7 +3,6 @@ package com.lengjiye.code.me.bean
 /**
  * @Author: lz
  * @Date: 2019-11-05
- * @Description: id 是默认属性，不用可以删除，为了防止报错
  */
 data class UserBean(
     val admin: Boolean, // false
@@ -36,4 +35,25 @@ data class RankTable(
     val pageCount: Int, // 342
     val size: Int, // 30
     val total: Int // 10239
+)
+
+data class Coin(
+    val coinCount: Int, // 20
+    val date: Long, // 1575861793000
+    val desc: String, // 2019-12-09 11:23:13 签到 , 积分：10 + 10
+    val id: Int, // 110399
+    val reason: String, // 签到
+    val type: Int, // 1
+    val userId: Int, // 1448
+    val userName: String // lengjiye
+)
+
+data class CoinList(
+    val curPage: Int, // 1
+    val datas: List<Coin>,
+    val offset: Int, // 0
+    val over: Boolean, // true
+    val pageCount: Int, // 1
+    val size: Int, // 20
+    val total: Int // 11
 )

@@ -18,14 +18,7 @@ import com.lengjiye.code.home.bean.HomeBean
  * 文章列表适配器
  */
 class ProjectFragmentItemAdapter constructor(val context: Context, models: MutableList<HomeBean>?) :
-    BaseDBAdapter<HomeBean, ProjectFragmentItemAdapter.HomeModelHolderDB>(context, models) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeModelHolderDB {
-        val binding = DataBindingUtil.inflate<ItemProjectItemBinding>(
-            mLayoutInflater, R.layout.item_project_item, parent, false
-        )
-        return HomeModelHolderDB(binding)
-    }
+    BaseDBAdapter<HomeBean, ProjectFragmentItemAdapter.HomeModelHolderDB, ItemProjectItemBinding>(context, models) {
 
     override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
         item?.let {
@@ -48,6 +41,13 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
         return homeBean.superChapterName + "/${homeBean.chapterName}"
     }
 
-
     class HomeModelHolderDB(binding: ItemProjectItemBinding) : BaseDBViewHolder<ItemProjectItemBinding>(binding)
+
+    override fun getLayoutId(): Int {
+        return R.layout.item_project_item
+    }
+
+    override fun getViewHolder(binding: ItemProjectItemBinding): HomeModelHolderDB {
+        return HomeModelHolderDB(binding)
+    }
 }

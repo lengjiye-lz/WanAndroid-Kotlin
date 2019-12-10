@@ -22,13 +22,6 @@ class ${functionName}Fragment : BaseFragment<Fragment${functionName}Binding, ${f
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    /**
-     * 获取 mBinding
-     */
-    override fun getBinding(): Fragment${functionName}Binding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 }

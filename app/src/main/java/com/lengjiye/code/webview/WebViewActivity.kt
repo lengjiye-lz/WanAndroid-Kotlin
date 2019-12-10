@@ -33,11 +33,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): ActivityWebviewBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun initView(savedInstanceState: Bundle?) {

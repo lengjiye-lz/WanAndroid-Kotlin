@@ -25,8 +25,15 @@ public interface ServerConstants {
     /**
      * 登录
      */
-
     String USER_LOGIN = "user/login";
     String USER_REGISTER = "user/register";
     String USER_LOGOUT = "user/logout/json";
+
+
+    /**
+     * 积分
+     */
+    String COIN_RANK = "coin/rank/{page}/json";
+    String COIN_USERINFO = "lg/coin/userinfo/json";
+    String COIN_USERINFO_LIST = "lg/coin/list/{page}/json";
 }

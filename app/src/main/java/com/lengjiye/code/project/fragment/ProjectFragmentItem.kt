@@ -12,10 +12,7 @@ import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
-import com.lengjiye.code.webview.WebViewActivity
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -50,11 +47,7 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentProjectItemBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun initView(savedInstanceState: Bundle?) {

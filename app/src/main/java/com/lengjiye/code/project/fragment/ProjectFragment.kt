@@ -31,11 +31,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentProjectBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun initView(savedInstanceState: Bundle?) {

@@ -16,11 +16,8 @@ import com.lengjiye.code.databinding.FragmentHomeBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
-import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
-import com.lengjiye.code.webview.WebViewActivity
 import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -48,20 +45,16 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentHomeBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        getBinding().srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
-        getBinding().srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
+        mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
+        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
-        getBinding().rlList.layoutManager = LinearLayoutManager(getBaseActivity())
-        getBinding().rlList.adapter = header
+        mBinding.rlList.layoutManager = LinearLayoutManager(getBaseActivity())
+        mBinding.rlList.adapter = header
         initBanner()
 
         mBinding.srlLayout.setOnRefreshListener {

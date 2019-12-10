@@ -9,6 +9,7 @@ import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.login.activity.LoginActivity
+import com.lengjiye.code.me.activity.RankTableActivity
 import com.lengjiye.code.webview.WebViewActivity
 
 inline fun <reified T : Activity> Context.startActivity() {
@@ -33,6 +34,10 @@ class ActivityUtil {
             context.startActivity<LoginActivity>(Bundle().apply {
                 putInt(ConstantKey.KEY_TYPE, type)
             })
+        }
+
+        fun startRankTableActivity(context: Context) {
+            context.startActivity<RankTableActivity>()
         }
     }
 }

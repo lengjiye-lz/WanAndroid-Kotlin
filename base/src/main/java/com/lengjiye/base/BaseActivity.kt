@@ -17,13 +17,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
         mViewModel = ViewModelProvider(this).get(getViewModel()::class.java)
         mBinding.lifecycleOwner = this
-
         bindViewModel()
-
         mViewModel.onCreate()
-
         initView(savedInstanceState)
-
         initData()
     }
 
@@ -35,11 +31,6 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
      * 绑定 ViewModel
      */
     abstract fun bindViewModel()
-
-    /**
-     * 获取 mBinding
-     */
-    abstract fun getBinding(): T
 
     /**
      * 初始化 view

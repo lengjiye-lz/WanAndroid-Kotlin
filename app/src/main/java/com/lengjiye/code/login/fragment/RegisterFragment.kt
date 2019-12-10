@@ -35,11 +35,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, LoginViewModel>()
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentRegisterBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     companion object {

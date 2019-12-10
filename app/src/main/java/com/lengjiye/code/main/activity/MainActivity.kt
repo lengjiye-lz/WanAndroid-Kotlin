@@ -29,14 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    /**
-     * 获取 mBinding
-     */
-    override fun getBinding(): ActivityMainBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -75,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
      * 初始化底部按钮
      */
     private fun initBottomNavigation() {
-        getBinding().bnBar.let {
+        mBinding.bnBar.let {
             it.setBarBackgroundColor(R.color.c_ff)
                 .addItem(
                     BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_1)

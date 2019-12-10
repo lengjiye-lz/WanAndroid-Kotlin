@@ -20,4 +20,6 @@
     <string name="s_15">积分榜</string>
     <string name="s_16">我的收藏</string>
     <string name="s_17">我的分享</string>
+    <string name="s_18">当前排名:%d</string>
+    <string name="s_19">总积分:%d</string>
 </resources>

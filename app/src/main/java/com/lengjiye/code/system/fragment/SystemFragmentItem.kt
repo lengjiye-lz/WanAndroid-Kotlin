@@ -18,10 +18,7 @@ import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.utils.toast
-import com.lengjiye.code.webview.WebViewActivity
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -45,11 +42,7 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentSystemItemBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     companion object {

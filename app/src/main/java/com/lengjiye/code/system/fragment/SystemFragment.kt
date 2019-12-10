@@ -29,11 +29,7 @@ class SystemFragment : LazyBaseFragment<FragmentSystemBinding, SystemViewModel>(
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    override fun getBinding(): FragmentSystemBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun loadData() {

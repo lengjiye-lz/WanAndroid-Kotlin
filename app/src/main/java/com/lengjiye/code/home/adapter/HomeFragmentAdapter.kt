@@ -16,16 +16,16 @@ import com.lengjiye.code.home.bean.HomeBean
  * 文章列表适配器
  */
 class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
-    BaseDBAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolderDB>(context, models) {
+    BaseDBAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolderDB, ItemHomeBinding>(context, models) {
 
     var type: Int = HomeFragmentAdapterType.TYPE_1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeModelHolderDB {
-        val binding = DataBindingUtil.inflate<ItemHomeBinding>(
-            mLayoutInflater, R.layout.item_home, parent, false
-        )
-        return HomeModelHolderDB(binding)
-    }
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeModelHolderDB {
+//        val binding = DataBindingUtil.inflate<ItemHomeBinding>(
+//            mLayoutInflater, R.layout.item_home, parent, false
+//        )
+//        return HomeModelHolderDB(binding)
+//    }
 
     override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
         item?.let {
@@ -52,4 +52,12 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
 
 
     class HomeModelHolderDB(binding: ItemHomeBinding) : BaseDBViewHolder<ItemHomeBinding>(binding)
+
+    override fun getLayoutId(): Int {
+        return R.layout.item_home
+    }
+
+    override fun getViewHolder(binding: ItemHomeBinding): HomeModelHolderDB {
+        return HomeModelHolderDB(binding)
+    }
 }

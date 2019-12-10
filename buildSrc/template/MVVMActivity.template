@@ -21,13 +21,6 @@ class ${functionName}Activity : BaseActivity<Activity${functionName}Binding, ${f
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    /**
-     * 获取 mBinding
-     */
-    override fun getBinding(): Activity${functionName}Binding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 }

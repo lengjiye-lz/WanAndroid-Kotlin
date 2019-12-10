@@ -23,21 +23,14 @@ open class BesselActivity : BaseActivity<ActivityBesselBinding, BesselViewModel>
     }
 
     override fun bindViewModel() {
-        getBinding().viewModel = mViewModel
-    }
-
-    /**
-     * 获取 mBinding
-     */
-    override fun getBinding(): ActivityBesselBinding {
-        return mBinding
+        mBinding.viewModel = mViewModel
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        getBinding().tvText.text = "测试  测试  测试"
-        getBinding().tvText.setOnClickListener {
+        mBinding.tvText.text = "测试  测试  测试"
+        mBinding.tvText.setOnClickListener {
             i++
-            getBinding().tvText.text = "测试  测试  测试:$i applicationId: ${MasterApplication.getInstance().applicationId()}"
+            mBinding.tvText.text = "测试  测试  测试:$i applicationId: ${MasterApplication.getInstance().applicationId()}"
         }
     }
 

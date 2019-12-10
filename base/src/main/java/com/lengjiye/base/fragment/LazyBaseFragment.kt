@@ -27,7 +27,6 @@ abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseF
      */
     abstract fun loadData()
 
-
     /**
      * fragment再次可见时，是否重新请求数据，默认为false 只请求一次数据
      *

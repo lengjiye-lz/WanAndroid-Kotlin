@@ -34,21 +34,11 @@
                 android:launchMode="singleTop"
                 android:windowSoftInputMode="stateAlwaysHidden|stateHidden" />
 
-        <!--<activity android:name=".activity.LottieActivity">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN"/>-->
+        <activity
+                android:name=".me.activity.RankTableActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
 
-        <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
-
-        <!--<activity android:name="kotlincodectivity.BesselActivity">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN"/>-->
-
-        <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
     </application>
 
 </manifest>
