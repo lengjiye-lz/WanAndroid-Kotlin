@@ -57,3 +57,14 @@ data class CoinList(
     val size: Int, // 20
     val total: Int // 11
 )
+
+data class Website(
+    val desc: String,
+    val icon: String,
+    val id: Int, // 3810
+    val link: String, // 上海
+    val name: String, // zhuo liu
+    val order: Int, // 0
+    val userId: Int, // 1448
+    val visible: Int // 1
+)

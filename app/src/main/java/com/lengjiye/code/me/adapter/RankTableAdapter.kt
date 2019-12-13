@@ -22,7 +22,7 @@ class RankTableAdapter constructor(context: Context, models: MutableList<Rank>?)
         item?.let {
             holder.binding.tvName.text = it.username
             holder.binding.tvCoin.text = ResTool.getStringFormat(R.string.s_19, it.coinCount)
-            holder.binding.tvRank.text = ResTool.getStringFormat(R.string.s_18, it.rank)
+            holder.binding.tvRank.text = ResTool.getStringFormat(R.string.s_18, it.level)
         }
     }
 

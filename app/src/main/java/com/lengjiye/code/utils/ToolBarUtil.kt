@@ -130,6 +130,7 @@ class ToolBarUtil {
             val toolIvBack = toolbar.findViewById<ImageView>(R.id.tool_iv_back)
             val toolTvTitle = toolbar.findViewById<TextView>(R.id.tool_tv_title)
             val toolIvClose = toolbar.findViewById<ImageView>(R.id.tool_iv_close)
+            val toolIvMore = toolbar.findViewById<ImageView>(R.id.tool_iv_more)
 
             val toolVSearch = toolbar.findViewById<View>(R.id.tool_v_search)
             val toolIvLogo = toolbar.findViewById<ImageView>(R.id.tool_iv_logo)
@@ -140,6 +141,7 @@ class ToolBarUtil {
                 toolIvBack.visibility = View.GONE
                 toolTvTitle.visibility = View.GONE
                 toolIvClose.visibility = View.GONE
+                toolIvMore.visibility = View.GONE
 
                 toolVSearch.visibility = View.VISIBLE
                 toolIvLogo.visibility = View.VISIBLE
@@ -162,6 +164,8 @@ class ToolBarUtil {
             val toolIvBack = view.findViewById<ImageView>(R.id.tool_iv_back)
             val toolTvTitle = view.findViewById<TextView>(R.id.tool_tv_title)
             val toolIvClose = view.findViewById<ImageView>(R.id.tool_iv_close)
+            val toolIvMore = view.findViewById<ImageView>(R.id.tool_iv_more)
+
             params.backRes?.let {
                 toolIvBack.visibility = View.VISIBLE
                 toolIvBack.setImageResource(it)

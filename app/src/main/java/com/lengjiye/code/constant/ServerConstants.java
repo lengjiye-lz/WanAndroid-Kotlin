@@ -36,4 +36,17 @@ public interface ServerConstants {
     String COIN_RANK = "coin/rank/{page}/json";
     String COIN_USERINFO = "lg/coin/userinfo/json";
     String COIN_USERINFO_LIST = "lg/coin/list/{page}/json";
+
+    /**
+     * 收藏
+     */
+    String COLLECT_ARTICEL_LIST = "lg/collect/list/{page}/json";
+    String COLLECT_ADD_ARTICLE = "lg/collect/{id}/json";
+    String COLLECT_ADD_OTHER_ARTICLE = "lg/collect/add/json";
+    String UNCOLLECT_ARTICLE = "lg/uncollect_originId/{id}/json";
+
+    String COLLECT_WEBSITE_LIS = "lg/collect/usertools/json";
+    String COLLECT_ADD_WEBSITE = "lg/collect/addtool/json";
+    String COLLECT_UPDATE_WEBSITE = "lg/collect/updatetool/json";
+    String COLLECT_DELETE_WEBSITE = "lg/collect/deletetool/json";
 }

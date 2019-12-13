@@ -1,26 +1,24 @@
-package com.lengjiye.code.home.adapter
+package com.lengjiye.code.me.adapter
 
 import android.content.Context
 import android.text.Html
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.HomeFragmentAdapterType
-import com.lengjiye.code.databinding.ItemHomeBinding
+import com.lengjiye.code.databinding.ItemCollectArticelListBinding
 import com.lengjiye.code.home.bean.HomeBean
 
 /**
  * 文章列表适配器
  */
-class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
-    BaseDBAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolderDB, ItemHomeBinding>(context, models) {
+class CollectArticleListAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
+    BaseDBAdapter<HomeBean, CollectArticleListAdapter.CollectArticleHolderDB, ItemCollectArticelListBinding>(context, models) {
 
     var type: Int = HomeFragmentAdapterType.TYPE_1
 
-    override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
+    override fun onBindViewHolder(holder: CollectArticleHolderDB, position: Int, item: HomeBean?) {
         item?.let {
             holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
@@ -44,13 +42,13 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
     }
 
 
-    class HomeModelHolderDB(binding: ItemHomeBinding) : BaseDBViewHolder<ItemHomeBinding>(binding)
+    class CollectArticleHolderDB(binding: ItemCollectArticelListBinding) : BaseDBViewHolder<ItemCollectArticelListBinding>(binding)
 
     override fun getLayoutId(): Int {
-        return R.layout.item_home
+        return R.layout.item_collect_articel_list
     }
 
-    override fun getViewHolder(binding: ItemHomeBinding): HomeModelHolderDB {
-        return HomeModelHolderDB(binding)
+    override fun getViewHolder(binding: ItemCollectArticelListBinding): CollectArticleHolderDB {
+        return CollectArticleHolderDB(binding)
     }
 }

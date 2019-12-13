@@ -20,6 +20,10 @@
     <string name="s_15">积分榜</string>
     <string name="s_16">我的收藏</string>
     <string name="s_17">我的分享</string>
-    <string name="s_18">当前排名:%d</string>
+    <string name="s_18">等级:%d</string>
     <string name="s_19">总积分:%d</string>
+    <string name="s_20">文章列表</string>
+    <string name="s_21">网站列表</string>
+    <string name="s_22">收藏站外文章</string>
+    <string name="s_23">收藏网站</string>
 </resources>

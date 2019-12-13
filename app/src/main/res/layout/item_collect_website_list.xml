@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.lengjiye.code.me.viewmodel.MeViewModel" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cv_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/d_8"
+            android:layout_marginTop="@dimen/d_5"
+            android:layout_marginRight="@dimen/d_8"
+            android:layout_marginBottom="@dimen/d_5"
+            app:cardCornerRadius="@dimen/d_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/d_5"
+                android:paddingTop="@dimen/d_8"
+                android:paddingRight="@dimen/d_8"
+                android:paddingBottom="@dimen/d_8">
+
+            <ImageView
+                    android:id="@+id/iv_collect"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:padding="@dimen/d_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/collect_icon" />
+
+            <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/d_10"
+                    android:maxLines="2"
+                    android:textColor="@color/c_3073FF"
+                    android:textSize="@dimen/d_16"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_collect"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="文章标题" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

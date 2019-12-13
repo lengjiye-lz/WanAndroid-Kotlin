@@ -39,6 +39,26 @@
                 android:configChanges="keyboard|screenSize|orientation"
                 android:launchMode="singleTop" />
 
+        <activity
+                android:name=".me.activity.CoinListActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
+
+        <activity
+                android:name=".me.activity.MyCollectActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
+
+        <activity
+                android:name=".me.activity.CollectArticleListActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
+
+        <activity
+                android:name=".me.activity.CollectWebsiteListActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
+
     </application>
 
 </manifest>

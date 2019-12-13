@@ -9,7 +9,7 @@ import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.login.activity.LoginActivity
-import com.lengjiye.code.me.activity.RankTableActivity
+import com.lengjiye.code.me.activity.*
 import com.lengjiye.code.webview.WebViewActivity
 
 inline fun <reified T : Activity> Context.startActivity() {
@@ -38,6 +38,22 @@ class ActivityUtil {
 
         fun startRankTableActivity(context: Context) {
             context.startActivity<RankTableActivity>()
+        }
+
+        fun startCoinListActivity(context: Context) {
+            context.startActivity<CoinListActivity>()
+        }
+
+        fun startMyCollectActivity(context: Context) {
+            context.startActivity<MyCollectActivity>()
+        }
+
+        fun startCollectArticleListActivity(context: Context) {
+            context.startActivity<CollectArticleListActivity>()
+        }
+
+        fun startCollectWebsiteListActivity(context: Context) {
+            context.startActivity<CollectWebsiteListActivity>()
         }
     }
 }

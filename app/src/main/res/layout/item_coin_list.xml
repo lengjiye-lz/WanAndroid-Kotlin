@@ -17,38 +17,15 @@
             tools:ignore="MissingConstraints">
 
         <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d_10"
                 android:textColor="@color/c_1a"
-                android:textSize="@dimen/d_20"
+                android:textSize="@dimen/d_18"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="姓名" />
-
-        <TextView
-                android:id="@+id/tv_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/d_10"
-                android:textColor="@color/c_1a"
-                android:textSize="@dimen/d_14"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="@string/s_18" />
-
-        <TextView
-                android:id="@+id/tv_coin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d_10"
-                android:layout_marginTop="@dimen/d_10"
-                android:textColor="@color/c_1a"
-                android:textSize="@dimen/d_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                tools:text="@string/s_19" />
+                tools:text="签到获取积分" />
 
         <include
                 android:id="@+id/line"
@@ -58,7 +35,7 @@
                 android:layout_marginTop="@dimen/d_10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_coin" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,7 +5,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
+import com.lengjiye.code.databinding.ActivityCoinListBinding
 import com.lengjiye.code.databinding.ActivityRankTableBinding
+import com.lengjiye.code.me.adapter.CoinListAdapter
 import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.toast
@@ -13,14 +15,14 @@ import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() {
+class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
 
-    private val adapter by lazy { RankTableAdapter(this, null) }
+    private val adapter by lazy { CoinListAdapter(this, null) }
 
-    private var page = 1
+    private var page = 0
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_rank_table
+        return R.layout.activity_coin_list
     }
 
     override fun bindViewModel() {
@@ -36,8 +38,8 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(this))
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(this))
 
-        mBinding.rvRank.layoutManager = LinearLayoutManager(this)
-        mBinding.rvRank.adapter = adapter
+        mBinding.rvCoin.layoutManager = LinearLayoutManager(this)
+        mBinding.rvCoin.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
             refresh()
@@ -46,6 +48,7 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
         mBinding.srlLayout.setOnLoadMoreListener {
             loadData()
         }
+
     }
 
     private fun refresh() {
@@ -55,10 +58,10 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
 
     override fun initData() {
         super.initData()
-        mViewModel.rankTable.observe(this, Observer {
+        mViewModel.coinList.observe(this, Observer {
             val list = it.datas
             if (list.isEmpty()) {
-                if (page == 1) {
+                if (page == 0) {
                     // TODO 显示错误界面
                     mBinding.srlLayout.finishRefresh()
                 } else {
@@ -68,7 +71,7 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
                 return@Observer
             }
 
-            if (page == 1) {
+            if (page == 0) {
                 mBinding.srlLayout.finishRefresh()
                 adapter.removeAll()
             } else {
@@ -83,6 +86,6 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
     }
 
     private fun loadData() {
-        mViewModel.getCoinRank(this, page)
+        mViewModel.getCoinUserInfoList(this, page)
     }
 }

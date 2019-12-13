@@ -66,11 +66,22 @@
                     android:id="@+id/tool_iv_close"
                     android:layout_width="@dimen/d_45"
                     android:layout_height="@dimen/d_40"
-                    android:layout_marginEnd="@dimen/d_10"
                     android:paddingTop="@dimen/d_2"
                     android:paddingBottom="@dimen/d_2"
                     android:src="@drawable/ic_close_ffffff_24dp"
                     android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tool_iv_more"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginEnd="@dimen/d_10" />
+
+            <ImageView
+                    android:id="@+id/tool_iv_more"
+                    android:layout_width="@dimen/d_45"
+                    android:layout_height="@dimen/d_40"
+                    android:layout_marginEnd="@dimen/d_10"
+                    android:src="@drawable/ic_more_black_24dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -129,7 +140,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tool_v_search"
                     app:layout_constraintEnd_toEndOf="@+id/tool_v_search"
                     app:layout_constraintTop_toTopOf="@+id/tool_v_search" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
