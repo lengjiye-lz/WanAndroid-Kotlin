@@ -36,11 +36,11 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
         mBinding.viewModel = mViewModel
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
+    override fun initToolBar() {
+        super.initToolBar()
         val toolbar = ToolBarUtil.Builder(findViewById(R.id.toolbar))
             .setType(ToolBarUtil.NORMAL_TYPE)
-            .setNormalTitleColor(Color.WHITE)
+            .setNormalTitleColor(R.color.c_ff)
             .setBackListener {
                 val b = mAgentWeb?.back()
                 if (b == false) finish()

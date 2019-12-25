@@ -26,4 +26,11 @@
     <string name="s_21">网站列表</string>
     <string name="s_22">收藏站外文章</string>
     <string name="s_23">收藏网站</string>
+    <string name="s_24">总积分榜</string>
+    <string name="s_25">登录</string>
+    <string name="s_26">注册</string>
+    <string name="s_27">设置</string>
+    <string name="s_28">退出登录</string>
+    <string name="s_29">退出成功</string>
+    <string name="s_30">登录成功</string>
 </resources>

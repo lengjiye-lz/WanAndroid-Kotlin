@@ -20,7 +20,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         bindViewModel()
         mViewModel.onCreate()
         initView(savedInstanceState)
+        initToolBar()
         initData()
+        initLiveDataListener()
     }
 
     abstract fun getLayoutId(): Int
@@ -38,6 +40,10 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
     open fun initView(savedInstanceState: Bundle?) = Unit
 
     open fun initData() = Unit
+
+    open fun initLiveDataListener() = Unit
+
+    open fun initToolBar() = Unit
 
     override fun onDestroy() {
         super.onDestroy()

@@ -10,6 +10,7 @@ import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 
 /**
@@ -65,6 +66,14 @@ class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
             }
 
             ActivityUtil.startCoinListActivity(getBaseActivity())
+        }
+
+        mBinding.hnMeSetting.setOnClickListener {
+            if (!AccountUtil.isLogin()) {
+                "没有账号登录".toast()
+                return@setOnClickListener
+            }
+            ActivityUtil.startSettingActivity(getBaseActivity())
         }
     }
 

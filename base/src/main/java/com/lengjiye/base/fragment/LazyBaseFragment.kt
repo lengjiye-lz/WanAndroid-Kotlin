@@ -17,6 +17,8 @@ abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseF
     // 记录当前fragment的是否隐藏 配合show()、hide()使用
     private var isHiddenToUser = true
 
+    private var isCreated = false
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         load()
@@ -37,8 +39,9 @@ abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseF
     }
 
     private fun load() {
-        // 第一次add时候不加载数据
+        // 防止第一次add时候不加载数据
         isHiddenToUser = false
+        isCreated = true
         startLoadData()
     }
 
@@ -53,11 +56,25 @@ abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseF
             startLoadData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // isNeedReload为true  防止从后台进入前台不请求数据
+        Log.e("LazyBaseFragment", "onResume:$isHiddenToUser")
+        if (!isHiddenToUser && !isCreated)
+            startLoadData()
+
+        isCreated = false
+
+    }
+
     /**
      * 开始请求数据
      */
     private fun startLoadData() {
-        Log.d("LazyBaseFragment", "startLoadData")
+        Log.d("LazyBaseFragment", "!isParentHidden():${!isParentHidden()}")
+        Log.d("LazyBaseFragment", "isNeedReload():${isNeedReload()}")
+        Log.d("LazyBaseFragment", "(isNeedReload() || !isDataLoaded):${(isNeedReload() || !isDataLoaded)}")
+        Log.d("LazyBaseFragment", "!isHiddenToUser:${!isHiddenToUser}")
         if (!isParentHidden() && (isNeedReload() || !isDataLoaded) && !isHiddenToUser) {
             Log.d("LazyBaseFragment", "loadData")
             loadData()

@@ -21,7 +21,7 @@ abstract class ViewPagerLazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         isViewCreated = true
-        // 第一次add时候不加载数据
+        // 防止第一次add时候不加载数据
         startLoadData()
     }
 

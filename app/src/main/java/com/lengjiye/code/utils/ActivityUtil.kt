@@ -55,5 +55,9 @@ class ActivityUtil {
         fun startCollectWebsiteListActivity(context: Context) {
             context.startActivity<CollectWebsiteListActivity>()
         }
+
+        fun startSettingActivity(context: Context) {
+            context.startActivity<SettingActivity>()
+        }
     }
 }

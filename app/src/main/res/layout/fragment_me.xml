@@ -34,23 +34,23 @@
                 android:textColor="@color/c_1a"
                 android:textSize="@dimen/d_14"
                 android:visibility="gone"
-                tools:text="lengjiye"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+                tools:text="lengjiye" />
 
         <TextView
                 android:id="@+id/tv_me_rank"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:gravity="center"
                 android:textColor="@color/c_1a"
                 android:textSize="@dimen/d_14"
-                tools:text="@string/s_14"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_me_name" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_me_name"
+                tools:text="@string/s_14" />
 
         <com.lengjiye.code.widgets.HorizontalNavigation
                 android:id="@+id/hn_rank_table"
@@ -81,6 +81,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hn_me_collect"
                 app:widgets_content="@string/s_17" />
+
+        <com.lengjiye.code.widgets.HorizontalNavigation
+                android:id="@+id/hn_me_setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hn_me_share"
+                app:widgets_content="@string/s_27" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

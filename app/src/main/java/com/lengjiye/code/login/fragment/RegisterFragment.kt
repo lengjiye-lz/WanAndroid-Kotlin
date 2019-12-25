@@ -17,6 +17,7 @@ import com.lengjiye.code.login.viewmodel.LoginViewModel
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.toast
+import com.lengjiye.network.ApiException
 import com.lengjiye.tools.ResTool
 
 /**
@@ -67,7 +68,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, LoginViewModel>()
         })
 
         mViewModel.errorCode.observe(this, Observer {
-            error(it)
+            if (it is ApiException){
+                it.mErrorMsg?.toast()
+            }
         })
     }
 
@@ -76,25 +79,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, LoginViewModel>()
         mBinding.detName.setEditText(name)
 
         setTextColor()
-    }
-
-    /**
-     * 统一处理error
-     */
-    private fun error(error: Int) {
-        when (error) {
-            ErrorCode.nameError -> {
-                ResTool.getString(R.string.s_9).toast()
-            }
-
-            ErrorCode.passError -> {
-                ResTool.getString(R.string.s_10).toast()
-            }
-
-            ErrorCode.rePassError -> {
-                ResTool.getString(R.string.s_11).toast()
-            }
-        }
     }
 
     private fun setTextColor() {

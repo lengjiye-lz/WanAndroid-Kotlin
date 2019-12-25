@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.Group
 import com.lengjiye.code.R
+import com.lengjiye.tools.ResTool
 
 /**
  * toolbar 工具
@@ -50,7 +51,7 @@ class ToolBarUtil {
             return this
         }
 
-        fun setNormalTitleRes(normalTitleRes: Int): Builder {
+        fun setNormalTitle(normalTitleRes: Int): Builder {
             params.normalTitleRes = normalTitleRes
             return this
         }
@@ -202,7 +203,7 @@ class ToolBarUtil {
 
             params.normalTitleColor?.let {
                 toolTvTitle.visibility = View.VISIBLE
-                toolTvTitle.setTextColor(it)
+                toolTvTitle.setTextColor(ResTool.getColor(it))
             }
 
             params.normalTitleSize?.let {
@@ -272,7 +273,7 @@ class ToolBarUtil {
 
             params.searchTitleColor?.let {
                 toolTvSearchTitle.visibility = View.VISIBLE
-                toolTvSearchTitle.setTextColor(it)
+                toolTvSearchTitle.setTextColor(ResTool.getColor(it))
             }
 
             params.searchTitleSize?.let {

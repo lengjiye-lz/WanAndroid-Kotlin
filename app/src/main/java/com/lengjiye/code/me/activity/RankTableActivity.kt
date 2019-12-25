@@ -8,6 +8,7 @@ import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityRankTableBinding
 import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
+import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -46,6 +47,15 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
         mBinding.srlLayout.setOnLoadMoreListener {
             loadData()
         }
+    }
+
+    override fun initToolBar() {
+        super.initToolBar()
+        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+            .setBackRes(R.drawable.ic_back_ffffff_24dp)
+            .setNormalTitle(R.string.s_24).setNormalTitleColor(R.color.c_ff).setBackListener {
+                finish()
+            }.builder()
     }
 
     private fun refresh() {

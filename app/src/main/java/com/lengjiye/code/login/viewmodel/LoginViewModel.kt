@@ -5,11 +5,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.constant.ErrorCode
 import com.lengjiye.base.viewmodel.BaseViewModel
+import com.lengjiye.code.R
 import com.lengjiye.code.login.model.LoginModel
 import com.lengjiye.code.me.bean.UserBean
 import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.network.ApiException
 import com.lengjiye.network.LoadingObserver
+import com.lengjiye.tools.LogTool
+import com.lengjiye.tools.ResTool
 
 /**
  * @Author: lz
@@ -24,6 +27,8 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     var loginSuc = MutableLiveData<Boolean>()
     var registerSuc = MutableLiveData<Boolean>()
 
+    var logoutSuc = MutableLiveData<Boolean>()
+
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
             override fun observerOnNext(data: UserBean?) {
@@ -34,7 +39,8 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             }
 
             override fun observerOnError(e: ApiException) {
-                errorCode.value = ErrorCode.loginError
+                errorCode.value = e
+                loginSuc.value = false
             }
 
         })
@@ -56,10 +62,11 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
             override fun observerOnNext(data: String?) {
                 AccountUtil.logout()
+                logoutSuc.value = true
             }
 
             override fun observerOnError(e: ApiException) {
-
+                logoutSuc.value = false
             }
         })
     }
@@ -69,12 +76,12 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
      */
     fun login(lifecycleOwner: LifecycleOwner, username: String?, password: String?) {
         if (username.isNullOrEmpty()) {
-            errorCode.value = ErrorCode.nameError
+            errorCode.value = ApiException(ErrorCode.nameError, ResTool.getString(R.string.s_9), null)
             return
         }
         AccountUtil.setUserName(username)
         if (password.isNullOrEmpty()) {
-            errorCode.value = ErrorCode.passError
+            errorCode.value = ApiException(ErrorCode.passError, ResTool.getString(R.string.s_10), null)
             return
         }
         loadingObserver.cancelRequest()
@@ -86,17 +93,17 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
      */
     fun register(lifecycleOwner: LifecycleOwner, username: String?, password: String?, rePassword: String?) {
         if (username.isNullOrEmpty()) {
-            errorCode.value = ErrorCode.nameError
+            errorCode.value = ApiException(ErrorCode.nameError, ResTool.getString(R.string.s_9), null)
             return
         }
         AccountUtil.setUserName(username)
         if (password.isNullOrEmpty()) {
-            errorCode.value = ErrorCode.passError
+            errorCode.value = ApiException(ErrorCode.passError, ResTool.getString(R.string.s_10), null)
             return
         }
 
         if (rePassword.isNullOrEmpty()) {
-            errorCode.value = ErrorCode.rePassError
+            errorCode.value = ApiException(ErrorCode.rePassError, ResTool.getString(R.string.s_11), null)
             return
         }
         loadingObserverRegister.cancelRequest()

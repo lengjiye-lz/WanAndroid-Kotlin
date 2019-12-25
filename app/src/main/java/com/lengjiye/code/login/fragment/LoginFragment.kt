@@ -15,6 +15,8 @@ import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.login.viewmodel.LoginViewModel
 import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.toast
+import com.lengjiye.network.ApiException
+import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 
 /**
@@ -59,12 +61,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         initValue()
         mViewModel.loginSuc.observe(this, Observer {
             if (it) {
+                ResTool.getString(R.string.s_30).toast()
                 getBaseActivity().finish()
             }
         })
 
         mViewModel.errorCode.observe(this, Observer {
-            error(it)
+            if (it is ApiException) {
+                it.mErrorMsg?.toast()
+            }
         })
     }
 
@@ -79,20 +84,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         val spText = SpannableString(text)
         spText.setSpan(ForegroundColorSpan(ResTool.getColor(R.color.colorPrimary)), 5, text.length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
         mBinding.tvGoRegister.text = spText
-    }
-
-    /**
-     * 统一处理error
-     */
-    private fun error(error: Int) {
-        when (error) {
-            ErrorCode.nameError -> {
-                ResTool.getString(R.string.s_9).toast()
-            }
-
-            ErrorCode.passError -> {
-                ResTool.getString(R.string.s_10).toast()
-            }
-        }
     }
 }

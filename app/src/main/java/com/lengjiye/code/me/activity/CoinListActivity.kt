@@ -48,7 +48,6 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
         mBinding.srlLayout.setOnLoadMoreListener {
             loadData()
         }
-
     }
 
     private fun refresh() {
