@@ -41,6 +41,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     open fun initData() = Unit
 
+    /**
+     * LiveData 数据监听
+     */
     open fun initLiveDataListener() = Unit
 
     open fun initToolBar() = Unit

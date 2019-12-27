@@ -1,5 +1,7 @@
 package com.lengjiye.code.me.bean
 
+import com.lengjiye.code.home.bean.ArticleBean
+
 /**
  * @Author: lz
  * @Date: 2019-11-05
@@ -68,3 +70,4 @@ data class Website(
     val userId: Int, // 1448
     val visible: Int // 1
 )
+

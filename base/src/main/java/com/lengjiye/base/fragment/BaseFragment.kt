@@ -31,6 +31,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData()
+        initLiveDataListener()
     }
 
     abstract fun getLayoutId(): Int
@@ -48,6 +49,11 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
     open fun initView(savedInstanceState: Bundle?) = Unit
 
     open fun initData() = Unit
+
+    /**
+     * LiveData 数据监听
+     */
+    open fun initLiveDataListener() = Unit
 
     fun getBaseActivity(): BaseActivity<*, *> {
         return activity as BaseActivity<*, *>

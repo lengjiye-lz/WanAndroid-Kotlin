@@ -83,9 +83,9 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 ResTool.getString(R.string.s_5).toast()
                 return@Observer
             }
-//            adapter.addAll(dates.toMutableList())
-//            header.notifyItemRangeInserted(header.itemCount, dates.size)
-//            pager = it.curPage
+            adapter.addAll(dates.toMutableList())
+            header.notifyItemRangeInserted(header.itemCount, dates.size)
+            pager = it.curPage
         })
 
         mViewModel.homeBeanList.observe(this, Observer {
@@ -94,7 +94,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 adapter.removeAll()
             }
             adapter.addAll(it.toMutableList())
-            header.notifyItemRangeInserted(header.itemCount, it.size)
+            header.notifyDataSetChanged()
             pager = 1
         })
 

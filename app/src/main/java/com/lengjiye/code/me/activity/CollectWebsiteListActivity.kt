@@ -7,7 +7,7 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCollectWebsiteBinding
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
-import com.lengjiye.code.me.viewmodel.MeViewModel
+import com.lengjiye.code.me.viewmodel.MeCollectViewModel
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
@@ -18,7 +18,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 /**
  * 我收藏的网站的列表
  */
-class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, MeViewModel>() {
+class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, MeCollectViewModel>() {
 
     private val adapter by lazy { CollectWebsiteListAdapter(this, null) }
 
@@ -31,8 +31,8 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): MeViewModel {
-        return MeViewModel(application)
+    override fun getViewModel(): MeCollectViewModel {
+        return MeCollectViewModel(application)
     }
 
     override fun initToolBar() {

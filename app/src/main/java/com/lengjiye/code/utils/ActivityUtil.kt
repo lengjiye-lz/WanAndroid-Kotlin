@@ -22,42 +22,44 @@ inline fun <reified T : Activity> Context.startActivity(bundle: Bundle?) {
     startActivity(intent)
 }
 
-class ActivityUtil {
-    companion object {
-        fun startWebViewActivity(context: Context, url: String) {
-            context.startActivity<WebViewActivity>(Bundle().apply {
-                putString(ConstantKey.KEY_WEB_URL, url)
-            })
-        }
+object ActivityUtil {
+    fun startWebViewActivity(context: Context, url: String) {
+        context.startActivity<WebViewActivity>(Bundle().apply {
+            putString(ConstantKey.KEY_WEB_URL, url)
+        })
+    }
 
-        fun startLoginActivity(context: Context, type: Int = LoginActivityType.TYPE_1) {
-            context.startActivity<LoginActivity>(Bundle().apply {
-                putInt(ConstantKey.KEY_TYPE, type)
-            })
-        }
+    fun startLoginActivity(context: Context, type: Int = LoginActivityType.TYPE_1) {
+        context.startActivity<LoginActivity>(Bundle().apply {
+            putInt(ConstantKey.KEY_TYPE, type)
+        })
+    }
 
-        fun startRankTableActivity(context: Context) {
-            context.startActivity<RankTableActivity>()
-        }
+    fun startRankTableActivity(context: Context) {
+        context.startActivity<RankTableActivity>()
+    }
 
-        fun startCoinListActivity(context: Context) {
-            context.startActivity<CoinListActivity>()
-        }
+    fun startCoinListActivity(context: Context) {
+        context.startActivity<CoinListActivity>()
+    }
 
-        fun startMyCollectActivity(context: Context) {
-            context.startActivity<MyCollectActivity>()
-        }
+    fun startMyCollectActivity(context: Context) {
+        context.startActivity<MyCollectActivity>()
+    }
 
-        fun startCollectArticleListActivity(context: Context) {
-            context.startActivity<CollectArticleListActivity>()
-        }
+    fun startCollectArticleListActivity(context: Context) {
+        context.startActivity<CollectArticleListActivity>()
+    }
 
-        fun startCollectWebsiteListActivity(context: Context) {
-            context.startActivity<CollectWebsiteListActivity>()
-        }
+    fun startCollectWebsiteListActivity(context: Context) {
+        context.startActivity<CollectWebsiteListActivity>()
+    }
 
-        fun startSettingActivity(context: Context) {
-            context.startActivity<SettingActivity>()
-        }
+    fun startSettingActivity(context: Context) {
+        context.startActivity<SettingActivity>()
+    }
+
+    fun startMyShareActivity(context: Context) {
+        context.startActivity<MyShareActivity>()
     }
 }

@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.code.me.viewmodel.MeCollectViewModel" />
+                type="com.lengjiye.code.me.viewmodel.MeShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,14 +28,14 @@
                 app:widgets_content="@string/s_20" />
 
         <com.lengjiye.code.widgets.HorizontalNavigation
-                android:id="@+id/hn_website_list"
+                android:id="@+id/hn_project_list"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/d_20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hn_article_list"
-                app:widgets_content="@string/s_21" />
+                app:widgets_content="@string/s_32" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

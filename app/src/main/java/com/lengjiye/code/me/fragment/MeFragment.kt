@@ -57,6 +57,7 @@ class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
                 ActivityUtil.startLoginActivity(getBaseActivity())
                 return@setOnClickListener
             }
+            ActivityUtil.startMyShareActivity(getBaseActivity())
         }
 
         mBinding.tvMeRank.setOnClickListener {

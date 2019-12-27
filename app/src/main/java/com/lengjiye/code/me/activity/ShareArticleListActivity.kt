@@ -8,6 +8,7 @@ import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCoinListBinding
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
 import com.lengjiye.code.databinding.ActivityRankTableBinding
+import com.lengjiye.code.databinding.ActivityShareArticleBinding
 import com.lengjiye.code.me.adapter.CoinListAdapter
 import com.lengjiye.code.me.adapter.CollectArticleListAdapter
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
@@ -19,14 +20,14 @@ import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, MeCollectViewModel>() {
+class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeCollectViewModel>() {
 
     private val adapter by lazy { CollectArticleListAdapter(this, null) }
 
     private var page = 0
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_collect_article
+        return R.layout.activity_share_article
     }
 
     override fun bindViewModel() {

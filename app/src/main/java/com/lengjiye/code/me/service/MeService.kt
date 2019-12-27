@@ -20,14 +20,14 @@ interface MeService {
     @GET(ServerConstants.COIN_RANK)
     fun getCoinRank(@Path("page") page: Int): Observable<BaseHttpResult<RankTable>>
 
-    @GET(ServerConstants.COIN_USERINFO)
+    @GET(ServerConstants.COIN_USER_INFO)
     fun getCoinUserInfo(): Observable<BaseHttpResult<Rank>>
 
-    @GET(ServerConstants.COIN_USERINFO_LIST)
+    @GET(ServerConstants.COIN_USER_INFO_LIST)
     fun getCoinUserInfoList(@Path("page") page: Int): Observable<BaseHttpResult<CoinList>>
 
     // 收藏文章列表
-    @GET(ServerConstants.COLLECT_ARTICEL_LIST)
+    @GET(ServerConstants.COLLECT_ARTICLE_LIST)
     fun getCollectArticleList(@Path("page") page: Int): Observable<BaseHttpResult<ArticleBean>>
 
     // 收藏文章

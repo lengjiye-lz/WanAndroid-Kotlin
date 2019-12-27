@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.code.me.viewmodel.MeViewModel" />
+                type="com.lengjiye.code.me.viewmodel.MeCollectViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

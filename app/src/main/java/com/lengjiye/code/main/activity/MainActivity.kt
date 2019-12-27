@@ -11,14 +11,6 @@ import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
 import com.lengjiye.code.utils.ToolBarUtil
-import com.lengjiye.tools.LogTool
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -27,7 +19,6 @@ import java.util.concurrent.TimeUnit
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var mTempFragment: Fragment
-    private var publishSubject: PublishSubject<String> = PublishSubject.create()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -63,8 +54,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         supportFragmentManager.beginTransaction()
             .add(R.id.f_container, mTempFragment as HomeFragment)
             .show(mTempFragment as HomeFragment).commit()
-
-        test()
     }
 
     private fun switchFragment(fragment: Fragment) {
@@ -91,6 +80,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
                 )
                 .addItem(
+                    BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_33)
+                        .setInactiveIconResource(R.mipmap.ic_launcher)
+                        .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
+                )
+                .addItem(
                     BottomNavigationItem(R.mipmap.ic_launcher, R.string.s_2)
                         .setInactiveIconResource(R.mipmap.ic_launcher)
                         .setActiveColor(R.color.c_4697fa).setInActiveColor(R.color.c_1a)
@@ -111,9 +105,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             it.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
                 override fun onTabReselected(position: Int) {
-                    publishSubject.onNext("asdc")
-
-
                 }
 
                 override fun onTabUnselected(position: Int) {
@@ -134,14 +125,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
 
             1 -> {
-                fragment = MainFragmentManager.instance.getSystemFragment()
+                fragment = MainFragmentManager.instance.getShareFragment()
             }
 
             2 -> {
-                fragment = MainFragmentManager.instance.getProjectFragment()
+                fragment = MainFragmentManager.instance.getSystemFragment()
             }
 
             3 -> {
+                fragment = MainFragmentManager.instance.getProjectFragment()
+            }
+
+            4 -> {
                 fragment = MainFragmentManager.instance.getMeFragment()
             }
         }
@@ -156,54 +151,4 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         MainFragmentManager.instance.destroy()
     }
 
-
-    private fun test() {
-
-        publishSubject
-            .debounce(400, TimeUnit.MILLISECONDS)
-            .switchMap {
-                test1(it)
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { x ->
-                    LogTool.e("lz", "x:$x")
-                }, {
-                    LogTool.e("lz", "error:${it.message}")
-                }
-            )
-    }
-
-    private fun test1(i: String?): Observable<String?>? {
-        return Observable.create<String> {
-            LogTool.e("lz", "i:$i")
-            // 模拟请求
-            Thread.sleep(1000)
-
-            if (it != null) {
-                i?.let { it1 -> it.onNext(it1) }
-                it.onComplete()
-            }
-        }
-    }
 }
-
-private class SearchSource(var s: Long) : ObservableSource<String> {
-    override fun subscribe(observer: Observer<in String>) {
-        LogTool.e("lz", "SearchSource:$s")
-        Observable.create<String> {
-            // 模拟请求
-            Thread.sleep(1000)
-            it.onNext("sdcasd")
-            it.onComplete()
-        }.subscribeOn(Schedulers.io())
-            .subscribe({
-                LogTool.e("lz", "observer:$observer")
-                observer.onNext("sdcasdobserver")
-                observer.onComplete()
-            }, {
-                LogTool.e("lz", "error:${it.message}")
-            })
-    }
-}
-

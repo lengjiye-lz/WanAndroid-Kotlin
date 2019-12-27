@@ -1,6 +1,6 @@
 package ${applicaitionId}.${packageName}.fragment
 
-import com.lengjiye.base.fragment.BaseFragment
+import com.lengjiye.base.fragment.LazyBaseFragment
 import ${applicaitionId}.R
 import ${applicaitionId}.application.CodeApplication
 import ${applicaitionId}.databinding.Fragment${functionName}Binding
@@ -11,7 +11,7 @@ import ${applicaitionId}.${packageName}.viewmodel.${functionName}ViewModel
  * @Date: ${date}
  * @Description:
  */
-class ${functionName}Fragment : BaseFragment<Fragment${functionName}Binding, ${functionName}ViewModel>() {
+class ${functionName}Fragment : LazyBaseFragment<Fragment${functionName}Binding, ${functionName}ViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_${packageName}
@@ -23,5 +23,9 @@ class ${functionName}Fragment : BaseFragment<Fragment${functionName}Binding, ${f
 
     override fun bindViewModel() {
         mBinding.viewModel = mViewModel
+    }
+
+    override fun loadData() {
+
     }
 }

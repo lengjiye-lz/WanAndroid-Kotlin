@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.me.fragment.MeFragment
 import com.lengjiye.code.project.fragment.ProjectFragment
+import com.lengjiye.code.share.fragment.ShareFragment
 import com.lengjiye.code.system.fragment.SystemFragment
 import java.lang.ref.WeakReference
 
@@ -55,6 +56,14 @@ class MainFragmentManager private constructor() {
             getFragmentMap().put(MeFragment::class.java.simpleName, WeakReference(fragment))
         }
         return getFragmentMap()[MeFragment::class.java.simpleName]?.get() as MeFragment
+    }
+
+    fun getShareFragment(): ShareFragment {
+        if (getFragmentMap()[ShareFragment::class.java.simpleName] == null) {
+            val fragment = ShareFragment()
+            getFragmentMap().put(ShareFragment::class.java.simpleName, WeakReference(fragment))
+        }
+        return getFragmentMap()[ShareFragment::class.java.simpleName]?.get() as ShareFragment
     }
 
     fun destroy() {
