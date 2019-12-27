@@ -52,12 +52,11 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-//        mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
-//        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
+        mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
+        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
-        mBinding.rlList.layoutManager = GridLayoutManager(getBaseActivity(), 2, GridLayoutManager.VERTICAL, false)
-        mBinding.rlList.addItemDecoration(SpaceDecoration(0, 0, 0, 500))
-        mBinding.rlList.adapter = adapter
+        mBinding.rlList.layoutManager = LinearLayoutManager(getBaseActivity())
+        mBinding.rlList.adapter = header
         initBanner()
 
         mBinding.srlLayout.setOnRefreshListener {

@@ -9,16 +9,19 @@ import com.lengjiye.code.databinding.ActivityCollectWebsiteBinding
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
+/**
+ * 我收藏的网站的列表
+ */
 class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, MeViewModel>() {
 
     private val adapter by lazy { CollectWebsiteListAdapter(this, null) }
 
-    private var page = 0
 
     override fun getLayoutId(): Int {
         return R.layout.activity_collect_website
@@ -32,19 +35,24 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
         return MeViewModel(application)
     }
 
+    override fun initToolBar() {
+        super.initToolBar()
+        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+            .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
+            .setNormalTitle(R.string.s_21)
+            .setBackListener {
+                finish()
+            }.builder()
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(this))
-        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(this))
 
         mBinding.rvCoin.layoutManager = LinearLayoutManager(this)
         mBinding.rvCoin.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
-            refresh()
-        }
-
-        mBinding.srlLayout.setOnLoadMoreListener {
             loadData()
         }
 
@@ -54,38 +62,21 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
         }
     }
 
-    private fun refresh() {
-        page = 0
-        loadData()
-    }
-
     override fun initData() {
         super.initData()
         mViewModel.websiteList.observe(this, Observer {
             val list = it
+            mBinding.srlLayout.finishRefresh()
             if (list.isEmpty()) {
-                if (page == 0) {
-                    // TODO 显示错误界面
-                    mBinding.srlLayout.finishRefresh()
-                } else {
-                    mBinding.srlLayout.finishLoadMore()
-                    ResTool.getString(R.string.s_5).toast()
-                }
+                // TODO 显示错误界面
                 return@Observer
             }
 
-            if (page == 0) {
-                mBinding.srlLayout.finishRefresh()
-                adapter.removeAll()
-            } else {
-                mBinding.srlLayout.finishLoadMore()
-            }
-            page++
+            mBinding.srlLayout.finishRefresh()
+            adapter.removeAll()
             adapter.addAll(list.toMutableList())
         })
-
-
-        refresh()
+        loadData()
     }
 
     private fun loadData() {

@@ -8,7 +8,7 @@ import com.lengjiye.code.databinding.ItemCoinListBinding
 import com.lengjiye.code.me.bean.Coin
 
 /**
- * 文章列表适配器
+ * 积分明细
  */
 class CoinListAdapter constructor(context: Context, models: MutableList<Coin>?) :
     BaseDBAdapter<Coin, CoinListAdapter.CoinHolderDB, ItemCoinListBinding>(context, models) {

@@ -13,6 +13,7 @@ import com.lengjiye.code.me.adapter.CollectArticleListAdapter
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
 import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
+import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -34,6 +35,16 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
 
     override fun getViewModel(): MeViewModel {
         return MeViewModel(application)
+    }
+
+    override fun initToolBar() {
+        super.initToolBar()
+        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+            .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
+            .setNormalTitle(R.string.s_20)
+            .setBackListener {
+                finish()
+            }.builder()
     }
 
     override fun initView(savedInstanceState: Bundle?) {
