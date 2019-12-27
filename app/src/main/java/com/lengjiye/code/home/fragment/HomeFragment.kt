@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,6 +19,7 @@ import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.toast
+import com.lengjiye.code.widgets.SpaceDecoration
 import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -50,11 +52,12 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
-        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
+//        mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
+//        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
-        mBinding.rlList.layoutManager = LinearLayoutManager(getBaseActivity())
-        mBinding.rlList.adapter = header
+        mBinding.rlList.layoutManager = GridLayoutManager(getBaseActivity(), 2, GridLayoutManager.VERTICAL, false)
+        mBinding.rlList.addItemDecoration(SpaceDecoration(0, 0, 0, 500))
+        mBinding.rlList.adapter = adapter
         initBanner()
 
         mBinding.srlLayout.setOnRefreshListener {
@@ -81,9 +84,9 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 ResTool.getString(R.string.s_5).toast()
                 return@Observer
             }
-            adapter.addAll(dates.toMutableList())
-            header.notifyItemRangeInserted(header.itemCount, dates.size)
-            pager = it.curPage
+//            adapter.addAll(dates.toMutableList())
+//            header.notifyItemRangeInserted(header.itemCount, dates.size)
+//            pager = it.curPage
         })
 
         mViewModel.homeBeanList.observe(this, Observer {
