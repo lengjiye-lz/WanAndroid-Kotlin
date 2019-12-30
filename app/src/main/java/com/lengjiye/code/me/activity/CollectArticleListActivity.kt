@@ -5,14 +5,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
-import com.lengjiye.code.databinding.ActivityCoinListBinding
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
-import com.lengjiye.code.databinding.ActivityRankTableBinding
-import com.lengjiye.code.me.adapter.CoinListAdapter
-import com.lengjiye.code.me.adapter.CollectArticleListAdapter
-import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
-import com.lengjiye.code.me.adapter.RankTableAdapter
+import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
+import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
@@ -21,7 +17,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 
 class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, MeCollectViewModel>() {
 
-    private val adapter by lazy { CollectArticleListAdapter(this, null) }
+    private val adapter by lazy { HomeFragmentAdapter(this, null) }
 
     private var page = 0
 
@@ -61,6 +57,12 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
 
         mBinding.srlLayout.setOnLoadMoreListener {
             loadData()
+        }
+
+        adapter.setOnItemClickListener { v, position, item ->
+            item?.let {
+                ActivityUtil.startWebViewActivity(this, it.link)
+            }
         }
     }
 

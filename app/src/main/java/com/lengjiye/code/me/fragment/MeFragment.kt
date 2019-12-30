@@ -44,28 +44,14 @@ class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
         }
 
         mBinding.hnMeCollect.setOnClickListener {
-            if (!AccountUtil.isLogin()) {
-                ActivityUtil.startLoginActivity(getBaseActivity())
-                return@setOnClickListener
-            }
-
             ActivityUtil.startMyCollectActivity(getBaseActivity())
         }
 
         mBinding.hnMeShare.setOnClickListener {
-            if (!AccountUtil.isLogin()) {
-                ActivityUtil.startLoginActivity(getBaseActivity())
-                return@setOnClickListener
-            }
             ActivityUtil.startMyShareActivity(getBaseActivity())
         }
 
         mBinding.tvMeRank.setOnClickListener {
-            if (!AccountUtil.isLogin()) {
-                ActivityUtil.startLoginActivity(getBaseActivity())
-                return@setOnClickListener
-            }
-
             ActivityUtil.startCoinListActivity(getBaseActivity())
         }
 

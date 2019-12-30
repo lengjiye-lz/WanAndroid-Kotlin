@@ -9,4 +9,7 @@ object ConstantKey {
     const val KEY_OBJECT = "key_object"
     // 传递类型
     const val KEY_TYPE = "key_type"
+
+    // 传递类型
+    const val KEY_USER_ID = "user_id"
 }

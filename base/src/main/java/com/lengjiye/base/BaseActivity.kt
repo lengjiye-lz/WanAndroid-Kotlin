@@ -21,6 +21,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         mViewModel.onCreate()
         initView(savedInstanceState)
         initToolBar()
+        initIntent(savedInstanceState)
         initData()
         initLiveDataListener()
     }
@@ -40,6 +41,8 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
     open fun initView(savedInstanceState: Bundle?) = Unit
 
     open fun initData() = Unit
+
+    open fun initIntent(savedInstanceState: Bundle?) = Unit
 
     /**
      * LiveData 数据监听

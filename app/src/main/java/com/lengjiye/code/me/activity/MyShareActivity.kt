@@ -13,6 +13,7 @@ import com.lengjiye.code.databinding.ActivityRankTableBinding
 import com.lengjiye.code.me.adapter.CoinListAdapter
 import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeShareViewModel
+import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
@@ -51,7 +52,7 @@ class MyShareActivity : BaseActivity<ActivityMyShareBinding, MeShareViewModel>()
         super.initView(savedInstanceState)
 
         mBinding.hnArticleList.setOnClickListener {
-            ActivityUtil.startCollectArticleListActivity(this)
+            ActivityUtil.startShareArticleListActivity(this, AccountUtil.getUserId())
         }
 
         mBinding.hnProjectList.setOnClickListener {

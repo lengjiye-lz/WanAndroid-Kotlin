@@ -5,26 +5,22 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
-import com.lengjiye.code.databinding.ActivityCoinListBinding
-import com.lengjiye.code.databinding.ActivityCollectArticleBinding
-import com.lengjiye.code.databinding.ActivityRankTableBinding
+import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.ActivityShareArticleBinding
-import com.lengjiye.code.me.adapter.CoinListAdapter
-import com.lengjiye.code.me.adapter.CollectArticleListAdapter
-import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
-import com.lengjiye.code.me.adapter.RankTableAdapter
-import com.lengjiye.code.me.viewmodel.MeCollectViewModel
+import com.lengjiye.code.home.adapter.HomeFragmentAdapter
+import com.lengjiye.code.me.viewmodel.MeShareViewModel
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeCollectViewModel>() {
+class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeShareViewModel>() {
 
-    private val adapter by lazy { CollectArticleListAdapter(this, null) }
+    private val adapter by lazy { HomeFragmentAdapter(this, null) }
 
     private var page = 0
+    private var userId = 0
 
     override fun getLayoutId(): Int {
         return R.layout.activity_share_article
@@ -34,8 +30,8 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeCol
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): MeCollectViewModel {
-        return MeCollectViewModel(application)
+    override fun getViewModel(): MeShareViewModel {
+        return MeShareViewModel(application)
     }
 
     override fun initToolBar() {
@@ -53,8 +49,8 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeCol
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(this))
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(this))
 
-        mBinding.rvCoin.layoutManager = LinearLayoutManager(this)
-        mBinding.rvCoin.adapter = adapter
+        mBinding.rvList.layoutManager = LinearLayoutManager(this)
+        mBinding.rvList.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
             refresh()
@@ -70,10 +66,17 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeCol
         loadData()
     }
 
+    override fun initIntent(savedInstanceState: Bundle?) {
+        super.initIntent(savedInstanceState)
+        intent.extras?.let {
+            userId = it.getInt(ConstantKey.KEY_USER_ID)
+        }
+    }
+
     override fun initData() {
         super.initData()
-        mViewModel.articleList.observe(this, Observer {
-            val list = it.datas
+        mViewModel.shareArticles.observe(this, Observer {
+            val list = it.shareArticles.datas
             if (list.isEmpty()) {
                 if (page == 0) {
                     // TODO 显示错误界面
@@ -95,11 +98,10 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeCol
             adapter.addAll(list.toMutableList())
         })
 
-
         refresh()
     }
 
     private fun loadData() {
-        mViewModel.getCollectArticleList(this, page)
+        mViewModel.getUserShareArticles(this, userId, page)
     }
 }

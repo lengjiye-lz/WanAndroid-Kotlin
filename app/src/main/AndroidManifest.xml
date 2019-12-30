@@ -69,6 +69,11 @@
                 android:configChanges="keyboard|screenSize|orientation"
                 android:launchMode="singleTop" />
 
+        <activity
+                android:name=".me.activity.ShareArticleListActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
+
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.code.me.viewmodel.MeCollectViewModel" />
+                type="com.lengjiye.code.me.viewmodel.MeShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_coin"
+                    android:id="@+id/rv_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 

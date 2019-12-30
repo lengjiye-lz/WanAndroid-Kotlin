@@ -22,7 +22,7 @@ interface ShareService {
 
     // 分享的数据（查看别人的）
     @GET(ServerConstants.USER_SHARE_ARTICLES)
-    fun collectDeleteWebsite(@Path("user_id") userId: Int, @Path("page") page: Int): Observable<BaseHttpResult<ShareBean>>
+    fun getUserShareArticles(@Path("user_id") userId: Int, @Path("page") page: Int): Observable<BaseHttpResult<ShareBean>>
 
     // 自己的分享列表
     @GET(ServerConstants.USER_PRIVATE_ARTICLES)

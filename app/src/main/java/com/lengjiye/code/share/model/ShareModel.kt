@@ -2,14 +2,12 @@ package com.lengjiye.code.share.model
 
 import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.share.bean.ShareBean
 import com.lengjiye.code.share.service.ShareService
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServiceHolder
 import io.reactivex.Observer
-import retrofit2.http.Field
 
 /**
  * @Author: lz
@@ -34,8 +32,8 @@ class ShareModel : BaseModel() {
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 
-    fun collectDeleteWebsite(lifecycleOwner: LifecycleOwner, userId: Int, page: Int, observer: Observer<ShareBean>) {
-        val observable = getService()?.collectDeleteWebsite(userId, page)?.map(HttpResultFunc())
+    fun getUserShareArticles(lifecycleOwner: LifecycleOwner, userId: Int, page: Int, observer: Observer<ShareBean>) {
+        val observable = getService()?.getUserShareArticles(userId, page)?.map(HttpResultFunc())
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 

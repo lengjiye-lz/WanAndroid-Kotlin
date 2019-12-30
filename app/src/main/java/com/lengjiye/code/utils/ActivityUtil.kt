@@ -40,18 +40,34 @@ object ActivityUtil {
     }
 
     fun startCoinListActivity(context: Context) {
+        if (!AccountUtil.isLogin()) {
+            startCoinListActivity(context)
+            return
+        }
         context.startActivity<CoinListActivity>()
     }
 
     fun startMyCollectActivity(context: Context) {
+        if (!AccountUtil.isLogin()) {
+            startCoinListActivity(context)
+            return
+        }
         context.startActivity<MyCollectActivity>()
     }
 
     fun startCollectArticleListActivity(context: Context) {
+        if (!AccountUtil.isLogin()) {
+            startCoinListActivity(context)
+            return
+        }
         context.startActivity<CollectArticleListActivity>()
     }
 
     fun startCollectWebsiteListActivity(context: Context) {
+        if (!AccountUtil.isLogin()) {
+            startCoinListActivity(context)
+            return
+        }
         context.startActivity<CollectWebsiteListActivity>()
     }
 
@@ -60,6 +76,20 @@ object ActivityUtil {
     }
 
     fun startMyShareActivity(context: Context) {
+        if (!AccountUtil.isLogin()) {
+            startCoinListActivity(context)
+            return
+        }
         context.startActivity<MyShareActivity>()
+    }
+
+    fun startShareArticleListActivity(context: Context, userId: Int) {
+        if (!AccountUtil.isLogin()) {
+            startCoinListActivity(context)
+            return
+        }
+        context.startActivity<ShareArticleListActivity>(Bundle().apply {
+            putInt(ConstantKey.KEY_USER_ID, userId)
+        })
     }
 }

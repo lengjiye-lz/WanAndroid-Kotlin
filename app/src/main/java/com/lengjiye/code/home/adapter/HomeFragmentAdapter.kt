@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.Html
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
@@ -24,8 +25,8 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
         item?.let {
             holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
-            holder.binding.tvCategory.text = getCategory(it)
             holder.binding.tvCategory.visibility = if (type == HomeFragmentAdapterType.TYPE_2) View.GONE else View.VISIBLE
+            getCategory(holder.binding.tvCategory, it)
             holder.binding.tvTime.text = it.niceDate
             holder.binding.tgList.setTag(it.type, it.publishTime, it.tags)
             holder.binding.tgList.visibility = if (holder.binding.tgList.childCount == 0) View.GONE else View.VISIBLE
@@ -39,8 +40,22 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
         return homeBean.author
     }
 
-    private fun getCategory(homeBean: HomeBean): String {
-        return homeBean.superChapterName + "/${homeBean.chapterName}"
+    private fun getCategory(view: TextView, homeBean: HomeBean) {
+        val value = if (homeBean.superChapterName.isNullOrEmpty()) {
+            if (homeBean.chapterName.isNullOrEmpty()) {
+                view.visibility = View.GONE
+                ""
+            } else {
+                homeBean.chapterName
+            }
+        } else {
+            if (homeBean.chapterName.isNullOrEmpty()) {
+                homeBean.superChapterName
+            } else {
+                homeBean.superChapterName + "/${homeBean.chapterName}"
+            }
+        }
+        view.setText(value)
     }
 
 
