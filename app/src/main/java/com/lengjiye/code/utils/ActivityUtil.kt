@@ -41,7 +41,7 @@ object ActivityUtil {
 
     fun startCoinListActivity(context: Context) {
         if (!AccountUtil.isLogin()) {
-            startCoinListActivity(context)
+            startLoginActivity(context)
             return
         }
         context.startActivity<CoinListActivity>()
@@ -49,7 +49,7 @@ object ActivityUtil {
 
     fun startMyCollectActivity(context: Context) {
         if (!AccountUtil.isLogin()) {
-            startCoinListActivity(context)
+            startLoginActivity(context)
             return
         }
         context.startActivity<MyCollectActivity>()
@@ -57,7 +57,7 @@ object ActivityUtil {
 
     fun startCollectArticleListActivity(context: Context) {
         if (!AccountUtil.isLogin()) {
-            startCoinListActivity(context)
+            startLoginActivity(context)
             return
         }
         context.startActivity<CollectArticleListActivity>()
@@ -65,7 +65,7 @@ object ActivityUtil {
 
     fun startCollectWebsiteListActivity(context: Context) {
         if (!AccountUtil.isLogin()) {
-            startCoinListActivity(context)
+            startLoginActivity(context)
             return
         }
         context.startActivity<CollectWebsiteListActivity>()
@@ -77,7 +77,7 @@ object ActivityUtil {
 
     fun startMyShareActivity(context: Context) {
         if (!AccountUtil.isLogin()) {
-            startCoinListActivity(context)
+            startLoginActivity(context)
             return
         }
         context.startActivity<MyShareActivity>()
@@ -85,7 +85,7 @@ object ActivityUtil {
 
     fun startShareArticleListActivity(context: Context, userId: Int) {
         if (!AccountUtil.isLogin()) {
-            startCoinListActivity(context)
+            startLoginActivity(context)
             return
         }
         context.startActivity<ShareArticleListActivity>(Bundle().apply {

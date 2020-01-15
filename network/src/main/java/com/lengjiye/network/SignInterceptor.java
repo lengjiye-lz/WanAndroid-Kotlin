@@ -23,15 +23,19 @@ public class SignInterceptor implements Interceptor {
         // 可以添加公共请求参数
         Request request = requestBuilder.build();
         Response response = chain.proceed(request);
-        MediaType mediaType = response.body().contentType();
-        LogTool.d("mediaType=" + mediaType);
-        String content = response.body().string();
-        if ("debug".equals(MasterApplication.getInstance().buildType())) {
-            LogTool.e("#############################################################");
-            LogTool.e("request.url()=" + request.url());
-            LogTool.e("response.body()=" + content);
-            LogTool.e("#############################################################");
+        ResponseBody body = response.body();
+        if (body != null) {
+            MediaType mediaType = body.contentType();
+            LogTool.d("mediaType=" + mediaType);
+            String content = body.string();
+            if ("debug".equals(MasterApplication.getInstance().buildType())) {
+                LogTool.e("#############################################################");
+                LogTool.e("request.url()=" + request.url());
+                LogTool.e("response.body()=" + content);
+                LogTool.e("#############################################################");
+            }
+            return response.newBuilder().body(ResponseBody.create(mediaType, content)).build();
         }
-        return response.newBuilder().body(ResponseBody.create(mediaType, content)).build();
+        return response;
     }
 }
