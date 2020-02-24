@@ -13,6 +13,7 @@ import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.databinding.ItemProjectItemBinding
 import com.lengjiye.code.home.bean.HomeBean
+import com.lengjiye.code.utils.GlideUtil
 
 /**
  * 文章列表适配器
@@ -26,7 +27,8 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvDesc.text = Html.fromHtml(it.desc).trim()
             holder.binding.tvTime.text = it.niceDate
-            Glide.with(context).load(it.envelopePic).into(holder.binding.ivEnvelope)
+            GlideUtil.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_10, holder.binding.ivEnvelope)
+//            Glide.with(context).load(it.envelopePic).into(holder.binding.ivEnvelope)
         }
     }
 

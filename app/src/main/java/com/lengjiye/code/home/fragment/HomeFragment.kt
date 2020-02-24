@@ -18,6 +18,7 @@ import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.GlideUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.widgets.SpaceDecoration
 import com.lengjiye.tools.LogTool
@@ -135,7 +136,8 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
         banner?.setImageLoader(object : ImageLoader() {
             override fun displayImage(context: Context, path: Any?, imageView: ImageView) {
                 if (path is BannerBean) {
-                    Glide.with(context).load(path.imagePath).into(imageView)
+                    GlideUtil.loadImage(context, path.imagePath, imageView)
+//                    Glide.with(this@HomeFragment).load(path.imagePath).into(imageView)
                 }
             }
         })
