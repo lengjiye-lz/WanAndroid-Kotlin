@@ -63,6 +63,14 @@ object GlideUtil {
     /**
      * 带边框的圆形
      */
+    fun loadCircleWithBorderImage(context: Context, url: String?, imageView: ImageView) {
+        loadCircleWithBorderImage(context, url, R.dimen.d_2, R.color.c_99, imageView)
+    }
+
+
+    /**
+     * 带边框的圆形
+     */
     fun loadCircleWithBorderImage(context: Context, url: String?, strokeWidth: Int?, strokeColor: Int?, imageView: ImageView) {
         with(context).load(url).apply(getOptions()).transform(CircleWithBorder(ResTool.getDimens(strokeWidth ?: 2), ResTool.getColor(strokeColor ?: R.color.white))).into(imageView)
     }
