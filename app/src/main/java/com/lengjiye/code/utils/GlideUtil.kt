@@ -45,11 +45,79 @@ object GlideUtil {
      * 圆角
      */
     fun loadRoundedCornersImage(context: Context, url: String?, dimenRes: Int, imageView: ImageView) {
+        loadRoundedCornersImage(context, url, dimenRes, RoundedCornersTransformation.CORNER_ALL, imageView)
+    }
+
+    /**
+     * 圆角
+     * @param url
+     * @param dimenRes 圆角大小
+     * @param cornerType 圆角方位
+     * @param imageView
+     */
+    fun loadRoundedCornersImage(context: Context, url: String?, dimenRes: Int, cornerType: Int, imageView: ImageView) {
+        loadRoundedCornersImage(context, url, dimenRes, cornerType, RoundedCornersTransformation.FIT_CENTER, imageView)
+    }
+
+    /**
+     * 圆角
+     * @param url
+     * @param dimenRes 圆角大小
+     * @param cornerType 圆角方位
+     * @param scaleType imageView的方向
+     * @param imageView
+     */
+    fun loadRoundedCornersImage(context: Context, url: String?, dimenRes: Int, cornerType: Int, scaleType: Int, imageView: ImageView) {
         with(context).load(url).apply(getOptions()).transform(
-            RoundedCornersTransformation(
-                ResTool.getDimens(dimenRes), RoundedCornersTransformation.CORNER_NONE,
-                RoundedCornersTransformation.FIT_CENTER
-            )
+            RoundedCornersTransformation(ResTool.getDimens(dimenRes), cornerType, scaleType)
+        ).into(imageView)
+    }
+
+    /**
+     * 圆角带边框
+     * @param url
+     * @param dimenRes 圆角大小
+     * @param imageView
+     */
+    fun loadRoundedCornersStrokeImage(context: Context, url: String?, dimenRes: Int, imageView: ImageView) {
+        loadRoundedCornersStrokeImage(
+            context,
+            url,
+            dimenRes,
+            RoundedCornersTransformation.CORNER_ALL,
+            RoundedCornersTransformation.FIT_CENTER,
+            true,
+            ResTool.getDimens(R.dimen.d_1),
+            ResTool.getColor(R.color.c_99),
+            imageView
+        )
+    }
+
+    /**
+     * 圆角
+     * @param context activity/fragment 最好传 绑定生命周期，有利于回收
+     * @param url
+     * @param dimenRes 圆角大小
+     * @param cornerType 圆角方位
+     * @param scaleType imageView的方向
+     * @param isShowStroke 是否显示圆角
+     * @param strokeWidth 边框宽度
+     * @param strokeColor 边框颜色
+     * @param imageView
+     */
+    fun loadRoundedCornersStrokeImage(
+        context: Context,
+        url: String?,
+        dimenRes: Int,
+        cornerType: Int,
+        scaleType: Int,
+        isShowStroke: Boolean,
+        strokeWidth: Int,
+        strokeColor: Int,
+        imageView: ImageView
+    ) {
+        with(context).load(url).apply(getOptions()).transform(
+            RoundedCornersTransformation(ResTool.getDimens(dimenRes), cornerType, scaleType, isShowStroke, strokeWidth, strokeColor)
         ).into(imageView)
     }
 

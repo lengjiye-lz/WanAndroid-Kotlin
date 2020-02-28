@@ -6,6 +6,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Shader;
 
@@ -15,7 +16,6 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
-import com.lengjiye.tools.LogTool;
 
 import java.security.MessageDigest;
 
@@ -48,6 +48,13 @@ public class RoundedCornersTransformation extends BitmapTransformation {
     private float radius;
     private float diameter;
     private int cornerType;
+    private Paint paint;
+
+    // 是否显示边框
+    private boolean isShowStroke;
+    // 边框颜色和宽度
+    private int strokeWidth;
+    private int strokeColor;
 
     private @ScaleType
     int scaleType;
@@ -57,10 +64,17 @@ public class RoundedCornersTransformation extends BitmapTransformation {
     }
 
     public RoundedCornersTransformation(int dpRadius, int cornerType, @ScaleType int scaleType) {
+        this(dpRadius, cornerType, scaleType, false, 0, 0);
+    }
+
+    public RoundedCornersTransformation(int dpRadius, int cornerType, @ScaleType int scaleType, boolean isShowStroke, int strokeWidth, int strokeColor) {
         this.radius = Resources.getSystem().getDisplayMetrics().density * dpRadius;
         this.diameter = this.radius * 2;
         this.cornerType = cornerType;
         this.scaleType = scaleType;
+        this.strokeWidth = strokeWidth;
+        this.strokeColor = strokeColor;
+        this.isShowStroke = isShowStroke;
     }
 
     @Override
@@ -90,28 +104,34 @@ public class RoundedCornersTransformation extends BitmapTransformation {
 
         Canvas canvas = new Canvas(result);
         canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        Paint paint = new Paint();
+        paint = new Paint();
         paint.setAntiAlias(true);
 
         paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
 
         drawRoundRect(canvas, paint, source.getWidth(), source.getHeight());
+
+        if (isShowStroke) {
+            drawRoundRect(canvas, source.getWidth(), source.getHeight());
+        }
+
         canvas.setBitmap(null);
         return result;
     }
 
+    /**
+     * 绘制圆角
+     *
+     * @param canvas
+     * @param paint
+     * @param width
+     * @param height
+     */
     private void drawRoundRect(Canvas canvas, Paint paint, float width, float height) {
         if (cornerType == CORNER_NONE) {
             canvas.drawRect(new RectF(0, 0, width, height), paint);
         } else {
             canvas.drawRoundRect(new RectF(0, 0, width, height), radius, radius, paint);
-
-//        Paint mPaint = new Paint();
-//        mPaint.setAntiAlias(true);
-//        mPaint.setColor(ResTool.getColor(R.color.black));
-//        mPaint.setStrokeWidth(2);
-//        mPaint.setStyle(Paint.Style.STROKE);
-//        canvas.drawRoundRect(new RectF(margin, margin, width, height), radius, radius, mPaint);
 
             //把不需要的圆角去掉
             int notRoundedCorners = cornerType ^ CORNER_ALL;
@@ -130,23 +150,51 @@ public class RoundedCornersTransformation extends BitmapTransformation {
         }
     }
 
-    private static void clipTopLeft(final Canvas canvas, final Paint paint, float offset) {
-        LogTool.e("lz", "offset:" + offset);
+    /**
+     * 绘制圆角边框
+     * <p>
+     * 目前只能显示全圆角
+     *
+     * @param canvas
+     * @param width
+     * @param height
+     */
+    private void drawRoundRect(Canvas canvas, float width, float height) {
+        paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(strokeColor);
+        paint.setStrokeWidth(strokeWidth);
+        Path mPath = new Path();
+        // 设置起点
+        mPath.moveTo(strokeWidth / 2, height - radius - strokeWidth / 2);
+        mPath.lineTo(strokeWidth / 2, radius + strokeWidth / 2);
+        mPath.quadTo(strokeWidth / 2, strokeWidth / 2, radius + strokeWidth / 2, strokeWidth / 2);
+        mPath.lineTo(width - radius - strokeWidth / 2, strokeWidth / 2);
+        mPath.quadTo(width - strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2, radius + strokeWidth / 2);
+        mPath.lineTo(width - strokeWidth / 2, height - radius - strokeWidth / 2);
+        mPath.quadTo(width - strokeWidth / 2, height - strokeWidth / 2, width - radius - strokeWidth / 2, height - strokeWidth / 2);
+        mPath.lineTo(radius + strokeWidth / 2, height - strokeWidth / 2);
+        mPath.quadTo(strokeWidth / 2, height - strokeWidth / 2, strokeWidth / 2, height - radius - strokeWidth / 2);
+
+        canvas.drawPath(mPath, paint);
+    }
+
+    private void clipTopLeft(final Canvas canvas, final Paint paint, float offset) {
         final RectF block = new RectF(0, 0, offset, offset);
         canvas.drawRect(block, paint);
     }
 
-    private static void clipTopRight(final Canvas canvas, final Paint paint, float offset, float width) {
+    private void clipTopRight(final Canvas canvas, final Paint paint, float offset, float width) {
         final RectF block = new RectF(width - offset, 0, width, offset);
         canvas.drawRect(block, paint);
     }
 
-    private static void clipBottomLeft(final Canvas canvas, final Paint paint, float offset, float height) {
+    private void clipBottomLeft(final Canvas canvas, final Paint paint, float offset, float height) {
         final RectF block = new RectF(0, height - offset, offset, height);
         canvas.drawRect(block, paint);
     }
 
-    private static void clipBottomRight(final Canvas canvas, final Paint paint, float offset, float width, float height) {
+    private void clipBottomRight(final Canvas canvas, final Paint paint, float offset, float width, float height) {
         final RectF block = new RectF(width - offset, height - offset, width, height);
         canvas.drawRect(block, paint);
     }
@@ -158,6 +206,7 @@ public class RoundedCornersTransformation extends BitmapTransformation {
                 ((RoundedCornersTransformation) o).diameter == diameter &&
                 ((RoundedCornersTransformation) o).cornerType == cornerType;
     }
+
 
     @Override
     public int hashCode() {
