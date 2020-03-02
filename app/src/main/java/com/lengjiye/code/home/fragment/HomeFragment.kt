@@ -1,14 +1,20 @@
 package com.lengjiye.code.home.fragment
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.AbsListView
 import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomViewTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.lengjiye.base.fragment.LazyBaseFragment
 import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
@@ -71,6 +77,38 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
                 ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
+            }
+        }
+
+        mBinding.rlList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    bannerIsStartPlay(recyclerView)
+                }
+            }
+        })
+    }
+
+    /**
+     * 控制banner开始滚动
+     *
+     * banner隐藏的时候不滚动
+     */
+    private fun bannerIsStartPlay(recyclerView: RecyclerView) {
+        val layoutManager = recyclerView.layoutManager
+        if (layoutManager is LinearLayoutManager) {
+            val firstSize = layoutManager.findFirstVisibleItemPosition()
+            LogTool.e("lz", "firstSize:$firstSize")
+            if (firstSize == 0) {
+                banner?.startAutoPlay()
+            } else {
+                banner?.stopAutoPlay()
             }
         }
     }
@@ -137,7 +175,6 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
             override fun displayImage(context: Context, path: Any?, imageView: ImageView) {
                 if (path is BannerBean) {
                     GlideUtil.loadImage(context, path.imagePath, imageView)
-//                    Glide.with(this@HomeFragment).load(path.imagePath).into(imageView)
                 }
             }
         })
