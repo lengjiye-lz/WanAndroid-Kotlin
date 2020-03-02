@@ -27,7 +27,7 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvDesc.text = Html.fromHtml(it.desc).trim()
             holder.binding.tvTime.text = it.niceDate
-            GlideUtil.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_5, holder.binding.ivEnvelope)
+            GlideUtil.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_2, holder.binding.ivEnvelope)
         }
     }
 
