@@ -113,7 +113,7 @@
                     app:layout_constraintStart_toStartOf="@+id/tool_v_search"
                     app:layout_constraintTop_toTopOf="@+id/tool_v_search" />
 
-            <TextView
+            <com.lengjiye.code.widgets.AutoTextView
                     android:id="@+id/tool_tv_search_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -122,12 +122,12 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:textSize="@dimen/d_18"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@id/tool_v_search"
                     app:layout_constraintEnd_toStartOf="@+id/tool_iv_search"
                     app:layout_constraintStart_toEndOf="@+id/tool_iv_logo"
                     app:layout_constraintTop_toTopOf="@+id/tool_v_search"
+                    app:text_sizes="@dimen/d_18"
                     tools:text="asdcasdc" />
 
             <ImageView

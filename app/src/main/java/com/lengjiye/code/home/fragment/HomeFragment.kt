@@ -159,6 +159,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun loadData() {
         mViewModel.getBanner(this)
+
         refresh()
     }
 

@@ -14,4 +14,8 @@
     <declare-styleable name="HorizontalNavigation">
         <attr name="widgets_content" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="AutoTextView">
+        <attr name="text_sizes" format="dimension" />
+    </declare-styleable>
 </resources>

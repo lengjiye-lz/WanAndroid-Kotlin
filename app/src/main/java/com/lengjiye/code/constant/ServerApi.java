@@ -1,12 +1,20 @@
 package com.lengjiye.code.constant;
 
-public interface ServerConstants {
+public interface ServerApi {
+
+    /**
+     * mian
+     */
+    String HOTKEY_LIST = "hotkey/json";// 关键字列表
+
+
     /**
      * 首页列表
      */
     String ARTICLE = "article/list/{page}/json";
     String ARTICLE_TOP = "article/top/json";
     String BANNER = "banner/json";
+
 
 
     /**

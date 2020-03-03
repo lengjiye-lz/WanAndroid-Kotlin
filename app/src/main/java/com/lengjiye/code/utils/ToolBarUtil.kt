@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.Group
 import com.lengjiye.code.R
+import com.lengjiye.code.widgets.AutoTextView
 import com.lengjiye.tools.ResTool
 
 /**
@@ -15,11 +15,16 @@ import com.lengjiye.tools.ResTool
 class ToolBarUtil {
 
     companion object {
+        private var stop = false
         val NORMAL_TYPE = 0
         val SEARCH_TYPE = 1
 
         fun getNormalTitle(toolbar: Toolbar): TextView {
             return toolbar.findViewById(R.id.tool_tv_title)
+        }
+
+        fun getSearchTitle(toolbar: Toolbar): AutoTextView {
+            return toolbar.findViewById(R.id.tool_tv_search_title)
         }
     }
 
@@ -136,7 +141,7 @@ class ToolBarUtil {
             val toolVSearch = toolbar.findViewById<View>(R.id.tool_v_search)
             val toolIvLogo = toolbar.findViewById<ImageView>(R.id.tool_iv_logo)
             val toolIvSearch = toolbar.findViewById<ImageView>(R.id.tool_iv_search)
-            val toolTvSearchTitle = toolbar.findViewById<TextView>(R.id.tool_tv_search_title)
+            val toolTvSearchTitle = toolbar.findViewById<AutoTextView>(R.id.tool_tv_search_title)
 
             if (params.type == SEARCH_TYPE) {
                 toolIvBack.visibility = View.GONE
@@ -216,7 +221,7 @@ class ToolBarUtil {
             val toolVSearch = view.findViewById<View>(R.id.tool_v_search)
             val toolIvLogo = view.findViewById<ImageView>(R.id.tool_iv_logo)
             val toolIvSearch = view.findViewById<ImageView>(R.id.tool_iv_search)
-            val toolTvSearchTitle = view.findViewById<TextView>(R.id.tool_tv_search_title)
+            val toolTvSearchTitle = view.findViewById<AutoTextView>(R.id.tool_tv_search_title)
 
             params.searchBgRes?.let {
                 toolVSearch.visibility = View.VISIBLE
@@ -256,12 +261,12 @@ class ToolBarUtil {
 
             params.searchTitleRes?.let {
                 toolTvSearchTitle.visibility = View.VISIBLE
-                toolTvSearchTitle.setText(it)
+                toolTvSearchTitle.setText(ResTool.getString(it))
             }
 
             params.searchTitle?.let {
                 toolTvSearchTitle.visibility = View.VISIBLE
-                toolTvSearchTitle.text = it
+                toolTvSearchTitle.setText(it)
             }
 
             params.searchTitleListener?.let { listener ->
@@ -278,7 +283,7 @@ class ToolBarUtil {
 
             params.searchTitleSize?.let {
                 toolTvSearchTitle.visibility = View.VISIBLE
-                toolTvSearchTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.toFloat())
+                toolTvSearchTitle.setTextSize(it.toFloat())
             }
         }
     }

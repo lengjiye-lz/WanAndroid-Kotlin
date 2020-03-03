@@ -1,6 +1,6 @@
 package com.lengjiye.code.system.service
 
-import com.lengjiye.code.constant.ServerConstants
+import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.network.BaseHttpResult
@@ -11,9 +11,9 @@ import retrofit2.http.Query
 
 interface SystemService {
 
-    @GET(ServerConstants.TREE)
+    @GET(ServerApi.TREE)
     fun getTree(): Observable<BaseHttpResult<List<TreeBean>>>
 
-    @GET(ServerConstants.TREE_ARTICLE)
+    @GET(ServerApi.TREE_ARTICLE)
     fun getTreeArticleList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<BaseHttpResult<ArticleBean>>
 }

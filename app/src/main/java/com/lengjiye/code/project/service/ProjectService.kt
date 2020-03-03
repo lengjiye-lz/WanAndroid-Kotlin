@@ -1,6 +1,6 @@
 package com.lengjiye.code.project.service
 
-import com.lengjiye.code.constant.ServerConstants
+import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.network.BaseHttpResult
@@ -16,9 +16,9 @@ import retrofit2.http.Query
  */
 interface ProjectService {
 
-    @GET(ServerConstants.PROJECT_TREE)
+    @GET(ServerApi.PROJECT_TREE)
     fun getProjectTree(): Observable<BaseHttpResult<List<TreeBean>>>
 
-    @GET(ServerConstants.PROJECT_TREE_ARTICLE)
+    @GET(ServerApi.PROJECT_TREE_ARTICLE)
     fun getProjectArticle(@Path("page") page: Int, @Query("cid") cid: Int): Observable<BaseHttpResult<ArticleBean>>
 }

@@ -50,6 +50,7 @@ data class TagBean(
     val name: String, // 公众号
     val url: String // /wxarticle/list/408/1
 )
+
 data class BannerBean(
     val desc: String, // Android高级进阶直播课免费学习
     val id: Int, // 23
@@ -59,4 +60,15 @@ data class BannerBean(
     val title: String, // Android高级进阶直播课免费学习
     val type: Int, // 0
     val url: String // https://url.163.com/4bj
+)
+
+/**
+ * 关键字
+ */
+data class Hotkey(
+    val id: Int, // 6
+    val link: String,
+    val name: String, // 面试
+    val order: Int, // 1
+    val visible: Int // 1
 )
