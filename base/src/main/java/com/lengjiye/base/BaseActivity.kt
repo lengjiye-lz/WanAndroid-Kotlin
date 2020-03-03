@@ -19,11 +19,11 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         mBinding.lifecycleOwner = this
         bindViewModel()
         mViewModel.onCreate()
+        initIntent(savedInstanceState)
         initView(savedInstanceState)
         initToolBar()
-        initIntent(savedInstanceState)
-        initData()
         initLiveDataListener()
+        initData()
     }
 
     abstract fun getLayoutId(): Int
@@ -37,11 +37,20 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     /**
      * 初始化 view
+     * 设置view监听
      */
     open fun initView(savedInstanceState: Bundle?) = Unit
 
+    /**
+     * 初始化数据
+     * 设置数据
+     * 请求接口等
+     */
     open fun initData() = Unit
 
+    /**
+     * intent 传值
+     */
     open fun initIntent(savedInstanceState: Bundle?) = Unit
 
     /**

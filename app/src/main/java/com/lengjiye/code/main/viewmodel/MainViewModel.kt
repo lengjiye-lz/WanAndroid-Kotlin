@@ -4,8 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
-import com.lengjiye.code.home.bean.Hotkey
-import com.lengjiye.code.home.model.HomeModel
+import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.main.model.MainModel
 import com.lengjiye.network.ApiException
 import com.lengjiye.network.LoadingObserver
@@ -15,13 +14,13 @@ import com.lengjiye.network.LoadingObserver
  */
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
-    var hotkeyList = MutableLiveData<List<Hotkey>>()
+    var hotkeyList = MutableLiveData<List<HotKey>>()
 
-    private var loadingObserverHotkey: LoadingObserver<List<Hotkey>>? = null
+    private var loadingObserverHotKey: LoadingObserver<List<HotKey>>? = null
 
     override fun onCreate() {
-        loadingObserverHotkey = LoadingObserver(object : LoadingObserver.ObserverListener<List<Hotkey>> {
-            override fun observerOnNext(data: List<Hotkey>?) {
+        loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>> {
+            override fun observerOnNext(data: List<HotKey>?) {
                 hotkeyList.value = data
             }
 
@@ -32,16 +31,16 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     }
 
     override fun onDestroy() {
-        loadingObserverHotkey?.cancelRequest()
+        loadingObserverHotKey?.cancelRequest()
     }
 
     /**
-     * 获取Hotkey
+     * 获取HotKey
      */
-    fun getHotkeyList(lifecycleOwner: LifecycleOwner) {
-        loadingObserverHotkey?.cancelRequest()
-        loadingObserverHotkey?.let {
-            MainModel.singleton.getHotkeyList(lifecycleOwner, it)
+    fun getHotKeyList(lifecycleOwner: LifecycleOwner) {
+        loadingObserverHotKey?.cancelRequest()
+        loadingObserverHotKey?.let {
+            MainModel.singleton.getHotKeyList(lifecycleOwner, it)
         }
     }
 }

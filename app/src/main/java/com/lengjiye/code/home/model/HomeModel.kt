@@ -4,7 +4,6 @@ import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.bean.HomeBean
-import com.lengjiye.code.home.bean.Hotkey
 import com.lengjiye.code.home.service.HomeService
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc

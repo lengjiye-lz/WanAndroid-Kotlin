@@ -65,7 +65,7 @@ data class BannerBean(
 /**
  * 关键字
  */
-data class Hotkey(
+data class HotKey(
     val id: Int, // 6
     val link: String,
     val name: String, // 面试

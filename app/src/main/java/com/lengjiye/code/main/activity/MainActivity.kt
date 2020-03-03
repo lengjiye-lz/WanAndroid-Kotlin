@@ -9,7 +9,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityMainBinding
-import com.lengjiye.code.home.bean.Hotkey
+import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
@@ -26,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private lateinit var mTempFragment: Fragment
 
     private var disposable: Disposable? = null
-    private var hotkeys: List<Hotkey>? = null
+    private var hotKeys: List<HotKey>? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -55,10 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 .builder()
         )
 
-        mViewModel.hotkeyList.observe(this, Observer {
-            this.hotkeys = it
-            interval()
-        })
+
     }
 
     override fun initData() {
@@ -68,19 +65,30 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .add(R.id.f_container, mTempFragment as HomeFragment)
             .show(mTempFragment as HomeFragment).commit()
 
-        mViewModel.getHotkeyList(this)
+        mViewModel.getHotKeyList(this)
+    }
+
+    override fun initLiveDataListener() {
+        super.initLiveDataListener()
+        mViewModel.hotkeyList.observe(this, Observer {
+            this.hotKeys = it
+            interval()
+        })
     }
 
     override fun onStart() {
         super.onStart()
-        if (disposable?.isDisposed == true && !hotkeys.isNullOrEmpty()) {
+        if (disposable?.isDisposed == true && !hotKeys.isNullOrEmpty()) {
             interval()
         }
     }
 
+    /**
+     * 启动循环
+     */
     private fun interval() {
         disposable?.dispose()
-        hotkeys?.let {
+        hotKeys?.let {
             val text = ToolBarUtil.getSearchTitle(findViewById(R.id.toolbar))
             if (text.visibility != View.VISIBLE) {
                 return
@@ -88,12 +96,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             val size = it.size
             disposable = IoUtil.interval(3) { it1 ->
                 val index = (it1 % size).toInt()
-                text.setText(hotkeys?.get(index)?.name)
+                text.setText(hotKeys?.get(index)?.name)
                 text.next()
             }
         }
     }
 
+    /**
+     * 切换fragment
+     */
     private fun switchFragment(fragment: Fragment) {
         if (fragment == mTempFragment) {
             return

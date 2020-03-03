@@ -15,9 +15,8 @@ import com.lengjiye.tools.ResTool
 class ToolBarUtil {
 
     companion object {
-        private var stop = false
-        val NORMAL_TYPE = 0
-        val SEARCH_TYPE = 1
+        const val NORMAL_TYPE = 0
+        const val SEARCH_TYPE = 1
 
         fun getNormalTitle(toolbar: Toolbar): TextView {
             return toolbar.findViewById(R.id.tool_tv_title)

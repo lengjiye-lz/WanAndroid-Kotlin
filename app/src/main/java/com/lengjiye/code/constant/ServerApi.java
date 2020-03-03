@@ -5,7 +5,7 @@ public interface ServerApi {
     /**
      * mian
      */
-    String HOTKEY_LIST = "hotkey/json";// 关键字列表
+    String HOT_KEY_LIST = "hotkey/json";// 关键字列表
 
 
     /**
@@ -14,7 +14,6 @@ public interface ServerApi {
     String ARTICLE = "article/list/{page}/json";
     String ARTICLE_TOP = "article/top/json";
     String BANNER = "banner/json";
-
 
 
     /**
@@ -29,6 +28,7 @@ public interface ServerApi {
      */
     String PROJECT_TREE = "project/tree/json";
     String PROJECT_TREE_ARTICLE = "project/list/{page}/json";
+
 
     /**
      * 登录
@@ -45,18 +45,20 @@ public interface ServerApi {
     String COIN_USER_INFO = "lg/coin/userinfo/json";
     String COIN_USER_INFO_LIST = "lg/coin/list/{page}/json";
 
+
     /**
      * 收藏
      */
     String COLLECT_ARTICLE_LIST = "lg/collect/list/{page}/json";
     String COLLECT_ADD_ARTICLE = "lg/collect/{id}/json";
     String COLLECT_ADD_OTHER_ARTICLE = "lg/collect/add/json";
-    String UNCOLLECT_ARTICLE = "lg/uncollect_originId/{id}/json";
+    String UN_COLLECT_ARTICLE = "lg/uncollect_originId/{id}/json";
 
     String COLLECT_WEBSITE_LIS = "lg/collect/usertools/json";
     String COLLECT_ADD_WEBSITE = "lg/collect/addtool/json";
     String COLLECT_UPDATE_WEBSITE = "lg/collect/updatetool/json";
     String COLLECT_DELETE_WEBSITE = "lg/collect/deletetool/json";
+
 
     /**
      * 广场  分享
