@@ -1,5 +1,6 @@
 package com.lengjiye.mvvm
 
+import groovy.xml.Namespace
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -16,10 +17,10 @@ class MVVMTask extends DefaultTask {
         def functionName = mvvmExtension.functionName
         // 作者
         def author = mvvmExtension.author
-        // activity 还是 fragment
-        def isActivity = mvvmExtension.isActivity
+        // 1是activity 2是fragment 0是activity和fragment
+        int addViewType = mvvmExtension.addViewType
 
-
+        getapplication()
         def mvpArray = [
                 [
                         templateName: "MVVMBean.template",
@@ -48,13 +49,15 @@ class MVVMTask extends DefaultTask {
                 ]
         ]
 
-        if (isActivity) {
+        if (addViewType != 2) {
             mvpArray.add([
                     templateName: "MVVMActivity.template",
                     type        : "activity",
                     fileName    : "Activity.kt"
             ])
-        } else {
+        }
+
+        if (addViewType != 1) {
             mvpArray.add([
                     templateName: "MVVMFragment.template",
                     type        : "fragment",
@@ -78,26 +81,27 @@ class MVVMTask extends DefaultTask {
         //代码文件根路径
         def fullPath = project.projectDir.toString() + "/src/main/java/" + packageFilePath
 
-        generateMvpFile(mvpArray, mBinding, fullPath, isActivity)
+        generateMvpFile(mvpArray, mBinding, fullPath, addViewType)
 
     }
 
-    void generateMvpFile(def mvpArray, def binding, def fullPath, def isActivity) {
+    void generateMvpFile(def mvpArray, def binding, def fullPath, int addViewType) {
 
         for (int i = 0; i < mvpArray.size(); i++) {
-            preGenerateFile(mvpArray[i], binding, fullPath, isActivity)
+            preGenerateFile(mvpArray[i], binding, fullPath, addViewType)
         }
     }
 
-    void preGenerateFile(def map, def binding, def fullPath, def isActivity) {
+    void preGenerateFile(def map, def binding, def fullPath, int addViewType) {
         def template = makeTemplate(map.templateName, binding)
         def path
         def fileName
         if ("laoyout" == map.type) {
             path = project.projectDir.toString() + "/src/main/res/layout/"
-            if (isActivity) {
+            if (addViewType != 2) {
                 fileName = path + "/activity_" + binding.layoutName + map.fileName
-            } else {
+            }
+            if (addViewType != 1) {
                 fileName = path + "/fragment_" + binding.layoutName + map.fileName
             }
         } else {
@@ -165,5 +169,15 @@ class MVVMTask extends DefaultTask {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
         return formatter.format(date)
+    }
+
+    def getapplication(){
+        // 声明命名空间
+        def android = new Namespace('http://schemas.android.com/apk/res/android', 'android')
+        // 获取apk application name
+        def parser = new XmlParser()
+
+        def testManifest = parser.parse(project.projectDir.toString() + "/src/main/AndroidManifest.xml")
+        println "lz:" + testManifest.application[0].attribute(android.name)
     }
 }

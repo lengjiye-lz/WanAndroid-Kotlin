@@ -7,6 +7,6 @@ class MVVMExtension {
     def functionName
     // 作者
     def author
-    // 是activity还好说fragment
-    boolean isActivity
+    // 1是activity 2是fragment 0是activity和fragment
+    int addViewType
 }

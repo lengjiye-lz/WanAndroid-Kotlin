@@ -14,7 +14,7 @@ mvvm {
     applicationId mvvmGeneratorProperties.applicationId
     functionName mvvmGeneratorProperties.functionName
     author mvvmGeneratorProperties.author
-    isActivity Boolean.parseBoolean(mvvmGeneratorProperties.isActivity)
+    addViewType Integer.parseInt(mvvmGeneratorProperties.addViewType)
 }
 
 //#定义混淆代码的路径
