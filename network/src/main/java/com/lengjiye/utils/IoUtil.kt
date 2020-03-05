@@ -4,6 +4,7 @@ import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
@@ -35,6 +36,26 @@ object IoUtil {
      */
     fun interval(initialDelay: Long, period: Long): Observable<Long> {
         return Observable.interval(initialDelay, period, TimeUnit.SECONDS)
+            .compose(io())
+    }
+
+    /**
+     * 定时任务
+     *
+     * 只执行一次
+     */
+    fun timer(delay: Long, listener: (long: Long) -> Unit): Disposable? {
+        return Observable.timer(delay, TimeUnit.SECONDS)
+            .compose(io()).subscribe(listener)
+    }
+
+    /**
+     * 定时任务
+     *
+     * 只执行一次
+     */
+    fun timer(delay: Long): Observable<Long> {
+        return Observable.timer(delay, TimeUnit.SECONDS)
             .compose(io())
     }
 

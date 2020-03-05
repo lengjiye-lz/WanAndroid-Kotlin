@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.lengjiye.code.R
 import com.lengjiye.code.widgets.AutoTextView
+import com.lengjiye.code.widgets.DeleteEditTextView
 import com.lengjiye.tools.ResTool
 
 /**
@@ -17,6 +18,7 @@ class ToolBarUtil {
     companion object {
         const val NORMAL_TYPE = 0
         const val SEARCH_TYPE = 1
+        const val EXIT_TYPE = 2
 
         fun getNormalTitle(toolbar: Toolbar): TextView {
             return toolbar.findViewById(R.id.tool_tv_title)
@@ -24,6 +26,10 @@ class ToolBarUtil {
 
         fun getSearchTitle(toolbar: Toolbar): AutoTextView {
             return toolbar.findViewById(R.id.tool_tv_search_title)
+        }
+
+        fun getSearchExit(toolbar: Toolbar): DeleteEditTextView {
+            return toolbar.findViewById(R.id.et_search)
         }
     }
 
@@ -132,34 +138,18 @@ class ToolBarUtil {
         }
 
         fun builder(): Toolbar {
-            val toolIvBack = toolbar.findViewById<ImageView>(R.id.tool_iv_back)
-            val toolTvTitle = toolbar.findViewById<TextView>(R.id.tool_tv_title)
-            val toolIvClose = toolbar.findViewById<ImageView>(R.id.tool_iv_close)
-            val toolIvMore = toolbar.findViewById<ImageView>(R.id.tool_iv_more)
+            when (params.type) {
+                NORMAL_TYPE -> {
+                    setNormalLayout(toolbar, params)
+                }
 
-            val toolVSearch = toolbar.findViewById<View>(R.id.tool_v_search)
-            val toolIvLogo = toolbar.findViewById<ImageView>(R.id.tool_iv_logo)
-            val toolIvSearch = toolbar.findViewById<ImageView>(R.id.tool_iv_search)
-            val toolTvSearchTitle = toolbar.findViewById<AutoTextView>(R.id.tool_tv_search_title)
+                SEARCH_TYPE -> {
+                    setSearchLayout(toolbar, params)
+                }
 
-            if (params.type == SEARCH_TYPE) {
-                toolIvBack.visibility = View.GONE
-                toolTvTitle.visibility = View.GONE
-                toolIvClose.visibility = View.GONE
-                toolIvMore.visibility = View.GONE
-
-                toolVSearch.visibility = View.VISIBLE
-                toolIvLogo.visibility = View.VISIBLE
-                toolIvSearch.visibility = View.VISIBLE
-                toolTvSearchTitle.visibility = View.VISIBLE
-
-                setSearchLayout(toolbar, params)
-            } else {
-                toolVSearch.visibility = View.GONE
-                toolIvLogo.visibility = View.GONE
-                toolIvSearch.visibility = View.GONE
-                toolTvSearchTitle.visibility = View.GONE
-                setNormalLayout(toolbar, params)
+                EXIT_TYPE -> {
+                    setExitSearchLayout(toolbar, params)
+                }
             }
             return toolbar
         }
@@ -171,49 +161,66 @@ class ToolBarUtil {
             val toolIvClose = view.findViewById<ImageView>(R.id.tool_iv_close)
             val toolIvMore = view.findViewById<ImageView>(R.id.tool_iv_more)
 
+            toolIvBack.visibility = View.VISIBLE
+            toolTvTitle.visibility = View.VISIBLE
+            toolIvClose.visibility = View.VISIBLE
+
             params.backRes?.let {
-                toolIvBack.visibility = View.VISIBLE
                 toolIvBack.setImageResource(it)
             }
 
             params.backListener?.let { listener ->
-                toolIvBack.visibility = View.VISIBLE
                 toolIvBack.setOnClickListener {
                     listener.invoke(it)
                 }
             }
 
             params.closeRes?.let {
-                toolIvClose.visibility = View.VISIBLE
                 toolIvClose.setImageResource(it)
             }
 
             params.closeListener?.let { listener ->
-                toolIvClose.visibility = View.VISIBLE
                 toolIvClose.setOnClickListener {
                     listener.invoke(it)
                 }
             }
 
             params.normalTitleRes?.let {
-                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.setText(it)
             }
 
             params.normalTitle?.let {
-                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.text = it
             }
 
             params.normalTitleColor?.let {
-                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.setTextColor(ResTool.getColor(it))
             }
 
             params.normalTitleSize?.let {
-                toolTvTitle.visibility = View.VISIBLE
                 toolTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.toFloat())
             }
+        }
+
+        private fun setExitSearchLayout(view: View, params: Params) {
+            val toolIvBack = view.findViewById<ImageView>(R.id.tool_iv_back)
+            val toolVSearchEt = view.findViewById<View>(R.id.tool_v_search_et)
+            val etSearch = view.findViewById<DeleteEditTextView>(R.id.et_search)
+
+            toolVSearchEt.visibility = View.VISIBLE
+            etSearch.visibility = View.VISIBLE
+            toolIvBack.visibility = View.VISIBLE
+
+            params.backRes?.let {
+                toolIvBack.setImageResource(it)
+            }
+
+            params.backListener?.let { listener ->
+                toolIvBack.setOnClickListener {
+                    listener.invoke(it)
+                }
+            }
+
         }
 
         private fun setSearchLayout(view: View, params: Params) {
@@ -222,13 +229,15 @@ class ToolBarUtil {
             val toolIvSearch = view.findViewById<ImageView>(R.id.tool_iv_search)
             val toolTvSearchTitle = view.findViewById<AutoTextView>(R.id.tool_tv_search_title)
 
+            toolVSearch.visibility = View.VISIBLE
+            toolIvSearch.visibility = View.VISIBLE
+            toolTvSearchTitle.visibility = View.VISIBLE
+
             params.searchBgRes?.let {
-                toolVSearch.visibility = View.VISIBLE
                 toolVSearch.setBackgroundResource(it)
             }
 
             params.searchBgListener?.let { listener ->
-                toolVSearch.visibility = View.VISIBLE
                 toolVSearch.setOnClickListener {
                     listener.invoke(it)
                 }
@@ -247,41 +256,35 @@ class ToolBarUtil {
             }
 
             params.searchRes?.let {
-                toolIvSearch.visibility = View.VISIBLE
                 toolIvSearch.setImageResource(it)
             }
 
             params.searchListener?.let { listener ->
-                toolIvSearch.visibility = View.VISIBLE
                 toolIvSearch.setOnClickListener {
                     listener.invoke(it)
                 }
             }
 
             params.searchTitleRes?.let {
-                toolTvSearchTitle.visibility = View.VISIBLE
+
                 toolTvSearchTitle.setText(ResTool.getString(it))
             }
 
             params.searchTitle?.let {
-                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setText(it)
             }
 
             params.searchTitleListener?.let { listener ->
-                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setOnClickListener {
                     listener.invoke(it)
                 }
             }
 
             params.searchTitleColor?.let {
-                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setTextColor(ResTool.getColor(it))
             }
 
             params.searchTitleSize?.let {
-                toolTvSearchTitle.visibility = View.VISIBLE
                 toolTvSearchTitle.setTextSize(it.toFloat())
             }
         }

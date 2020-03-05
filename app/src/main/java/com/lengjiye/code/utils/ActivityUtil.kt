@@ -10,6 +10,7 @@ import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.me.activity.*
+import com.lengjiye.code.search.activity.SearchActivity
 import com.lengjiye.code.webview.WebViewActivity
 
 inline fun <reified T : Activity> Context.startActivity() {
@@ -91,5 +92,9 @@ object ActivityUtil {
         context.startActivity<ShareArticleListActivity>(Bundle().apply {
             putInt(ConstantKey.KEY_USER_ID, userId)
         })
+    }
+
+    fun startSearchActivity(context: Context) {
+        context.startActivity<SearchActivity>()
     }
 }

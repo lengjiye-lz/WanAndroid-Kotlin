@@ -28,9 +28,10 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
         val array = context?.obtainStyledAttributes(attrs, R.styleable.DeleteEditTextView)
         val icon = array?.getDrawable(R.styleable.DeleteEditTextView_icon)
         val text = array?.getString(R.styleable.DeleteEditTextView_text)
-        val size = array?.getDimensionPixelSize(R.styleable.DeleteEditTextView_text_size, resources.getDimensionPixelSize(R.dimen.d_18))
+        val size = array?.getDimensionPixelSize(R.styleable.DeleteEditTextView_textSize, resources.getDimensionPixelSize(R.dimen.d_18))
         val hint = array?.getResourceId(R.styleable.DeleteEditTextView_hint, R.string.s_7)
         val inputType = array?.getInt(R.styleable.DeleteEditTextView_inputType, 0)
+        val lineVisibility = array?.getBoolean(R.styleable.DeleteEditTextView_lineVisibility, true)
 
         array?.recycle()
 
@@ -41,6 +42,7 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
         setListener()
         setSingleLine()
         setInputType(inputType)
+        setLineVisibility(lineVisibility)
     }
 
     private fun setIcon(icon: Drawable?) {
@@ -79,6 +81,14 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
         }
     }
 
+    private fun setLineVisibility(type: Boolean?) {
+        if (type == false) {
+            line.visibility = View.GONE
+        } else {
+            line.visibility = View.VISIBLE
+        }
+    }
+
     private fun setListener() {
         et_text.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -113,5 +123,9 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
 
     fun setEditText(value: String) {
         et_text.setText(value)
+    }
+
+    fun addTextChangedListener(watcher: TextWatcher) {
+        et_text.addTextChangedListener(watcher)
     }
 }

@@ -40,7 +40,7 @@ public class AutoTextView extends TextSwitcher implements
     public AutoTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AutoTextView);
-        textSize = a.getDimension(R.styleable.AutoTextView_text_sizes, 36);
+        textSize = a.getDimension(R.styleable.AutoTextView_textSizes, 36);
         a.recycle();
         mContext = context;
         init();

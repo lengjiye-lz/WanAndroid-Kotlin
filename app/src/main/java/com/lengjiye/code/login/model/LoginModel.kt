@@ -3,10 +3,14 @@ package com.lengjiye.code.login.model
 import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.login.service.LoginService
 import com.lengjiye.code.me.bean.UserBean
+import com.lengjiye.network.BaseHttpResult
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServiceHolder
+import io.reactivex.ObservableTransformer
 import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * @Author: lz

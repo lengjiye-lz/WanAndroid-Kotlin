@@ -68,4 +68,10 @@ public interface ServerApi {
     String USER_PRIVATE_ARTICLES = "lg/private_articles/{page}/json";
     String USER_ARTICLE_DELETE = "lg/user_article/delete/{article_id}/json";
     String USER_ARTICLE_ADD = "lg/user_article/add/json";
+
+    /**
+     * 搜索
+     */
+    String ARTICLE_QUERY = "article/query/{page}/json";
+
 }

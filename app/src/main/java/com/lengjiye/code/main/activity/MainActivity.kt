@@ -13,6 +13,7 @@ import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
+import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.utils.IoUtil
 import io.reactivex.disposables.Disposable
@@ -43,6 +44,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         initBottomNavigation()
+
+        ToolBarUtil.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
+            ActivityUtil.startSearchActivity(this)
+        }
     }
 
     override fun initToolBar() {
