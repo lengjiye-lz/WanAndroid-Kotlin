@@ -10,7 +10,9 @@ import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentShareBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.share.viewmodel.ShareViewModel
+import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
@@ -44,7 +46,8 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
-        mBinding.rlList.layoutManager = LinearLayoutManager(getBaseActivity())
+        mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(getBaseActivity())
+        mBinding.rlList.addItemDecoration(LayoutManagerUtils.borderDivider(0, ResTool.getDimens(R.dimen.d_4), 0, 0))
         adapter.type = HomeFragmentAdapterType.TYPE_2
         mBinding.rlList.adapter = adapter
 
@@ -59,6 +62,25 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
                 ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
+            }
+        }
+
+        adapter.collectClickListener { view, position, item ->
+            item?.let {
+                if (AccountUtil.isNoLogin()) {
+                    ActivityUtil.startLoginActivity(getBaseActivity())
+                    return@let
+                }
+
+                if (it.collect) {
+                    mViewModel.unCollectArticle(this, it.id)
+                } else {
+                    mViewModel.collectAddArticle(this, it.id)
+                }
+
+                it.collect = !it.collect
+                adapter.getItems().set(position, it)
+                adapter.notifyItemChanged(position)
             }
         }
     }
@@ -82,7 +104,6 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
                     return@Observer
                 } else {
                     adapter.addAll(it.datas.toMutableList())
-                    LogTool.e("lz", "adapter.itemCount:${adapter.itemCount}")
                     adapter.notifyItemRangeChanged(adapter.itemCount, it.datas.size)
                 }
             }

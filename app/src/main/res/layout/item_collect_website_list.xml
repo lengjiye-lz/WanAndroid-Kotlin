@@ -32,12 +32,10 @@
             <ImageView
                     android:id="@+id/iv_collect"
                     android:layout_width="30dp"
-                    android:layout_height="0dp"
-                    android:padding="@dimen/d_2"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:padding="@dimen/d_1"
+                    android:layout_height="match_parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/collect_icon" />
+                    app:srcCompat="@drawable/collect_icon_pre" />
 
             <TextView
                     android:id="@+id/tv_title"

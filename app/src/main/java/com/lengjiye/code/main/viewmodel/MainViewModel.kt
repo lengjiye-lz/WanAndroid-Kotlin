@@ -14,14 +14,14 @@ import com.lengjiye.network.LoadingObserver
  */
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
-    var hotkeyList = MutableLiveData<List<HotKey>>()
+    var hotKeyList = MutableLiveData<List<HotKey>>()
 
     private var loadingObserverHotKey: LoadingObserver<List<HotKey>>? = null
 
     override fun onCreate() {
         loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>> {
             override fun observerOnNext(data: List<HotKey>?) {
-                hotkeyList.value = data
+                hotKeyList.value = data
             }
 
             override fun observerOnError(e: ApiException) {

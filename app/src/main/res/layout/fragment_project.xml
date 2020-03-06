@@ -19,6 +19,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:tabIndicatorColor="@color/c_E24333"
@@ -27,6 +28,20 @@
                 app:tabTextAppearance="@style/first_tab_text_style"
                 app:tabTextColor="@color/c_1a" />
 
+        <include
+                layout="@layout/widget_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d_1"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+
+
+        <ImageView
+                android:id="@+id/tool_iv_top_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_title_bar_shadow"
+                app:layout_constraintTop_toBottomOf="@+id/v_line" />
+
         <androidx.viewpager.widget.ViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="0dp"
@@ -34,7 +49,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/v_line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -37,5 +37,7 @@
     <string name="s_30">登录成功</string>
     <string name="s_31">积分明细</string>
     <string name="s_32">项目列表</string>
+    <string name="s_35">操作成功</string>
+    <string name="s_36">操作失败</string>
 
 </resources>

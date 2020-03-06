@@ -17,7 +17,9 @@ import com.lengjiye.code.databinding.FragmentSystemItemBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
+import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -66,7 +68,8 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(getBaseActivity()))
 
-        mBinding.rvView.layoutManager = LinearLayoutManager(getBaseActivity())
+        mBinding.rvView.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(getBaseActivity())
+        mBinding.rvView.addItemDecoration(LayoutManagerUtils.borderDivider(0, ResTool.getDimens(R.dimen.d_4), 0, 0))
         adapter.type = HomeFragmentAdapterType.TYPE_2
         mBinding.rvView.adapter = adapter
 
@@ -102,6 +105,25 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
                 ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
+            }
+        }
+
+        adapter.collectClickListener { view, position, item ->
+            item?.let {
+                if (AccountUtil.isNoLogin()) {
+                    ActivityUtil.startLoginActivity(getBaseActivity())
+                    return@let
+                }
+
+                if (it.collect) {
+                    mViewModel.unCollectArticle(this, it.id)
+                } else {
+                    mViewModel.collectAddArticle(this, it.id)
+                }
+
+                it.collect = !it.collect
+                adapter.getItems().set(position, it)
+                adapter.notifyItemChanged(position)
             }
         }
 

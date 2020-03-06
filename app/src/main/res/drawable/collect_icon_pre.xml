@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:width="24dp"
         android:height="24dp"
-        android:tint="#54CEE3"
+        android:tint="#FF2B33"
         android:viewportWidth="24.0"
         android:viewportHeight="24.0"
         tools:ignore="MissingDefaultResource">

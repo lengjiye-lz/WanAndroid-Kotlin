@@ -16,6 +16,13 @@ object AccountUtil {
         return getUserId() != 0
     }
 
+    /**
+     * 是否登录
+     */
+    fun isNoLogin(): Boolean {
+        return !isLogin()
+    }
+
     fun getUserName(): String {
         return SPTool.getString(SPKey.KEY_NAME, SPKey.KEY_USER_NAME, "")
     }

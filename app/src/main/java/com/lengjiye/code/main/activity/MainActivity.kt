@@ -75,7 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initLiveDataListener() {
         super.initLiveDataListener()
-        mViewModel.hotkeyList.observe(this, Observer {
+        mViewModel.hotKeyList.observe(this, Observer {
             this.hotKeys = it
             interval()
         })

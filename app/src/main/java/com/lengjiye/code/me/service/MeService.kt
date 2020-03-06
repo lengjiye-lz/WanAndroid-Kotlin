@@ -32,7 +32,6 @@ interface MeService {
 
     // 收藏文章
     @POST(ServerApi.COLLECT_ADD_ARTICLE)
-    @FormUrlEncoded
     fun collectAddArticle(@Path("id") id: Int): Observable<BaseHttpResult<String>>
 
     // 收藏站外文章
@@ -42,8 +41,12 @@ interface MeService {
 
     // 取消收藏
     @POST(ServerApi.UN_COLLECT_ARTICLE)
-    @FormUrlEncoded
     fun unCollectArticle(@Path("id") id: Int): Observable<BaseHttpResult<String>>
+
+    // 取消我的收藏
+    @POST(ServerApi.UN_COLLECT_ARTICLE)
+    @FormUrlEncoded
+    fun unMyCollectArticle(@Path("id") id: Int, @Field("originId") originId: Int): Observable<BaseHttpResult<String>>
 
     // 收藏的网站列表
     @GET(ServerApi.COLLECT_WEBSITE_LIS)

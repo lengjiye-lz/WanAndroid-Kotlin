@@ -52,7 +52,7 @@ public interface ServerApi {
     String COLLECT_ARTICLE_LIST = "lg/collect/list/{page}/json";
     String COLLECT_ADD_ARTICLE = "lg/collect/{id}/json";
     String COLLECT_ADD_OTHER_ARTICLE = "lg/collect/add/json";
-    String UN_COLLECT_ARTICLE = "lg/uncollect_originId/{id}/json";
+    String UN_COLLECT_ARTICLE = "lg/uncollect/{id}/json";
 
     String COLLECT_WEBSITE_LIS = "lg/collect/usertools/json";
     String COLLECT_ADD_WEBSITE = "lg/collect/addtool/json";

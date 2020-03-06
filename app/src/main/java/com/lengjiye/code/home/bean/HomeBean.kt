@@ -21,7 +21,7 @@ data class HomeBean(
     val author: String, // 鸿洋
     val chapterId: Int, // 408
     val chapterName: String, // 鸿洋
-    val collect: Boolean, // false
+    var collect: Boolean, // false
     val courseId: Int, // 13
     val desc: String,
     val envelopePic: String,
@@ -43,6 +43,7 @@ data class HomeBean(
     val type: Int, // 0
     val userId: Int, // -1
     val visible: Int, // 1
+    val originId: Int?, // 1
     val zan: Int // 0
 )
 

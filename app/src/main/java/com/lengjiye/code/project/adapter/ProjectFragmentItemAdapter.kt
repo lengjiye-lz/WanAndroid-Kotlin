@@ -21,6 +21,8 @@ import com.lengjiye.code.utils.GlideUtil
 class ProjectFragmentItemAdapter constructor(val context: Context, models: MutableList<HomeBean>?) :
     BaseDBAdapter<HomeBean, ProjectFragmentItemAdapter.HomeModelHolderDB, ItemProjectItemBinding>(context, models) {
 
+    private var listener: ((view: View, position: Int, item: HomeBean?) -> Unit)? = null
+
     override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
         item?.let {
             holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
@@ -28,6 +30,11 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
             holder.binding.tvDesc.text = Html.fromHtml(it.desc).trim()
             holder.binding.tvTime.text = it.niceDate
             GlideUtil.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_2, holder.binding.ivEnvelope)
+
+            holder.binding.ivCollect.setOnClickListener { view ->
+                listener?.invoke(view, position, item)
+            }
+
         }
     }
 
@@ -40,6 +47,10 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
 
     private fun getCategory(homeBean: HomeBean): String {
         return homeBean.superChapterName + "/${homeBean.chapterName}"
+    }
+
+    fun collectClickListener(listener: ((view: View, position: Int, item: HomeBean?) -> Unit)?) {
+        this.listener = listener
     }
 
     class HomeModelHolderDB(binding: ItemProjectItemBinding) : BaseDBViewHolder<ItemProjectItemBinding>(binding)

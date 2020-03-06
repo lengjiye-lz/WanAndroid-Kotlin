@@ -1,6 +1,7 @@
 package com.lengjiye.code.project.adapter
 
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -34,6 +35,6 @@ class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVI
 
     override fun getPageTitle(position: Int): CharSequence? {
         val treeBean = treeBeans?.get(position)
-        return treeBean?.name
+        return Html.fromHtml(treeBean?.name)
     }
 }

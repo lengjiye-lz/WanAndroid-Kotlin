@@ -7,10 +7,10 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
+import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
-import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.ToolBarUtil
-import com.lengjiye.code.utils.toast
+import com.lengjiye.code.utils.*
+import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -47,8 +47,9 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
         super.initView(savedInstanceState)
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(this))
         mBinding.srlLayout.setRefreshFooter(BallPulseFooter(this))
-
-        mBinding.rvCoin.layoutManager = LinearLayoutManager(this)
+        mBinding.srlLayout.setEnableLoadMore(false)
+        mBinding.rvCoin.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
+        mBinding.rvCoin.addItemDecoration(LayoutManagerUtils.borderDivider(0, ResTool.getDimens(R.dimen.d_4), 0, 0))
         mBinding.rvCoin.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
@@ -62,6 +63,23 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
                 ActivityUtil.startWebViewActivity(this, it.link)
+            }
+        }
+
+        adapter.collectClickListener { view, position, item ->
+            item?.let {
+                if (AccountUtil.isNoLogin()) {
+                    ActivityUtil.startLoginActivity(this)
+                    return@let
+                }
+
+                mViewModel.unMyCollectArticle(this, it.id, it.originId ?: -1)
+
+                adapter.getItems().remove(it)
+                adapter.notifyItemRemoved(position)
+                if (position != adapter.itemCount) {
+                    adapter.notifyItemRangeChanged(position, adapter.itemCount - position)
+                }
             }
         }
     }
@@ -85,7 +103,7 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
                 }
                 return@Observer
             }
-
+            mBinding.srlLayout.setEnableLoadMore(true)
             if (page == 0) {
                 mBinding.srlLayout.finishRefresh()
                 adapter.removeAll()
@@ -93,11 +111,23 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
                 mBinding.srlLayout.finishLoadMore()
             }
             page++
-            adapter.addAll(list.toMutableList())
+            adapter.addAll(addCollectTag(list))
         })
 
 
         refresh()
+    }
+
+    /**
+     * 添加收藏标示
+     */
+    private fun addCollectTag(lists: List<HomeBean>): MutableList<HomeBean> {
+        val newLists = mutableListOf<HomeBean>()
+        lists.forEach {
+            it.collect = true
+            newLists.add(it)
+        }
+        return newLists
     }
 
     private fun loadData() {

@@ -65,6 +65,11 @@ class MeModel : BaseModel() {
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 
+    fun unMyCollectArticle(lifecycleOwner: LifecycleOwner, id: Int, originId: Int, observer: Observer<String>) {
+        val observable = getService()?.unMyCollectArticle(id, originId)?.map(HttpResultFunc())
+        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+    }
+
     fun getCollectWebsiteList(lifecycleOwner: LifecycleOwner, observer: Observer<List<Website>>) {
         val observable = getService()?.collectWebsiteLis()?.map(HttpResultFunc())
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
