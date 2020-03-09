@@ -61,6 +61,7 @@ android {
 
         debug {
             debuggable true
+            // 是否开启混淆
             minifyEnabled false
             zipAlignEnabled true
             // 移除无用的resource文件
@@ -82,7 +83,7 @@ android {
         }
 
         release {
-            debuggable false
+            debuggable true
             minifyEnabled true
             zipAlignEnabled true
             // 移除无用的resource文件

@@ -24,7 +24,9 @@ android {
     buildTypes {
         debug {}
         qa {}
-        release {}
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
     }
 }
 
