@@ -99,6 +99,13 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName =  "WanAndroid-" + buildType.name + "-v" +
+                    defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
+        }
+    }
 }
 
 project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
