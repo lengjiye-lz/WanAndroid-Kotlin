@@ -83,7 +83,7 @@ android {
         }
 
         release {
-            debuggable true
+            debuggable false
             minifyEnabled true
             zipAlignEnabled true
             // 移除无用的resource文件
