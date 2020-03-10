@@ -54,3 +54,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+proguard/code/unused.txt
+proguard/code/seeds.txt
+proguard/code/proguardMapping.txt
