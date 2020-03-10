@@ -115,7 +115,6 @@ class LoadingObserver<T>() : Observer<T> {
         }
     }
 
-
     abstract class ObserverListener<T> {
         open fun observerOnNext(data: T?) {}
         open fun observerOnError(e: ApiException) {}
