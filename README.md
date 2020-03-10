@@ -5,6 +5,8 @@
 
 分为base库、网络库、工具库、自动化生成代码工具等
 
+持续更新中...
+
 项目地址：[https://github.com/qiduzao/WanAndroid-Kotlin](https://github.com/qiduzao/WanAndroid-Kotlin)
 
 ### 效果图
