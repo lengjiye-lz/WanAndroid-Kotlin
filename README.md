@@ -8,8 +8,8 @@
 项目地址：[https://github.com/qiduzao/WanAndroid-Kotlin](https://github.com/qiduzao/WanAndroid-Kotlin)
 
 ### 效果图
-![Image text](./image/home.jpeg) ![Image text](./image/share.jpeg) ![Image text](./image/system.jpeg)
-![Image text](./image/project.jpeg) ![Image text](./image/me.jpeg) ![Image text](./image/search.jpeg)
+![Image text](./image/home.jpg) ![Image text](./image/share.jpg) ![Image text](./image/system.jpg)
+![Image text](./image/project.jpg) ![Image text](./image/me.jpg) ![Image text](./image/search.jpg)
 
 ### 使用到的依赖库
 
