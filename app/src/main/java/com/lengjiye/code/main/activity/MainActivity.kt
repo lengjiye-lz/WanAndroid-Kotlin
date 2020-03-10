@@ -18,9 +18,8 @@ import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.utils.IoUtil
 import io.reactivex.disposables.Disposable
 
-
 /**
- * mainActivity
+ * MainActivity
  */
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 

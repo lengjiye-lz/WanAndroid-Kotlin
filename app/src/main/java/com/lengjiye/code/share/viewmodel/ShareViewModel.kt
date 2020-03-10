@@ -2,16 +2,14 @@ package com.lengjiye.code.share.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.share.model.ShareModel
 import com.lengjiye.code.utils.toast
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.tools.ResTool
 
@@ -28,7 +26,7 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
     var userArticleList = MutableLiveData<ArticleBean>()
 
     override fun onCreate() {
-        loadingObserverUserArticle = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean> {
+        loadingObserverUserArticle = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 userArticleList.value = data
             }
@@ -39,7 +37,7 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }

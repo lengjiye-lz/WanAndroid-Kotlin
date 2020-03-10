@@ -1,6 +1,8 @@
 package com.lengjiye.network
 
 import com.google.gson.Gson
+import com.lengjiye.network.exception.ApiException
+import com.lengjiye.network.exception.ErrorCodeConstant
 import io.reactivex.functions.Function
 import java.lang.Exception
 

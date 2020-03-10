@@ -1,4 +1,4 @@
-package com.lengjiye.network
+package com.lengjiye.network.exception
 
 import java.lang.RuntimeException
 

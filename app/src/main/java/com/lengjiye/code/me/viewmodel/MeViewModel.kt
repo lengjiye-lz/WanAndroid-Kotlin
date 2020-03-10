@@ -4,13 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
-import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.me.bean.CoinList
 import com.lengjiye.code.me.bean.Rank
 import com.lengjiye.code.me.bean.RankTable
-import com.lengjiye.code.me.bean.Website
 import com.lengjiye.code.me.model.MeModel
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.network.LoadingObserver.ObserverListener
 
@@ -30,7 +28,7 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
     var coinList = MutableLiveData<CoinList>()
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<RankTable> {
+        loadingObserver = LoadingObserver(object : ObserverListener<RankTable>() {
             override fun observerOnNext(data: RankTable?) {
                 rankTable.value = data
             }
@@ -40,7 +38,7 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverRank = LoadingObserver(object : ObserverListener<Rank> {
+        loadingObserverRank = LoadingObserver(object : ObserverListener<Rank>() {
             override fun observerOnNext(data: Rank?) {
                 rank.value = data
             }
@@ -50,7 +48,7 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverCoinList = LoadingObserver(object : ObserverListener<CoinList> {
+        loadingObserverCoinList = LoadingObserver(object : ObserverListener<CoinList>() {
             override fun observerOnNext(data: CoinList?) {
                 coinList.value = data
             }

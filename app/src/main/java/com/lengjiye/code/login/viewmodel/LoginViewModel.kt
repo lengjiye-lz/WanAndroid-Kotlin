@@ -9,9 +9,8 @@ import com.lengjiye.code.R
 import com.lengjiye.code.login.model.LoginModel
 import com.lengjiye.code.me.bean.UserBean
 import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 
 /**
@@ -30,7 +29,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     var logoutSuc = MutableLiveData<Boolean>()
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
             override fun observerOnNext(data: UserBean?) {
                 data?.let {
                     saveAccount(it)
@@ -45,7 +44,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverRegister = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
+        loadingObserverRegister = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
             override fun observerOnNext(data: UserBean?) {
                 data?.let {
                     saveAccount(it)
@@ -59,7 +58,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
+        loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 AccountUtil.logout()
                 logoutSuc.value = true

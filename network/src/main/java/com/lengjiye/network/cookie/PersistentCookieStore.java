@@ -1,10 +1,12 @@
-package com.lengjiye.network;
+package com.lengjiye.network.cookie;
 
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.lengjiye.base.application.MasterApplication;
+import com.lengjiye.network.cookie.CookieStore;
+import com.lengjiye.network.cookie.SerializableCookie;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

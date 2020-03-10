@@ -14,6 +14,9 @@ import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
+/**
+ * 积分榜
+ */
 class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() {
 
     private val adapter by lazy { RankTableAdapter(this, null) }
@@ -59,7 +62,7 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
     }
 
     private fun refresh() {
-        page = 0
+        page = 1
         loadData()
     }
 
@@ -87,8 +90,6 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
             page++
             adapter.addAll(list.toMutableList())
         })
-
-
         refresh()
     }
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.main.model.MainModel
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 
 /**
@@ -19,7 +19,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     private var loadingObserverHotKey: LoadingObserver<List<HotKey>>? = null
 
     override fun onCreate() {
-        loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>> {
+        loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>>() {
             override fun observerOnNext(data: List<HotKey>?) {
                 hotKeyList.value = data
             }

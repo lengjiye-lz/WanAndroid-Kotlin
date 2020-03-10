@@ -11,7 +11,7 @@ import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.home.model.HomeModel
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.utils.toast
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.network.LoadingObserver.ObserverListener
 import com.lengjiye.tools.ResTool
@@ -33,7 +33,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     private lateinit var loadingDefault: LoadingObserver<String>
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean> {
+        loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 article.value = data
             }
@@ -45,7 +45,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
 
         homeBeanTopAndFirstList = arrayListOf()
 
-        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener1<List<HomeBean>> {
+        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeBean>>() {
 
             override fun observerOnComplete() {
                 homeBeanList.value = homeBeanTopAndFirstList
@@ -62,7 +62,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingObserverBannerBean = LoadingObserver(object : ObserverListener<List<BannerBean>> {
+        loadingObserverBannerBean = LoadingObserver(object : ObserverListener<List<BannerBean>>() {
             override fun observerOnNext(data: List<BannerBean>?) {
                 bannerList.value = data
             }
@@ -72,7 +72,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingDefault = LoadingObserver(object : ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }
