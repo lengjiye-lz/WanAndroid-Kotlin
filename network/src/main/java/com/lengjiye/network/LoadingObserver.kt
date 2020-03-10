@@ -21,14 +21,9 @@ import java.net.UnknownHostException
  */
 class LoadingObserver<T>() : Observer<T> {
     private var observerListener: ObserverListener<T>? = null
-    private var observerListener1: ObserverListener1<T>? = null
 
     constructor(observerListener: ObserverListener<T>?) : this() {
         this.observerListener = observerListener
-    }
-
-    constructor(observerListener1: ObserverListener1<T>?) : this() {
-        this.observerListener1 = observerListener1
     }
 
     private var disposable: Disposable? = null
@@ -40,18 +35,16 @@ class LoadingObserver<T>() : Observer<T> {
             val errorMsg = ResTool.getString(R.string.net_0001)
             val apiException = ApiException(errorCode, errorMsg, null)
             observerListener?.observerOnError(apiException)
-            observerListener1?.observerOnError(apiException)
             disposable?.dispose()
         }
     }
 
     override fun onNext(t: T) {
         observerListener?.observerOnNext(t)
-        observerListener1?.observerOnNext(t)
     }
 
     override fun onComplete() {
-        observerListener1?.observerOnComplete()
+        observerListener?.observerOnComplete()
     }
 
     override fun onError(e: Throwable) {
@@ -60,15 +53,8 @@ class LoadingObserver<T>() : Observer<T> {
         val apiException: ApiException?
         LogTool.e("message:${e.message}")
         when (e) {
-            is ApiException -> {
-                interceptStatusCode(e)
-                errorCode = e.mErrorCode
-                errorMsg = e.mErrorMsg
-                apiException = e
-            }
             is NullPointerException -> {
                 observerListener?.observerOnNext(null)
-                observerListener1?.observerOnNext(null)
                 return
             }
             is SocketTimeoutException -> {
@@ -86,6 +72,10 @@ class LoadingObserver<T>() : Observer<T> {
                 errorMsg = e.message
                 apiException = ApiException(errorCode, errorMsg, null)
             }
+            is ApiException -> {
+                interceptStatusCode(e)
+                apiException = e
+            }
             else -> {
                 // 线上环境显示未知错误
                 if ("release" == MasterApplication.getInstance().buildType()) {
@@ -99,7 +89,6 @@ class LoadingObserver<T>() : Observer<T> {
             }
         }
         observerListener?.observerOnError(apiException)
-        observerListener1?.observerOnError(apiException)
     }
 
     /**
@@ -127,15 +116,9 @@ class LoadingObserver<T>() : Observer<T> {
     }
 
 
-    interface ObserverListener<T> {
-        fun observerOnNext(data: T?)
-        fun observerOnError(e: ApiException)
+    abstract class ObserverListener<T> {
+        open fun observerOnNext(data: T?) {}
+        open fun observerOnError(e: ApiException) {}
+        open fun observerOnComplete() {}
     }
-
-    interface ObserverListener1<T> {
-        fun observerOnNext(data: T?)
-        fun observerOnError(e: ApiException)
-        fun observerOnComplete()
-    }
-
 }

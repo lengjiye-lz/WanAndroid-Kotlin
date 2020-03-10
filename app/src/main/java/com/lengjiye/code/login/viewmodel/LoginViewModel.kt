@@ -29,7 +29,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     var logoutSuc = MutableLiveData<Boolean>()
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
             override fun observerOnNext(data: UserBean?) {
                 data?.let {
                     saveAccount(it)
@@ -44,7 +44,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverRegister = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean> {
+        loadingObserverRegister = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
             override fun observerOnNext(data: UserBean?) {
                 data?.let {
                     saveAccount(it)
@@ -58,7 +58,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
+        loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 AccountUtil.logout()
                 logoutSuc.value = true

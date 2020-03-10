@@ -28,7 +28,7 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
     var coinList = MutableLiveData<CoinList>()
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<RankTable> {
+        loadingObserver = LoadingObserver(object : ObserverListener<RankTable>() {
             override fun observerOnNext(data: RankTable?) {
                 rankTable.value = data
             }
@@ -38,7 +38,7 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverRank = LoadingObserver(object : ObserverListener<Rank> {
+        loadingObserverRank = LoadingObserver(object : ObserverListener<Rank>() {
             override fun observerOnNext(data: Rank?) {
                 rank.value = data
             }
@@ -48,7 +48,7 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingObserverCoinList = LoadingObserver(object : ObserverListener<CoinList> {
+        loadingObserverCoinList = LoadingObserver(object : ObserverListener<CoinList>() {
             override fun observerOnNext(data: CoinList?) {
                 coinList.value = data
             }

@@ -33,7 +33,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     private lateinit var loadingDefault: LoadingObserver<String>
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean> {
+        loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 article.value = data
             }
@@ -45,7 +45,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
 
         homeBeanTopAndFirstList = arrayListOf()
 
-        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener1<List<HomeBean>> {
+        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeBean>>() {
 
             override fun observerOnComplete() {
                 homeBeanList.value = homeBeanTopAndFirstList
@@ -62,7 +62,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingObserverBannerBean = LoadingObserver(object : ObserverListener<List<BannerBean>> {
+        loadingObserverBannerBean = LoadingObserver(object : ObserverListener<List<BannerBean>>() {
             override fun observerOnNext(data: List<BannerBean>?) {
                 bannerList.value = data
             }
@@ -72,7 +72,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingDefault = LoadingObserver(object : ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }

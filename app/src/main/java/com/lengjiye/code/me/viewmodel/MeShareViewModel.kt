@@ -22,7 +22,7 @@ class MeShareViewModel(application: Application) : BaseViewModel(application) {
     var shareArticles = MutableLiveData<ShareBean>()
 
     override fun onCreate() {
-        loadingObserverUserShareArticles = LoadingObserver(object : ObserverListener<ShareBean> {
+        loadingObserverUserShareArticles = LoadingObserver(object : ObserverListener<ShareBean>() {
             override fun observerOnNext(data: ShareBean?) {
                 shareArticles.value = data
             }

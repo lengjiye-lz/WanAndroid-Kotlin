@@ -25,7 +25,7 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
     private var cid = 0
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>> {
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>>() {
             override fun observerOnNext(data: List<TreeBean>?) {
                 tree.value = data
             }
@@ -35,7 +35,7 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingObserverArticleBean = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean> {
+        loadingObserverArticleBean = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 data?.cid = cid
                 articleBean.value = data
@@ -46,7 +46,7 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }

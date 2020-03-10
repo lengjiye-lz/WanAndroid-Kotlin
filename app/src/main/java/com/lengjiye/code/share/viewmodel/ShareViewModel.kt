@@ -26,7 +26,7 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
     var userArticleList = MutableLiveData<ArticleBean>()
 
     override fun onCreate() {
-        loadingObserverUserArticle = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean> {
+        loadingObserverUserArticle = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 userArticleList.value = data
             }
@@ -37,7 +37,7 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }

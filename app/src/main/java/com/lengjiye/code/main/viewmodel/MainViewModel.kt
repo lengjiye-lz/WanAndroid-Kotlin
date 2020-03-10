@@ -19,7 +19,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     private var loadingObserverHotKey: LoadingObserver<List<HotKey>>? = null
 
     override fun onCreate() {
-        loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>> {
+        loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>>() {
             override fun observerOnNext(data: List<HotKey>?) {
                 hotKeyList.value = data
             }

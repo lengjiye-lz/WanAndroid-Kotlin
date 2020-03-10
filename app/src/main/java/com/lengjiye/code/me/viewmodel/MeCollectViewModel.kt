@@ -29,7 +29,7 @@ class MeCollectViewModel(application: Application) : BaseViewModel(application) 
     var websiteList = MutableLiveData<List<Website>>()
 
     override fun onCreate() {
-        loadingObserverCollectArticleList = LoadingObserver(object : ObserverListener<ArticleBean> {
+        loadingObserverCollectArticleList = LoadingObserver(object : ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 articleList.value = data
             }
@@ -39,7 +39,7 @@ class MeCollectViewModel(application: Application) : BaseViewModel(application) 
 
         })
 
-        loadingObserverCollectWebsiteList = LoadingObserver(object : ObserverListener<List<Website>> {
+        loadingObserverCollectWebsiteList = LoadingObserver(object : ObserverListener<List<Website>>() {
             override fun observerOnNext(data: List<Website>?) {
                 websiteList.value = data
             }
@@ -49,7 +49,7 @@ class MeCollectViewModel(application: Application) : BaseViewModel(application) 
 
         })
 
-        loadingDefault = LoadingObserver(object : ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }

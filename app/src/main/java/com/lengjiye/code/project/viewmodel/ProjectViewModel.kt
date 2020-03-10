@@ -30,7 +30,7 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
     private var cid = 0
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>> {
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>>() {
             override fun observerOnNext(data: List<TreeBean>?) {
                 projectTree.value = data
             }
@@ -39,7 +39,7 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
             }
 
         })
-        loadingArticleObserver = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean> {
+        loadingArticleObserver = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 data?.cid = cid
                 projectArticle.value = data
@@ -50,7 +50,7 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String> {
+        loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
                 ResTool.getString(R.string.s_35).toast()
             }
