@@ -2,16 +2,14 @@ package com.lengjiye.code.share.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.share.model.ShareModel
 import com.lengjiye.code.utils.toast
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.tools.ResTool
 

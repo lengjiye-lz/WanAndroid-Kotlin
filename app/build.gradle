@@ -76,7 +76,7 @@ android {
             minifyEnabled true
             zipAlignEnabled true
             // 移除无用的resource文件
-            shrinkResources false
+            shrinkResources true
             proguardFiles proguardPath
             signingConfig signingConfigs.wanAndroid
             buildConfigField("String", "BASE_URL", base_url_release)
@@ -87,11 +87,9 @@ android {
             minifyEnabled true
             zipAlignEnabled true
             // 移除无用的resource文件
-            shrinkResources false
+            shrinkResources true
             proguardFiles proguardPath
             signingConfig signingConfigs.wanAndroid
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
             buildConfigField("String", "BASE_URL", base_url_release)
         }
     }

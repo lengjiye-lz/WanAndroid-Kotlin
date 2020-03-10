@@ -5,19 +5,16 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.Observer
-import com.lengjiye.base.constant.ErrorCode
 import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.LoginActivityType
-import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.databinding.FragmentRegisterBinding
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.login.viewmodel.LoginViewModel
-import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.toast
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.tools.ResTool
 
 /**

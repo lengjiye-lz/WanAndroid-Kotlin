@@ -2,6 +2,8 @@ package com.lengjiye.network
 
 import com.google.gson.JsonSyntaxException
 import com.lengjiye.base.application.MasterApplication
+import com.lengjiye.network.exception.ApiException
+import com.lengjiye.network.exception.ErrorCodeConstant
 import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.NetWorkTool
 import com.lengjiye.tools.ResTool

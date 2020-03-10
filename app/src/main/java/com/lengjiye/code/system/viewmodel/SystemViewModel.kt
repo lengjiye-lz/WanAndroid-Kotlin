@@ -10,7 +10,7 @@ import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.code.utils.toast
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.tools.ResTool
 

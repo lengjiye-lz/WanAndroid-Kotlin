@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.search.model.SearchModel
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 
 /**

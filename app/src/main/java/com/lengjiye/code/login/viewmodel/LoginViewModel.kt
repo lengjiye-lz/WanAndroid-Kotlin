@@ -9,9 +9,8 @@ import com.lengjiye.code.R
 import com.lengjiye.code.login.model.LoginModel
 import com.lengjiye.code.me.bean.UserBean
 import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.network.ApiException
+import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 
 /**
