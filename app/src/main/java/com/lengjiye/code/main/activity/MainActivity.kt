@@ -179,18 +179,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
 
             1 -> {
-                LogServiceInstance.singleton.start(this)
-                LogServiceInstance.singleton.setMessage("dcasdcasd")
                 fragment = MainFragmentManager.instance.getShareFragment()
             }
 
             2 -> {
-                LogServiceInstance.singleton.setMessage("casdcasdc")
                 fragment = MainFragmentManager.instance.getSystemFragment()
             }
 
             3 -> {
-                LogServiceInstance.singleton.setMessage("asrqwerqwe")
                 fragment = MainFragmentManager.instance.getProjectFragment()
             }
 

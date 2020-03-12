@@ -77,8 +77,6 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
         val n = System.currentTimeMillis()
         LogTool.i("Info", "init used time:" + (n - p))
-
-        LogServiceInstance.singleton.setMessage("1111111111111111111111111111111111111111111111111")
     }
 
     private val mWebViewClient = object : WebViewClient() {
