@@ -16,6 +16,7 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.main.LogServiceInstance
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.tools.LogTool
 
@@ -76,6 +77,8 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
         val n = System.currentTimeMillis()
         LogTool.i("Info", "init used time:" + (n - p))
+
+        LogServiceInstance.singleton.setMessage("1111111111111111111111111111111111111111111111111")
     }
 
     private val mWebViewClient = object : WebViewClient() {

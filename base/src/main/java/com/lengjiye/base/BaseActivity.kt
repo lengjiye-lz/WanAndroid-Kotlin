@@ -1,11 +1,16 @@
 package com.lengjiye.base
 
+import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcessInfo
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.lengjiye.base.viewmodel.BaseViewModel
+
 
 abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
@@ -64,4 +69,33 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         super.onDestroy()
         mViewModel.onDestroy()
     }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("lz", "isAppIsInBackground(this):${isAppIsInBackground(this)}")
+    }
+
+    /**
+     * 判断应用是否在后台
+     *
+     * @param context
+     * @return
+     */
+    private fun isAppIsInBackground(context: Context): Boolean {
+        var isInBackground = true
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningProcesses = am.runningAppProcesses
+        for (processInfo in runningProcesses) {
+            //前台程序
+            if (processInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                for (activeProcess in processInfo.pkgList) {
+                    if (activeProcess == context.getPackageName()) {
+                        isInBackground = false
+                    }
+                }
+            }
+        }
+        return isInBackground
+    }
+
 }
