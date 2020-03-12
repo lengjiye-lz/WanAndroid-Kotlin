@@ -1,4 +1,4 @@
-package com.lengjiye.code.me.service
+package com.lengjiye.code.me.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
@@ -15,7 +15,7 @@ import retrofit2.http.*
  * @Date: 2019-11-05
  * @Description:
  */
-interface MeService {
+interface MeServe {
 
     @GET(ServerApi.COIN_RANK)
     fun getCoinRank(@Path("page") page: Int): Observable<BaseHttpResult<RankTable>>

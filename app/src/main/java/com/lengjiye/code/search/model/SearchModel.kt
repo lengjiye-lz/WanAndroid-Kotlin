@@ -2,11 +2,10 @@ package com.lengjiye.code.search.model
 
 import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.HomeBean
-import com.lengjiye.code.search.service.SearchService
+import com.lengjiye.code.search.serve.SearchServe
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
-import com.lengjiye.network.ServiceHolder
+import com.lengjiye.network.ServeHolder
 import io.reactivex.Observer
 
 /**
@@ -23,12 +22,12 @@ class SearchModel : BaseModel() {
         val instance = SearchModel()
     }
 
-    private fun getService(): SearchService? {
-        return ServiceHolder.singleton.getService(SearchService::class.java)
+    private fun getServe(): SearchServe? {
+        return ServeHolder.singleton.getServe(SearchServe::class.java)
     }
 
     fun search(lifecycleOwner: LifecycleOwner, page: Int, key: String, observer: Observer<ArticleBean>) {
-        val observable = getService()?.search(page, key)?.map(HttpResultFunc())
+        val observable = getServe()?.search(page, key)?.map(HttpResultFunc())
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 }

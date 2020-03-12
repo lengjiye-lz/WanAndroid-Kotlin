@@ -1,4 +1,4 @@
-package com.lengjiye.code.login.service
+package com.lengjiye.code.login.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.me.bean.UserBean
@@ -11,7 +11,7 @@ import retrofit2.http.*
  * @Date: 2019-11-05
  * @Description:
  */
-interface LoginService {
+interface LoginServe {
 
     @POST(ServerApi.USER_LOGIN)
     @FormUrlEncoded

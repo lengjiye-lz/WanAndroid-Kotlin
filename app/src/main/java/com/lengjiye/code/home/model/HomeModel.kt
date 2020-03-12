@@ -4,10 +4,10 @@ import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.bean.HomeBean
-import com.lengjiye.code.home.service.HomeService
+import com.lengjiye.code.home.serve.HomeServe
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
-import com.lengjiye.network.ServiceHolder
+import com.lengjiye.network.ServeHolder
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.schedulers.Schedulers
@@ -21,12 +21,12 @@ class HomeModel : BaseModel() {
         val instance = HomeModel()
     }
 
-    private fun getService(): HomeService? {
-        return ServiceHolder.singleton.getService(HomeService::class.java)
+    private fun getServe(): HomeServe? {
+        return ServeHolder.singleton.getServe(HomeServe::class.java)
     }
 
     fun getHomeListData(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<ArticleBean>) {
-        val observableList = getService()?.getArticle(page)?.map(HttpResultFunc())
+        val observableList = getServe()?.getArticle(page)?.map(HttpResultFunc())
         observableList?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 
@@ -34,8 +34,8 @@ class HomeModel : BaseModel() {
      * 获取首页置顶和第一页的数据
      */
     fun getHomeTopAndFirstListData(lifecycleOwner: LifecycleOwner, observer: Observer<List<HomeBean>>) {
-        val observableTop = getService()?.getArticleTop()?.map(HttpResultFunc())
-        val observableList = getService()?.getArticle(0)?.map(HttpResultFunc())
+        val observableTop = getServe()?.getArticleTop()?.map(HttpResultFunc())
+        val observableList = getServe()?.getArticle(0)?.map(HttpResultFunc())
         val observableData: Observable<List<HomeBean>>
         observableList?.let {
             observableData = it.subscribeOn(Schedulers.io())
@@ -47,7 +47,7 @@ class HomeModel : BaseModel() {
     }
 
     fun getBanner(lifecycleOwner: LifecycleOwner, observer: Observer<List<BannerBean>>) {
-        val observable = getService()?.getBanner()?.map(HttpResultFunc())
+        val observable = getServe()?.getBanner()?.map(HttpResultFunc())
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 }

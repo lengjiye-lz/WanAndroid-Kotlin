@@ -38,9 +38,9 @@ class MVVMTask extends DefaultTask {
                         fileName    : "ViewModel.kt"
                 ],
                 [
-                        templateName: "MVVMService.template",
-                        type        : "service",
-                        fileName    : "Service.kt"
+                        templateName: "MVVMServe.template",
+                        type        : "serve",
+                        fileName    : "Serve.kt"
                 ],
                 [
                         templateName: "MVVMLayout.template",

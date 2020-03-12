@@ -1,8 +1,8 @@
 package ${applicaitionId}.${packageName}.model
 
-import ${applicaitionId}.${packageName}.service.${functionName}Service
+import ${applicaitionId}.${packageName}.Serve.${functionName}Serve
 import com.lengjiye.network.BaseModel
-import com.lengjiye.network.ServiceHolder
+import com.lengjiye.network.ServeHolder
 
 /**
  * @Author: ${author}
@@ -18,7 +18,7 @@ class ${functionName}Model : BaseModel() {
         val instance = ${functionName}Model()
     }
 
-    private fun getService(): ${functionName}Service? {
-        return ServiceHolder.singleton.getService(${functionName}Service::class.java)
+    private fun getServe(): ${functionName}Serve? {
+        return ServeHolder.singleton.getServe(${functionName}Serve::class.java)
     }
 }

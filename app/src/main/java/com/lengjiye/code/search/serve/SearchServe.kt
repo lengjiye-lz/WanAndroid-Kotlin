@@ -1,8 +1,7 @@
-package com.lengjiye.code.search.service
+package com.lengjiye.code.search.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.network.BaseHttpResult
 import io.reactivex.Observable
 import retrofit2.http.Field
@@ -15,7 +14,7 @@ import retrofit2.http.Path
  * @Date: 2020-03-03
  * @Description:
  */
-interface SearchService {
+interface SearchServe {
 
     @POST(ServerApi.ARTICLE_QUERY)
     @FormUrlEncoded

@@ -2,7 +2,7 @@ package com.lengjiye.network
 
 import java.util.*
 
-class ServiceHolder {
+class ServeHolder {
     companion object {
         var singleton = Instance.holder
 
@@ -10,12 +10,12 @@ class ServiceHolder {
     }
 
     private object Instance {
-        val holder = ServiceHolder()
+        val holder = ServeHolder()
     }
 
     private var list: HashMap<String, *>? = null
 
-    private fun <T> getService(c: Class<T>, type: Int): T? {
+    private fun <T> getServe(c: Class<T>, type: Int): T? {
 
         if (list == null) {
             list = HashMap<String, T>()
@@ -47,7 +47,7 @@ class ServiceHolder {
     /**
      * 获取接口
      */
-    fun <T> getService(c: Class<T>): T? {
-        return getService(c, retrofitHolder)
+    fun <T> getServe(c: Class<T>): T? {
+        return getServe(c, retrofitHolder)
     }
 }

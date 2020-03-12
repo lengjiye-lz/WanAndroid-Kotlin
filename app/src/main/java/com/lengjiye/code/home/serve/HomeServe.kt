@@ -1,4 +1,4 @@
-package com.lengjiye.code.home.service
+package com.lengjiye.code.home.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface HomeService {
+interface HomeServe {
 
     @GET(ServerApi.ARTICLE)
     fun getArticle(@Path("page") page: Int): Observable<BaseHttpResult<ArticleBean>>

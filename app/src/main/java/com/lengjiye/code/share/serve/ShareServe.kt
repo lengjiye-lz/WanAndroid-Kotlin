@@ -1,4 +1,4 @@
-package com.lengjiye.code.share.service
+package com.lengjiye.code.share.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
@@ -12,7 +12,7 @@ import retrofit2.http.*
  * @Date: 2019-12-27
  * @Description:
  */
-interface ShareService {
+interface ShareServe {
 
     // 广场
     @GET(ServerApi.USER_ARTICLE_LIST)

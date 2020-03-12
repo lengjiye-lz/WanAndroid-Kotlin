@@ -1,4 +1,4 @@
-package com.lengjiye.code.project.service
+package com.lengjiye.code.project.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
@@ -14,7 +14,7 @@ import retrofit2.http.Query
  * @Date: 2019-11-05
  * @Description:
  */
-interface ProjectService {
+interface ProjectServe {
 
     @GET(ServerApi.PROJECT_TREE)
     fun getProjectTree(): Observable<BaseHttpResult<List<TreeBean>>>

@@ -2,10 +2,10 @@ package com.lengjiye.code.main.model
 
 import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.home.bean.HotKey
-import com.lengjiye.code.main.service.MainService
+import com.lengjiye.code.main.serve.MainServe
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
-import com.lengjiye.network.ServiceHolder
+import com.lengjiye.network.ServeHolder
 import io.reactivex.Observer
 
 class MainModel : BaseModel() {
@@ -17,12 +17,12 @@ class MainModel : BaseModel() {
         val instance = MainModel()
     }
 
-    private fun getService(): MainService? {
-        return ServiceHolder.singleton.getService(MainService::class.java)
+    private fun getServe(): MainServe? {
+        return ServeHolder.singleton.getServe(MainServe::class.java)
     }
 
     fun getHotKeyList(lifecycleOwner: LifecycleOwner, observer: Observer<List<HotKey>>) {
-        val observable = getService()?.getHotKeyList()?.map(HttpResultFunc())
+        val observable = getServe()?.getHotKeyList()?.map(HttpResultFunc())
         observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
     }
 }
