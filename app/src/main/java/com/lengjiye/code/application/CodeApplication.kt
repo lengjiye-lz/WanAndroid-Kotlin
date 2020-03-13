@@ -57,5 +57,6 @@ class CodeApplication : Application(), IApp {
     companion object {
         lateinit var instance: CodeApplication
     }
+
 }
 

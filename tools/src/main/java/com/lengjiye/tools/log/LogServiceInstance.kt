@@ -7,6 +7,9 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 
+/**
+ * log service 操作类
+ */
 class LogServiceInstance {
 
     var logMessage = MutableLiveData<String>()

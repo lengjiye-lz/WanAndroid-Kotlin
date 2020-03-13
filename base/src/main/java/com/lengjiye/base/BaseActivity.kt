@@ -70,9 +70,14 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         mViewModel.onDestroy()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("lz", "onResume:${isAppIsInBackground(this)}")
+    }
+
     override fun onStop() {
         super.onStop()
-        Log.e("lz", "isAppIsInBackground(this):${isAppIsInBackground(this)}")
+        Log.e("lz", "onStop:${isAppIsInBackground(this)}")
     }
 
     /**
@@ -97,5 +102,4 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         }
         return isInBackground
     }
-
 }

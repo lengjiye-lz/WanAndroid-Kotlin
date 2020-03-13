@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 
 /**
  * 日志显示功能
+ * 悬浮窗
  */
 class LogService : LifecycleService() {
 
