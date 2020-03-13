@@ -16,7 +16,6 @@ import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.utils.*
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader

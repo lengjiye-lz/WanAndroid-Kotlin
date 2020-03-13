@@ -11,11 +11,11 @@ import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
-import com.lengjiye.code.main.LogServiceInstance
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.tools.log.LogServiceInstance
 import com.lengjiye.utils.IoUtil
 import io.reactivex.disposables.Disposable
 

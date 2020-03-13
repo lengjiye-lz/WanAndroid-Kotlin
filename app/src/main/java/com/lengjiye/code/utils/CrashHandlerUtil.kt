@@ -1,6 +1,6 @@
 package com.lengjiye.code.utils
 
-import com.lengjiye.tools.LogTool
+import com.lengjiye.tools.log.LogTool
 import java.io.PrintWriter
 import java.io.StringWriter
 

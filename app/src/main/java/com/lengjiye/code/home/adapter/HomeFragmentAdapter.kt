@@ -3,16 +3,13 @@ package com.lengjiye.code.home.adapter
 import android.content.Context
 import android.text.Html
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.home.bean.HomeBean
-import com.lengjiye.tools.LogTool
 
 /**
  * 文章列表适配器

@@ -2,7 +2,6 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
@@ -10,7 +9,6 @@ import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
 import com.lengjiye.code.utils.*
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader

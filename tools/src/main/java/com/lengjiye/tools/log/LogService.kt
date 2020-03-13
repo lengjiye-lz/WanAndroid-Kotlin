@@ -1,4 +1,4 @@
-package com.lengjiye.code.main
+package com.lengjiye.tools.log
 
 import android.content.Context
 import android.content.Intent

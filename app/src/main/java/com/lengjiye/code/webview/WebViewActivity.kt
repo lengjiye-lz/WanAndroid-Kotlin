@@ -1,8 +1,6 @@
 package com.lengjiye.code.webview
 
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.os.Bundle
 import android.view.KeyEvent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -16,9 +14,8 @@ import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.ConstantKey
-import com.lengjiye.code.main.LogServiceInstance
 import com.lengjiye.code.utils.ToolBarUtil
-import com.lengjiye.tools.LogTool
+import com.lengjiye.tools.log.LogTool
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 

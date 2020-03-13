@@ -2,7 +2,7 @@ package com.lengjiye.network.interceptor;
 
 
 import com.lengjiye.base.application.MasterApplication;
-import com.lengjiye.tools.LogTool;
+import com.lengjiye.tools.log.LogTool;
 
 import java.io.IOException;
 

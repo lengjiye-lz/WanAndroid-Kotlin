@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         package="com.lengjiye.code">
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+
     <application
             android:name="com.lengjiye.code.application.CodeApplication"
             android:allowBackup="true"
@@ -80,7 +79,7 @@
                 android:configChanges="keyboard|screenSize|orientation"
                 android:launchMode="singleTop" />
 
-        <service android:name=".main.LogService" />
+        <service android:name="com.lengjiye.tools.log.LogService" />
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
-package com.lengjiye.tools;
+package com.lengjiye.tools.log;
 
 import android.util.Log;
+
+import com.lengjiye.tools.BuildConfig;
 
 /**
  * 类描述: 日志工具类

@@ -2,7 +2,6 @@ package com.lengjiye.code.share.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.fragment.LazyBaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
@@ -14,7 +13,6 @@ import com.lengjiye.code.utils.AccountUtil
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
-import com.lengjiye.tools.LogTool
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader

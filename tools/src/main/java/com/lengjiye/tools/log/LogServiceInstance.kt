@@ -1,11 +1,11 @@
-package com.lengjiye.code.main
+package com.lengjiye.tools.log
 
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.lengjiye.code.utils.toast
 
 class LogServiceInstance {
 
@@ -26,7 +26,7 @@ class LogServiceInstance {
             } else {
                 //若没有权限，提示获取.
                 val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                "需要取得权限以使用悬浮窗".toast()
+                Toast.makeText(context, "需要取得权限以使用悬浮窗", Toast.LENGTH_SHORT).show()
                 context.startActivity(intent)
             }
         } else {
