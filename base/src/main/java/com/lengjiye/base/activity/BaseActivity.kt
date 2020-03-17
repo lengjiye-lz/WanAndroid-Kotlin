@@ -1,8 +1,5 @@
-package com.lengjiye.base
+package com.lengjiye.base.activity
 
-import android.app.ActivityManager
-import android.app.ActivityManager.RunningAppProcessInfo
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +21,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         mBinding.lifecycleOwner = this
         bindViewModel()
         mViewModel.onCreate()
+        ActivityManager.singleton.add(this)
         initIntent(savedInstanceState)
         initView(savedInstanceState)
         initToolBar()
@@ -68,38 +66,16 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
     override fun onDestroy() {
         super.onDestroy()
         mViewModel.onDestroy()
+        ActivityManager.singleton.remove(this)
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e("lz", "onResume:${isAppIsInBackground(this)}")
+        Log.e("lz", "onResume:${ActivityManager.singleton.isAppIsInBackground()}")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.e("lz", "onStop:${isAppIsInBackground(this)}")
-    }
-
-    /**
-     * 判断应用是否在后台
-     *
-     * @param context
-     * @return
-     */
-    private fun isAppIsInBackground(context: Context): Boolean {
-        var isInBackground = true
-        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        val runningProcesses = am.runningAppProcesses
-        for (processInfo in runningProcesses) {
-            //前台程序
-            if (processInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                for (activeProcess in processInfo.pkgList) {
-                    if (activeProcess == context.getPackageName()) {
-                        isInBackground = false
-                    }
-                }
-            }
-        }
-        return isInBackground
+        Log.e("lz", "onStop:${ActivityManager.singleton.isAppIsInBackground()}")
     }
 }

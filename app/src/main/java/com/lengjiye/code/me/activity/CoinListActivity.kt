@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCoinListBinding
-import com.lengjiye.code.databinding.ActivityRankTableBinding
 import com.lengjiye.code.me.adapter.CoinListAdapter
-import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast

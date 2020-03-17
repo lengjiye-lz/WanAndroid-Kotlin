@@ -7,8 +7,6 @@ import com.lengjiye.base.constant.ErrorCode
 
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
-    val mApplication by lazy { getApplication<Application>() }
-
     /**
      * 错误处理
      */
