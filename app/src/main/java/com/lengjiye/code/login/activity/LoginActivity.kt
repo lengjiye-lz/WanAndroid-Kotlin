@@ -2,7 +2,7 @@ package com.lengjiye.code.login.activity
 
 import android.os.Bundle
 import android.widget.TextView
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey

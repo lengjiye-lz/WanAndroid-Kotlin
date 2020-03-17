@@ -14,6 +14,7 @@ import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.databinding.ItemProjectItemBinding
 import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.utils.GlideUtil
+import com.lengjiye.tools.ResTool
 
 /**
  * 文章列表适配器
@@ -25,9 +26,9 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
 
     override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
         item?.let {
-            holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
+            holder.binding.tvTitle.text = ResTool.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
-            holder.binding.tvDesc.text = Html.fromHtml(it.desc).trim()
+            holder.binding.tvDesc.text = ResTool.fromHtml(it.desc).trim()
             holder.binding.tvTime.text = it.niceDate
             GlideUtil.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_2, holder.binding.ivEnvelope)
 

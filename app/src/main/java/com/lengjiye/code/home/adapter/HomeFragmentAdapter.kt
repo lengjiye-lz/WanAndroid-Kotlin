@@ -1,15 +1,18 @@
 package com.lengjiye.code.home.adapter
 
 import android.content.Context
+import android.os.Build
 import android.text.Html
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.home.bean.HomeBean
+import com.lengjiye.tools.ResTool
 
 /**
  * 文章列表适配器
@@ -22,7 +25,7 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
 
     override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
         item?.let {
-            holder.binding.tvTitle.text = Html.fromHtml(it.title).trim()
+            holder.binding.tvTitle.text = ResTool.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvCategory.visibility = if (type == HomeFragmentAdapterType.TYPE_2) View.GONE else View.VISIBLE
             getCategory(holder.binding.tvCategory, it)

@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.base.viewmodel.BaseViewModel
 
 /**

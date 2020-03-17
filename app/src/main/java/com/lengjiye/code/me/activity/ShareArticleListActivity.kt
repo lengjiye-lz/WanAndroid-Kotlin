@@ -3,7 +3,7 @@ package com.lengjiye.code.me.activity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.ActivityShareArticleBinding

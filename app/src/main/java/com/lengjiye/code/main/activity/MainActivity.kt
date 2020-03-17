@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.bean.HotKey

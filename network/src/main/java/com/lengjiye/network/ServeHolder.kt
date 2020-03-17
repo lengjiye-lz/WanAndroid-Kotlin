@@ -6,7 +6,7 @@ class ServeHolder {
     companion object {
         var singleton = Instance.holder
 
-        val retrofitHolder: Int = 1
+        const val retrofitHolder: Int = 1
     }
 
     private object Instance {
@@ -28,13 +28,13 @@ class ServeHolder {
         }
 
         if (t == null) {
-            when (type) {
+            t = when (type) {
                 retrofitHolder -> {
-                    t = RetrofitHolder.singleton.getRetrofit().create(c)
+                    RetrofitHolder.singleton.getRetrofit().create(c)
                 }
 
                 else -> {
-                    t = RetrofitHolder.singleton.getRetrofit().create(c)
+                    RetrofitHolder.singleton.getRetrofit().create(c)
                 }
             }
             t?.let {

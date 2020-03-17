@@ -2,7 +2,7 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter

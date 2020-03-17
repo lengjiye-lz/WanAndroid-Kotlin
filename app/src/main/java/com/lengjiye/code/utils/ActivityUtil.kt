@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.login.activity.LoginActivity

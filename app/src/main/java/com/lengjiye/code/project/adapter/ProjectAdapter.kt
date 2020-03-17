@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.project.fragment.ProjectFragmentItem
 import com.lengjiye.code.system.bean.TreeBean
+import com.lengjiye.tools.ResTool
 
 /**
  * viewpager适配器
@@ -35,6 +36,6 @@ class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVI
 
     override fun getPageTitle(position: Int): CharSequence? {
         val treeBean = treeBeans?.get(position)
-        return Html.fromHtml(treeBean?.name)
+        return ResTool.fromHtml(treeBean?.name)
     }
 }

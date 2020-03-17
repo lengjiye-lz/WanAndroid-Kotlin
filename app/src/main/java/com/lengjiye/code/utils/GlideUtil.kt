@@ -170,7 +170,7 @@ object GlideUtil {
     private fun with(context: Context): RequestManager {
         return when (context) {
             is Activity -> {
-                Glide.with(context as Activity)
+                Glide.with(context)
             }
             is Fragment -> {
                 Glide.with(context as Fragment)

@@ -2,15 +2,16 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCollectWebsiteBinding
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
-import com.lengjiye.code.utils.*
+import com.lengjiye.code.utils.AccountUtil
+import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.LayoutManagerUtils
+import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.tools.ResTool
-import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
 /**

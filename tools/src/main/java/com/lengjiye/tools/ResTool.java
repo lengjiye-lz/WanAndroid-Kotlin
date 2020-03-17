@@ -2,6 +2,9 @@ package com.lengjiye.tools;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.text.Html;
+import android.text.Spanned;
 
 import androidx.core.content.ContextCompat;
 
@@ -76,5 +79,17 @@ public class ResTool {
 
     public static int getDimens(Context context, int resId) {
         return context.getApplicationContext().getResources().getDimensionPixelSize(resId);
+    }
+
+    /**
+     * 格式化html
+     *
+     * @param content
+     * @return
+     */
+    public static Spanned fromHtml(String content) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            return Html.fromHtml(content, Html.FROM_HTML_MODE_COMPACT);
+        else return Html.fromHtml(content);
     }
 }
