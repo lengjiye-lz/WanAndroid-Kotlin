@@ -82,14 +82,21 @@ public class DimensGenerator {
             System.out.println(file.getAbsolutePath());
             Document document = db.parse(file);
             NodeList nodeList = document.getElementsByTagName("dimen");
+
+            Node book;
+            NamedNodeMap attrs;
+            Node attr;
+            StringBuilder elementStrBuilder;
+            NodeList childNodes;
+            String nodeValue;
             for (int i = 0; i < nodeList.getLength(); i++) {
-                Node book = nodeList.item(i);
-                NamedNodeMap attrs = book.getAttributes();
-                Node attr = attrs.item(0);
-                StringBuilder elementStrBuilder = new StringBuilder();
+                book = nodeList.item(i);
+                attrs = book.getAttributes();
+                attr = attrs.item(0);
+                elementStrBuilder = new StringBuilder();
                 elementStrBuilder.append("<dimen " + attr.getNodeName() + "=\"" + attr.getNodeValue() + "\">");
-                NodeList childNodes = book.getChildNodes();
-                String nodeValue = childNodes.item(0).getNodeValue();
+                childNodes = book.getChildNodes();
+                nodeValue = childNodes.item(0).getNodeValue();
                 if (nodeValue.contains("dp")) {
                     float value = Float.valueOf(nodeValue.replace("dp", ""));
                     elementStrBuilder.append(value * factor + "dp");
@@ -101,11 +108,7 @@ public class DimensGenerator {
                 elementStrBuilder.append("</dimen>");
                 sb.append(elementStrBuilder.toString() + "\n");
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
     }
