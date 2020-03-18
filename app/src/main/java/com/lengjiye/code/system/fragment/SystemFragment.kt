@@ -48,7 +48,7 @@ class SystemFragment : LazyBaseFragment<FragmentSystemBinding, SystemViewModel>(
     override fun initData() {
         super.initData()
         mViewModel.tree.observe(this, Observer {
-            adapter.setDatas(it)
+            adapter.setData(it)
             adapter.notifyDataSetChanged()
         })
     }

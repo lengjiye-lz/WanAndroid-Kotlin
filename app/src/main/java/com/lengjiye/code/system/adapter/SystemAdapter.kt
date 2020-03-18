@@ -14,7 +14,7 @@ class SystemAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private var treeBeans: List<TreeBean>? = null
 
-    fun setDatas(treeBeans: List<TreeBean>?) {
+    fun setData(treeBeans: List<TreeBean>?) {
         this.treeBeans = treeBeans
     }
 

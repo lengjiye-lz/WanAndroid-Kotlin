@@ -94,19 +94,19 @@ public class DimensGenerator {
                 attrs = book.getAttributes();
                 attr = attrs.item(0);
                 elementStrBuilder = new StringBuilder();
-                elementStrBuilder.append("<dimen " + attr.getNodeName() + "=\"" + attr.getNodeValue() + "\">");
+                elementStrBuilder.append("<dimen ").append(attr.getNodeName()).append("=\"").append(attr.getNodeValue()).append("\">");
                 childNodes = book.getChildNodes();
                 nodeValue = childNodes.item(0).getNodeValue();
                 if (nodeValue.contains("dp")) {
                     float value = Float.valueOf(nodeValue.replace("dp", ""));
-                    elementStrBuilder.append(value * factor + "dp");
+                    elementStrBuilder.append(value * factor).append("dp");
                 } else if (nodeValue.contains("sp")) {
                     float value = Float.valueOf(nodeValue.replace("sp", ""));
-                    elementStrBuilder.append(value * factor + "sp");
+                    elementStrBuilder.append(value * factor).append("sp");
                 }
 
                 elementStrBuilder.append("</dimen>");
-                sb.append(elementStrBuilder.toString() + "\n");
+                sb.append(elementStrBuilder.toString()).append("\n");
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
