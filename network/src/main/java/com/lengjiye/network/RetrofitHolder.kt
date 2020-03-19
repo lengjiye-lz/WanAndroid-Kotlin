@@ -25,7 +25,7 @@ class RetrofitHolder {
     }
 
     private fun createRetrofit(): Retrofit {
-        val url = MasterApplication.getInstance().baseUrl()
+        val url = com.lengjiye.base.application.MasterApplication.getInstance().baseUrl()
         return Retrofit.Builder().baseUrl(url)
             .client(OkHttpClientHolder.singleton.getHttpClient())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))

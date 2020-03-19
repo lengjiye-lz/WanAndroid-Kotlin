@@ -29,10 +29,10 @@ public class SignInterceptor implements Interceptor {
             LogTool.d("mediaType=" + mediaType);
             String content = body.string();
             if ("debug".equals(MasterApplication.getInstance().buildType())) {
-                LogTool.e("#############################################################");
+//                LogTool.e("#############################################################");
                 LogTool.e("request.url()=" + request.url());
                 LogTool.e("response.body()=" + content);
-                LogTool.e("#############################################################");
+//                LogTool.e("#############################################################");
             }
             return response.newBuilder().body(ResponseBody.create(mediaType, content)).build();
         }

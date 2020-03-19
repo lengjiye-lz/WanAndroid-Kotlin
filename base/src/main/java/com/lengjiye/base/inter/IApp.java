@@ -1,8 +1,7 @@
 package com.lengjiye.base.inter;
 
 import android.content.Context;
-
-public interface IApp {
+ public interface IApp {
 
     Context applicationContext();
 

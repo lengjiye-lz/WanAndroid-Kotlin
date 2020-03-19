@@ -1,7 +1,6 @@
 package com.lengjiye.base.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -69,13 +68,4 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         ActivityManager.singleton.remove(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.e("lz", "onResume:${ActivityManager.singleton.isAppIsInBackground()}")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e("lz", "onStop:${ActivityManager.singleton.isAppIsInBackground()}")
-    }
 }

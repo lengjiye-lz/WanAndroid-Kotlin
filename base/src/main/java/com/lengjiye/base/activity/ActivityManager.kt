@@ -70,14 +70,14 @@ class ActivityManager {
      * @return
      */
     fun isAppIsInBackground(): Boolean {
-        val am = MasterApplication.getInstance().applicationContext()
+        val am = com.lengjiye.base.application.MasterApplication.getInstance().applicationContext()
             .getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
         val runningProcesses = am.runningAppProcesses
         for (processInfo in runningProcesses) {
             //前台程序
             if (processInfo.importance == android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
                 for (activeProcess in processInfo.pkgList) {
-                    if (activeProcess == MasterApplication.getInstance().applicationContext().packageName) {
+                    if (activeProcess == com.lengjiye.base.application.MasterApplication.getInstance().applicationContext().packageName) {
                         return false
                     }
                 }

@@ -1,7 +1,6 @@
 package com.lengjiye.network
 
 import com.google.gson.JsonSyntaxException
-import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.exception.ErrorCodeConstant
 import com.lengjiye.tools.log.LogTool
@@ -78,7 +77,7 @@ class LoadingObserver<T>() : Observer<T> {
             }
             else -> {
                 // 线上环境显示未知错误
-                if ("release" == MasterApplication.getInstance().buildType()) {
+                if ("release" == com.lengjiye.base.application.MasterApplication.getInstance().buildType()) {
                     errorCode = ErrorCodeConstant.UNKNOWN_ERROR
                     errorMsg = ResTool.getString(R.string.net_0004)
                     apiException = ApiException(errorCode, errorMsg, null)

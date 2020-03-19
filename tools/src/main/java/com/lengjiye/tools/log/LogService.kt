@@ -1,14 +1,16 @@
 package com.lengjiye.tools.log
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
+import android.text.method.ScrollingMovementMethod
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
+import com.lengjiye.tools.ResTool
 
 /**
  * 日志显示功能
@@ -23,23 +25,32 @@ class LogService : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
         getWindowManager()
-        LogServiceInstance.singleton.logMessage.observe(this, Observer {
-            textView?.let { view ->
-                view.text = it
+        LogServiceInstance.singleton.logContent.observe(this, Observer {
+            textView?.append(ResTool.fromHtml(it).toString() + "\n")
+        })
+        LogServiceInstance.singleton.viewVisibility.observe(this, Observer {
+            if (it) {
+                textView?.visibility = View.VISIBLE
+            } else {
+                textView?.visibility = View.GONE
             }
         })
+
+        add()
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        show()
-        return super.onStartCommand(intent, flags, startId)
-    }
-
-    private fun show() {
+    private fun add() {
         if (textView != null) {
             return
         }
         textView = TextView(this)
+        textView?.setBackgroundColor(ResTool.getColor(android.R.color.black))
+        textView?.setTextColor(ResTool.getColor(android.R.color.white))
+        textView?.alpha = 0.6f
+        textView?.setTextSize(10f)
+        textView?.maxLines = 15
+        textView?.setMovementMethod(ScrollingMovementMethod.getInstance())
+        textView?.gravity = Gravity.BOTTOM
         mWindowManager?.addView(textView, mParams)
     }
 
@@ -55,7 +66,7 @@ class LogService : LifecycleService() {
         } else {
             mParams?.type = WindowManager.LayoutParams.TYPE_PHONE
         }
-        //设置图片格式，效果为背景透明
+        // 设置图片格式，效果为背景透明
         mParams?.format = PixelFormat.RGBA_8888
         mParams?.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or

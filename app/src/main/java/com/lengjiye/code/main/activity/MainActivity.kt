@@ -8,11 +8,13 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.code.R
+import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
+import com.lengjiye.code.utils.ActivityLifecycleCallback
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.tools.log.LogServiceInstance
@@ -43,8 +45,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        // 注册activity生命周期
+        CodeApplication.instance.registerActivityLifecycleCallbacks(ActivityLifecycleCallback())
         initBottomNavigation()
-
         ToolBarUtil.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
             ActivityUtil.startSearchActivity(this)
         }
@@ -59,8 +62,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 .setSearchTitle("经常搜索的几个关键词")
                 .builder()
         )
-
-
     }
 
     override fun initData() {
@@ -71,6 +72,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .show(mTempFragment as HomeFragment).commit()
 
         mViewModel.getHotKeyList(this)
+        LogServiceInstance.singleton.start(this)
     }
 
     override fun initLiveDataListener() {
@@ -210,6 +212,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         super.onDestroy()
         disposable?.dispose()
         MainFragmentManager.instance.destroy()
+        LogServiceInstance.singleton.stop(this)
     }
 
 }

@@ -12,9 +12,13 @@ import androidx.lifecycle.MutableLiveData
  */
 class LogServiceInstance {
 
-    var logMessage = MutableLiveData<String>()
+    var logContent = MutableLiveData<String>()
+    var viewVisibility = MutableLiveData<Boolean>()
 
     companion object {
+
+        var isShow = false
+
         var singleton = Instance.holder
     }
 
@@ -23,6 +27,7 @@ class LogServiceInstance {
     }
 
     fun start(context: Context) {
+        isShow = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Settings.canDrawOverlays(context)) {
                 context.startService(Intent(context, LogService::class.java))
@@ -39,10 +44,19 @@ class LogServiceInstance {
     }
 
     fun stop(context: Context) {
+        isShow = false
         context.stopService(Intent(context, LogService::class.java))
     }
 
-    fun setMessage(message: String) {
-        logMessage.value = message
+    fun setMessage(content: String) {
+        logContent.postValue(content)
+    }
+
+    fun hideLog() {
+        viewVisibility.value = false
+    }
+
+    fun showLog() {
+        viewVisibility.value = true
     }
 }
