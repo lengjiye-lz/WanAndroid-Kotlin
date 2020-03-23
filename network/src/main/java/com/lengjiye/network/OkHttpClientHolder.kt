@@ -36,7 +36,7 @@ class OkHttpClientHolder {
             .build()
     }
 
-    fun getCookieJarImpl(): CookieJarImpl {
+    private fun getCookieJarImpl(): CookieJarImpl {
         if (cookieJarImpl == null) {
             cookieJarImpl = CookieJarImpl(PersistentCookieStore())
         }

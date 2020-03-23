@@ -5,8 +5,6 @@ import java.util.*
 class ServeHolder {
     companion object {
         var singleton = Instance.holder
-
-        const val retrofitHolder: Int = 1
     }
 
     private object Instance {
@@ -15,8 +13,7 @@ class ServeHolder {
 
     private var list: HashMap<String, *>? = null
 
-    private fun <T> getServe(c: Class<T>, type: Int): T? {
-
+    fun <T> getServe(c: Class<T>): T? {
         if (list == null) {
             list = HashMap<String, T>()
         }
@@ -28,26 +25,9 @@ class ServeHolder {
         }
 
         if (t == null) {
-            t = when (type) {
-                retrofitHolder -> {
-                    RetrofitHolder.singleton.getRetrofit().create(c)
-                }
-
-                else -> {
-                    RetrofitHolder.singleton.getRetrofit().create(c)
-                }
-            }
-            t?.let {
-                (list as HashMap<String, T>).put(c.simpleName, it)
-            }
+            t = RetrofitHolder.singleton.getRetrofit().create(c)
+            (list as HashMap<String, T>).put(c.simpleName, t as T)
         }
         return t
-    }
-
-    /**
-     * 获取接口
-     */
-    fun <T> getServe(c: Class<T>): T? {
-        return getServe(c, retrofitHolder)
     }
 }
