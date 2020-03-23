@@ -49,7 +49,7 @@ class LogServiceInstance {
     }
 
     fun setMessage(content: String) {
-        logContent.postValue(content)
+        LiveDataUtils.setValue(logContent, content)
     }
 
     fun hideLog() {

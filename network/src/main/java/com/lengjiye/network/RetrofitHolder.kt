@@ -1,6 +1,5 @@
 package com.lengjiye.network
 
-import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.lengjiye.base.application.MasterApplication
@@ -12,7 +11,6 @@ class RetrofitHolder {
 
     private val gson: Gson by lazy {
         val builder = GsonBuilder()
-        builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         builder.create()
     }
 

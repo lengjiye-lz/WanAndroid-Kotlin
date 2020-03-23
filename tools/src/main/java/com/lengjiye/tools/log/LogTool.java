@@ -190,8 +190,6 @@ public class LogTool {
         if (!LogServiceInstance.Companion.isShow()) {
             return;
         }
-        synchronized (LogTool.class) {
-            LogServiceInstance.Companion.getSingleton().setMessage(tag + ":" + content);
-        }
+        LogServiceInstance.Companion.getSingleton().setMessage(tag + ":" + content);
     }
 }
