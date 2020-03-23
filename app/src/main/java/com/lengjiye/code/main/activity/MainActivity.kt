@@ -72,7 +72,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .show(mTempFragment as HomeFragment).commit()
 
         mViewModel.getHotKeyList(this)
-        LogServiceInstance.singleton.start(this)
+//        LogServiceInstance.singleton.start(this)
     }
 
     override fun initLiveDataListener() {
