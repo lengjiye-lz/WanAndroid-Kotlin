@@ -25,7 +25,7 @@ class ServeHolder {
         }
 
         if (t == null) {
-            t = RetrofitHolder.singleton.getRetrofit().create(c)
+            t = RetrofitHolder.singleton.createRetrofit().create(c)
             (list as HashMap<String, T>).put(c.simpleName, t as T)
         }
         return t

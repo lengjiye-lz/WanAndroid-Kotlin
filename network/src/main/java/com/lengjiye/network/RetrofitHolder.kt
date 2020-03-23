@@ -9,9 +9,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitHolder {
-    private var retrofit: Retrofit? = null
 
-    val gson: Gson by lazy {
+    private val gson: Gson by lazy {
         val builder = GsonBuilder()
         builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         builder.create()
@@ -25,17 +24,10 @@ class RetrofitHolder {
         val holder = RetrofitHolder()
     }
 
-    fun getRetrofit(): Retrofit {
-        if (null == retrofit) {
-            retrofit = createRetrofit()
-        }
-        return retrofit as Retrofit
-    }
-
-    private fun createRetrofit(): Retrofit {
+    fun createRetrofit(): Retrofit {
         val url = MasterApplication.getInstance().baseUrl()
         return Retrofit.Builder().baseUrl(url)
-            .client(OkHttpClientHolder.singleton.getHttpClient())
+            .client(OkHttpClientHolder.singleton.createClient())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

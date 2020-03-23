@@ -7,7 +7,6 @@ import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 class OkHttpClientHolder {
-    private var client: OkHttpClient? = null
     private var cookieJarImpl: CookieJarImpl? = null
 
     companion object {
@@ -18,14 +17,7 @@ class OkHttpClientHolder {
         val holder = OkHttpClientHolder()
     }
 
-    fun getHttpClient(): OkHttpClient {
-        if (null == client) {
-            client = createClient()
-        }
-        return client as OkHttpClient
-    }
-
-    private fun createClient(): OkHttpClient {
+    fun createClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(SignInterceptor())
             .cookieJar(getCookieJarImpl())
