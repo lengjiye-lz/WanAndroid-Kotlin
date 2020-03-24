@@ -2,6 +2,7 @@ package com.lengjiye.code.application
 
 import android.app.Application
 import android.content.Context
+import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
 import com.lengjiye.code.utils.CrashHandlerUtil
@@ -46,7 +47,7 @@ class CodeApplication : Application(), IApp {
 
     override fun onCreate() {
         super.onCreate()
-        com.lengjiye.base.application.MasterApplication.getInstance().setIApp(this)
+        MasterApplication.getInstance().setIApp(this)
 
         // 崩溃日志捕捉
         val handler = CrashHandlerUtil()
