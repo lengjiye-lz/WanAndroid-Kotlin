@@ -12,7 +12,7 @@ import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.search.viewmodel.SearchViewModel
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
-import com.lengjiye.utils.IoUtil
+import com.lengjiye.utils.RxUtil
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import io.reactivex.disposables.Disposable
@@ -138,7 +138,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
     private fun delaySearch() {
         disposableSearch?.dispose()
         // 延迟请求数据
-        disposableSearch = IoUtil.timer(2) {
+        disposableSearch = RxUtil.timer(this, 2) {
             refresh()
         }
     }

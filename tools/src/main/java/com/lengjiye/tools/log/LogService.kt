@@ -47,9 +47,9 @@ class LogService : LifecycleService() {
         textView?.setBackgroundColor(ResTool.getColor(android.R.color.black))
         textView?.setTextColor(ResTool.getColor(android.R.color.white))
         textView?.alpha = 0.6f
-        textView?.setTextSize(10f)
+        textView?.textSize = 10f
         textView?.maxLines = 15
-        textView?.setMovementMethod(ScrollingMovementMethod.getInstance())
+        textView?.movementMethod = ScrollingMovementMethod.getInstance()
         textView?.gravity = Gravity.BOTTOM
         mWindowManager?.addView(textView, mParams)
     }

@@ -18,7 +18,7 @@ import com.lengjiye.code.utils.ActivityLifecycleCallback
 import com.lengjiye.code.utils.ActivityUtil
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.tools.log.LogServiceInstance
-import com.lengjiye.utils.IoUtil
+import com.lengjiye.utils.RxUtil
 import io.reactivex.disposables.Disposable
 
 /**
@@ -72,7 +72,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .show(mTempFragment as HomeFragment).commit()
 
         mViewModel.getHotKeyList(this)
-//        LogServiceInstance.singleton.start(this)
+        LogServiceInstance.singleton.start(this)
     }
 
     override fun initLiveDataListener() {
@@ -101,7 +101,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 return
             }
             val size = it.size
-            disposable = IoUtil.interval(3) { it1 ->
+            disposable = RxUtil.interval(this, 3) { it1 ->
                 val index = (it1 % size).toInt()
                 text.setText(hotKeys?.get(index)?.name)
                 text.next()
