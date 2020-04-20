@@ -3,6 +3,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.lengjiye.code">
 
+
+
     <application
             android:name="com.lengjiye.code.application.CodeApplication"
             android:allowBackup="true"

@@ -36,8 +36,10 @@ class ActivityManager {
         }
         stack.forEach { currentActivity ->
             if (currentActivity::class.java == activity::class.java) {
-                currentActivity.finish()
                 stack.remove(currentActivity)
+                if (!currentActivity.isFinishing){
+                    currentActivity.finish()
+                }
                 return@forEach
             }
         }

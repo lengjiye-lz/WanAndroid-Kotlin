@@ -1,5 +1,6 @@
 package com.lengjiye.tools.log
 
+import android.app.KeyguardManager
 import android.content.Context
 import android.graphics.PixelFormat
 import android.os.Build
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
 import com.lengjiye.tools.ResTool
+
 
 /**
  * 日志显示功能
@@ -51,7 +53,12 @@ class LogService : LifecycleService() {
         textView?.maxLines = 15
         textView?.movementMethod = ScrollingMovementMethod.getInstance()
         textView?.gravity = Gravity.BOTTOM
+        //先解锁系统自带锁屏服务，放在锁屏界面里面
+        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        keyguardManager.newKeyguardLock("").disableKeyguard() //解锁
+
         mWindowManager?.addView(textView, mParams)
+
     }
 
     private fun getWindowManager() {
@@ -68,9 +75,13 @@ class LogService : LifecycleService() {
         }
         // 设置图片格式，效果为背景透明
         mParams?.format = PixelFormat.RGBA_8888
+
         mParams?.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+
         mParams?.width = WindowManager.LayoutParams.MATCH_PARENT
         mParams?.height = WindowManager.LayoutParams.WRAP_CONTENT
     }
