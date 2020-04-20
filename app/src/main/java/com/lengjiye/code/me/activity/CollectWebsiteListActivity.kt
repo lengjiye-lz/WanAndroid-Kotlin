@@ -30,8 +30,8 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): MeCollectViewModel {
-        return MeCollectViewModel(application)
+    override fun getViewModel(): Class<MeCollectViewModel> {
+        return MeCollectViewModel::class.java
     }
 
     override fun initToolBar() {

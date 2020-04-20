@@ -21,8 +21,8 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding, MeCollectViewMo
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): MeCollectViewModel {
-        return MeCollectViewModel(application)
+    override fun getViewModel(): Class<MeCollectViewModel> {
+        return MeCollectViewModel::class.java
     }
 
     override fun initToolBar() {

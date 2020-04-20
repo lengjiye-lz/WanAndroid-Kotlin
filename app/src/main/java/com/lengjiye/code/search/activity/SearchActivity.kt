@@ -34,8 +34,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
         return R.layout.activity_search
     }
 
-    override fun getViewModel(): SearchViewModel {
-        return SearchViewModel(application)
+    override fun getViewModel(): Class<SearchViewModel> {
+        return SearchViewModel::class.java
     }
 
     override fun bindViewModel() {

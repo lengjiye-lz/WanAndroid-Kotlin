@@ -17,8 +17,8 @@ class ${functionName}Fragment : LazyBaseFragment<Fragment${functionName}Binding,
         return R.layout.fragment_${packageName}
     }
 
-    override fun getViewModel(): ${functionName}ViewModel {
-        return ${functionName}ViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<${functionName}ViewModel> {
+            return ${functionName}ViewModel::class.java
     }
 
     override fun bindViewModel() {

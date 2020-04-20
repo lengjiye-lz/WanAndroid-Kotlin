@@ -16,8 +16,8 @@ class ${functionName}Activity : BaseActivity<Activity${functionName}Binding, ${f
         return R.layout.activity_${packageName}
     }
 
-    override fun getViewModel(): ${functionName}ViewModel {
-        return ${functionName}ViewModel(application)
+    override fun getViewModel(): Class<${functionName}ViewModel> {
+        return ${functionName}ViewModel::class.java
     }
 
     override fun bindViewModel() {

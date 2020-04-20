@@ -31,8 +31,8 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): MeViewModel {
-        return MeViewModel(application)
+    override fun getViewModel(): Class<MeViewModel> {
+        return MeViewModel::class.java
     }
 
     override fun initToolBar() {

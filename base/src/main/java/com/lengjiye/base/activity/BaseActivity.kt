@@ -16,7 +16,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        mViewModel = ViewModelProvider(this).get(getViewModel()::class.java)
+        mViewModel = ViewModelProvider(this).get(getViewModel())
         mBinding.lifecycleOwner = this
         bindViewModel()
         mViewModel.onCreate()
@@ -30,7 +30,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel(): VM
+    abstract fun getViewModel(): Class<VM>
 
     /**
      * 绑定 ViewModel

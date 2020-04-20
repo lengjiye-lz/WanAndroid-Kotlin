@@ -22,8 +22,8 @@ class MyShareActivity : BaseActivity<ActivityMyShareBinding, MeShareViewModel>()
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): MeShareViewModel {
-        return MeShareViewModel(application)
+    override fun getViewModel(): Class<MeShareViewModel> {
+        return MeShareViewModel::class.java
     }
 
     override fun initToolBar() {

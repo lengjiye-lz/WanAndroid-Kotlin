@@ -28,8 +28,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         return R.layout.activity_login
     }
 
-    override fun getViewModel(): LoginViewModel {
-        return LoginViewModel(application)
+    override fun getViewModel(): Class<LoginViewModel> {
+        return LoginViewModel::class.java
     }
 
     override fun bindViewModel() {

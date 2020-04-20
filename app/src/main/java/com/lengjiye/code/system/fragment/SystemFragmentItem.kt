@@ -39,8 +39,8 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
         return R.layout.fragment_system_item
     }
 
-    override fun getViewModel(): SystemViewModel {
-        return SystemViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<SystemViewModel> {
+        return SystemViewModel::class.java
     }
 
     override fun bindViewModel() {

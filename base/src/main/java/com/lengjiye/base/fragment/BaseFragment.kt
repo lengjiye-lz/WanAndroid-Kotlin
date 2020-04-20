@@ -20,7 +20,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        mViewModel = ViewModelProvider(getBaseActivity()).get(getViewModel()::class.java)
+        mViewModel = ViewModelProvider(getBaseActivity()).get(getViewModel())
         mBinding.lifecycleOwner = this
         bindViewModel()
         mViewModel.onCreate()
@@ -36,7 +36,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel(): VM
+    abstract fun getViewModel(): Class<VM>
 
     /**
      * 绑定 ViewModel

@@ -20,8 +20,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, LoginViewModel>() {
         mBinding.viewModel = mViewModel
     }
 
-    override fun getViewModel(): LoginViewModel {
-        return LoginViewModel(application)
+    override fun getViewModel(): Class<LoginViewModel> {
+        return LoginViewModel::class.java
     }
 
     override fun initToolBar() {

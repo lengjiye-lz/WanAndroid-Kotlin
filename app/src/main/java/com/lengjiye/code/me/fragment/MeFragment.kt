@@ -24,8 +24,8 @@ class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
         return R.layout.fragment_me
     }
 
-    override fun getViewModel(): MeViewModel {
-        return MeViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<MeViewModel> {
+        return MeViewModel::class.java
     }
 
     override fun bindViewModel() {

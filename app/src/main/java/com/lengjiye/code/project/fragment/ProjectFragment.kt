@@ -26,8 +26,8 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         return R.layout.fragment_project
     }
 
-    override fun getViewModel(): ProjectViewModel {
-        return ProjectViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<ProjectViewModel> {
+        return ProjectViewModel::class.java
     }
 
     override fun bindViewModel() {

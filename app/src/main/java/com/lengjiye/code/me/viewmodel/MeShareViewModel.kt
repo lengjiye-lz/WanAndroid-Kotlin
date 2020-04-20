@@ -1,9 +1,9 @@
 package com.lengjiye.code.me.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
+import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.share.bean.ShareBean
 import com.lengjiye.code.share.model.ShareModel
 import com.lengjiye.network.exception.ApiException
@@ -15,7 +15,7 @@ import com.lengjiye.network.LoadingObserver.ObserverListener
  * @Date: 2019-11-05
  * @Description:
  */
-class MeShareViewModel(application: Application) : BaseViewModel(application) {
+class MeShareViewModel() : BaseViewModel(CodeApplication.instance) {
 
     private lateinit var loadingObserverUserShareArticles: LoadingObserver<ShareBean>
 
@@ -30,7 +30,6 @@ class MeShareViewModel(application: Application) : BaseViewModel(application) {
             override fun observerOnError(e: ApiException) {
 
             }
-
         })
     }
 

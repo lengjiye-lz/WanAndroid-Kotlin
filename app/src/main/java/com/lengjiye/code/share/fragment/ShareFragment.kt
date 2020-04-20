@@ -31,8 +31,8 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
         return R.layout.fragment_share
     }
 
-    override fun getViewModel(): ShareViewModel {
-        return ShareViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<ShareViewModel> {
+        return ShareViewModel::class.java
     }
 
     override fun bindViewModel() {

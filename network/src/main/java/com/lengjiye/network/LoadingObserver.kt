@@ -20,12 +20,11 @@ import java.net.UnknownHostException
  */
 class LoadingObserver<T>() : Observer<T> {
     private var observerListener: ObserverListener<T>? = null
+    private var disposable: Disposable? = null
 
     constructor(observerListener: ObserverListener<T>?) : this() {
         this.observerListener = observerListener
     }
-
-    private var disposable: Disposable? = null
 
     override fun onSubscribe(d: Disposable) {
         disposable = d
@@ -35,6 +34,10 @@ class LoadingObserver<T>() : Observer<T> {
             val apiException = ApiException(errorCode, errorMsg, null)
             observerListener?.observerOnError(apiException)
             disposable?.dispose()
+        } else {
+            // TODO 显示loading
+
+
         }
     }
 

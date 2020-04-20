@@ -28,8 +28,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         return R.layout.fragment_login
     }
 
-    override fun getViewModel(): LoginViewModel {
-        return LoginViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<LoginViewModel> {
+        return LoginViewModel::class.java
     }
 
     override fun bindViewModel() {

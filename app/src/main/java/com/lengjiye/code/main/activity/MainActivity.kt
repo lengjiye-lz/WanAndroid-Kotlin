@@ -35,8 +35,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return R.layout.activity_main
     }
 
-    override fun getViewModel(): MainViewModel {
-        return MainViewModel(application)
+    override fun getViewModel(): Class<MainViewModel> {
+        return MainViewModel::class.java
     }
 
     override fun bindViewModel() {

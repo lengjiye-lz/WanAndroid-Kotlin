@@ -26,8 +26,8 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
         return R.layout.activity_webview
     }
 
-    override fun getViewModel(): WebViewModel {
-        return WebViewModel(application)
+    override fun getViewModel(): Class<WebViewModel> {
+        return WebViewModel::class.java
     }
 
     override fun bindViewModel() {

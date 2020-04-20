@@ -37,8 +37,8 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
         return R.layout.fragment_home
     }
 
-    override fun getViewModel(): HomeViewModel {
-        return HomeViewModel(CodeApplication.instance)
+    override fun getViewModel(): Class<HomeViewModel> {
+        return HomeViewModel::class.java
     }
 
     override fun bindViewModel() {
