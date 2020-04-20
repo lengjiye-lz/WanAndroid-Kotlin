@@ -48,7 +48,7 @@ class LogServiceInstance {
         context.stopService(Intent(context, LogService::class.java))
     }
 
-    fun setMessage(content: String) {
+    fun setMessage(content: String?) {
         LiveDataUtils.setValue(logContent, content)
     }
 

@@ -3,8 +3,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.lengjiye.code">
 
-
-
     <application
             android:name="com.lengjiye.code.application.CodeApplication"
             android:allowBackup="true"
@@ -82,6 +80,8 @@
                 android:launchMode="singleTop" />
 
         <service android:name="com.lengjiye.tools.log.LogService" />
+
+
     </application>
 
 </manifest>

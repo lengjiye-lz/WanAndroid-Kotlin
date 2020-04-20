@@ -27,20 +27,22 @@ class ActivityManager {
         }
         val a = stack.lastElement()
         a.finish()
-        stack.remove(a)
+        remove(a)
     }
 
     fun remove(activity: Activity) {
         if (stack.empty()) {
             return
         }
-        stack.forEach { currentActivity ->
+        val iterators = stack.iterator()
+        while (iterators.hasNext()) {
+            val currentActivity = iterators.next()
             if (currentActivity::class.java == activity::class.java) {
                 stack.remove(currentActivity)
-                if (!currentActivity.isFinishing){
+                if (!currentActivity.isFinishing) {
                     currentActivity.finish()
                 }
-                return@forEach
+                return
             }
         }
     }
@@ -49,9 +51,12 @@ class ActivityManager {
         if (stack.empty()) {
             return
         }
-        stack.forEach {
-            it.finish()
-            stack.remove(it)
+
+        val iterators = stack.iterator()
+        while (iterators.hasNext()) {
+            val currentActivity = iterators.next()
+            currentActivity.finish()
+            stack.remove(currentActivity)
         }
     }
 

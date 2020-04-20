@@ -53,12 +53,9 @@ class LogService : LifecycleService() {
         textView?.maxLines = 15
         textView?.movementMethod = ScrollingMovementMethod.getInstance()
         textView?.gravity = Gravity.BOTTOM
-        //先解锁系统自带锁屏服务，放在锁屏界面里面
-        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-        keyguardManager.newKeyguardLock("").disableKeyguard() //解锁
 
         mWindowManager?.addView(textView, mParams)
-
+        textView?.visibility = View.GONE
     }
 
     private fun getWindowManager() {
@@ -78,7 +75,9 @@ class LogService : LifecycleService() {
 
         mParams?.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH or
+                // 锁屏显示权限，可以不用
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
                 WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
 

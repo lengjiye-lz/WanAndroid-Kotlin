@@ -72,7 +72,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .show(mTempFragment as HomeFragment).commit()
 
         mViewModel.getHotKeyList(this)
-        LogServiceInstance.singleton.start(this)
+        // 显示悬浮窗
+//        LogServiceInstance.singleton.start(this)
     }
 
     override fun initLiveDataListener() {

@@ -9,4 +9,6 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <!-- 申请电源锁需要的权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
 </manifest>
