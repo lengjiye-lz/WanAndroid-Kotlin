@@ -1,5 +1,6 @@
 package com.lengjiye.network
 
+import com.lengjiye.base.application.MasterApplication
 import java.util.*
 
 class ServeHolder {
@@ -13,7 +14,7 @@ class ServeHolder {
 
     private var list: HashMap<String, *>? = null
 
-    fun <T> getServe(c: Class<T>): T? {
+    fun <T> getServe(c: Class<T>, url: String = MasterApplication.getInstance().baseUrl()): T? {
         if (list == null) {
             list = HashMap<String, T>()
         }
@@ -25,7 +26,7 @@ class ServeHolder {
         }
 
         if (t == null) {
-            t = RetrofitHolder.singleton.createRetrofit().create(c)
+            t = RetrofitHolder.createRetrofit(url).create(c)
             (list as HashMap<String, T>).put(c.simpleName, t as T)
         }
         return t

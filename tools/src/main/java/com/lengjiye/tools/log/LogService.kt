@@ -55,7 +55,6 @@ class LogService : LifecycleService() {
         textView?.gravity = Gravity.BOTTOM
 
         mWindowManager?.addView(textView, mParams)
-        textView?.visibility = View.GONE
     }
 
     private fun getWindowManager() {

@@ -7,25 +7,16 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitHolder {
+object RetrofitHolder {
 
     private val gson: Gson by lazy {
         val builder = GsonBuilder()
         builder.create()
     }
 
-    companion object {
-        val singleton = Instance.holder
-    }
-
-    private object Instance {
-        val holder = RetrofitHolder()
-    }
-
-    fun createRetrofit(): Retrofit {
-        val url = MasterApplication.getInstance().baseUrl()
+    fun createRetrofit(url:String): Retrofit {
         return Retrofit.Builder().baseUrl(url)
-            .client(OkHttpClientHolder.singleton.createClient())
+            .client(OkHttpClientHolder.createClient())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

@@ -6,16 +6,8 @@ import com.lengjiye.network.interceptor.SignInterceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
-class OkHttpClientHolder {
+object OkHttpClientHolder {
     private var cookieJarImpl: CookieJarImpl? = null
-
-    companion object {
-        var singleton = Instance.holder
-    }
-
-    private object Instance {
-        val holder = OkHttpClientHolder()
-    }
 
     fun createClient(): OkHttpClient {
         return OkHttpClient.Builder()

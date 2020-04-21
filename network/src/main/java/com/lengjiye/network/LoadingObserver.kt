@@ -14,7 +14,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 /**
- * 请求dialog统一处理
+ * 请求统一处理
  *
  * code 拦截
  */
@@ -34,10 +34,6 @@ class LoadingObserver<T>() : Observer<T> {
             val apiException = ApiException(errorCode, errorMsg, null)
             observerListener?.observerOnError(apiException)
             disposable?.dispose()
-        } else {
-            // TODO 显示loading
-
-
         }
     }
 
