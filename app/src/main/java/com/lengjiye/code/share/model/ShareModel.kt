@@ -27,28 +27,28 @@ class ShareModel : BaseModel() {
         return ServeHolder.singleton.getServe(ShareServe::class.java)
     }
 
-    fun getCollectArticleList(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<ArticleBean>) {
+    fun getCollectArticleList(page: Int, observer: Observer<ArticleBean>) {
         val observable = getServe()?.getUserArticleList(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun getUserShareArticles(lifecycleOwner: LifecycleOwner, userId: Int, page: Int, observer: Observer<ShareBean>) {
+    fun getUserShareArticles(userId: Int, page: Int, observer: Observer<ShareBean>) {
         val observable = getServe()?.getUserShareArticles(userId, page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun getUserPrivateArticles(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<ShareBean>) {
+    fun getUserPrivateArticles(page: Int, observer: Observer<ShareBean>) {
         val observable = getServe()?.getUserPrivateArticles(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun userArticleDelete(lifecycleOwner: LifecycleOwner, articleId: Int, observer: Observer<String>) {
+    fun userArticleDelete(articleId: Int, observer: Observer<String>) {
         val observable = getServe()?.userArticleDelete(articleId)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun userArticleAdd(lifecycleOwner: LifecycleOwner, title: String, link: String, observer: Observer<String>) {
+    fun userArticleAdd(title: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.userArticleAdd(title, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 }

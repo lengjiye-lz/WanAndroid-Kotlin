@@ -7,7 +7,6 @@ import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.Observer
 import com.lengjiye.base.fragment.BaseFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.databinding.FragmentRegisterBinding
 import com.lengjiye.code.login.activity.LoginActivity
@@ -28,14 +27,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, LoginViewModel>()
         return R.layout.fragment_register
     }
 
-    override fun getViewModel(): Class<LoginViewModel> {
-        return LoginViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = RegisterFragment().apply {}
@@ -47,7 +38,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, LoginViewModel>()
             val name = mBinding.detName.getText()
             val pass = mBinding.detPass.getText()
             val rePass = mBinding.detRePass.getText()
-            mViewModel.register(this, name, pass, rePass)
+            mViewModel.register(name, pass, rePass)
         }
 
         mBinding.tvGoLogin.setOnClickListener {

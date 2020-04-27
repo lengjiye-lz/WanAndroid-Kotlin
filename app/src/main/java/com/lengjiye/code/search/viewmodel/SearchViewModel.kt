@@ -35,13 +35,14 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     /**
      * 登出
      */
-    fun search(lifecycleOwner: LifecycleOwner, page: Int, key: String) {
+    fun search(page: Int, key: String) {
         val newKey = key.replace(" ", ",")
         loadingObserver.cancelRequest()
-        SearchModel.singleton.search(lifecycleOwner, page, newKey, loadingObserver)
+        SearchModel.singleton.search(page, newKey, loadingObserver)
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserver.cancelRequest()
     }
 

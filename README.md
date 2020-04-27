@@ -23,7 +23,6 @@
 * recycleview刷新加载：com.scwang.smart:refresh-layout-kernel
 * webview：com.just.agentweb:agentweb
 * 底部切换button：com.ashokvarma.android:bottom-navigation-bar
-* rxjava内存泄漏：com.uber.autodispose:autodispose
 
 
 ![Image text](./image/no_bug.jpg)

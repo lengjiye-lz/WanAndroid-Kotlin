@@ -30,63 +30,63 @@ class MeModel : BaseModel() {
         return ServeHolder.singleton.getServe(MeServe::class.java)
     }
 
-    fun getCoinRank(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<RankTable>) {
+    fun getCoinRank(page: Int, observer: Observer<RankTable>) {
         val observable = getServe()?.getCoinRank(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun getCoinUserInfo(lifecycleOwner: LifecycleOwner, observer: Observer<Rank>) {
+    fun getCoinUserInfo(observer: Observer<Rank>) {
         val observable = getServe()?.getCoinUserInfo()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun getCoinUserInfoList(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<CoinList>) {
+    fun getCoinUserInfoList(page: Int, observer: Observer<CoinList>) {
         val observable = getServe()?.getCoinUserInfoList(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun getCollectArticleList(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<ArticleBean>) {
+    fun getCollectArticleList(page: Int, observer: Observer<ArticleBean>) {
         val observable = getServe()?.getCollectArticleList(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun collectAddArticle(lifecycleOwner: LifecycleOwner, id: Int, observer: Observer<String>) {
+    fun collectAddArticle(id: Int, observer: Observer<String>) {
         val observable = getServe()?.collectAddArticle(id)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun collectAddOtherArticle(lifecycleOwner: LifecycleOwner, title: String, author: String, link: String, observer: Observer<String>) {
+    fun collectAddOtherArticle(title: String, author: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.collectAddOtherArticle(title, author, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun unCollectArticle(lifecycleOwner: LifecycleOwner, id: Int, observer: Observer<String>) {
+    fun unCollectArticle(id: Int, observer: Observer<String>) {
         val observable = getServe()?.unCollectArticle(id)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun unMyCollectArticle(lifecycleOwner: LifecycleOwner, id: Int, originId: Int, observer: Observer<String>) {
+    fun unMyCollectArticle(id: Int, originId: Int, observer: Observer<String>) {
         val observable = getServe()?.unMyCollectArticle(id, originId)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun getCollectWebsiteList(lifecycleOwner: LifecycleOwner, observer: Observer<List<Website>>) {
+    fun getCollectWebsiteList(observer: Observer<List<Website>>) {
         val observable = getServe()?.collectWebsiteLis()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun collectAddWebsite(lifecycleOwner: LifecycleOwner, name: String, link: String, observer: Observer<String>) {
+    fun collectAddWebsite(name: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.collectAddWebsite(name, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun collectUpdateWebsite(lifecycleOwner: LifecycleOwner, id: Int, name: String, link: String, observer: Observer<String>) {
+    fun collectUpdateWebsite(id: Int, name: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.collectUpdateWebsite(id, name, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun collectDeleteWebsite(lifecycleOwner: LifecycleOwner, id: Int, observer: Observer<String>) {
+    fun collectDeleteWebsite(id: Int, observer: Observer<String>) {
         val observable = getServe()?.collectDeleteWebsite(id)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 }

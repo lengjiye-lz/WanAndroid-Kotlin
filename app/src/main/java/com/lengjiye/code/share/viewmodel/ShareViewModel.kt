@@ -49,29 +49,30 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
         })
     }
 
-    fun getUserArticleList(lifecycleOwner: LifecycleOwner, page: Int) {
+    fun getUserArticleList(page: Int) {
         loadingObserverUserArticle.cancelRequest()
-        ShareModel.singleton.getCollectArticleList(lifecycleOwner, page, loadingObserverUserArticle)
+        ShareModel.singleton.getCollectArticleList(page, loadingObserverUserArticle)
     }
 
     /**
      * 添加收藏
      */
-    fun collectAddArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun collectAddArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.collectAddArticle(id, loadingDefault)
     }
 
     /**
      * 取消收藏
      */
-    fun unCollectArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun unCollectArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.unCollectArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.unCollectArticle(id, loadingDefault)
     }
 
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingDefault.cancelRequest()
         loadingObserverUserArticle.cancelRequest()
     }

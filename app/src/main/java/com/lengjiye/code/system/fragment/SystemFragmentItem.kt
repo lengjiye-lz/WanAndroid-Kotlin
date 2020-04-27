@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.base.fragment.ViewPagerLazyBaseFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentSystemItemBinding
@@ -39,14 +37,6 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
         return R.layout.fragment_system_item
     }
 
-    override fun getViewModel(): Class<SystemViewModel> {
-        return SystemViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     companion object {
         @JvmStatic
         fun newInstance(extras: Bundle?) = SystemFragmentItem().apply {
@@ -59,7 +49,7 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
     }
 
     private fun loadMore() {
-        mViewModel.getTreeArticleList(this, pager, secondTree?.id ?: 0)
+        mViewModel.getTreeArticleList(pager, secondTree?.id ?: 0)
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -116,9 +106,9 @@ class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, 
                 }
 
                 if (it.collect) {
-                    mViewModel.unCollectArticle(this, it.id)
+                    mViewModel.unCollectArticle(it.id)
                 } else {
-                    mViewModel.collectAddArticle(this, it.id)
+                    mViewModel.collectAddArticle(it.id)
                 }
 
                 it.collect = !it.collect

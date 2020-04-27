@@ -26,14 +26,6 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         return R.layout.fragment_project
     }
 
-    override fun getViewModel(): Class<ProjectViewModel> {
-        return ProjectViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.viewPager.adapter = adapter
@@ -53,7 +45,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
             adapter.notifyDataSetChanged()
         })
 
-        mViewModel.getProjectTree(this)
+        mViewModel.getProjectTree()
     }
 
     @SuppressLint("ResourceType")

@@ -26,14 +26,6 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
         return R.layout.activity_webview
     }
 
-    override fun getViewModel(): Class<WebViewModel> {
-        return WebViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         val toolbar = ToolBarUtil.Builder(findViewById(R.id.toolbar))
@@ -103,7 +95,6 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
     override fun onPause() {
         mAgentWeb?.webLifeCycle?.onPause()
         super.onPause()
-
     }
 
     override fun onResume() {

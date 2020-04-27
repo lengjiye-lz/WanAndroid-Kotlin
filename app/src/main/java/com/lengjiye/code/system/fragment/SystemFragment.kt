@@ -24,16 +24,8 @@ class SystemFragment : LazyBaseFragment<FragmentSystemBinding, SystemViewModel>(
         return R.layout.fragment_system
     }
 
-    override fun getViewModel(): Class<SystemViewModel> {
-        return SystemViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun loadData() {
-        mViewModel.getTree(this)
+        mViewModel.getTree()
     }
 
     override fun initView(savedInstanceState: Bundle?) {

@@ -25,15 +25,15 @@ class HomeModel : BaseModel() {
         return ServeHolder.singleton.getServe(HomeServe::class.java)
     }
 
-    fun getHomeListData(lifecycleOwner: LifecycleOwner, page: Int, observer: Observer<ArticleBean>) {
+    fun getHomeListData(page: Int, observer: Observer<ArticleBean>) {
         val observableList = getServe()?.getArticle(page)?.map(HttpResultFunc())
-        observableList?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observableList?.let { makeSubscribe(it, observer) }
     }
 
     /**
      * 获取首页置顶和第一页的数据
      */
-    fun getHomeTopAndFirstListData(lifecycleOwner: LifecycleOwner, observer: Observer<List<HomeBean>>) {
+    fun getHomeTopAndFirstListData(observer: Observer<List<HomeBean>>) {
         val observableTop = getServe()?.getArticleTop()?.map(HttpResultFunc())
         val observableList = getServe()?.getArticle(0)?.map(HttpResultFunc())
         val observableData: Observable<List<HomeBean>>
@@ -42,12 +42,12 @@ class HomeModel : BaseModel() {
                 .unsubscribeOn(Schedulers.io()).map { t -> t.datas }
             // 合并请求
             val observable = Observable.concat(observableTop, observableData)
-            makeSubscribe(lifecycleOwner, observable, observer)
+            makeSubscribe(observable, observer)
         }
     }
 
-    fun getBanner(lifecycleOwner: LifecycleOwner, observer: Observer<List<BannerBean>>) {
+    fun getBanner(observer: Observer<List<BannerBean>>) {
         val observable = getServe()?.getBanner()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 }

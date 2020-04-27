@@ -35,14 +35,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return R.layout.activity_main
     }
 
-    override fun getViewModel(): Class<MainViewModel> {
-        return MainViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         // 注册activity生命周期
@@ -71,7 +63,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .add(R.id.f_container, mTempFragment as HomeFragment)
             .show(mTempFragment as HomeFragment).commit()
 
-        mViewModel.getHotKeyList(this)
+        mViewModel.getHotKeyList()
         // 显示悬浮窗
 //        LogServiceInstance.singleton.start(this)
     }
@@ -102,7 +94,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 return
             }
             val size = it.size
-            disposable = RxUtil.interval(this, 3) { it1 ->
+            disposable = RxUtil.interval(3) { it1 ->
                 val index = (it1 % size).toInt()
                 text.setText(hotKeys?.get(index)?.name)
                 text.next()

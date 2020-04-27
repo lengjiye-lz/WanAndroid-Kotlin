@@ -59,34 +59,35 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
     }
 
 
-    fun getTree(lifecycleOwner: LifecycleOwner) {
+    fun getTree() {
         loadingObserver.cancelRequest()
-        SystemModel.singleton.getTree(lifecycleOwner, loadingObserver)
+        SystemModel.singleton.getTree(loadingObserver)
     }
 
-    fun getTreeArticleList(lifecycleOwner: LifecycleOwner, pager: Int, cid: Int) {
+    fun getTreeArticleList(pager: Int, cid: Int) {
         this.cid = cid
         loadingObserverArticleBean.cancelRequest()
-        SystemModel.singleton.getTreeArticleList(lifecycleOwner, pager, cid, loadingObserverArticleBean)
+        SystemModel.singleton.getTreeArticleList(pager, cid, loadingObserverArticleBean)
     }
 
     /**
      * 添加收藏
      */
-    fun collectAddArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun collectAddArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.collectAddArticle(id, loadingDefault)
     }
 
     /**
      * 取消收藏
      */
-    fun unCollectArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun unCollectArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.unCollectArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.unCollectArticle(id, loadingDefault)
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserver.cancelRequest()
         loadingObserverArticleBean.cancelRequest()
     }

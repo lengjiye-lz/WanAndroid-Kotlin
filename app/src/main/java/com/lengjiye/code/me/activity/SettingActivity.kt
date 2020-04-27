@@ -16,14 +16,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, LoginViewModel>() {
         return R.layout.activity_setting
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<LoginViewModel> {
-        return LoginViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
@@ -36,7 +28,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, LoginViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.hnLogout.setOnClickListener {
-            mViewModel.logout(this)
+            mViewModel.logout()
         }
     }
 

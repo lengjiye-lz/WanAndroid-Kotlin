@@ -5,7 +5,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.lengjiye.base.fragment.LazyBaseFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.AccountUtil
@@ -22,14 +21,6 @@ class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_me
-    }
-
-    override fun getViewModel(): Class<MeViewModel> {
-        return MeViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
     }
 
     override fun isNeedReload(): Boolean {
@@ -84,6 +75,6 @@ class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
 
         mBinding.tvMeName.visibility = View.VISIBLE
         mBinding.tvMeName.text = AccountUtil.getUserName()
-        mViewModel.getCoinUserInfo(this)
+        mViewModel.getCoinUserInfo()
     }
 }

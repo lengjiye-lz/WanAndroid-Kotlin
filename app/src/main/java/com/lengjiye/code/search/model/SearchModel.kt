@@ -26,8 +26,8 @@ class SearchModel : BaseModel() {
         return ServeHolder.singleton.getServe(SearchServe::class.java)
     }
 
-    fun search(lifecycleOwner: LifecycleOwner, page: Int, key: String, observer: Observer<ArticleBean>) {
+    fun search(page: Int, key: String, observer: Observer<ArticleBean>) {
         val observable = getServe()?.search(page, key)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 }

@@ -21,8 +21,8 @@ class MainModel : BaseModel() {
         return ServeHolder.singleton.getServe(MainServe::class.java)
     }
 
-    fun getHotKeyList(lifecycleOwner: LifecycleOwner, observer: Observer<List<HotKey>>) {
+    fun getHotKeyList(observer: Observer<List<HotKey>>) {
         val observable = getServe()?.getHotKeyList()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 }

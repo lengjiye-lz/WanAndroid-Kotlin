@@ -1,7 +1,6 @@
 package com.lengjiye.code.login.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.constant.ErrorCode
 import com.lengjiye.base.viewmodel.BaseViewModel
@@ -41,7 +40,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 errorCode.value = e
                 loginSuc.value = false
             }
-
         })
 
         loadingObserverRegister = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
@@ -55,7 +53,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             override fun observerOnError(e: ApiException) {
 
             }
-
         })
 
         loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
@@ -73,7 +70,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     /**
      * 登录
      */
-    fun login(lifecycleOwner: LifecycleOwner, username: String?, password: String?) {
+    fun login(username: String?, password: String?) {
         if (username.isNullOrEmpty()) {
             errorCode.value = ApiException(ErrorCode.nameError, ResTool.getString(R.string.s_9), null)
             return
@@ -84,13 +81,13 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             return
         }
         loadingObserver.cancelRequest()
-        LoginModel.singleton.login(lifecycleOwner, username, password, loadingObserver)
+        LoginModel.singleton.login(username, password, loadingObserver)
     }
 
     /**
      * 注册
      */
-    fun register(lifecycleOwner: LifecycleOwner, username: String?, password: String?, rePassword: String?) {
+    fun register(username: String?, password: String?, rePassword: String?) {
         if (username.isNullOrEmpty()) {
             errorCode.value = ApiException(ErrorCode.nameError, ResTool.getString(R.string.s_9), null)
             return
@@ -106,15 +103,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             return
         }
         loadingObserverRegister.cancelRequest()
-        LoginModel.singleton.register(lifecycleOwner, username, password, rePassword, loadingObserverRegister)
+        LoginModel.singleton.register(username, password, rePassword, loadingObserverRegister)
     }
 
     /**
      * 登出
      */
-    fun logout(lifecycleOwner: LifecycleOwner) {
+    fun logout() {
         loadingObserverLogout.cancelRequest()
-        LoginModel.singleton.logout(lifecycleOwner, loadingObserverLogout)
+        LoginModel.singleton.logout(loadingObserverLogout)
     }
 
     /**
@@ -125,7 +122,8 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         AccountUtil.login(user)
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserver.cancelRequest()
         loadingObserverRegister.cancelRequest()
         loadingObserverLogout.cancelRequest()

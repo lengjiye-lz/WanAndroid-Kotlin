@@ -33,13 +33,14 @@ class MeShareViewModel() : BaseViewModel(CodeApplication.instance) {
         })
     }
 
-    fun getUserShareArticles(lifecycleOwner: LifecycleOwner, userId: Int, page: Int) {
+    fun getUserShareArticles(userId: Int, page: Int) {
         loadingObserverUserShareArticles.cancelRequest()
-        ShareModel.singleton.getUserShareArticles(lifecycleOwner, userId, page, loadingObserverUserShareArticles)
+        ShareModel.singleton.getUserShareArticles(userId, page, loadingObserverUserShareArticles)
     }
 
 
-    override fun onDestroy() {
-
+    override fun onCleared() {
+        super.onCleared()
+        loadingObserverUserShareArticles.cancelRequest()
     }
 }

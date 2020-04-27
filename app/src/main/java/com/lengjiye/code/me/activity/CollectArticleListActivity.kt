@@ -23,14 +23,6 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
         return R.layout.activity_collect_article
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeCollectViewModel> {
-        return MeCollectViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
@@ -71,7 +63,7 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
                     return@let
                 }
 
-                mViewModel.unMyCollectArticle(this, it.id, it.originId ?: -1)
+                mViewModel.unMyCollectArticle(it.id, it.originId ?: -1)
 
                 adapter.getItems().remove(it)
                 adapter.notifyItemRemoved(position)
@@ -129,6 +121,6 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
     }
 
     private fun loadData() {
-        mViewModel.getCollectArticleList(this, page)
+        mViewModel.getCollectArticleList(page)
     }
 }

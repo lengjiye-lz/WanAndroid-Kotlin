@@ -64,68 +64,69 @@ class MeCollectViewModel(application: Application) : BaseViewModel(application) 
     /**
      * 获取收藏的文章的列表
      */
-    fun getCollectArticleList(lifecycleOwner: LifecycleOwner, page: Int) {
+    fun getCollectArticleList(page: Int) {
         loadingObserverCollectArticleList.cancelRequest()
-        MeModel.singleton.getCollectArticleList(lifecycleOwner, page, loadingObserverCollectArticleList)
+        MeModel.singleton.getCollectArticleList(page, loadingObserverCollectArticleList)
     }
 
     /**
      * 添加收藏
      */
-    fun collectAddArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun collectAddArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.collectAddArticle(id, loadingDefault)
     }
 
     /**
      * 添加收藏
      */
-    fun collectAddOtherArticle(lifecycleOwner: LifecycleOwner, title: String, author: String, link: String) {
+    fun collectAddOtherArticle(title: String, author: String, link: String) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddOtherArticle(lifecycleOwner, title, author, link, loadingDefault)
+        MeModel.singleton.collectAddOtherArticle(title, author, link, loadingDefault)
     }
 
     /**
      * 取消收藏
      */
-    fun unMyCollectArticle(lifecycleOwner: LifecycleOwner, id: Int, originId: Int) {
+    fun unMyCollectArticle(id: Int, originId: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.unMyCollectArticle(lifecycleOwner, id, originId, loadingDefault)
+        MeModel.singleton.unMyCollectArticle(id, originId, loadingDefault)
     }
 
     /**
      * 获取收藏的网站的列表
      */
-    fun getCollectWebsiteList(lifecycleOwner: LifecycleOwner) {
+    fun getCollectWebsiteList() {
         loadingObserverCollectWebsiteList.cancelRequest()
-        MeModel.singleton.getCollectWebsiteList(lifecycleOwner, loadingObserverCollectWebsiteList)
+        MeModel.singleton.getCollectWebsiteList(loadingObserverCollectWebsiteList)
     }
 
     /**
      * 添加收藏网站
      */
-    fun collectAddWebsite(lifecycleOwner: LifecycleOwner, name: String, link: String) {
+    fun collectAddWebsite(name: String, link: String) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddWebsite(lifecycleOwner, name, link, loadingDefault)
+        MeModel.singleton.collectAddWebsite(name, link, loadingDefault)
     }
 
     /**
      * 更新
      */
-    fun collectUpdateWebsite(lifecycleOwner: LifecycleOwner, id: Int, name: String, link: String) {
+    fun collectUpdateWebsite(id: Int, name: String, link: String) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectUpdateWebsite(lifecycleOwner, id, name, link, loadingDefault)
+        MeModel.singleton.collectUpdateWebsite(id, name, link, loadingDefault)
     }
 
     /**
      * 删除
      */
-    fun collectDeleteWebsite(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun collectDeleteWebsite(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectDeleteWebsite(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.collectDeleteWebsite(id, loadingDefault)
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserverCollectArticleList.cancelRequest()
         loadingObserverCollectWebsiteList.cancelRequest()
         loadingDefault.cancelRequest()

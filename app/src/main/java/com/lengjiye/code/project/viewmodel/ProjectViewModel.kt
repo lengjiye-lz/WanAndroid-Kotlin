@@ -62,36 +62,37 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
         })
     }
 
-    fun getProjectTree(lifecycleOwner: LifecycleOwner) {
+    fun getProjectTree() {
         loadingObserver.cancelRequest()
-        ProjectModel.singleton.getProjectTree(lifecycleOwner, loadingObserver)
+        ProjectModel.singleton.getProjectTree(loadingObserver)
     }
 
-    fun getProjectArticle(lifecycleOwner: LifecycleOwner, page: Int, cid: Int) {
+    fun getProjectArticle(page: Int, cid: Int) {
         this.cid = cid
         loadingArticleObserver.cancelRequest()
-        ProjectModel.singleton.getProjectArticle(lifecycleOwner, page, cid, loadingArticleObserver)
+        ProjectModel.singleton.getProjectArticle(page, cid, loadingArticleObserver)
     }
 
 
     /**
      * 添加收藏
      */
-    fun collectAddArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun collectAddArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.collectAddArticle(id, loadingDefault)
     }
 
     /**
      * 取消收藏
      */
-    fun unCollectArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun unCollectArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.unCollectArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.unCollectArticle(id, loadingDefault)
     }
 
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserver.cancelRequest()
         loadingArticleObserver.cancelRequest()
     }

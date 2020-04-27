@@ -22,13 +22,13 @@ class SystemModel : BaseModel() {
         return ServeHolder.singleton.getServe(SystemServe::class.java)
     }
 
-    fun getTree(lifecycleOwner: LifecycleOwner, observer: Observer<List<TreeBean>>) {
+    fun getTree(observer: Observer<List<TreeBean>>) {
         val observableList = getServe()?.getTree()?.map(HttpResultFunc())
-        observableList?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observableList?.let { makeSubscribe(it, observer) }
     }
 
-    fun getTreeArticleList(lifecycleOwner: LifecycleOwner, pager: Int, cid: Int, observer: Observer<ArticleBean>) {
+    fun getTreeArticleList( pager: Int, cid: Int, observer: Observer<ArticleBean>) {
         val observableList = getServe()?.getTreeArticleList(pager, cid)?.map(HttpResultFunc())
-        observableList?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observableList?.let { makeSubscribe( it, observer) }
     }
 }

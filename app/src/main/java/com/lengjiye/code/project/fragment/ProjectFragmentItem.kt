@@ -44,14 +44,6 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
         return R.layout.fragment_project_item
     }
 
-    override fun getViewModel(): Class<ProjectViewModel> {
-        return ProjectViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
@@ -83,9 +75,9 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
                 }
 
                 if (it.collect) {
-                    mViewModel.unCollectArticle(this, it.id)
+                    mViewModel.unCollectArticle(it.id)
                 } else {
-                    mViewModel.collectAddArticle(this, it.id)
+                    mViewModel.collectAddArticle(it.id)
                 }
 
                 it.collect = !it.collect
@@ -96,7 +88,7 @@ class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectView
     }
 
     private fun loadMore() {
-        mViewModel.getProjectArticle(this, pager, cid)
+        mViewModel.getProjectArticle(pager, cid)
     }
 
     private fun refresh() {

@@ -1,8 +1,5 @@
 package com.lengjiye.network
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import com.uber.autodispose.android.lifecycle.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,11 +14,13 @@ open class BaseModel {
      * @param observer
      * @param <T>
     </T> */
-    fun <T> makeSubscribe(lifecycleOwner: LifecycleOwner, observable: Observable<T>, observer: Observer<T>?) {
-        observable.subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .autoDisposable(lifecycleOwner, Lifecycle.Event.ON_DESTROY) // 防止 rxJava 内存泄漏
-            .subscribe(observer)
+    fun <T> makeSubscribe(observable: Observable<T>, observer: Observer<T>?) {
+        observer?.let {
+            observable.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    //            .autoDisposable(lifecycleOwner, Lifecycle.Event.ON_DESTROY) // 防止 rxJava 内存泄漏
+                .subscribe(it)
+        }
     }
 }

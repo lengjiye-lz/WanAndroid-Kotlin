@@ -27,14 +27,6 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
         return R.layout.activity_coin_list
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeViewModel> {
-        return MeViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
@@ -97,6 +89,6 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
     }
 
     private fun loadData() {
-        mViewModel.getCoinUserInfoList(this, page)
+        mViewModel.getCoinUserInfoList(page)
     }
 }

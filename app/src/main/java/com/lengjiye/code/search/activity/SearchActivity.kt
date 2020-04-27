@@ -34,14 +34,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
         return R.layout.activity_search
     }
 
-    override fun getViewModel(): Class<SearchViewModel> {
-        return SearchViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar))
@@ -84,7 +76,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
         }
 
         mBinding.srlLayout.setOnLoadMoreListener {
-            mViewModel.search(this, page, key)
+            mViewModel.search(page, key)
         }
 
         searchAdapter.setOnItemClickListener { v, position, item ->
@@ -138,14 +130,14 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
     private fun delaySearch() {
         disposableSearch?.dispose()
         // 延迟请求数据
-        disposableSearch = RxUtil.timer(this, 2) {
+        disposableSearch = RxUtil.timer(2) {
             refresh()
         }
     }
 
     private fun refresh() {
         page = 0
-        mViewModel.search(this, page, key)
+        mViewModel.search(page, key)
     }
 
     override fun onDestroy() {

@@ -30,17 +30,18 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
         })
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserverHotKey?.cancelRequest()
     }
 
     /**
      * 获取HotKey
      */
-    fun getHotKeyList(lifecycleOwner: LifecycleOwner) {
+    fun getHotKeyList() {
         loadingObserverHotKey?.cancelRequest()
         loadingObserverHotKey?.let {
-            MainModel.singleton.getHotKeyList(lifecycleOwner, it)
+            MainModel.singleton.getHotKeyList(it)
         }
     }
 }

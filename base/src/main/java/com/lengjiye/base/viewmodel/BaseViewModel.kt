@@ -12,8 +12,6 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     val errorCode = MutableLiveData<Any>()
 
     abstract fun onCreate()
-
-    abstract fun onDestroy()
 }
 
 

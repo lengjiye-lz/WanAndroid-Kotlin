@@ -18,14 +18,6 @@ class MyShareActivity : BaseActivity<ActivityMyShareBinding, MeShareViewModel>()
         return R.layout.activity_my_share
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeShareViewModel> {
-        return MeShareViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)

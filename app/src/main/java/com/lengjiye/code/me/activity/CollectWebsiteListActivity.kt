@@ -26,14 +26,6 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
         return R.layout.activity_collect_website
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeCollectViewModel> {
-        return MeCollectViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
@@ -69,7 +61,7 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
                     return@let
                 }
 
-                mViewModel.collectDeleteWebsite(this, it.id)
+                mViewModel.collectDeleteWebsite(it.id)
                 adapter.getItems().removeAt(position)
                 adapter.notifyItemRemoved(position)
                 if (position != adapter.itemCount) {
@@ -97,6 +89,6 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
     }
 
     private fun loadData() {
-        mViewModel.getCollectWebsiteList(this)
+        mViewModel.getCollectWebsiteList()
     }
 }

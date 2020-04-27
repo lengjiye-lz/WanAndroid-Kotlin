@@ -1,7 +1,6 @@
 package com.lengjiye.code.home.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
@@ -87,55 +86,54 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     /**
      * 获取首页列表数据
      */
-    fun getHomeData(lifecycleOwner: LifecycleOwner, page: Int) {
+    fun getHomeData(page: Int) {
         loadingObserver.cancelRequest()
         loadingObserver.let {
-            HomeModel.singleton.getHomeListData(lifecycleOwner, page, it)
+            HomeModel.singleton.getHomeListData(page, it)
         }
     }
 
     /**
      * 获取置顶和首页数据
      */
-    fun getHomeTopAndFirstListData(lifecycleOwner: LifecycleOwner) {
+    fun getHomeTopAndFirstListData() {
         loadingObserverTopAndFirst.cancelRequest()
         loadingObserverTopAndFirst.let {
-            HomeModel.singleton.getHomeTopAndFirstListData(lifecycleOwner, it)
+            HomeModel.singleton.getHomeTopAndFirstListData(it)
         }
     }
 
     /**
      * 获取banner
      */
-    fun getBanner(lifecycleOwner: LifecycleOwner) {
+    fun getBanner() {
         loadingObserverBannerBean.cancelRequest()
         loadingObserverBannerBean.let {
-            HomeModel.singleton.getBanner(lifecycleOwner, it)
+            HomeModel.singleton.getBanner(it)
         }
     }
 
     /**
      * 添加收藏
      */
-    fun collectAddArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun collectAddArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.collectAddArticle(id, loadingDefault)
     }
 
     /**
      * 取消收藏
      */
-    fun unCollectArticle(lifecycleOwner: LifecycleOwner, id: Int) {
+    fun unCollectArticle(id: Int) {
         loadingDefault.cancelRequest()
-        MeModel.singleton.unCollectArticle(lifecycleOwner, id, loadingDefault)
+        MeModel.singleton.unCollectArticle(id, loadingDefault)
     }
 
-
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingDefault.cancelRequest()
         loadingObserver.cancelRequest()
         loadingObserverTopAndFirst.cancelRequest()
         loadingObserverBannerBean.cancelRequest()
     }
-
 }

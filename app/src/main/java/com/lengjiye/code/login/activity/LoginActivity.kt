@@ -28,14 +28,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         return R.layout.activity_login
     }
 
-    override fun getViewModel(): Class<LoginViewModel> {
-        return LoginViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)

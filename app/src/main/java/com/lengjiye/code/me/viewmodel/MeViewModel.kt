@@ -35,7 +35,6 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
 
             override fun observerOnError(e: ApiException) {
             }
-
         })
 
         loadingObserverRank = LoadingObserver(object : ObserverListener<Rank>() {
@@ -62,28 +61,29 @@ class MeViewModel(application: Application) : BaseViewModel(application) {
     /**
      * 积分排行榜
      */
-    fun getCoinRank(lifecycleOwner: LifecycleOwner, page: Int) {
+    fun getCoinRank(page: Int) {
         loadingObserver.cancelRequest()
-        MeModel.singleton.getCoinRank(lifecycleOwner, page, loadingObserver)
+        MeModel.singleton.getCoinRank(page, loadingObserver)
     }
 
     /**
      * 个人积分信息
      */
-    fun getCoinUserInfo(lifecycleOwner: LifecycleOwner) {
+    fun getCoinUserInfo() {
         loadingObserverRank.cancelRequest()
-        MeModel.singleton.getCoinUserInfo(lifecycleOwner, loadingObserverRank)
+        MeModel.singleton.getCoinUserInfo(loadingObserverRank)
     }
 
     /**
      * 个人积分获取明细
      */
-    fun getCoinUserInfoList(lifecycleOwner: LifecycleOwner, page: Int) {
+    fun getCoinUserInfoList(page: Int) {
         loadingObserverCoinList.cancelRequest()
-        MeModel.singleton.getCoinUserInfoList(lifecycleOwner, page, loadingObserverCoinList)
+        MeModel.singleton.getCoinUserInfoList(page, loadingObserverCoinList)
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         loadingObserver.cancelRequest()
         loadingObserverRank.cancelRequest()
         loadingObserverCoinList.cancelRequest()

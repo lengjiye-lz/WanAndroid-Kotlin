@@ -27,14 +27,6 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
         return R.layout.activity_rank_table
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeViewModel> {
-        return MeViewModel::class.java
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(this))
@@ -94,6 +86,6 @@ class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() 
     }
 
     private fun loadData() {
-        mViewModel.getCoinRank(this, page)
+        mViewModel.getCoinRank(page)
     }
 }

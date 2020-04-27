@@ -27,14 +27,14 @@ class ProjectModel : BaseModel() {
         return ServeHolder.singleton.getServe(ProjectServe::class.java)
     }
 
-    fun getProjectTree(lifecycleOwner: LifecycleOwner, observer: Observer<List<TreeBean>>) {
+    fun getProjectTree(observer: Observer<List<TreeBean>>) {
         val observableList = getServe()?.getProjectTree()?.map(HttpResultFunc())
-        observableList?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observableList?.let { makeSubscribe(it, observer) }
     }
 
-    fun getProjectArticle(lifecycleOwner: LifecycleOwner, page: Int, cid: Int, observer: Observer<ArticleBean>) {
+    fun getProjectArticle(page: Int, cid: Int, observer: Observer<ArticleBean>) {
         val observableList = getServe()?.getProjectArticle(page, cid)?.map(HttpResultFunc())
-        observableList?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observableList?.let { makeSubscribe(it, observer) }
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.lengjiye.base.utils.ClassUtil
 import com.lengjiye.base.viewmodel.BaseViewModel
 
 
@@ -16,26 +17,17 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        mViewModel = ViewModelProvider(this).get(getViewModel())
         mBinding.lifecycleOwner = this
-        bindViewModel()
-        mViewModel.onCreate()
         ActivityManager.singleton.add(this)
         initIntent(savedInstanceState)
         initView(savedInstanceState)
         initToolBar()
+        initViewModel()
         initLiveDataListener()
         initData()
     }
 
     abstract fun getLayoutId(): Int
-
-    abstract fun getViewModel(): Class<VM>
-
-    /**
-     * 绑定 ViewModel
-     */
-    abstract fun bindViewModel()
 
     /**
      * 初始化 view
@@ -62,10 +54,19 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     open fun initToolBar() = Unit
 
+    /**
+     * 初始化ViewModel
+     */
+    private fun initViewModel() {
+        val viewModelClass = ClassUtil.getViewModel<VM>(this) ?: return
+        mViewModel = ViewModelProvider(this).get(viewModelClass)
+        mViewModel.onCreate()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        mViewModel.onDestroy()
         ActivityManager.singleton.remove(this)
     }
+
 
 }

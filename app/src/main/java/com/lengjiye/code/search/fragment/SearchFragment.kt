@@ -17,14 +17,6 @@ class SearchFragment : LazyBaseFragment<FragmentSearchBinding, SearchViewModel>(
         return R.layout.fragment_search
     }
 
-    override fun getViewModel(): Class<SearchViewModel> {
-        return SearchViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun loadData() {
 
     }

@@ -8,9 +8,4 @@ class WebViewModel(application: Application) : BaseViewModel(application) {
     override fun onCreate() {
 
     }
-
-    override fun onDestroy() {
-
-    }
-
 }

@@ -26,14 +26,6 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeSha
         return R.layout.activity_share_article
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeShareViewModel> {
-        return MeShareViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
@@ -102,6 +94,6 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeSha
     }
 
     private fun loadData() {
-        mViewModel.getUserShareArticles(this, userId, page)
+        mViewModel.getUserShareArticles(userId, page)
     }
 }

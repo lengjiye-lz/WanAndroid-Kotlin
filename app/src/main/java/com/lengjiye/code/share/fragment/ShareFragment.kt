@@ -31,14 +31,6 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
         return R.layout.fragment_share
     }
 
-    override fun getViewModel(): Class<ShareViewModel> {
-        return ShareViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
@@ -71,9 +63,9 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
                 }
 
                 if (it.collect) {
-                    mViewModel.unCollectArticle(this, it.id)
+                    mViewModel.unCollectArticle(it.id)
                 } else {
-                    mViewModel.collectAddArticle(this, it.id)
+                    mViewModel.collectAddArticle(it.id)
                 }
 
                 it.collect = !it.collect
@@ -116,7 +108,7 @@ class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
     }
 
     override fun loadData() {
-        mViewModel.getUserArticleList(this, pager)
+        mViewModel.getUserArticleList(pager)
     }
 
 

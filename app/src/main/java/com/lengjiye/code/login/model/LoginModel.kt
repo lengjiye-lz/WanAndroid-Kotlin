@@ -26,18 +26,18 @@ class LoginModel : BaseModel() {
         return ServeHolder.singleton.getServe(LoginServe::class.java)
     }
 
-    fun login(lifecycleOwner: LifecycleOwner, username: String, password: String, observer: Observer<UserBean>) {
+    fun login(username: String, password: String, observer: Observer<UserBean>) {
         val observable = getServe()?.login(username, password)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun register(lifecycleOwner: LifecycleOwner, username: String, password: String, rePassword: String, observer: Observer<UserBean>) {
+    fun register(username: String, password: String, rePassword: String, observer: Observer<UserBean>) {
         val observable = getServe()?.register(username, password, rePassword)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 
-    fun logout(lifecycleOwner: LifecycleOwner, observer: Observer<String>) {
+    fun logout(observer: Observer<String>) {
         val observable = getServe()?.logout()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(lifecycleOwner, it, observer) }
+        observable?.let { makeSubscribe(it, observer) }
     }
 }

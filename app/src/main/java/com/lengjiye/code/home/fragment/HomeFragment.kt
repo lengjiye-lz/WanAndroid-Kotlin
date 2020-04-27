@@ -37,14 +37,6 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
         return R.layout.fragment_home
     }
 
-    override fun getViewModel(): Class<HomeViewModel> {
-        return HomeViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         mBinding.srlLayout.setRefreshHeader(MaterialHeader(getBaseActivity()))
@@ -59,7 +51,7 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
 
         mBinding.srlLayout.setOnLoadMoreListener {
-            mViewModel.getHomeData(this, page)
+            mViewModel.getHomeData(page)
         }
 
         adapter.setOnItemClickListener { v, position, item ->
@@ -90,9 +82,9 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
 
                 if (it.collect) {
-                    mViewModel.unCollectArticle(this, it.id)
+                    mViewModel.unCollectArticle(it.id)
                 } else {
-                    mViewModel.collectAddArticle(this, it.id)
+                    mViewModel.collectAddArticle(it.id)
                 }
 
                 it.collect = !it.collect
@@ -165,14 +157,14 @@ class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     override fun loadData() {
-        mViewModel.getBanner(this)
+        mViewModel.getBanner()
 
         refresh()
     }
 
     private fun refresh() {
         page = 0
-        mViewModel.getHomeTopAndFirstListData(this)
+        mViewModel.getHomeTopAndFirstListData()
         mViewModel.homeBeanTopAndFirstList?.clear()
     }
 

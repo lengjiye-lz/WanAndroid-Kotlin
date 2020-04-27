@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.lengjiye.base.utils.ClassUtil
 import com.lengjiye.base.activity.BaseActivity
 import com.lengjiye.base.viewmodel.BaseViewModel
 
@@ -20,11 +21,9 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        mViewModel = ViewModelProvider(getBaseActivity()).get(getViewModel())
         mBinding.lifecycleOwner = this
-        bindViewModel()
-        mViewModel.onCreate()
         initView(savedInstanceState)
+        initViewModel()
         return mBinding.root
     }
 
@@ -36,19 +35,23 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel(): Class<VM>
-
-    /**
-     * 绑定 ViewModel
-     */
-    abstract fun bindViewModel()
-
     /**
      * 初始化 view
      *
      * view监听事件 等
+     *
+     * 注：ViewModel还没有初始化
      */
     open fun initView(savedInstanceState: Bundle?) = Unit
+
+    /**
+     * 初始化ViewModel
+     */
+    private fun initViewModel(){
+        val viewModelClass = ClassUtil.getViewModel<VM>(this) ?: return
+        mViewModel = ViewModelProvider(this).get(viewModelClass)
+        mViewModel.onCreate()
+    }
 
     /**
      * 初始化数据
@@ -64,10 +67,5 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     fun getBaseActivity(): BaseActivity<*, *> {
         return activity as BaseActivity<*, *>
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mViewModel.onDestroy()
     }
 }

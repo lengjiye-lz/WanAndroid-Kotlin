@@ -17,14 +17,6 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding, MeCollectViewMo
         return R.layout.activity_my_collect
     }
 
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
-    }
-
-    override fun getViewModel(): Class<MeCollectViewModel> {
-        return MeCollectViewModel::class.java
-    }
-
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
