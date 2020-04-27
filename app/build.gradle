@@ -1,3 +1,5 @@
+import com.lengjiye.mvvm.MVVMPlugin
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -5,7 +7,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 // 自定义插件 生成mvvm文件
-apply plugin: com.lengjiye.mvvm.MVVMPlugin
+apply plugin: MVVMPlugin
 
 def mvvmGeneratorProperties = new Properties()
 mvvmGeneratorProperties.load(new FileInputStream(file("mvvmGenerator.properties")))
