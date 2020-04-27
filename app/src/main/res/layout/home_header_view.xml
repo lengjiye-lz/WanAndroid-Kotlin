@@ -9,5 +9,5 @@
     <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d_150" />
+            android:layout_height="@dimen/d_200" />
 </LinearLayout>
