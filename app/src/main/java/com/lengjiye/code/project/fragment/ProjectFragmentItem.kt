@@ -2,10 +2,8 @@ package com.lengjiye.code.project.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.fragment.BaseFragment
+import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.FragmentProjectItemBinding
 import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
@@ -24,7 +22,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
  * @Date: 2019-11-05
  * @Description: 项目
  */
-class ProjectFragmentItem : BaseFragment<FragmentProjectItemBinding, ProjectViewModel>() {
+class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectViewModel>() {
 
     private var projectTree: TreeBean? = null
     private var pager = 1

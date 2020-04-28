@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.ActivityMainBinding
@@ -24,7 +24,7 @@ import io.reactivex.disposables.Disposable
 /**
  * MainActivity
  */
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : ParentActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var mTempFragment: Fragment
 

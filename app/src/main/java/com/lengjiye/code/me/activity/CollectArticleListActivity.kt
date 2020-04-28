@@ -2,7 +2,7 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
@@ -13,7 +13,7 @@ import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, MeCollectViewModel>() {
+class CollectArticleListActivity : ParentActivity<ActivityCollectArticleBinding, MeCollectViewModel>() {
 
     private val adapter by lazy { HomeFragmentAdapter(this, null) }
 

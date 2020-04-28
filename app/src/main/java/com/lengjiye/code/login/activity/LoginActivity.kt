@@ -1,9 +1,8 @@
 package com.lengjiye.code.login.activity
 
-import android.os.Bundle
 import android.widget.TextView
-import com.lengjiye.base.activity.BaseActivity
-import com.lengjiye.base.fragment.BaseFragment
+import com.lengjiye.base.activity.ParentActivity
+import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.LoginActivityType
@@ -18,10 +17,10 @@ import com.lengjiye.code.utils.ToolBarUtil
  * @Date: 2019-11-05
  * @Description: 登录注册
  */
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : ParentActivity<ActivityLoginBinding, LoginViewModel>() {
     // 类型 默认登录
     private var type: Int? = null
-    private var mTempFragment: BaseFragment<*, *>? = null
+    private var mTempFragment: ParentFragment<*, *>? = null
     private var titleView: TextView? = null
 
     override fun getLayoutId(): Int {
@@ -44,7 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         selectFragment()
     }
 
-    private fun switchFragment(): BaseFragment<*, *> {
+    private fun switchFragment(): ParentFragment<*, *> {
         return if (type == LoginActivityType.TYPE_1) {
             titleView?.setText(R.string.s_25)
             LoginFragment.newInstance()

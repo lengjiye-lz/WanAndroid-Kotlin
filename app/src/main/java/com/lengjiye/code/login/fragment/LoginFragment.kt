@@ -5,7 +5,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.Observer
-import com.lengjiye.base.fragment.BaseFragment
+import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.databinding.FragmentLoginBinding
@@ -21,7 +21,7 @@ import com.lengjiye.tools.ResTool
  * @Date: 2019-11-05
  * @Description: 登录
  */
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
+class LoginFragment : ParentFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_login

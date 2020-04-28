@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
-import com.lengjiye.base.fragment.ViewPagerLazyBaseFragment
+import com.lengjiye.base.fragment.ViewPagerLazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
@@ -23,7 +23,7 @@ import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class SystemFragmentItem : ViewPagerLazyBaseFragment<FragmentSystemItemBinding, SystemViewModel>() {
+class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding, SystemViewModel>() {
 
     private var treeBean: TreeBean? = null
     private var secondTree: TreeBean? = null

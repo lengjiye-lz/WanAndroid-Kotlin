@@ -7,10 +7,9 @@ import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lengjiye.base.fragment.LazyBaseFragment
+import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.FragmentHomeBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.bean.BannerBean
@@ -26,7 +25,7 @@ import com.youth.banner.loader.ImageLoader
 /**
  * 首页
  */
-class HomeFragment : LazyBaseFragment<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
     private val header by lazy { HeaderAndFooterWrapper(adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>) }

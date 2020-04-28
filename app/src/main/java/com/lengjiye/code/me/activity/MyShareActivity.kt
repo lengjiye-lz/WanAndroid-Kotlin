@@ -1,7 +1,7 @@
 package com.lengjiye.code.me.activity
 
 import android.os.Bundle
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityMyShareBinding
 import com.lengjiye.code.me.viewmodel.MeShareViewModel
@@ -12,7 +12,7 @@ import com.lengjiye.code.utils.ToolBarUtil
 /**
  * 我的分享
  */
-class MyShareActivity : BaseActivity<ActivityMyShareBinding, MeShareViewModel>() {
+class MyShareActivity : ParentActivity<ActivityMyShareBinding, MeShareViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_my_share

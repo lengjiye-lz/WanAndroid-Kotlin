@@ -1,7 +1,7 @@
 package com.lengjiye.code.me.activity
 
 import android.os.Bundle
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityMyCollectBinding
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
@@ -11,7 +11,7 @@ import com.lengjiye.code.utils.ToolBarUtil
 /**
  * 我的收藏
  */
-class MyCollectActivity : BaseActivity<ActivityMyCollectBinding, MeCollectViewModel>() {
+class MyCollectActivity : ParentActivity<ActivityMyCollectBinding, MeCollectViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_my_collect

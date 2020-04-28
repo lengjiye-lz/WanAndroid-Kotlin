@@ -10,7 +10,7 @@ import com.lengjiye.base.viewmodel.BaseViewModel
  * 懒加载基类
  * viewpager 懒加载
  */
-abstract class ViewPagerLazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseFragment<T, VM>() {
+abstract class ViewPagerLazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : ParentFragment<T, VM>() {
     // view是否创建成功  配合viewpager使用
     private var isViewCreated = false
     // fragment是否可见  配合viewpager使用
@@ -67,7 +67,7 @@ abstract class ViewPagerLazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel
      */
     private fun isParentVisible(): Boolean {
         val fragment = parentFragment
-        return fragment == null || (fragment as BaseFragment<*, *>).userVisibleHint
+        return fragment == null || (fragment as ParentFragment<*, *>).userVisibleHint
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class ViewPagerLazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel
         val fragmentList = fragmentManager.fragments
         if (fragmentList.isEmpty()) return
         fragmentList.forEach {
-            if (it is ViewPagerLazyBaseFragment<*, *> && it.isVisibleToUser) {
+            if (it is ViewPagerLazyParentFragment<*, *> && it.isVisibleToUser) {
                 Log.d("LazyBaseFragment", "viewpager child startLoadData")
                 it.startLoadData()
             }

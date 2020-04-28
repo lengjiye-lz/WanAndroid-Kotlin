@@ -5,9 +5,8 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import com.lengjiye.base.fragment.BaseFragment
+import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.FragmentProjectBinding
 import com.lengjiye.code.project.adapter.ProjectAdapter
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
@@ -18,7 +17,7 @@ import com.lengjiye.tools.ResTool
  * @Date: 2019-11-05
  * @Description: 项目
  */
-class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>() {
+class ProjectFragment : ParentFragment<FragmentProjectBinding, ProjectViewModel>() {
 
     private val adapter by lazy { ProjectAdapter(childFragmentManager) }
 

@@ -1,6 +1,7 @@
 package com.lengjiye.base.activity
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -8,8 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.lengjiye.base.utils.ClassUtil
 import com.lengjiye.base.viewmodel.BaseViewModel
 
-
-abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
+/**
+ * 基类，不掺杂业务，没有必要不建议修改
+ */
+abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
     lateinit var mBinding: T
     lateinit var mViewModel: VM

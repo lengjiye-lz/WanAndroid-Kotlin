@@ -2,7 +2,7 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivitySettingBinding
 import com.lengjiye.code.login.viewmodel.LoginViewModel
@@ -10,7 +10,7 @@ import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 
-class SettingActivity : BaseActivity<ActivitySettingBinding, LoginViewModel>() {
+class SettingActivity : ParentActivity<ActivitySettingBinding, LoginViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_setting

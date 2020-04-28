@@ -9,13 +9,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.lengjiye.base.utils.ClassUtil
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.base.viewmodel.BaseViewModel
 
 /**
- * 基类
+ * 基类，不掺杂业务，如没有必要，不建议修改
  */
-abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+abstract class ParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment() {
     lateinit var mBinding: T
     lateinit var mViewModel: VM
 
@@ -65,7 +65,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
      */
     open fun initLiveDataListener() = Unit
 
-    fun getBaseActivity(): BaseActivity<*, *> {
-        return activity as BaseActivity<*, *>
+    fun getBaseActivity(): ParentActivity<*, *> {
+        return activity as ParentActivity<*, *>
     }
 }

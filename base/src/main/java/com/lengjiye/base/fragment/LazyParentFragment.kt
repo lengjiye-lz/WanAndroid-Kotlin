@@ -11,7 +11,7 @@ import com.lengjiye.base.viewmodel.BaseViewModel
  *
  * 适用于非viewpager
  */
-abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseFragment<T, VM>() {
+abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : ParentFragment<T, VM>() {
     // 是否已经加载过数据
     private var isDataLoaded = false
     // 记录当前fragment的是否隐藏 配合show()、hide()使用
@@ -92,7 +92,7 @@ abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseF
         val fragment = parentFragment
         if (fragment == null) {
             return false
-        } else if (fragment is LazyBaseFragment<*, *> && !fragment.isHiddenToUser) {
+        } else if (fragment is LazyParentFragment<*, *> && !fragment.isHiddenToUser) {
             return false
         }
         return true
@@ -108,7 +108,7 @@ abstract class LazyBaseFragment<T : ViewDataBinding, VM : BaseViewModel> : BaseF
         val fragmentList = fragmentManager.fragments
         if (fragmentList.isEmpty()) return
         fragmentList.forEach {
-            if (it is LazyBaseFragment<*, *> && !it.isHidden) {
+            if (it is LazyParentFragment<*, *> && !it.isHidden) {
                 Log.d("LazyBaseFragment", "child startLoadData")
                 it.startLoadData()
             }

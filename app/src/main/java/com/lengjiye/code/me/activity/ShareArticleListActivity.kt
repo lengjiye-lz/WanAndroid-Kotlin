@@ -3,7 +3,7 @@ package com.lengjiye.code.me.activity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.ActivityShareArticleBinding
@@ -15,7 +15,7 @@ import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
-class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeShareViewModel>() {
+class ShareArticleListActivity : ParentActivity<ActivityShareArticleBinding, MeShareViewModel>() {
 
     private val adapter by lazy { HomeFragmentAdapter(this, null) }
 

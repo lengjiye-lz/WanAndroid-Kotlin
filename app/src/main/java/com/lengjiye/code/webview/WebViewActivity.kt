@@ -10,14 +10,14 @@ import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
 import com.just.agentweb.WebChromeClient
 import com.just.agentweb.WebViewClient
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.utils.ToolBarUtil
 import com.lengjiye.tools.log.LogTool
 
-class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
+class WebViewActivity : ParentActivity<ActivityWebviewBinding, WebViewModel>() {
 
     private var mAgentWeb: AgentWeb? = null
     private var titleView: TextView? = null

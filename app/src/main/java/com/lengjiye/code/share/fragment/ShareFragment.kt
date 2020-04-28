@@ -2,9 +2,8 @@ package com.lengjiye.code.share.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.fragment.LazyBaseFragment
+import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentShareBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
@@ -22,7 +21,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
  * @Date: 2019-12-27
  * @Description: 广场
  */
-class ShareFragment : LazyBaseFragment<FragmentShareBinding, ShareViewModel>() {
+class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>() {
 
     private val adapter: HomeFragmentAdapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
     private var pager = 0

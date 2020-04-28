@@ -3,7 +3,7 @@ package com.lengjiye.code.me.activity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityRankTableBinding
 import com.lengjiye.code.me.adapter.RankTableAdapter
@@ -17,7 +17,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 /**
  * 积分榜
  */
-class RankTableActivity : BaseActivity<ActivityRankTableBinding, MeViewModel>() {
+class RankTableActivity : ParentActivity<ActivityRankTableBinding, MeViewModel>() {
 
     private val adapter by lazy { RankTableAdapter(this, null) }
 

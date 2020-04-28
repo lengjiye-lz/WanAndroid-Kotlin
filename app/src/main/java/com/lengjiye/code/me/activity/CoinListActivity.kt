@@ -3,7 +3,7 @@ package com.lengjiye.code.me.activity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.activity.BaseActivity
+import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityCoinListBinding
 import com.lengjiye.code.me.adapter.CoinListAdapter
@@ -17,7 +17,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 /**
  * 积分明细
  */
-class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
+class CoinListActivity : ParentActivity<ActivityCoinListBinding, MeViewModel>() {
 
     private val adapter by lazy { CoinListAdapter(this, null) }
 

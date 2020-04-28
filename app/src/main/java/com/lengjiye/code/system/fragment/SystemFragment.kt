@@ -5,9 +5,8 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import com.lengjiye.base.fragment.LazyBaseFragment
+import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.code.R
-import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.databinding.FragmentSystemBinding
 import com.lengjiye.code.system.adapter.SystemAdapter
 import com.lengjiye.code.system.viewmodel.SystemViewModel
@@ -16,7 +15,7 @@ import com.lengjiye.tools.ResTool
 /**
  * 体系
  */
-class SystemFragment : LazyBaseFragment<FragmentSystemBinding, SystemViewModel>() {
+class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel>() {
 
     private val adapter by lazy { SystemAdapter(childFragmentManager) }
 

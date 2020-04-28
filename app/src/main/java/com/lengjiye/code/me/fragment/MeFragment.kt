@@ -3,7 +3,7 @@ package com.lengjiye.code.me.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import com.lengjiye.base.fragment.LazyBaseFragment
+import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.me.viewmodel.MeViewModel
@@ -17,7 +17,7 @@ import com.lengjiye.tools.ResTool
  * @Date: 2019-11-05
  * @Description:
  */
-class MeFragment : LazyBaseFragment<FragmentMeBinding, MeViewModel>() {
+class MeFragment : LazyParentFragment<FragmentMeBinding, MeViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_me
