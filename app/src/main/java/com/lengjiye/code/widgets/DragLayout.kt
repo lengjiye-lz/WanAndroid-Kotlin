@@ -1,5 +1,6 @@
 package com.lengjiye.code.widgets
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -7,6 +8,8 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
 import com.lengjiye.code.R
 import com.lengjiye.tools.log.LogTool
@@ -14,12 +17,14 @@ import com.lengjiye.tools.log.LogTool
 /**
  * 可以拖动的悬浮球
  */
-class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : FrameLayout(context, attrs, defStyleAttr) {
+class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : RelativeLayout(context, attrs, defStyleAttr) {
 
     private lateinit var mDrag: ViewDragHelper
     private var lastX = -1
     private var lastY = -1
     private lateinit var iv: ImageView
+
+    private var boo = false
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -34,8 +39,7 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Fr
             private var mTop: Int = 0
 
             override fun tryCaptureView(child: View, pointerId: Int): Boolean {
-                LogTool.e("lz", "33333:${iv.id == child.id}")
-                return iv.id == child.id
+                return iv == child
             }
 
             override fun clampViewPositionVertical(child: View, top: Int, dy: Int): Int {
@@ -70,9 +74,6 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Fr
 
             override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
                 super.onViewReleased(releasedChild, xvel, yvel)
-                LogTool.e("lz", "releasedChild:${releasedChild.id}")
-                LogTool.e("lz", "xvel:${xvel}")
-                LogTool.e("lz", "yvel:${yvel}")
                 mDrag.settleCapturedViewAt(mLeft, mTop)
                 invalidate()
             }
@@ -82,12 +83,20 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Fr
                 lastX = changedView.x.toInt()
                 lastY = changedView.y.toInt()
             }
+
+            override fun getViewHorizontalDragRange(child: View): Int {
+                return measuredWidth - child.measuredWidth
+            }
+
+            override fun getViewVerticalDragRange(child: View): Int {
+                return measuredHeight - child.measuredHeight
+            }
         })
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-//        iv = this.findViewById(R.id.iv_drag)
+        iv = this.findViewById(R.id.iv_logo)
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
@@ -104,25 +113,45 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Fr
     }
 
 
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        if (ev != null) {
-            return mDrag.shouldInterceptTouchEvent(ev)
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        var b: Boolean = false
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val x = ev.x
+            val y = ev.y
+
+            val view = findChildUnder(x.toInt(), y.toInt())
+            b = view == iv
         }
-        return true
+
+        if (ev.action == MotionEvent.ACTION_CANCEL || ev.action == MotionEvent.ACTION_UP) {
+            mDrag.cancel()
+            return false
+        }
+
+        return if (b) {
+            mDrag.processTouchEvent(ev)
+            true
+        } else {
+            mDrag.shouldInterceptTouchEvent(ev)
+        }
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event != null) {
-            mDrag.processTouchEvent(event)
 
+    private fun findChildUnder(x: Int, y: Int): View? {
+        if (x >= iv.left && x < iv.right && y >= iv.top && y < iv.bottom) {
+            return iv
         }
+        return null
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        mDrag.processTouchEvent(event)
         return true
     }
 
     override fun computeScroll() {
-        super.computeScroll()
         if (mDrag.continueSettling(true)) {
-            invalidate()
+            ViewCompat.postInvalidateOnAnimation(this)
         }
     }
 
