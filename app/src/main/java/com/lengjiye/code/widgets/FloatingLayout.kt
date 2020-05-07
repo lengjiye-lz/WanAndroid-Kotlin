@@ -11,6 +11,7 @@ import androidx.customview.widget.ViewDragHelper
 import com.lengjiye.code.R
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.SPTool
+import com.lengjiye.tools.log.LogTool
 import java.util.*
 
 /**
@@ -20,6 +21,8 @@ class FloatingLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
 
     private lateinit var mDrag: ViewDragHelper
     private lateinit var iv: View
+
+    private var listener: OnClickListener? = null
 
     private companion object {
         const val KEY_FLOATING_X = "KEY_FLOATING_X"
@@ -71,8 +74,8 @@ class FloatingLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
 
             override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
                 super.onViewReleased(releasedChild, xvel, yvel)
-                if (releasedChild != iv) {
-                    return
+                if (xvel == 0f && yvel == 0f) {
+                    listener?.onClick(releasedChild)
                 }
                 var x = releasedChild.x
                 var y = releasedChild.y
@@ -220,5 +223,9 @@ class FloatingLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
 
     override fun update(o: Observable?, arg: Any?) {
         restorePosition()
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        this.listener = l
     }
 }

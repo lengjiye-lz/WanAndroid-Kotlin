@@ -3,7 +3,6 @@ package com.lengjiye.code.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.ViewDataBinding
 import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.base.viewmodel.BaseViewModel
@@ -28,9 +27,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : ParentAct
         val floatingParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         (baseBinding as ActivityBaseBinding).dlLayout.addView(floatingView, floatingParams)
         FloatingHolder.singleton.addObserver((baseBinding as ActivityBaseBinding).dlLayout)
-
-        val ivLogo = (baseBinding as ActivityBaseBinding).dlLayout.findViewById<ImageView>(R.id.iv_logo)
-        ivLogo.setOnClickListener {
+        (baseBinding as ActivityBaseBinding).dlLayout.setOnClickListener{
             "我是悬浮球".toast()
         }
     }
