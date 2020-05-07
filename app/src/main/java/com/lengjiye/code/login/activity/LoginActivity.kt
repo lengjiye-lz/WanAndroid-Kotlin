@@ -4,6 +4,7 @@ import android.widget.TextView
 import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.databinding.ActivityLoginBinding
@@ -17,7 +18,7 @@ import com.lengjiye.code.utils.ToolBarUtil
  * @Date: 2019-11-05
  * @Description: 登录注册
  */
-class LoginActivity : ParentActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     // 类型 默认登录
     private var type: Int? = null
     private var mTempFragment: ParentFragment<*, *>? = null

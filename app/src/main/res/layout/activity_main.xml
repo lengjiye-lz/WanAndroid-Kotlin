@@ -10,47 +10,35 @@
                 type="com.lengjiye.code.main.viewmodel.MainViewModel" />
     </data>
 
-    <com.lengjiye.code.widgets.DragLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include layout="@layout/layout_tool_bar" />
+
+        <FrameLayout
+                android:id="@+id/f_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/bn_bar"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-            <include layout="@layout/layout_tool_bar" />
+        <include
+                layout="@layout/widget_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5px"
+                app:layout_constraintBottom_toTopOf="@+id/bn_bar" />
 
-            <FrameLayout
-                    android:id="@+id/f_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toTopOf="@+id/bn_bar"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
+                android:id="@+id/bn_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bnbAnimationDuration="0"
+                app:bnbBackgroundStyle="background_style_static"
+                app:bnbElevation="-20dp"
+                app:bnbMode="mode_fixed"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-            <include
-                    layout="@layout/widget_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5px"
-                    app:layout_constraintBottom_toTopOf="@+id/bn_bar" />
-
-            <com.ashokvarma.bottomnavigation.BottomNavigationBar
-                    android:id="@+id/bn_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:bnbAnimationDuration="0"
-                    app:bnbBackgroundStyle="background_style_static"
-                    app:bnbElevation="-20dp"
-                    app:bnbMode="mode_fixed"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="@dimen/d_40"
-                android:layout_height="@dimen/d_40"
-                android:src="@mipmap/logo" />
-    </com.lengjiye.code.widgets.DragLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

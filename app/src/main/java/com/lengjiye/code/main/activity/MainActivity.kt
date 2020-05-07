@@ -9,6 +9,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
@@ -24,7 +25,7 @@ import io.reactivex.disposables.Disposable
 /**
  * MainActivity
  */
-class MainActivity : ParentActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var mTempFragment: Fragment
 

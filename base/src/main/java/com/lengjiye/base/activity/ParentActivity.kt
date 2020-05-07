@@ -1,7 +1,9 @@
 package com.lengjiye.base.activity
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -14,12 +16,26 @@ import com.lengjiye.base.viewmodel.BaseViewModel
  */
 abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
-    lateinit var mBinding: T
+    protected lateinit var mBinding: T
     lateinit var mViewModel: VM
+    lateinit var baseBinding: ViewDataBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, getLayoutId())
+
+        val baseLayout = getBaseLayoutId()
+        if (baseLayout == null) {
+            mBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        } else {
+            baseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), baseLayout, null, true)
+            mBinding = DataBindingUtil.inflate(layoutInflater, getLayoutId(), null, true)
+            val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            if (baseBinding.root is ViewGroup) {
+                (baseBinding.root as ViewGroup).addView(mBinding.root, params)
+            }
+            initBaseView(savedInstanceState)
+            window.setContentView(baseBinding.root)
+        }
         mBinding.lifecycleOwner = this
         ActivityManager.singleton.add(this)
         initIntent(savedInstanceState)
@@ -31,6 +47,22 @@ abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
     }
 
     abstract fun getLayoutId(): Int
+
+    /**
+     * 在原有的布局外面添加一些公共的控件，比如悬浮窗，异常界面等
+     *
+     * 可以使用<merge>标签优化
+     */
+    protected open fun getBaseLayoutId(): Int? {
+        return null
+    }
+
+    /**
+     * 初始化 BaseView
+     * 设置view监听
+     * 只有在含有baseLayout的时候起作用
+     */
+    open fun initBaseView(savedInstanceState: Bundle?) = Unit
 
     /**
      * 初始化 view
@@ -70,6 +102,4 @@ abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
         super.onDestroy()
         ActivityManager.singleton.remove(this)
     }
-
-
 }

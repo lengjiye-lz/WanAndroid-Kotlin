@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityCollectWebsiteBinding
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
@@ -17,7 +18,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 /**
  * 我收藏的网站的列表
  */
-class CollectWebsiteListActivity : ParentActivity<ActivityCollectWebsiteBinding, MeCollectViewModel>() {
+class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, MeCollectViewModel>() {
 
     private val adapter by lazy { CollectWebsiteListAdapter(this, null) }
 

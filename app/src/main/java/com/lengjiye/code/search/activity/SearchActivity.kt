@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivitySearchBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.search.viewmodel.SearchViewModel
@@ -22,7 +23,7 @@ import io.reactivex.disposables.Disposable
  * @Date: 2020-03-03
  * @Description:
  */
-class SearchActivity : ParentActivity<ActivitySearchBinding, SearchViewModel>() {
+class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
 
     private val searchAdapter by lazy { HomeFragmentAdapter(this, null) }
 

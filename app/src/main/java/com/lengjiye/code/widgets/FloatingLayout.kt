@@ -1,39 +1,36 @@
 package com.lengjiye.code.widgets
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
 import com.lengjiye.code.R
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.SPTool
+import java.util.*
 
 /**
  * 可以拖动的悬浮球
  */
-class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : RelativeLayout(context, attrs, defStyleAttr) {
+class FloatingLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr), Observer {
 
     private lateinit var mDrag: ViewDragHelper
-    private var lastX = -1
-    private var lastY = -1
-    private lateinit var iv: ImageView
+    private lateinit var iv: View
 
-    private var boo = false
+    private companion object {
+        const val KEY_FLOATING_X = "KEY_FLOATING_X"
+        const val KEY_FLOATING_Y = "KEY_FLOATING_Y"
+    }
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
-
-//        LayoutInflater.from(context).inflate()
-
-        mDrag = ViewDragHelper.create(this, 0.1f, object : ViewDragHelper.Callback() {
+        mDrag = ViewDragHelper.create(this, 1f, object : ViewDragHelper.Callback() {
 
             private var mLeft: Int = 0
             private var mTop: Int = 0
@@ -74,14 +71,49 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
 
             override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
                 super.onViewReleased(releasedChild, xvel, yvel)
-                mDrag.settleCapturedViewAt(mLeft, mTop)
+                if (releasedChild != iv) {
+                    return
+                }
+                var x = releasedChild.x
+                var y = releasedChild.y
+                if (x < (measuredWidth / 2f - releasedChild.measuredWidth / 2f)) {
+                    when {
+                        x < releasedChild.measuredWidth / 3f -> {
+                            x = 0f
+                        }
+                        y < releasedChild.measuredHeight * 3 -> { // 0-y/3
+                            y = 0f
+                        }
+                        y > measuredHeight - releasedChild.measuredHeight * 3 -> { // 0-(y-y/3)
+                            y = measuredHeight - releasedChild.measuredHeight.toFloat()
+                        }
+                        else -> {
+                            x = 0f
+                        }
+                    }
+                } else {
+                    when {
+                        x > measuredWidth - releasedChild.measuredWidth / 3f - releasedChild.measuredWidth -> {
+                            x = measuredWidth - releasedChild.measuredWidth.toFloat()
+                        }
+                        y < releasedChild.measuredHeight * 3 -> { // 0-y/3
+                            y = 0f
+                        }
+                        y > measuredHeight - releasedChild.measuredHeight * 3 -> { // 0-(y-y/3)
+                            y = measuredHeight - releasedChild.measuredHeight.toFloat()
+                        }
+                        else -> {
+                            x = measuredWidth - releasedChild.measuredWidth.toFloat()
+                        }
+                    }
+                }
+                mDrag.settleCapturedViewAt(x.toInt(), y.toInt())
                 invalidate()
             }
 
             override fun onViewPositionChanged(changedView: View, left: Int, top: Int, dx: Int, dy: Int) {
                 super.onViewPositionChanged(changedView, left, top, dx, dy)
-                lastX = changedView.x.toInt()
-                lastY = changedView.y.toInt()
+                savePosition()
             }
 
             override fun getViewHorizontalDragRange(child: View): Int {
@@ -91,11 +123,20 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
             override fun getViewVerticalDragRange(child: View): Int {
                 return measuredHeight - child.measuredHeight
             }
+
+            override fun onViewDragStateChanged(state: Int) {
+                super.onViewDragStateChanged(state)
+                if (state == ViewDragHelper.STATE_SETTLING) { // 拖拽结束，通知观察者
+                    FloatingHolder.singleton.update()
+                }
+            }
+
         })
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        // 获取可以被拖动的控件
         iv = this.findViewById(R.id.iv_logo)
     }
 
@@ -104,17 +145,39 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
         restorePosition()
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        savePosition()
+        FloatingHolder.singleton.deleteObserver(this)
+    }
+
+    /**
+     * 保存位置
+     */
+    private fun savePosition() {
+        val x = iv.x
+        val y = iv.y
+        SPTool.putFloat(KEY_FLOATING_X, x)
+        SPTool.putFloat(KEY_FLOATING_Y, y)
+    }
+
+    /**
+     * 更新位置
+     */
     private fun restorePosition() {
-        if (lastX == -1 && lastY == -1) {
-            lastX = measuredWidth - iv.measuredWidth
-            lastY = 0
+        var x = SPTool.getFloat(KEY_FLOATING_X, -1f)
+        var y = SPTool.getFloat(KEY_FLOATING_Y, -1f)
+
+        if (x == -1f && y == -1f) {
+            x = (measuredWidth - iv.measuredWidth).toFloat()
+            y = (measuredHeight * 3 / 4).toFloat()
         }
-        iv.layout(lastX, lastY, lastX + iv.measuredWidth, lastY + iv.measuredHeight)
+        iv.layout(x.toInt(), y.toInt(), (x + iv.measuredWidth).toInt(), (y + iv.measuredHeight).toInt())
     }
 
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        var b: Boolean = false
+        var b = false
         if (ev.action == MotionEvent.ACTION_DOWN) {
             val x = ev.x
             val y = ev.y
@@ -155,4 +218,7 @@ class DragLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Re
         }
     }
 
+    override fun update(o: Observable?, arg: Any?) {
+        restorePosition()
+    }
 }
