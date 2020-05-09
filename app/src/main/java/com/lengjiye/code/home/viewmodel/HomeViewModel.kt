@@ -6,14 +6,15 @@ import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.home.bean.BannerBean
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.home.model.HomeModel
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.utils.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.network.LoadingObserver.ObserverListener
+import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.LogTool
 
 /**
  * 数据请求接口
@@ -21,13 +22,13 @@ import com.lengjiye.tools.ResTool
 class HomeViewModel(application: Application) : BaseViewModel(application) {
 
     var article = MutableLiveData<ArticleBean>()
-    var homeBeanList = MutableLiveData<List<HomeBean>>()
+    var homeEntityList = MutableLiveData<List<HomeEntity>>()
     var bannerList = MutableLiveData<List<BannerBean>>()
 
-    var homeBeanTopAndFirstList: MutableList<HomeBean>? = null
+    var homeEntityTopAndFirstList: MutableList<HomeEntity>? = null
 
     private lateinit var loadingObserver: LoadingObserver<ArticleBean>
-    private lateinit var loadingObserverTopAndFirst: LoadingObserver<List<HomeBean>>
+    private lateinit var loadingObserverTopAndFirst: LoadingObserver<List<HomeEntity>>
     private lateinit var loadingObserverBannerBean: LoadingObserver<List<BannerBean>>
     private lateinit var loadingDefault: LoadingObserver<String>
 
@@ -42,17 +43,17 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        homeBeanTopAndFirstList = arrayListOf()
+        homeEntityTopAndFirstList = arrayListOf()
 
-        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeBean>>() {
+        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeEntity>>() {
 
             override fun observerOnComplete() {
-                homeBeanList.value = homeBeanTopAndFirstList
+                homeEntityList.value = homeEntityTopAndFirstList
             }
 
-            override fun observerOnNext(data: List<HomeBean>?) {
+            override fun observerOnNext(data: List<HomeEntity>?) {
                 data?.let {
-                    homeBeanTopAndFirstList?.addAll(it)
+                    homeEntityTopAndFirstList?.addAll(it)
                 }
             }
 

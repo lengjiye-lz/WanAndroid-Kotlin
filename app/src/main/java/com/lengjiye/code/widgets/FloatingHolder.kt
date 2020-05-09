@@ -17,7 +17,6 @@ class FloatingHolder : Observable() {
      * 通知观察者
      */
     fun update() {
-        LogTool.e("lz", "update")
         setChanged()
         notifyObservers()
     }

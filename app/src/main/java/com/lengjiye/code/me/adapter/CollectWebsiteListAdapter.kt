@@ -6,7 +6,6 @@ import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ItemCollectWebsiteListBinding
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.me.bean.Website
 
 /**

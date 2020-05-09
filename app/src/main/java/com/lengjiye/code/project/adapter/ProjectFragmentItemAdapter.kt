@@ -12,19 +12,19 @@ import com.lengjiye.code.R
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.databinding.ItemProjectItemBinding
-import com.lengjiye.code.home.bean.HomeBean
 import com.lengjiye.code.utils.GlideUtil
+import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.tools.ResTool
 
 /**
  * 文章列表适配器
  */
-class ProjectFragmentItemAdapter constructor(val context: Context, models: MutableList<HomeBean>?) :
-    BaseDBAdapter<HomeBean, ProjectFragmentItemAdapter.HomeModelHolderDB, ItemProjectItemBinding>(context, models) {
+class ProjectFragmentItemAdapter constructor(val context: Context, models: MutableList<HomeEntity>?) :
+    BaseDBAdapter<HomeEntity, ProjectFragmentItemAdapter.HomeModelHolderDB, ItemProjectItemBinding>(context, models) {
 
-    private var listener: ((view: View, position: Int, item: HomeBean?) -> Unit)? = null
+    private var listener: ((view: View, position: Int, item: HomeEntity?) -> Unit)? = null
 
-    override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
+    override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeEntity?) {
         item?.let {
             holder.binding.tvTitle.text = ResTool.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
@@ -39,18 +39,18 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
         }
     }
 
-    private fun getAuthor(homeBean: HomeBean): String {
-        if (homeBean.author.isEmpty()) {
-            return homeBean.shareUser
+    private fun getAuthor(HomeEntity: HomeEntity): String {
+        if (HomeEntity.author.isEmpty()) {
+            return HomeEntity.shareUser
         }
-        return homeBean.author
+        return HomeEntity.author
     }
 
-    private fun getCategory(homeBean: HomeBean): String {
-        return homeBean.superChapterName + "/${homeBean.chapterName}"
+    private fun getCategory(HomeEntity: HomeEntity): String {
+        return HomeEntity.superChapterName + "/${HomeEntity.chapterName}"
     }
 
-    fun collectClickListener(listener: ((view: View, position: Int, item: HomeBean?) -> Unit)?) {
+    fun collectClickListener(listener: ((view: View, position: Int, item: HomeEntity?) -> Unit)?) {
         this.listener = listener
     }
 

@@ -22,7 +22,8 @@ object RxUtil {
     /**
      * 循环
      */
-    fun interval(initialDelay: Long, period: Long, succ: (long: Long) -> Unit
+    fun interval(
+        initialDelay: Long, period: Long, succ: (long: Long) -> Unit
     ): Disposable? {
         return interval(initialDelay, period)
             .subscribe {
@@ -60,9 +61,11 @@ object RxUtil {
 
     /**
      * 执行单个任务
+     *
+     * 在线程中
      */
-    fun just(string: String = "", listener: (long: String) -> Unit): Disposable? {
-        return Observable.just(string).compose(ioScheduler()).subscribe(listener)
+    fun justInIO(string: String = "", listener: (long: String) -> Unit): Disposable? {
+        return Observable.just(string).observeOn(Schedulers.io()).subscribe(listener)
     }
 
     /**

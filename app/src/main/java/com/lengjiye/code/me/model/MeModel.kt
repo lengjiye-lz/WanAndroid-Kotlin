@@ -32,61 +32,61 @@ class MeModel : BaseModel() {
 
     fun getCoinRank(page: Int, observer: Observer<RankTable>) {
         val observable = getServe()?.getCoinRank(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun getCoinUserInfo(observer: Observer<Rank>) {
         val observable = getServe()?.getCoinUserInfo()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun getCoinUserInfoList(page: Int, observer: Observer<CoinList>) {
         val observable = getServe()?.getCoinUserInfoList(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun getCollectArticleList(page: Int, observer: Observer<ArticleBean>) {
         val observable = getServe()?.getCollectArticleList(page)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun collectAddArticle(id: Int, observer: Observer<String>) {
         val observable = getServe()?.collectAddArticle(id)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun collectAddOtherArticle(title: String, author: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.collectAddOtherArticle(title, author, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun unCollectArticle(id: Int, observer: Observer<String>) {
         val observable = getServe()?.unCollectArticle(id)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun unMyCollectArticle(id: Int, originId: Int, observer: Observer<String>) {
         val observable = getServe()?.unMyCollectArticle(id, originId)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun getCollectWebsiteList(observer: Observer<List<Website>>) {
         val observable = getServe()?.collectWebsiteLis()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun collectAddWebsite(name: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.collectAddWebsite(name, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun collectUpdateWebsite(id: Int, name: String, link: String, observer: Observer<String>) {
         val observable = getServe()?.collectUpdateWebsite(id, name, link)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun collectDeleteWebsite(id: Int, observer: Observer<String>) {
         val observable = getServe()?.collectDeleteWebsite(id)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 }

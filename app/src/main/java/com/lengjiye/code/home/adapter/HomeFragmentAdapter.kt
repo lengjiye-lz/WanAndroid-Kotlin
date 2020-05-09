@@ -11,19 +11,19 @@ import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding
-import com.lengjiye.code.home.bean.HomeBean
+import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.tools.ResTool
 
 /**
  * 文章列表适配器
  */
-class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeBean>?) :
-    BaseDBAdapter<HomeBean, HomeFragmentAdapter.HomeModelHolderDB, ItemHomeBinding>(context, models) {
+class HomeFragmentAdapter constructor(context: Context, models: MutableList<HomeEntity>?) :
+    BaseDBAdapter<HomeEntity, HomeFragmentAdapter.HomeModelHolderDB, ItemHomeBinding>(context, models) {
 
     var type: Int = HomeFragmentAdapterType.TYPE_1
-    private var listener: ((view: View, position: Int, item: HomeBean?) -> Unit)? = null
+    private var listener: ((view: View, position: Int, item: HomeEntity?) -> Unit)? = null
 
-    override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeBean?) {
+    override fun onBindViewHolder(holder: HomeModelHolderDB, position: Int, item: HomeEntity?) {
         item?.let {
             holder.binding.tvTitle.text = ResTool.fromHtml(it.title).trim()
             holder.binding.tvAuthor.text = getAuthor(it)
@@ -40,35 +40,35 @@ class HomeFragmentAdapter constructor(context: Context, models: MutableList<Home
         }
     }
 
-    private fun getAuthor(homeBean: HomeBean): String {
-        if (homeBean.author.isEmpty()) {
-            return homeBean.shareUser
+    private fun getAuthor(HomeEntity: HomeEntity): String {
+        if (HomeEntity.author.isEmpty()) {
+            return HomeEntity.shareUser
         }
-        return homeBean.author
+        return HomeEntity.author
     }
 
     /**
      * 类别
      */
-    private fun getCategory(view: TextView, homeBean: HomeBean) {
-        val value = if (homeBean.superChapterName.isNullOrEmpty()) {
-            if (homeBean.chapterName.isNullOrEmpty()) {
+    private fun getCategory(view: TextView, HomeEntity: HomeEntity) {
+        val value = if (HomeEntity.superChapterName.isNullOrEmpty()) {
+            if (HomeEntity.chapterName.isNullOrEmpty()) {
                 view.visibility = View.GONE
                 ""
             } else {
-                homeBean.chapterName
+                HomeEntity.chapterName
             }
         } else {
-            if (homeBean.chapterName.isNullOrEmpty()) {
-                homeBean.superChapterName
+            if (HomeEntity.chapterName.isNullOrEmpty()) {
+                HomeEntity.superChapterName
             } else {
-                homeBean.superChapterName + "/${homeBean.chapterName}"
+                HomeEntity.superChapterName + "/${HomeEntity.chapterName}"
             }
         }
         view.setText(value)
     }
 
-    fun collectClickListener(listener: ((view: View, position: Int, item: HomeBean?) -> Unit)?) {
+    fun collectClickListener(listener: ((view: View, position: Int, item: HomeEntity?) -> Unit)?) {
         this.listener = listener
     }
 

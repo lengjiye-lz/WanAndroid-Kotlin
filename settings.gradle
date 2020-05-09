@@ -1,1 +1,2 @@
 include ':app', ':base', ':network', ':tools', ':buildSrc'
+include ':room'

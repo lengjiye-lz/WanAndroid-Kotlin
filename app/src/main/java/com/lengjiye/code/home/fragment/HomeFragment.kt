@@ -125,7 +125,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
             page = it.curPage
         })
 
-        mViewModel.homeBeanList.observe(this, Observer {
+        mViewModel.homeEntityList.observe(this, Observer {
             mBinding.srlLayout.finishRefresh()
             if (page == 0) {
                 adapter.removeAll()
@@ -164,7 +164,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun refresh() {
         page = 0
         mViewModel.getHomeTopAndFirstListData()
-        mViewModel.homeBeanTopAndFirstList?.clear()
+        mViewModel.homeEntityTopAndFirstList?.clear()
     }
 
     private fun initBanner() {
