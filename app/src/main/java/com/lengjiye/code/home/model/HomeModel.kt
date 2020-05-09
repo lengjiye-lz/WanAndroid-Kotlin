@@ -13,6 +13,8 @@ import com.lengjiye.tools.log.LogTool
 import com.lengjiye.utils.RxUtil
 import io.reactivex.Observable
 import io.reactivex.Observer
+import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function
 
 class HomeModel : BaseModel() {
     companion object {
@@ -38,12 +40,11 @@ class HomeModel : BaseModel() {
     fun getHomeTopAndFirstListData(observer: Observer<List<HomeEntity>>) {
         val observableTop = getServe()?.getArticleTop()?.map(HttpResultFunc())
         val observableList = getServe()?.getArticle(0)?.map(HttpResultFunc())?.map { t ->
-            LogTool.e("lz", "thread:${Thread.currentThread().name}")
             t.datas
         }
-        LogTool.e("lz", "getHomeTopAndFirstListData:${Thread.currentThread().name}")
         // 合并请求
-        val observable = Observable.concat(observableTop, observableList)
+        val observable = Observable.zip(observableTop, observableList,
+            BiFunction<List<HomeEntity>, List<HomeEntity>, List<HomeEntity>> { t1, t2 -> t1 + t2 })
         makeSubscribe(observable, observer)
     }
 
@@ -66,6 +67,9 @@ class HomeModel : BaseModel() {
         }
     }
 
+    /**
+     * 查询数据
+     */
     fun queryHome2Room(): List<HomeEntity> {
         val list = arrayListOf<HomeEntity>()
         RxUtil.create(object : RxUtil.RXSimpleTask<List<HomeEntity>>() {

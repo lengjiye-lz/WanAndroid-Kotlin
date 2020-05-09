@@ -164,7 +164,6 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun refresh() {
         page = 0
         mViewModel.getHomeTopAndFirstListData()
-        mViewModel.homeEntityTopAndFirstList?.clear()
     }
 
     private fun initBanner() {

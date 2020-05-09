@@ -25,7 +25,6 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     var homeEntityList = MutableLiveData<List<HomeEntity>>()
     var bannerList = MutableLiveData<List<BannerBean>>()
 
-    var homeEntityTopAndFirstList: MutableList<HomeEntity>? = null
 
     private lateinit var loadingObserver: LoadingObserver<ArticleBean>
     private lateinit var loadingObserverTopAndFirst: LoadingObserver<List<HomeEntity>>
@@ -43,18 +42,10 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        homeEntityTopAndFirstList = arrayListOf()
-
         loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeEntity>>() {
-
-            override fun observerOnComplete() {
-                homeEntityList.value = homeEntityTopAndFirstList
-            }
-
             override fun observerOnNext(data: List<HomeEntity>?) {
-                data?.let {
-                    homeEntityTopAndFirstList?.addAll(it)
-                }
+                LogTool.e("lz", "observerOnNext")
+                homeEntityList.value = data
             }
 
             override fun observerOnError(e: ApiException) {
