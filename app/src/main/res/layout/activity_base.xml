@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <com.lengjiye.code.widgets.FloatingLayout
-            android:id="@+id/dl_layout"
+            android:id="@+id/fl_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 </layout>

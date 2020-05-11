@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.lengjiye.room.dao.HomeDao
 import com.lengjiye.room.entity.HomeEntity
 
-@Database(entities = [HomeEntity::class], version = 1)
+@Database(entities = [HomeEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun homeDao(): HomeDao

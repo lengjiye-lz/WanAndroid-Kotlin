@@ -44,8 +44,8 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
 
         loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeEntity>>() {
             override fun observerOnNext(data: List<HomeEntity>?) {
-                LogTool.e("lz", "observerOnNext")
                 homeEntityList.value = data
+                HomeModel.singleton.installHome2Room(data as MutableList<HomeEntity>)
             }
 
             override fun observerOnError(e: ApiException) {

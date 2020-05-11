@@ -18,7 +18,7 @@ open class BaseModel {
         observer?.let {
             observable?.subscribeOn(Schedulers.io())
                 ?.unsubscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.observeOn(AndroidSchedulers.mainThread(),true)
                 //            .autoDisposable(lifecycleOwner, Lifecycle.Event.ON_DESTROY) // 防止 rxJava 内存泄漏
                 ?.subscribe(it)
         }

@@ -25,9 +25,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : ParentAct
         super.initBaseView(savedInstanceState)
         val floatingView = LayoutInflater.from(this).inflate(R.layout.base_suspension_layout, null, false)
         val floatingParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        (baseBinding as ActivityBaseBinding).dlLayout.addView(floatingView, floatingParams)
-        FloatingHolder.singleton.addObserver((baseBinding as ActivityBaseBinding).dlLayout)
-        (baseBinding as ActivityBaseBinding).dlLayout.setOnClickListener{
+        (baseBinding as ActivityBaseBinding).flLayout.addView(floatingView, floatingParams)
+        FloatingHolder.singleton.addObserver((baseBinding as ActivityBaseBinding).flLayout)
+        (baseBinding as ActivityBaseBinding).flLayout.setOnClickListener {
             "我是悬浮球".toast()
         }
     }

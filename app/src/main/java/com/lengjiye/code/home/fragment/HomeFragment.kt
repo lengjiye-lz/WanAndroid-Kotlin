@@ -16,6 +16,7 @@ import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.utils.*
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.youth.banner.Banner
@@ -126,10 +127,12 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         })
 
         mViewModel.homeEntityList.observe(this, Observer {
-            mBinding.srlLayout.finishRefresh()
-            if (page == 0) {
-                adapter.removeAll()
+            LogTool.e("lz", "it:${it.size}")
+            if (it.isEmpty()) {
+                return@Observer
             }
+            mBinding.srlLayout.finishRefresh()
+            adapter.removeAll()
             adapter.addAll(it.toMutableList())
             header.notifyDataSetChanged()
             page = 1
@@ -157,7 +160,6 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun loadData() {
         mViewModel.getBanner()
-
         refresh()
     }
 

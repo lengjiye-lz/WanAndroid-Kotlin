@@ -2,6 +2,7 @@ package com.lengjiye.code.application
 
 import android.app.Application
 import android.content.Context
+import com.facebook.stetho.Stetho
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
@@ -52,10 +53,21 @@ class CodeApplication : Application(), IApp {
         // 崩溃日志捕捉
         val handler = CrashHandlerUtil()
         Thread.setDefaultUncaughtExceptionHandler(handler)
+
+        debugInit()
     }
 
     companion object {
         lateinit var instance: CodeApplication
+    }
+
+    /**
+     * debug 下才加载
+     */
+    private fun debugInit() {
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
     }
 }
 

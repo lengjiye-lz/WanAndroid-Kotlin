@@ -1,46 +1,44 @@
 package com.lengjiye.room.entity
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.lengjiye.room.entity.converter.TagEntityConverters
 
 @Entity(tableName = "home")
+@TypeConverters(TagEntityConverters::class)
 class HomeEntity {
     @PrimaryKey
-    val id: Int = 0 // 9126
-    val apkLink: String = ""
-    val audit: Int = 0 // 1
-    val author: String = "" // 鸿洋
-    val chapterId: Int = 0 // 408
-    val chapterName: String = "" // 鸿洋
+    var id: Int = 0 // 9126
+    var apkLink: String = ""
+    var audit: Int = 0 // 1
+    var author: String = "" // 鸿洋
+    var chapterId: Int = 0 // 408
+    var chapterName: String = "" // 鸿洋
     var collect: Boolean = false // false
-    val courseId: Int = 0 // 13
-    val desc: String = ""
-    val envelopePic: String = ""
-    val fresh: Boolean = false // false
-    val link: String = "" // https://mp.weixin.qq.com/s/Js5lB7NsL-9QRK7al3bQfg
-    val niceDate: String = "" // 2019-09-11
-    val niceShareDate: String = "" // 未知时间
-    val origin: String = ""
-    val prefix: String = ""
-    val projectLink: String = ""
-    val publishTime: Long = 0 // 1568131200000
-    val shareDate: Any? = null // null
-    val shareUser: String = ""
-    val superChapterId: Int = 0 // 408
-    val superChapterName: String = "" // 公众号
-
-    @Embedded
-    val tags: List<TagEntity>? = null
-    val title: String = "" // catch 住 OOM，行吗？
-    val type: Int = 0 // 0
-    val userId: Int = 0 // -1
-    val visible: Int = 0 // 1
-    val originId: Int = 0 // 1
-    val zan: Int = 0 // 0
+    var courseId: Int = 0 // 13
+    var desc: String = ""
+    var envelopePic: String = ""
+    var fresh: Boolean = false // false
+    var link: String = "" // https://mp.weixin.qq.com/s/Js5lB7NsL-9QRK7al3bQfg
+    var niceDate: String = "" // 2019-09-11
+    var niceShareDate: String = "" // 未知时间
+    var origin: String = ""
+    var prefix: String = ""
+    var projectLink: String = ""
+    var publishTime: Long = 0 // 1568131200000
+    var shareDate: Long = 0 // null
+    var shareUser: String = ""
+    var superChapterId: Int = 0 // 408
+    var superChapterName: String = "" // 公众号
+    var tags: List<TagEntity>? = null
+    var title: String = "" // catch 住 OOM，行吗？
+    var type: Int = 0 // 0
+    var userId: Int = 0 // -1
+    var visible: Int = 0 // 1
+    var originId: Int = 0 // 1
+    var zan: Int = 0 // 0
 }
 
 class TagEntity {
-    val name: String = "" // 公众号
-    val url: String = "" // /wxarticle/list/408/1
+    var name: String = "" // 公众号
+    var url: String = "" // /wxarticle/list/408/1
 }

@@ -9,12 +9,10 @@ import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServeHolder
 import com.lengjiye.room.AppDatabase
 import com.lengjiye.room.entity.HomeEntity
-import com.lengjiye.tools.log.LogTool
 import com.lengjiye.utils.RxUtil
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Function
 
 class HomeModel : BaseModel() {
     companion object {
@@ -38,14 +36,28 @@ class HomeModel : BaseModel() {
      * 获取首页置顶和第一页的数据
      */
     fun getHomeTopAndFirstListData(observer: Observer<List<HomeEntity>>) {
+        // 本地缓存
+        val localData = Observable.create<List<HomeEntity>> {
+            val dao = AppDatabase.getInstance(CodeApplication.instance).homeDao()
+            val data = dao.queryAll()
+            if (data == null) {
+                it.onNext(arrayListOf())
+            } else {
+                it.onNext(data)
+            }
+            it.onComplete()
+        }
+
+        // 网络数据
         val observableTop = getServe()?.getArticleTop()?.map(HttpResultFunc())
         val observableList = getServe()?.getArticle(0)?.map(HttpResultFunc())?.map { t ->
             t.datas
         }
         // 合并请求
-        val observable = Observable.zip(observableTop, observableList,
+        val networkObservable = Observable.zip(observableTop, observableList,
             BiFunction<List<HomeEntity>, List<HomeEntity>, List<HomeEntity>> { t1, t2 -> t1 + t2 })
-        makeSubscribe(observable, observer)
+        val concatObservable = Observable.concat(localData, networkObservable)
+        makeSubscribe(concatObservable, observer)
     }
 
     fun getBanner(observer: Observer<List<BannerBean>>) {
