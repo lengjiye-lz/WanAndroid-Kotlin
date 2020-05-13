@@ -160,22 +160,22 @@ class FloatingLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
     private fun savePosition() {
         val x = iv.x
         val y = iv.y
-        SPTool.putFloat(KEY_FLOATING_X, x)
-        SPTool.putFloat(KEY_FLOATING_Y, y)
+        SPTool.putInt(KEY_FLOATING_X, x.toInt())
+        SPTool.putInt(KEY_FLOATING_Y, y.toInt())
     }
 
     /**
      * 更新位置
      */
     private fun restorePosition() {
-        var x = SPTool.getFloat(KEY_FLOATING_X, -1f)
-        var y = SPTool.getFloat(KEY_FLOATING_Y, -1f)
+        var x = SPTool.getInt(KEY_FLOATING_X, -1)
+        var y = SPTool.getInt(KEY_FLOATING_Y, -1)
 
-        if (x == -1f && y == -1f) {
-            x = (measuredWidth - iv.measuredWidth).toFloat()
-            y = (measuredHeight * 3 / 4).toFloat()
+        if (x == -1 && y == -1) {
+            x = measuredWidth - iv.measuredWidth
+            y = measuredHeight * 3 / 4
         }
-        iv.layout(x.toInt(), y.toInt(), (x + iv.measuredWidth).toInt(), (y + iv.measuredHeight).toInt())
+        iv.layout(x, y, x + iv.measuredWidth, y + iv.measuredHeight)
     }
 
 
