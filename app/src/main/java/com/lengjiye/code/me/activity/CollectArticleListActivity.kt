@@ -2,7 +2,6 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityCollectArticleBinding
@@ -26,7 +25,7 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
             .setNormalTitle(R.string.s_20)
             .setBackListener {
@@ -53,14 +52,14 @@ class CollectArticleListActivity : BaseActivity<ActivityCollectArticleBinding, M
 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                ActivityUtil.startWebViewActivity(this, it.link)
+                ActivityUtils.startWebViewActivity(this, it.link)
             }
         }
 
         adapter.collectClickListener { view, position, item ->
             item?.let {
-                if (AccountUtil.isNoLogin()) {
-                    ActivityUtil.startLoginActivity(this)
+                if (AccountUtils.isNoLogin()) {
+                    ActivityUtils.startLoginActivity(this)
                     return@let
                 }
 

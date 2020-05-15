@@ -3,13 +3,12 @@ package com.lengjiye.code.me.activity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityCoinListBinding
 import com.lengjiye.code.me.adapter.CoinListAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -30,7 +29,7 @@ class CoinListActivity : BaseActivity<ActivityCoinListBinding, MeViewModel>() {
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
             .setNormalTitle(R.string.s_31)
             .setBackListener {

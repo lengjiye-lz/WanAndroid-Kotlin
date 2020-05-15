@@ -1,18 +1,12 @@
 package com.lengjiye.code.project.adapter
 
 import android.content.Context
-import android.text.Html
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
-import com.lengjiye.code.constant.HomeFragmentAdapterType
-import com.lengjiye.code.databinding.ItemHomeBinding
 import com.lengjiye.code.databinding.ItemProjectItemBinding
-import com.lengjiye.code.utils.GlideUtil
+import com.lengjiye.code.utils.GlideUtils
 import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.tools.ResTool
 
@@ -30,7 +24,7 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
             holder.binding.tvAuthor.text = getAuthor(it)
             holder.binding.tvDesc.text = ResTool.fromHtml(it.desc).trim()
             holder.binding.tvTime.text = it.niceDate
-            GlideUtil.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_2, holder.binding.ivEnvelope)
+            GlideUtils.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_2, holder.binding.ivEnvelope)
 
             holder.binding.ivCollect.setOnClickListener { view ->
                 listener?.invoke(view, position, item)

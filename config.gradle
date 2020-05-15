@@ -21,7 +21,7 @@ ext {
             constraintlayout    : "2.0.0-beta4",
             android_ktx         : "1.1.0",
             rxjava2             : "2.2.0",
-            rxandroid2          : "2.0.2",
+            rxandroid2          : "2.1.1",
             retrofit2           : "2.6.1",
             retrofit2_gson      : "2.6.1",
             retrofit2_rxjava    : "2.6.1",

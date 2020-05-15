@@ -13,7 +13,7 @@ import com.lengjiye.tools.ResTool
 /**
  * toolbar 工具
  */
-class ToolBarUtil {
+class ToolBarUtils {
 
     companion object {
         const val NORMAL_TYPE = 0

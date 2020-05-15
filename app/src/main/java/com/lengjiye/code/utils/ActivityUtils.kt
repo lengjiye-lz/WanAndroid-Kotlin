@@ -21,7 +21,7 @@ inline fun <reified T : Activity> Context.startActivity(bundle: Bundle?) {
     startActivity(intent)
 }
 
-object ActivityUtil {
+object ActivityUtils {
     fun startWebViewActivity(context: Context, url: String) {
         context.startActivity<WebViewActivity>(Bundle().apply {
             putString(ConstantKey.KEY_WEB_URL, url)
@@ -39,7 +39,7 @@ object ActivityUtil {
     }
 
     fun startCoinListActivity(context: Context) {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             startLoginActivity(context)
             return
         }
@@ -47,7 +47,7 @@ object ActivityUtil {
     }
 
     fun startMyCollectActivity(context: Context) {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             startLoginActivity(context)
             return
         }
@@ -55,7 +55,7 @@ object ActivityUtil {
     }
 
     fun startCollectArticleListActivity(context: Context) {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             startLoginActivity(context)
             return
         }
@@ -63,7 +63,7 @@ object ActivityUtil {
     }
 
     fun startCollectWebsiteListActivity(context: Context) {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             startLoginActivity(context)
             return
         }
@@ -75,7 +75,7 @@ object ActivityUtil {
     }
 
     fun startMyShareActivity(context: Context) {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             startLoginActivity(context)
             return
         }
@@ -83,7 +83,7 @@ object ActivityUtil {
     }
 
     fun startShareArticleListActivity(context: Context, userId: Int) {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             startLoginActivity(context)
             return
         }

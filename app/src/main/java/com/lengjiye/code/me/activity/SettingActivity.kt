@@ -2,12 +2,11 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivitySettingBinding
 import com.lengjiye.code.login.viewmodel.LoginViewModel
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 
@@ -19,7 +18,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, LoginViewModel>() {
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp)
             .setNormalTitle(R.string.s_27).setNormalTitleColor(R.color.c_ff).setBackListener {
                 finish()

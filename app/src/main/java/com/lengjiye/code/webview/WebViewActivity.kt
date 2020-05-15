@@ -10,12 +10,11 @@ import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
 import com.just.agentweb.WebChromeClient
 import com.just.agentweb.WebViewClient
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.ConstantKey
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.log.LogTool
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
@@ -29,8 +28,8 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
     override fun initToolBar() {
         super.initToolBar()
-        val toolbar = ToolBarUtil.Builder(findViewById(R.id.toolbar))
-            .setType(ToolBarUtil.NORMAL_TYPE)
+        val toolbar = ToolBarUtils.Builder(findViewById(R.id.toolbar))
+            .setType(ToolBarUtils.NORMAL_TYPE)
             .setNormalTitleColor(R.color.c_ff)
             .setBackListener {
                 val b = mAgentWeb?.back()
@@ -41,7 +40,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
             }
             .builder()
         this.setSupportActionBar(toolbar)
-        titleView = ToolBarUtil.getNormalTitle(toolbar)
+        titleView = ToolBarUtils.getNormalTitle(toolbar)
     }
 
     override fun initData() {

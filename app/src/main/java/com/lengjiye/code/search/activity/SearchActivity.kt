@@ -5,14 +5,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivitySearchBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.search.viewmodel.SearchViewModel
-import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ActivityUtils
+import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.utils.RxUtil
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -37,8 +36,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar))
-            .setType(ToolBarUtil.EXIT_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar))
+            .setType(ToolBarUtils.EXIT_TYPE)
             .setBackListener {
                 finish()
             }
@@ -47,7 +46,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        val etSearch = ToolBarUtil.getSearchExit(findViewById(R.id.toolbar))
+        val etSearch = ToolBarUtils.getSearchExit(findViewById(R.id.toolbar))
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 key = etSearch.getText()
@@ -82,7 +81,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
 
         searchAdapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                ActivityUtil.startWebViewActivity(this, it.link)
+                ActivityUtils.startWebViewActivity(this, it.link)
             }
         }
 

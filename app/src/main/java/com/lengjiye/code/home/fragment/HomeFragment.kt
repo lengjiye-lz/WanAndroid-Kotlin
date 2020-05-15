@@ -56,7 +56,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
+                ActivityUtils.startWebViewActivity(this.getBaseActivity(), it.link)
             }
         }
 
@@ -76,8 +76,8 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
 
         adapter.collectClickListener { view, position, item ->
             item?.let {
-                if (AccountUtil.isNoLogin()) {
-                    ActivityUtil.startLoginActivity(getBaseActivity())
+                if (AccountUtils.isNoLogin()) {
+                    ActivityUtils.startLoginActivity(getBaseActivity())
                     return@let
                 }
 
@@ -174,7 +174,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         banner?.setImageLoader(object : ImageLoader() {
             override fun displayImage(context: Context, path: Any?, imageView: ImageView) {
                 if (path is BannerBean) {
-                    GlideUtil.loadImage(context, path.imagePath, imageView)
+                    GlideUtils.loadImage(context, path.imagePath, imageView)
                 }
             }
         })
@@ -182,7 +182,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
             ?.setOnBannerListener { position ->
                 val value = mViewModel.bannerList.value?.get(position)
                 value?.let {
-                    ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.url)
+                    ActivityUtils.startWebViewActivity(this.getBaseActivity(), it.url)
                 }
 
             }

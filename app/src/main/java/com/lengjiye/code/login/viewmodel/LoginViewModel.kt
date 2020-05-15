@@ -7,7 +7,7 @@ import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.login.model.LoginModel
 import com.lengjiye.code.me.bean.UserBean
-import com.lengjiye.code.utils.AccountUtil
+import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.tools.ResTool
@@ -57,7 +57,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
         loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
-                AccountUtil.logout()
+                AccountUtils.logout()
                 logoutSuc.value = true
             }
 
@@ -75,7 +75,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             errorCode.value = ApiException(ErrorCode.nameError, ResTool.getString(R.string.s_9), null)
             return
         }
-        AccountUtil.setUserName(username)
+        AccountUtils.setUserName(username)
         if (password.isNullOrEmpty()) {
             errorCode.value = ApiException(ErrorCode.passError, ResTool.getString(R.string.s_10), null)
             return
@@ -92,7 +92,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             errorCode.value = ApiException(ErrorCode.nameError, ResTool.getString(R.string.s_9), null)
             return
         }
-        AccountUtil.setUserName(username)
+        AccountUtils.setUserName(username)
         if (password.isNullOrEmpty()) {
             errorCode.value = ApiException(ErrorCode.passError, ResTool.getString(R.string.s_10), null)
             return
@@ -119,7 +119,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
      */
     private fun saveAccount(user: UserBean) {
         // TODO  保存到数据库
-        AccountUtil.login(user)
+        AccountUtils.login(user)
     }
 
     override fun onCleared() {

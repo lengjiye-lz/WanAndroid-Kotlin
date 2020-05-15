@@ -1,7 +1,6 @@
 package com.lengjiye.code.login.activity
 
 import android.widget.TextView
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
@@ -11,7 +10,7 @@ import com.lengjiye.code.databinding.ActivityLoginBinding
 import com.lengjiye.code.login.fragment.LoginFragment
 import com.lengjiye.code.login.fragment.RegisterFragment
 import com.lengjiye.code.login.viewmodel.LoginViewModel
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ToolBarUtils
 
 /**
  * @Author: lz
@@ -30,12 +29,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff).setBackListener {
                 finish()
             }.builder()
 
-        titleView = ToolBarUtil.getNormalTitle(findViewById(R.id.toolbar))
+        titleView = ToolBarUtils.getNormalTitle(findViewById(R.id.toolbar))
     }
 
     override fun initData() {

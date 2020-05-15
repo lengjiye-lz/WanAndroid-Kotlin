@@ -1,13 +1,12 @@
 package com.lengjiye.code.me.activity
 
 import android.os.Bundle
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityMyCollectBinding
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
-import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ActivityUtils
+import com.lengjiye.code.utils.ToolBarUtils
 
 /**
  * 我的收藏
@@ -20,7 +19,7 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding, MeCollectViewMo
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
             .setNormalTitle(R.string.s_16)
             .setBackListener {
@@ -32,11 +31,11 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding, MeCollectViewMo
         super.initView(savedInstanceState)
 
         mBinding.hnArticleList.setOnClickListener {
-            ActivityUtil.startCollectArticleListActivity(this)
+            ActivityUtils.startCollectArticleListActivity(this)
         }
 
         mBinding.hnWebsiteList.setOnClickListener {
-            ActivityUtil.startCollectWebsiteListActivity(this)
+            ActivityUtils.startCollectWebsiteListActivity(this)
         }
     }
 }

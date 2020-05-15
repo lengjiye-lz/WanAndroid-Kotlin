@@ -9,8 +9,8 @@ import com.lengjiye.code.databinding.FragmentProjectItemBinding
 import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
 import com.lengjiye.code.system.bean.TreeBean
-import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.AccountUtils
+import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
@@ -61,14 +61,14 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
+                ActivityUtils.startWebViewActivity(this.getBaseActivity(), it.link)
             }
         }
 
         adapter.collectClickListener { view, position, item ->
             item?.let {
-                if (AccountUtil.isNoLogin()) {
-                    ActivityUtil.startLoginActivity(getBaseActivity())
+                if (AccountUtils.isNoLogin()) {
+                    ActivityUtils.startLoginActivity(getBaseActivity())
                     return@let
                 }
 

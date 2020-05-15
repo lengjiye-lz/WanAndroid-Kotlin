@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.base.BaseActivity
@@ -16,8 +15,8 @@ import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
 import com.lengjiye.code.utils.ActivityLifecycleCallback
-import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ActivityUtils
+import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.log.LogServiceInstance
 import com.lengjiye.utils.RxUtil
 import io.reactivex.disposables.Disposable
@@ -41,16 +40,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         // 注册activity生命周期
         CodeApplication.instance.registerActivityLifecycleCallbacks(ActivityLifecycleCallback())
         initBottomNavigation()
-        ToolBarUtil.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
-            ActivityUtil.startSearchActivity(this)
+        ToolBarUtils.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
+            ActivityUtils.startSearchActivity(this)
         }
     }
 
     override fun initToolBar() {
         super.initToolBar()
         setSupportActionBar(
-            ToolBarUtil.Builder(findViewById(R.id.toolbar))
-                .setType(ToolBarUtil.SEARCH_TYPE)
+            ToolBarUtils.Builder(findViewById(R.id.toolbar))
+                .setType(ToolBarUtils.SEARCH_TYPE)
                 .setSearchLogoRes(R.mipmap.logo)
                 .setSearchTitle("经常搜索的几个关键词")
                 .builder()
@@ -90,7 +89,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun interval() {
         disposable?.dispose()
         hotKeys?.let {
-            val text = ToolBarUtil.getSearchTitle(findViewById(R.id.toolbar))
+            val text = ToolBarUtils.getSearchTitle(findViewById(R.id.toolbar))
             if (text.visibility != View.VISIBLE) {
                 return
             }

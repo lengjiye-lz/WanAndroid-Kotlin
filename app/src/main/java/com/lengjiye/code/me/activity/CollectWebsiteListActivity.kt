@@ -2,16 +2,15 @@ package com.lengjiye.code.me.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityCollectWebsiteBinding
 import com.lengjiye.code.me.adapter.CollectWebsiteListAdapter
 import com.lengjiye.code.me.viewmodel.MeCollectViewModel
-import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.AccountUtils
+import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -29,7 +28,7 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
             .setNormalTitle(R.string.s_21)
             .setBackListener {
@@ -52,13 +51,13 @@ class CollectWebsiteListActivity : BaseActivity<ActivityCollectWebsiteBinding, M
 
         adapter.setOnItemClickListener { v, position, item ->
             val url = item?.link
-            url?.let { ActivityUtil.startWebViewActivity(this, it) }
+            url?.let { ActivityUtils.startWebViewActivity(this, it) }
         }
 
         adapter.collectClickListener { view, position, item ->
             item?.let {
-                if (AccountUtil.isNoLogin()) {
-                    ActivityUtil.startLoginActivity(this)
+                if (AccountUtils.isNoLogin()) {
+                    ActivityUtils.startLoginActivity(this)
                     return@let
                 }
 

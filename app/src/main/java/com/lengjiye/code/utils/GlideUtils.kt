@@ -31,7 +31,7 @@ import java.io.File
  *
  * context: Context  最好不要使用application
  */
-object GlideUtil {
+object GlideUtils {
 
     fun loadImage(context: Context, url: String?, imageView: ImageView) {
         with(context).load(url).apply(getOptions()).into(imageView)

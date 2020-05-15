@@ -6,7 +6,7 @@ import com.facebook.stetho.Stetho
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
-import com.lengjiye.code.utils.CrashHandlerUtil
+import com.lengjiye.code.utils.CrashHandlerUtils
 
 /**
  * applicationContext
@@ -51,7 +51,7 @@ class CodeApplication : Application(), IApp {
         MasterApplication.getInstance().setIApp(this)
 
         // 崩溃日志捕捉
-        val handler = CrashHandlerUtil()
+        val handler = CrashHandlerUtils()
         Thread.setDefaultUncaughtExceptionHandler(handler)
 
         debugInit()

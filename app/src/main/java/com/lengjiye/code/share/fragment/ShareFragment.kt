@@ -8,8 +8,8 @@ import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentShareBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.share.viewmodel.ShareViewModel
-import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.AccountUtils
+import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
@@ -50,14 +50,14 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
 
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
-                ActivityUtil.startWebViewActivity(this.getBaseActivity(), it.link)
+                ActivityUtils.startWebViewActivity(this.getBaseActivity(), it.link)
             }
         }
 
         adapter.collectClickListener { view, position, item ->
             item?.let {
-                if (AccountUtil.isNoLogin()) {
-                    ActivityUtil.startLoginActivity(getBaseActivity())
+                if (AccountUtils.isNoLogin()) {
+                    ActivityUtils.startLoginActivity(getBaseActivity())
                     return@let
                 }
 

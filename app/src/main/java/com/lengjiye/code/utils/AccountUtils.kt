@@ -7,7 +7,7 @@ import com.lengjiye.tools.SPTool
 /**
  * 账户相关
  */
-object AccountUtil {
+object AccountUtils {
 
     /**
      * 是否登录

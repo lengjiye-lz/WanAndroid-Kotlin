@@ -7,8 +7,8 @@ import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.me.viewmodel.MeViewModel
-import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.code.utils.ActivityUtil
+import com.lengjiye.code.utils.AccountUtils
+import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.ResTool
 
@@ -31,27 +31,27 @@ class MeFragment : LazyParentFragment<FragmentMeBinding, MeViewModel>() {
         super.initView(savedInstanceState)
 
         mBinding.hnRankTable.setOnClickListener {
-            ActivityUtil.startRankTableActivity(getBaseActivity())
+            ActivityUtils.startRankTableActivity(getBaseActivity())
         }
 
         mBinding.hnMeCollect.setOnClickListener {
-            ActivityUtil.startMyCollectActivity(getBaseActivity())
+            ActivityUtils.startMyCollectActivity(getBaseActivity())
         }
 
         mBinding.hnMeShare.setOnClickListener {
-            ActivityUtil.startMyShareActivity(getBaseActivity())
+            ActivityUtils.startMyShareActivity(getBaseActivity())
         }
 
         mBinding.tvMeRank.setOnClickListener {
-            ActivityUtil.startCoinListActivity(getBaseActivity())
+            ActivityUtils.startCoinListActivity(getBaseActivity())
         }
 
         mBinding.hnMeSetting.setOnClickListener {
-            if (!AccountUtil.isLogin()) {
+            if (!AccountUtils.isLogin()) {
                 "没有账号登录".toast()
                 return@setOnClickListener
             }
-            ActivityUtil.startSettingActivity(getBaseActivity())
+            ActivityUtils.startSettingActivity(getBaseActivity())
         }
     }
 
@@ -67,14 +67,14 @@ class MeFragment : LazyParentFragment<FragmentMeBinding, MeViewModel>() {
      * 请求接口
      */
     override fun loadData() {
-        if (!AccountUtil.isLogin()) {
+        if (!AccountUtils.isLogin()) {
             mBinding.tvMeRank.visibility = View.GONE
             mBinding.tvMeName.visibility = View.GONE
             return
         }
 
         mBinding.tvMeName.visibility = View.VISIBLE
-        mBinding.tvMeName.text = AccountUtil.getUserName()
+        mBinding.tvMeName.text = AccountUtils.getUserName()
         mViewModel.getCoinUserInfo()
     }
 }

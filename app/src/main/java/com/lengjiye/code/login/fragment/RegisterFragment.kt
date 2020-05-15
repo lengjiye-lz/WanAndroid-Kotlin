@@ -11,7 +11,7 @@ import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.databinding.FragmentRegisterBinding
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.login.viewmodel.LoginViewModel
-import com.lengjiye.code.utils.AccountUtil
+import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.tools.ResTool
@@ -63,7 +63,7 @@ class RegisterFragment : ParentFragment<FragmentRegisterBinding, LoginViewModel>
     }
 
     private fun initValue() {
-        val name = AccountUtil.getUserName()
+        val name = AccountUtils.getUserName()
         mBinding.detName.setEditText(name)
 
         setTextColor()

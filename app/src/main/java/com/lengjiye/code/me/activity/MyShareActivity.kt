@@ -1,14 +1,13 @@
 package com.lengjiye.code.me.activity
 
 import android.os.Bundle
-import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityMyShareBinding
 import com.lengjiye.code.me.viewmodel.MeShareViewModel
-import com.lengjiye.code.utils.AccountUtil
-import com.lengjiye.code.utils.ActivityUtil
-import com.lengjiye.code.utils.ToolBarUtil
+import com.lengjiye.code.utils.AccountUtils
+import com.lengjiye.code.utils.ActivityUtils
+import com.lengjiye.code.utils.ToolBarUtils
 
 /**
  * 我的分享
@@ -21,7 +20,7 @@ class MyShareActivity : BaseActivity<ActivityMyShareBinding, MeShareViewModel>()
 
     override fun initToolBar() {
         super.initToolBar()
-        ToolBarUtil.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtil.NORMAL_TYPE)
+        ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)
             .setBackRes(R.drawable.ic_back_ffffff_24dp).setNormalTitleColor(R.color.c_ff)
             .setNormalTitle(R.string.s_17)
             .setBackListener {
@@ -33,11 +32,11 @@ class MyShareActivity : BaseActivity<ActivityMyShareBinding, MeShareViewModel>()
         super.initView(savedInstanceState)
 
         mBinding.hnArticleList.setOnClickListener {
-            ActivityUtil.startShareArticleListActivity(this, AccountUtil.getUserId())
+            ActivityUtils.startShareArticleListActivity(this, AccountUtils.getUserId())
         }
 
         mBinding.hnProjectList.setOnClickListener {
-            ActivityUtil.startCollectWebsiteListActivity(this)
+            ActivityUtils.startCollectWebsiteListActivity(this)
         }
     }
 }
