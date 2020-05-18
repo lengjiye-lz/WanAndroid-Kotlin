@@ -127,7 +127,6 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         })
 
         mViewModel.homeEntityList.observe(this, Observer {
-            LogTool.e("lz", "it:${it.size}")
             if (it.isEmpty()) {
                 return@Observer
             }

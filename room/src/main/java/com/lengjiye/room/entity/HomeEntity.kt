@@ -6,7 +6,8 @@ import com.lengjiye.room.entity.converter.TagEntityConverters
 @Entity(tableName = "home")
 @TypeConverters(TagEntityConverters::class)
 class HomeEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    var autoId: Int = 0 // 9126
     var id: Int = 0 // 9126
     var apkLink: String = ""
     var audit: Int = 0 // 1

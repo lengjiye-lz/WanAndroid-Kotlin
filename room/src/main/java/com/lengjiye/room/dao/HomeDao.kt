@@ -16,11 +16,14 @@ interface HomeDao {
     fun insert(homeEntity: HomeEntity)
 
     @Insert
-    fun insert(homeEntitys: List<HomeEntity>)
+    fun insert(homeEntities: List<HomeEntity>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(homeEntity: HomeEntity)
 
     @Delete
     fun delete(homeEntity: HomeEntity)
+
+    @Delete
+    fun deleteAll(homeEntities: List<HomeEntity>)
 }

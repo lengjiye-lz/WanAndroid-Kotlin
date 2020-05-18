@@ -31,6 +31,9 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     private lateinit var loadingObserverBannerBean: LoadingObserver<List<BannerBean>>
     private lateinit var loadingDefault: LoadingObserver<String>
 
+    // 数据是不是来自数据库
+    private var isTopAndFirstRoom: Boolean = true
+
     override fun onCreate() {
         loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
@@ -45,7 +48,10 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
         loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeEntity>>() {
             override fun observerOnNext(data: List<HomeEntity>?) {
                 homeEntityList.value = data
-                HomeModel.singleton.installHome2Room(data as MutableList<HomeEntity>)
+                if (!isTopAndFirstRoom) {
+                    HomeModel.singleton.installHome2Room(data as MutableList<HomeEntity>)
+                }
+                isTopAndFirstRoom = false
             }
 
             override fun observerOnError(e: ApiException) {
@@ -91,6 +97,8 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     fun getHomeTopAndFirstListData() {
         loadingObserverTopAndFirst.cancelRequest()
         loadingObserverTopAndFirst.let {
+            isTopAndFirstRoom = true
+            HomeModel.singleton.getHomeTopAndFirstListData2Room(it)
             HomeModel.singleton.getHomeTopAndFirstListData(it)
         }
     }
