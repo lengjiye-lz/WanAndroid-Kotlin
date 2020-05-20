@@ -2,12 +2,13 @@ package com.lengjiye.code.project.adapter
 
 import android.os.Bundle
 import android.text.Html
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.project.fragment.ProjectFragmentItem
-import com.lengjiye.code.system.bean.TreeBean
+import com.lengjiye.room.entity.ProjectTreeEntity
 import com.lengjiye.tools.ResTool
 
 /**
@@ -17,9 +18,10 @@ import com.lengjiye.tools.ResTool
  */
 class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private var treeBeans: List<TreeBean>? = null
+    private var treeBeans: List<ProjectTreeEntity>? = null
+    var fragment: Fragment? = null
 
-    fun setDatas(treeBeans: List<TreeBean>?) {
+    fun setDatas(treeBeans: List<ProjectTreeEntity>?) {
         this.treeBeans = treeBeans
     }
 
@@ -28,6 +30,11 @@ class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVI
         return ProjectFragmentItem.newInstance(Bundle().apply {
             putParcelable(ConstantKey.KEY_OBJECT, tree)
         })
+    }
+
+    override fun setPrimaryItem(container: ViewGroup, position: Int, `object`: Any) {
+        fragment = `object` as Fragment
+        super.setPrimaryItem(container, position, `object`)
     }
 
     override fun getCount(): Int {

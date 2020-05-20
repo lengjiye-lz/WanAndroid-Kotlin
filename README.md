@@ -25,4 +25,9 @@
 * 底部切换button：com.ashokvarma.android:bottom-navigation-bar
 
 
+
+### 版本迭代记录
+
+* 1.0.0 搭建框架，实现基本功能
+
 ![Image text](./image/no_bug.jpg)

@@ -41,7 +41,7 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
         mBinding.rlList.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
-            refresh()
+            refreshData()
         }
 
         mBinding.srlLayout.setOnLoadMoreListener {
@@ -76,39 +76,44 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
 
     override fun initLiveDataListener() {
         super.initLiveDataListener()
-        mViewModel.userArticleList.observe(this, Observer {
-            if (pager == 0) {
-                mBinding.srlLayout.finishRefresh()
-                if (it.datas.isEmpty()) {
-                    // TODO 显示错误界面
-                } else {
+
+        mViewModel.shareRefreshList.observe(this, Observer {
+            if (it.first) {
+                // 缓存  如果已经有数据就不再处理
+                if (adapter.itemCount <= 0) {
                     adapter.removeAll()
-                    adapter.addAll(it.datas.toMutableList())
+                    adapter.addAll(it.second.datas.toMutableList())
                     adapter.notifyDataSetChanged()
                 }
             } else {
-                mBinding.srlLayout.finishLoadMore()
-                if (it.datas.isEmpty()) {
-                    ResTool.getString(R.string.s_5).toast()
-                    return@Observer
-                } else {
-                    adapter.addAll(it.datas.toMutableList())
-                    adapter.notifyItemRangeChanged(adapter.itemCount, it.datas.size)
-                }
+                // 网络数据
+                mBinding.srlLayout.finishRefresh()
+                adapter.removeAll()
+                adapter.addAll(it.second.datas.toMutableList())
+                adapter.notifyDataSetChanged()
             }
-            pager++
+            pager = it.second.curPage
+        })
+
+        mViewModel.shareMoreList.observe(this, Observer {
+            mBinding.srlLayout.finishLoadMore()
+            if (it.datas.isEmpty()) {
+                ResTool.getString(R.string.s_5).toast()
+                return@Observer
+            } else {
+                adapter.addAll(it.datas.toMutableList())
+                adapter.notifyItemRangeChanged(adapter.itemCount, it.datas.size)
+            }
+            pager = it.curPage
         })
     }
 
-
-    private fun refresh() {
-        pager = 0
-        loadData()
+    private fun loadData() {
+        mViewModel.getShareMoreList(pager)
     }
 
-    override fun loadData() {
-        mViewModel.getUserArticleList(pager)
+    override fun refreshData() {
+        mBinding.srlLayout.autoRefreshAnimationOnly()
+        mViewModel.getShareRefreshList()
     }
-
-
 }

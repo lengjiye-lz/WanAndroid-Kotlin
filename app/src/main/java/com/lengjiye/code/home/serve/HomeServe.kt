@@ -2,8 +2,8 @@ package com.lengjiye.code.home.serve
 
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.network.BaseHttpResult
+import com.lengjiye.room.entity.HomeBannerEntity
 import com.lengjiye.room.entity.HomeEntity
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -18,5 +18,5 @@ interface HomeServe {
     fun getArticleTop(): Observable<BaseHttpResult<List<HomeEntity>>>
 
     @GET(ServerApi.BANNER)
-    fun getBanner(): Observable<BaseHttpResult<List<BannerBean>>>
+    fun getBanner(): Observable<BaseHttpResult<List<HomeBannerEntity>>>
 }

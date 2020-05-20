@@ -5,7 +5,7 @@ import com.lengjiye.room.entity.converter.TagEntityConverters
 
 @Entity(tableName = "home")
 @TypeConverters(TagEntityConverters::class)
-class HomeEntity {
+open class HomeEntity {
     @PrimaryKey(autoGenerate = true)
     var autoId: Int = 0 // 9126
     var id: Int = 0 // 9126
@@ -39,7 +39,3 @@ class HomeEntity {
     var zan: Int = 0 // 0
 }
 
-class TagEntity {
-    var name: String = "" // 公众号
-    var url: String = "" // /wxarticle/list/408/1
-}

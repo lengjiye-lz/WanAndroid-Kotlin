@@ -14,6 +14,7 @@ import com.lengjiye.base.viewmodel.BaseViewModel
 abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : ParentFragment<T, VM>() {
     // 是否已经加载过数据
     private var isDataLoaded = false
+
     // 记录当前fragment的是否隐藏 配合show()、hide()使用
     private var isHiddenToUser = true
 
@@ -26,8 +27,10 @@ abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Par
 
     /**
      * 请求加在数据
+     *
+     * 加载第一次请求数据
      */
-    abstract fun loadData()
+    abstract fun refreshData()
 
     /**
      * fragment再次可见时，是否重新请求数据，默认为false 只请求一次数据
@@ -77,7 +80,7 @@ abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Par
         Log.d("LazyBaseFragment", "!isHiddenToUser:${!isHiddenToUser}")
         if (!isParentHidden() && (isNeedReload() || !isDataLoaded) && !isHiddenToUser) {
             Log.d("LazyBaseFragment", "loadData")
-            loadData()
+            refreshData()
             isDataLoaded = true
             dispatchParentHiddenState()
         }

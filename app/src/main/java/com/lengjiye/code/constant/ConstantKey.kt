@@ -4,6 +4,7 @@ package com.lengjiye.code.constant
  * 传参数用的key
  */
 object ConstantKey {
+    const val KEY_ID = "key_id"
     const val KEY_WEB_URL = "key_web_url"
     // 传递对象
     const val KEY_OBJECT = "key_object"

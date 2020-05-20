@@ -1,33 +1,37 @@
 package com.lengjiye.code.system.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.me.model.MeModel
-import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.code.utils.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
+import com.lengjiye.room.entity.SystemEntity
+import com.lengjiye.room.entity.SystemTreeEntity
 import com.lengjiye.tools.ResTool
 
 class SystemViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<List<TreeBean>>
+    private lateinit var loadingObserver: LoadingObserver<Pair<Boolean, List<SystemTreeEntity>>>
     private lateinit var loadingObserverArticleBean: LoadingObserver<ArticleBean>
+    private lateinit var loadingObserverArticleBean2Room: LoadingObserver<ArticleBean>
     private lateinit var loadingDefault: LoadingObserver<String>
 
-    var tree = MutableLiveData<List<TreeBean>>()
+    var tree = MutableLiveData<List<SystemTreeEntity>>()
     var articleBean = MutableLiveData<ArticleBean>()
     private var cid = 0
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>>() {
-            override fun observerOnNext(data: List<TreeBean>?) {
-                tree.value = data
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, List<SystemTreeEntity>>>() {
+            override fun observerOnNext(data: Pair<Boolean, List<SystemTreeEntity>>?) {
+                tree.value = data?.second
+                if (data?.first == false) {
+                    SystemModel.singleton.installTree2Room(data.second)
+                }
             }
 
             override fun observerOnError(e: ApiException) {
@@ -38,6 +42,19 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
         loadingObserverArticleBean = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 data?.cid = cid
+                articleBean.value = data
+                SystemModel.singleton.installTreeArticle2Room(data?.datas?.map {
+                    SystemEntity.toSystemEntity(it)
+                } as MutableList<SystemEntity>)
+            }
+
+            override fun observerOnError(e: ApiException) {
+
+            }
+        })
+
+        loadingObserverArticleBean2Room = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
+            override fun observerOnNext(data: ArticleBean?) {
                 articleBean.value = data
             }
 
@@ -68,6 +85,10 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
         this.cid = cid
         loadingObserverArticleBean.cancelRequest()
         SystemModel.singleton.getTreeArticleList(pager, cid, loadingObserverArticleBean)
+    }
+
+    fun getTreeArticleList2Room() {
+        SystemModel.singleton.getTreeArticleList2Room(loadingObserverArticleBean2Room)
     }
 
     /**

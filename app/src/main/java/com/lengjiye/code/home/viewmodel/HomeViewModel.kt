@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
-import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.model.HomeModel
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.utils.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.network.LoadingObserver.ObserverListener
+import com.lengjiye.room.entity.HomeBannerEntity
 import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.tools.ResTool
 import com.lengjiye.tools.log.LogTool
@@ -21,23 +21,19 @@ import com.lengjiye.tools.log.LogTool
  */
 class HomeViewModel(application: Application) : BaseViewModel(application) {
 
-    var article = MutableLiveData<ArticleBean>()
-    var homeEntityList = MutableLiveData<List<HomeEntity>>()
-    var bannerList = MutableLiveData<List<BannerBean>>()
+    var articleMoreList = MutableLiveData<ArticleBean>()
+    var homeRefreshList = MutableLiveData<Pair<Boolean, List<HomeEntity>>>()
+    var bannerList = MutableLiveData<Pair<Boolean, List<HomeBannerEntity>>>()
 
-
-    private lateinit var loadingObserver: LoadingObserver<ArticleBean>
-    private lateinit var loadingObserverTopAndFirst: LoadingObserver<List<HomeEntity>>
-    private lateinit var loadingObserverBannerBean: LoadingObserver<List<BannerBean>>
+    private lateinit var loadingMoreObserver: LoadingObserver<ArticleBean>
+    private lateinit var loadingRefreshObserver: LoadingObserver<Pair<Boolean, List<HomeEntity>>>
+    private lateinit var loadingBannerBeanObserver: LoadingObserver<Pair<Boolean, List<HomeBannerEntity>>>
     private lateinit var loadingDefault: LoadingObserver<String>
 
-    // 数据是不是来自数据库
-    private var isTopAndFirstRoom: Boolean = true
-
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<ArticleBean>() {
+        loadingMoreObserver = LoadingObserver(object : ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
-                article.value = data
+                articleMoreList.value = data
             }
 
             override fun observerOnError(e: ApiException) {
@@ -45,13 +41,13 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingObserverTopAndFirst = LoadingObserver(object : LoadingObserver.ObserverListener<List<HomeEntity>>() {
-            override fun observerOnNext(data: List<HomeEntity>?) {
-                homeEntityList.value = data
-                if (!isTopAndFirstRoom) {
-                    HomeModel.singleton.installHome2Room(data as MutableList<HomeEntity>)
+        loadingRefreshObserver = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, List<HomeEntity>>>() {
+            override fun observerOnNext(data: Pair<Boolean, List<HomeEntity>>?) {
+                LogTool.e("lz", "data:${data?.first}")
+                homeRefreshList.value = data
+                if (data?.first == false) {
+                    HomeModel.singleton.installHome2Room(data.second as MutableList<HomeEntity>)
                 }
-                isTopAndFirstRoom = false
             }
 
             override fun observerOnError(e: ApiException) {
@@ -59,9 +55,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingObserverBannerBean = LoadingObserver(object : ObserverListener<List<BannerBean>>() {
-            override fun observerOnNext(data: List<BannerBean>?) {
+        loadingBannerBeanObserver = LoadingObserver(object : ObserverListener<Pair<Boolean, List<HomeBannerEntity>>>() {
+            override fun observerOnNext(data: Pair<Boolean, List<HomeBannerEntity>>?) {
                 bannerList.value = data
+                if (data?.first == false) {
+                    HomeModel.singleton.installBanner2Room(data.second as MutableList<HomeBannerEntity>)
+                }
             }
 
             override fun observerOnError(e: ApiException) {
@@ -85,32 +84,24 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
      * 获取首页列表数据
      */
     fun getHomeData(page: Int) {
-        loadingObserver.cancelRequest()
-        loadingObserver.let {
-            HomeModel.singleton.getHomeListData(page, it)
-        }
+        loadingMoreObserver.cancelRequest()
+        HomeModel.singleton.getHomeListData(page, loadingMoreObserver)
     }
 
     /**
      * 获取置顶和首页数据
      */
     fun getHomeTopAndFirstListData() {
-        loadingObserverTopAndFirst.cancelRequest()
-        loadingObserverTopAndFirst.let {
-            isTopAndFirstRoom = true
-            HomeModel.singleton.getHomeTopAndFirstListData2Room(it)
-            HomeModel.singleton.getHomeTopAndFirstListData(it)
-        }
+        loadingRefreshObserver.cancelRequest()
+        HomeModel.singleton.getHomeTopAndFirstListData(loadingRefreshObserver)
     }
 
     /**
      * 获取banner
      */
     fun getBanner() {
-        loadingObserverBannerBean.cancelRequest()
-        loadingObserverBannerBean.let {
-            HomeModel.singleton.getBanner(it)
-        }
+        loadingBannerBeanObserver.cancelRequest()
+        HomeModel.singleton.getBanner(loadingBannerBeanObserver)
     }
 
     /**
@@ -132,8 +123,8 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     override fun onCleared() {
         super.onCleared()
         loadingDefault.cancelRequest()
-        loadingObserver.cancelRequest()
-        loadingObserverTopAndFirst.cancelRequest()
-        loadingObserverBannerBean.cancelRequest()
+        loadingMoreObserver.cancelRequest()
+        loadingRefreshObserver.cancelRequest()
+        loadingBannerBeanObserver.cancelRequest()
     }
 }

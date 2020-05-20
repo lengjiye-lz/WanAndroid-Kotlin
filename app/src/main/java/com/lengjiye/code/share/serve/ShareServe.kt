@@ -16,7 +16,7 @@ interface ShareServe {
 
     // 广场
     @GET(ServerApi.USER_ARTICLE_LIST)
-    fun getUserArticleList(@Path("page") page: Int): Observable<BaseHttpResult<ArticleBean>>
+    fun getShareList(@Path("page") page: Int): Observable<BaseHttpResult<ArticleBean>>
 
     // 分享的数据（查看别人的）
     @GET(ServerApi.USER_SHARE_ARTICLES)

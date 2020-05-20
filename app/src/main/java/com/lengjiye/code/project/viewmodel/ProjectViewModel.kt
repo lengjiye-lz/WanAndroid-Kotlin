@@ -8,10 +8,12 @@ import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.project.model.ProjectModel
-import com.lengjiye.code.system.bean.TreeBean
+import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.code.utils.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
+import com.lengjiye.room.entity.ProjectEntity
+import com.lengjiye.room.entity.ProjectTreeEntity
 import com.lengjiye.tools.ResTool
 
 /**
@@ -21,18 +23,22 @@ import com.lengjiye.tools.ResTool
  */
 class ProjectViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<List<TreeBean>>
+    private lateinit var loadingObserver: LoadingObserver<Pair<Boolean, List<ProjectTreeEntity>>>
     private lateinit var loadingArticleObserver: LoadingObserver<ArticleBean>
+    private lateinit var loadingArticleRoomObserver: LoadingObserver<ArticleBean>
     private lateinit var loadingDefault: LoadingObserver<String>
 
-    var projectTree = MutableLiveData<List<TreeBean>>()
+    var projectTree = MutableLiveData<List<ProjectTreeEntity>>()
     var projectArticle = MutableLiveData<ArticleBean>()
     private var cid = 0
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<TreeBean>>() {
-            override fun observerOnNext(data: List<TreeBean>?) {
-                projectTree.value = data
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, List<ProjectTreeEntity>>>() {
+            override fun observerOnNext(data: Pair<Boolean, List<ProjectTreeEntity>>?) {
+                projectTree.value = data?.second
+                if (data?.first == false) {
+                    ProjectModel.singleton.installTree2Room(data.second)
+                }
             }
 
             override fun observerOnError(e: ApiException) {
@@ -42,6 +48,19 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
         loadingArticleObserver = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
                 data?.cid = cid
+                projectArticle.value = data
+                ProjectModel.singleton.installProjectArticle2Room(data?.datas?.map {
+                    ProjectEntity.toProjectEntity(it)
+                } as MutableList<ProjectEntity>)
+            }
+
+            override fun observerOnError(e: ApiException) {
+            }
+
+        })
+
+        loadingArticleRoomObserver = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
+            override fun observerOnNext(data: ArticleBean?) {
                 projectArticle.value = data
             }
 
@@ -71,6 +90,10 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
         this.cid = cid
         loadingArticleObserver.cancelRequest()
         ProjectModel.singleton.getProjectArticle(page, cid, loadingArticleObserver)
+    }
+
+    fun getProjectArticle2Room() {
+        ProjectModel.singleton.getProjectArticle2Room(loadingArticleRoomObserver)
     }
 
 

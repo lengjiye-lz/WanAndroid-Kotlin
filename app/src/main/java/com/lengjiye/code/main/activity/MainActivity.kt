@@ -14,6 +14,9 @@ import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
 import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
+import com.lengjiye.code.project.fragment.ProjectFragment
+import com.lengjiye.code.share.fragment.ShareFragment
+import com.lengjiye.code.system.fragment.SystemFragment
 import com.lengjiye.code.utils.ActivityLifecycleCallback
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.ToolBarUtils
@@ -154,45 +157,59 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             it.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
                 override fun onTabReselected(position: Int) {
+                    when (val fragment = getFragment(position)) {
+                        is HomeFragment -> {
+                            fragment.refresh()
+                        }
+                        is ShareFragment -> {
+                            fragment.refreshData()
+                        }
+                        is SystemFragment -> {
+                            fragment.refresh()
+                        }
+                        is ProjectFragment -> {
+                            fragment.refresh()
+                        }
+                    }
                 }
 
                 override fun onTabUnselected(position: Int) {
                 }
 
                 override fun onTabSelected(position: Int) {
-                    switchFragment(position)
+                    val fragment = getFragment(position)
+                    switchFragment(fragment)
                 }
             })
         }
     }
 
-    private fun switchFragment(position: Int) {
-        var fragment: Fragment? = null
-        when (position) {
+    private fun getFragment(position: Int): Fragment {
+        return when (position) {
             0 -> {
-                fragment = MainFragmentManager.instance.getHomeFragment()
+                MainFragmentManager.instance.getHomeFragment()
             }
 
             1 -> {
-                fragment = MainFragmentManager.instance.getShareFragment()
+                MainFragmentManager.instance.getShareFragment()
             }
 
             2 -> {
-                fragment = MainFragmentManager.instance.getSystemFragment()
+                MainFragmentManager.instance.getSystemFragment()
             }
 
             3 -> {
-                fragment = MainFragmentManager.instance.getProjectFragment()
+                MainFragmentManager.instance.getProjectFragment()
             }
 
             4 -> {
-                fragment = MainFragmentManager.instance.getMeFragment()
+                MainFragmentManager.instance.getMeFragment()
+            }
+            else -> {
+                MainFragmentManager.instance.getHomeFragment()
             }
         }
 
-        fragment?.let {
-            switchFragment(it)
-        }
     }
 
 

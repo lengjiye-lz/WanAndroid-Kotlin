@@ -16,7 +16,7 @@ class SearchFragment : LazyParentFragment<FragmentSearchBinding, SearchViewModel
         return R.layout.fragment_search
     }
 
-    override fun loadData() {
+    override fun refreshData() {
 
     }
 }

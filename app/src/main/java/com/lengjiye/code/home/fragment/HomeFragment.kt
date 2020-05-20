@@ -12,9 +12,9 @@ import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentHomeBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
-import com.lengjiye.code.home.bean.BannerBean
 import com.lengjiye.code.home.viewmodel.HomeViewModel
 import com.lengjiye.code.utils.*
+import com.lengjiye.room.entity.HomeBannerEntity
 import com.lengjiye.tools.ResTool
 import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -51,7 +51,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         }
 
         mBinding.srlLayout.setOnLoadMoreListener {
-            mViewModel.getHomeData(page)
+            loadMoreData()
         }
 
         adapter.setOnItemClickListener { v, position, item ->
@@ -112,9 +112,9 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
 
-    override fun initData() {
-        super.initData()
-        mViewModel.article.observe(this, Observer {
+    override fun initLiveDataListener() {
+        super.initLiveDataListener()
+        mViewModel.articleMoreList.observe(this, Observer {
             mBinding.srlLayout.finishLoadMore()
             val dates = it.datas
             if (dates.isEmpty()) {
@@ -126,26 +126,34 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
             page = it.curPage
         })
 
-        mViewModel.homeEntityList.observe(this, Observer {
-            if (it.isEmpty()) {
+        mViewModel.homeRefreshList.observe(this, Observer {
+            if (it.second.isEmpty()) {
+                mBinding.srlLayout.finishRefresh()
                 return@Observer
             }
-            mBinding.srlLayout.finishRefresh()
-            adapter.removeAll()
-            adapter.addAll(it.toMutableList())
-            header.notifyDataSetChanged()
+            LogTool.e("lz", "first:${it.first}")
+            if (it.first) {
+                if (adapter.itemCount <= 0) {
+                    adapter.removeAll()
+                    adapter.addAll(it.second.toMutableList())
+                    header.notifyDataSetChanged()
+                }
+            } else {
+                mBinding.srlLayout.finishRefresh()
+                adapter.removeAll()
+                adapter.addAll(it.second.toMutableList())
+                header.notifyDataSetChanged()
+            }
             page = 1
         })
 
         mViewModel.bannerList.observe(this, Observer {
-            if (it.isEmpty()) {
+            if (it.second.isEmpty()) {
                 return@Observer
             }
-            banner?.setImages(it)
+            banner?.setImages(it.second.filter { homeBannerEntity -> homeBannerEntity.visible == 1 })
             banner?.start()
         })
-
-
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
@@ -157,14 +165,19 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
 
-    override fun loadData() {
+    override fun refreshData() {
         mViewModel.getBanner()
         refresh()
     }
 
-    private fun refresh() {
+    fun refresh() {
         page = 0
+        mBinding.srlLayout.autoRefreshAnimationOnly()
         mViewModel.getHomeTopAndFirstListData()
+    }
+
+    private fun loadMoreData() {
+        mViewModel.getHomeData(page)
     }
 
     private fun initBanner() {
@@ -172,18 +185,17 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         banner = view.findViewById(R.id.banner)
         banner?.setImageLoader(object : ImageLoader() {
             override fun displayImage(context: Context, path: Any?, imageView: ImageView) {
-                if (path is BannerBean) {
+                if (path is HomeBannerEntity) {
                     GlideUtils.loadImage(context, path.imagePath, imageView)
                 }
             }
         })
             ?.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
             ?.setOnBannerListener { position ->
-                val value = mViewModel.bannerList.value?.get(position)
+                val value = mViewModel.bannerList.value?.second?.filter { it.visible == 1 }?.get(position)
                 value?.let {
                     ActivityUtils.startWebViewActivity(this.getBaseActivity(), it.url)
                 }
-
             }
         header.addHeaderView(view)
     }

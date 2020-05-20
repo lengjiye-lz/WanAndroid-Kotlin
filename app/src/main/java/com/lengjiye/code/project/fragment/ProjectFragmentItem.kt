@@ -8,11 +8,11 @@ import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.FragmentProjectItemBinding
 import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
-import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
+import com.lengjiye.room.entity.ProjectTreeEntity
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -24,12 +24,16 @@ import com.scwang.smart.refresh.header.MaterialHeader
  */
 class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectViewModel>() {
 
-    private var projectTree: TreeBean? = null
+    private var projectTree: ProjectTreeEntity? = null
     private var pager = 1
     private var cid = 0
     private val adapter by lazy { ProjectFragmentItemAdapter(getBaseActivity(), null) }
+
     // 数据只请求一次
     private var isFirst = true
+
+    // 是不是要加载缓存
+    private var isRoom = false
 
     companion object {
         @JvmStatic
@@ -89,7 +93,7 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
         mViewModel.getProjectArticle(pager, cid)
     }
 
-    private fun refresh() {
+    fun refresh() {
         pager = 1
         mBinding.srlLayout.autoRefreshAnimationOnly()
         loadMore()
@@ -97,6 +101,7 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
 
     override fun initData() {
         super.initData()
+        isRoom = arguments?.getInt(ConstantKey.KEY_ID, -1) == 0
         projectTree = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
         projectTree?.let {
             cid = it.id
@@ -129,9 +134,12 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
         })
     }
 
+
+
     override fun onResume() {
         super.onResume()
         if (isFirst) {
+            if (isRoom) mViewModel.getProjectArticle2Room()
             refresh()
         }
         isFirst = false

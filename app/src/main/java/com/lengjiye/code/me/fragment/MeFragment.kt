@@ -66,7 +66,7 @@ class MeFragment : LazyParentFragment<FragmentMeBinding, MeViewModel>() {
     /**
      * 请求接口
      */
-    override fun loadData() {
+    override fun refreshData() {
         if (!AccountUtils.isLogin()) {
             mBinding.tvMeRank.visibility = View.GONE
             mBinding.tvMeName.visibility = View.GONE

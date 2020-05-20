@@ -13,25 +13,28 @@ import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentSystemItemBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
-import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
+import com.lengjiye.room.entity.SystemTreeEntity
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
 class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding, SystemViewModel>() {
 
-    private var treeBean: TreeBean? = null
-    private var secondTree: TreeBean? = null
+    private var treeBean: SystemTreeEntity? = null
+    private var secondTree: SystemTreeEntity? = null
     private var pager = 0
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
 
     // 第一次不加载数据
     private var isFirst = false
+
+    // 是不是要加载缓存
+    private var isRoom = false
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_system_item
@@ -44,8 +47,9 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
         }
     }
 
-    override fun loadData() {
+    override fun refreshData() {
         refresh()
+        if (isRoom) mViewModel.getTreeArticleList2Room()
     }
 
     private fun loadMore() {
@@ -91,7 +95,6 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
             loadMore()
         }
 
-
         adapter.setOnItemClickListener { v, position, item ->
             item?.let {
                 ActivityUtils.startWebViewActivity(this.getBaseActivity(), it.link)
@@ -116,17 +119,20 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
                 adapter.notifyItemChanged(position)
             }
         }
-
     }
 
     override fun initData() {
         super.initData()
+        isRoom = arguments?.getInt(ConstantKey.KEY_ID, -1) == 0
         treeBean = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
         if (treeBean == null) {
             return
         }
         initTitle(treeBean)
+    }
 
+    override fun initLiveDataListener() {
+        super.initLiveDataListener()
         mViewModel.articleBean.observe(this, Observer {
             if (it.cid != secondTree?.id) {
                 mBinding.srlLayout.finishRefresh()
@@ -148,25 +154,24 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
             adapter.addAll(it.datas.toMutableList())
             pager = it.curPage
         })
-
     }
 
-    private fun refresh() {
+    fun refresh() {
         pager = 0
         mBinding.srlLayout.autoRefreshAnimationOnly()
         loadMore()
     }
 
-    private fun initTitle(treeBean: TreeBean?) {
+    private fun initTitle(treeBean: SystemTreeEntity?) {
         treeBean?.let {
             val trees = it.children
-            if (trees.isEmpty()) {
+            if (trees?.isEmpty() == true) {
                 mBinding.tabLayout.visibility = View.GONE
                 return@let
             }
-            secondTree = treeBean.children[0]
+            secondTree = treeBean.children?.get(0)
             var tab: TabLayout.Tab
-            trees.forEachIndexed { index, tree ->
+            trees?.forEachIndexed { index, tree ->
                 tab = mBinding.tabLayout.newTab()
                 tab.tag = index
                 tab.text = tree.name
@@ -178,8 +183,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
     @SuppressLint("ResourceType")
     private fun setDivider() {
         val linearLayout = mBinding.tabLayout.getChildAt(0) as LinearLayout
-        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE)
-        linearLayout.setDividerDrawable(Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider)))
-        linearLayout.setDividerPadding(ResTool.getDimens(R.dimen.d_16))
+        linearLayout.showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
+        linearLayout.dividerDrawable = Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider))
+        linearLayout.dividerPadding = ResTool.getDimens(R.dimen.d_16)
     }
 }

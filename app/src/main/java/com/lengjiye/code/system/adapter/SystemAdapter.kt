@@ -1,20 +1,21 @@
 package com.lengjiye.code.system.adapter
 
 import android.os.Bundle
-import android.text.Html
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.lengjiye.code.constant.ConstantKey
-import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.fragment.SystemFragmentItem
+import com.lengjiye.room.entity.SystemTreeEntity
 import com.lengjiye.tools.ResTool
 
 class SystemAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    private var treeBeans: List<TreeBean>? = null
+    private var treeBeans: List<SystemTreeEntity>? = null
+    var fragment: Fragment? = null
 
-    fun setData(treeBeans: List<TreeBean>?) {
+    fun setData(treeBeans: List<SystemTreeEntity>?) {
         this.treeBeans = treeBeans
     }
 
@@ -22,7 +23,13 @@ class SystemAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         val trees = treeBeans?.get(position)
         return SystemFragmentItem.newInstance(Bundle().apply {
             putParcelable(ConstantKey.KEY_OBJECT, trees)
+            putInt(ConstantKey.KEY_ID, position)
         })
+    }
+
+    override fun setPrimaryItem(container: ViewGroup, position: Int, `object`: Any) {
+        fragment = `object` as Fragment
+        super.setPrimaryItem(container, position, `object`)
     }
 
     override fun getCount(): Int {
@@ -30,7 +37,7 @@ class SystemAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        val treeBean = treeBeans?.get(position)
-        return ResTool.fromHtml(treeBean?.name)
+        val systemTreeEntity = treeBeans?.get(position)
+        return ResTool.fromHtml(systemTreeEntity?.name)
     }
 }

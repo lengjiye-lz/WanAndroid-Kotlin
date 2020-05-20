@@ -23,7 +23,7 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
         return R.layout.fragment_system
     }
 
-    override fun loadData() {
+    override fun refreshData() {
         mViewModel.getTree()
     }
 
@@ -36,20 +36,25 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
         setDivider()
     }
 
-    override fun initData() {
-        super.initData()
+    override fun initLiveDataListener() {
+        super.initLiveDataListener()
         mViewModel.tree.observe(this, Observer {
             adapter.setData(it)
             adapter.notifyDataSetChanged()
         })
     }
 
+    fun refresh() {
+        if (adapter.fragment is SystemFragmentItem) {
+            (adapter.fragment as SystemFragmentItem).refresh()
+        }
+    }
 
     @SuppressLint("ResourceType")
     private fun setDivider() {
         val linearLayout = mBinding.tabLayout.getChildAt(0) as LinearLayout
-        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE)
-        linearLayout.setDividerDrawable(Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider)))
-        linearLayout.setDividerPadding(ResTool.getDimens(R.dimen.d_16))
+        linearLayout.showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
+        linearLayout.dividerDrawable = Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider))
+        linearLayout.dividerPadding = ResTool.getDimens(R.dimen.d_16)
     }
 }

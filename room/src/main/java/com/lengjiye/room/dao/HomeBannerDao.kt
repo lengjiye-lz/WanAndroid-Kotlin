@@ -6,12 +6,12 @@ import com.lengjiye.room.entity.HomeEntity
 
 @Dao
 interface HomeBannerDao {
-    @Query("SELECT * FROM home_banner where id=:id")
-    fun query(id: Int): HomeBannerEntity?
+    @Query("SELECT * FROM home_banner")
+    fun queryAll(): List<HomeBannerEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(homeEntity: HomeBannerEntity)
+    fun insertAll(homeBannerEntities: List<HomeBannerEntity>)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(homeEntity: HomeBannerEntity)
+    @Delete
+    fun deleteAll(homeBannerEntities: List<HomeBannerEntity>)
 }

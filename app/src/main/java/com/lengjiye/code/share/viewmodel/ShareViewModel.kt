@@ -1,7 +1,6 @@
 package com.lengjiye.code.share.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
@@ -11,6 +10,7 @@ import com.lengjiye.code.share.model.ShareModel
 import com.lengjiye.code.utils.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
+import com.lengjiye.room.entity.ShareEntity
 import com.lengjiye.tools.ResTool
 
 /**
@@ -20,21 +20,37 @@ import com.lengjiye.tools.ResTool
  */
 class ShareViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserverUserArticle: LoadingObserver<ArticleBean>
+    private lateinit var loadingObserverMoreList: LoadingObserver<ArticleBean>
+    private lateinit var loadingObserverRefreshList: LoadingObserver<Pair<Boolean, ArticleBean>>
     private lateinit var loadingDefault: LoadingObserver<String>
 
-    var userArticleList = MutableLiveData<ArticleBean>()
+    var shareMoreList = MutableLiveData<ArticleBean>()
+    var shareRefreshList = MutableLiveData<Pair<Boolean, ArticleBean>>()
 
     override fun onCreate() {
-        loadingObserverUserArticle = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
+        loadingObserverMoreList = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
-                userArticleList.value = data
+                shareMoreList.value = data
             }
 
             override fun observerOnError(e: ApiException) {
 
             }
+        })
 
+        loadingObserverRefreshList = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, ArticleBean>>() {
+            override fun observerOnNext(data: Pair<Boolean, ArticleBean>?) {
+                shareRefreshList.value = data
+                if (data?.first == false) { // 只缓存当前第一页数据
+                    ShareModel.singleton.installBanner2Room(data.second.datas.map {
+                        ShareEntity.toShareEntity(it)
+                    } as MutableList<ShareEntity>)
+                }
+            }
+
+            override fun observerOnError(e: ApiException) {
+
+            }
         })
 
         loadingDefault = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
@@ -49,9 +65,20 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
         })
     }
 
-    fun getUserArticleList(page: Int) {
-        loadingObserverUserArticle.cancelRequest()
-        ShareModel.singleton.getCollectArticleList(page, loadingObserverUserArticle)
+    /**
+     * 请求更多数据
+     */
+    fun getShareMoreList(page: Int) {
+        loadingObserverMoreList.cancelRequest()
+        ShareModel.singleton.getShareMoreList(page, loadingObserverMoreList)
+    }
+
+    /**
+     * 刷新数据
+     */
+    fun getShareRefreshList() {
+        loadingObserverRefreshList.cancelRequest()
+        ShareModel.singleton.getShareRefreshList(loadingObserverRefreshList)
     }
 
     /**
@@ -70,10 +97,10 @@ class ShareViewModel(application: Application) : BaseViewModel(application) {
         MeModel.singleton.unCollectArticle(id, loadingDefault)
     }
 
-
     override fun onCleared() {
         super.onCleared()
+        loadingObserverRefreshList.cancelRequest()
         loadingDefault.cancelRequest()
-        loadingObserverUserArticle.cancelRequest()
+        loadingObserverMoreList.cancelRequest()
     }
 }

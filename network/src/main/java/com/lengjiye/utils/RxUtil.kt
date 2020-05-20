@@ -1,10 +1,13 @@
 package com.lengjiye.utils
 
+import com.lengjiye.tools.log.LogTool
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import java.lang.reflect.Constructor
 import java.util.concurrent.TimeUnit
 
 object RxUtil {
@@ -65,7 +68,24 @@ object RxUtil {
      * 在线程中
      */
     fun justInIO(string: String = "", listener: (long: String) -> Unit): Disposable? {
-        return Observable.just(string).observeOn(Schedulers.io()).subscribe(listener)
+        return Observable.just(string).observeOn(Schedulers.io()).subscribe(listener, {
+            LogTool.e("error:${it.message}")
+        })
+    }
+
+    /**
+     * 执行单个任务,可以延迟
+     */
+    fun <T> create2(task: RXSimpleTask<T>, delay: Long = 0): Observable<T>? {
+        return Observable.create<T> {
+            val t = task.doSth()
+            if (t == null) {
+                it.onError(Throwable("is null"))
+            } else {
+                it.onNext(t)
+            }
+            it.onComplete()
+        }.delay(delay, TimeUnit.MILLISECONDS)
     }
 
     /**

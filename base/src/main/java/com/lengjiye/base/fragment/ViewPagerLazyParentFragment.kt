@@ -38,7 +38,7 @@ abstract class ViewPagerLazyParentFragment<T : ViewDataBinding, VM : BaseViewMod
     /**
      * 请求加在数据
      */
-    abstract fun loadData()
+    abstract fun refreshData()
 
     /**
      * 开始请求数据
@@ -53,7 +53,7 @@ abstract class ViewPagerLazyParentFragment<T : ViewDataBinding, VM : BaseViewMod
         )
         if (isViewCreated && isVisibleToUser && isParentVisible() && (isNeedReload() || !isDataLoaded)) {
             Log.d("LazyBaseFragment", "viewpager loadData")
-            loadData()
+            refreshData()
             isDataLoaded = true
             // 通知子fragment请求数据
             dispatchParentVisibleState()
