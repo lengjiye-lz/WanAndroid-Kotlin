@@ -43,7 +43,6 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
 
             override fun observerOnError(e: ApiException) {
             }
-
         })
         loadingArticleObserver = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
             override fun observerOnNext(data: ArticleBean?) {
@@ -95,7 +94,6 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
     fun getProjectArticle2Room() {
         ProjectModel.singleton.getProjectArticle2Room(loadingArticleRoomObserver)
     }
-
 
     /**
      * 添加收藏

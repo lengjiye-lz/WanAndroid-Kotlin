@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentShareBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
@@ -113,6 +114,9 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
     }
 
     override fun refreshData() {
+        if (getBaseActivity() is BaseActivity) {
+            (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rlList, 0)
+        }
         mBinding.srlLayout.autoRefreshAnimationOnly()
         mViewModel.getShareRefreshList()
     }

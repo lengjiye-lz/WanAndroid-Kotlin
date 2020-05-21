@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.databinding.FragmentProjectItemBinding
 import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
@@ -95,6 +96,9 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
 
     fun refresh() {
         pager = 1
+        if (getBaseActivity() is BaseActivity) {
+            (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rlList, 0)
+        }
         mBinding.srlLayout.autoRefreshAnimationOnly()
         loadMore()
     }
@@ -133,7 +137,6 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
             pager = it.curPage + 1
         })
     }
-
 
 
     override fun onResume() {

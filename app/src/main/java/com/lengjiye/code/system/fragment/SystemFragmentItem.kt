@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.base.fragment.ViewPagerLazyParentFragment
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentSystemItemBinding
@@ -158,6 +159,9 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
 
     fun refresh() {
         pager = 0
+        if (getBaseActivity() is BaseActivity) {
+            (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rvView, 0)
+        }
         mBinding.srlLayout.autoRefreshAnimationOnly()
         loadMore()
     }

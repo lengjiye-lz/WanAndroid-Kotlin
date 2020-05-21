@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
+import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.FragmentHomeBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.home.viewmodel.HomeViewModel
@@ -172,6 +173,9 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
 
     fun refresh() {
         page = 0
+        if (getBaseActivity() is BaseActivity) {
+            (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rlList, 0)
+        }
         mBinding.srlLayout.autoRefreshAnimationOnly()
         mViewModel.getHomeTopAndFirstListData()
     }
