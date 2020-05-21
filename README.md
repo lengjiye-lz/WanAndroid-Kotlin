@@ -16,7 +16,13 @@
 
 ### 使用到的依赖库
 
-* 项目框架：MVVM + Jetpack
+* 项目框架：JetPack
+
+  2. MVVM：项目整体框架
+  3. Lifecycle：生命周期管理，主要是网络请求
+  4. LiveData：数据通知
+  5. Room：数据库
+
 * 网络框架：okhttp3 + retrofit2 + rxjava2
 * 图片框架：glide
 * banner：com.youth.banner.Banner
@@ -24,16 +30,15 @@
 * webview：com.just.agentweb:agentweb
 * 底部切换button：com.ashokvarma.android:bottom-navigation-bar
 
-
-
 ### 版本迭代记录
 
 * 1.0.0 搭建框架，实现基本功能，组件化开发
 * 1.0.1
   1. 添加room数据库，首页四屏都添加数据缓存
   2. 修改数据加载策略
-  3. 添加新功能，不需要权限都悬浮球
-  4. 添加日志实时显示功能 [LogServiceInstance](https://github.com/lengjiye-lz/WanAndroid-Kotlin/blob/v1.0.1/tools/src/main/java/com/lengjiye/tools/log/LogServiceInstance.kt)
-  5. 修改bug
+  3. 添加自定义图片圆角
+  4. 添加新功能，不需要权限都悬浮球
+  5. 添加日志实时显示功能 [LogServiceInstance](https://github.com/lengjiye-lz/WanAndroid-Kotlin/blob/v1.0.1/tools/src/main/java/com/lengjiye/tools/log/LogServiceInstance.kt)
+  6. 修改bug
 
 ![Image text](./image/no_bug.jpg)
