@@ -41,11 +41,11 @@ object GlideUtils {
         with(context).asBitmap().load(url).apply(getOptions()).into(target)
     }
 
-    fun loadFile(context: Context, file: File?, imageView: ImageView) {
+    fun loadImage(context: Context, file: File?, imageView: ImageView) {
         with(context).load(file).apply(getOptions()).into(imageView)
     }
 
-    fun loadRes(context: Context, res: Int?, imageView: ImageView) {
+    fun loadImage(context: Context, res: Int?, imageView: ImageView) {
         with(context).load(res).apply(getOptions()).into(imageView)
     }
 

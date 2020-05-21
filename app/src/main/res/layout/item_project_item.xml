@@ -102,7 +102,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tv_time"
                     app:layout_constraintEnd_toEndOf="@+id/tv_desc"
                     app:layout_constraintTop_toTopOf="@+id/tv_author"
-                    app:srcCompat="@drawable/collect_icon_nor" />
+                    tools:src="@drawable/collect_icon_nor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

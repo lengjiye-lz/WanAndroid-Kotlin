@@ -28,6 +28,12 @@
 
 ### 版本迭代记录
 
-* 1.0.0 搭建框架，实现基本功能
+* 1.0.0 搭建框架，实现基本功能，组件化开发
+* 1.0.1
+  1. 添加room数据库，首页四屏都添加数据缓存
+  2. 修改数据加载策略
+  3. 添加新功能，不需要权限都悬浮球
+  4. 添加日志实时显示功能 [LogServiceInstance](https://github.com/lengjiye-lz/WanAndroid-Kotlin/blob/v1.0.1/tools/src/main/java/com/lengjiye/tools/log/LogServiceInstance.kt)
+  5. 修改bug
 
 ![Image text](./image/no_bug.jpg)

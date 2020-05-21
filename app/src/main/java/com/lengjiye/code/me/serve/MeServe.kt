@@ -40,7 +40,7 @@ interface MeServe {
     fun collectAddOtherArticle(@Field("title") title: String, @Field("author") author: String, @Field("link") link: String): Observable<BaseHttpResult<String>>
 
     // 取消收藏
-    @POST(ServerApi.UN_COLLECT_ARTICLE)
+    @POST(ServerApi.UN_COLLECT_ORIGINID_ARTICLE)
     fun unCollectArticle(@Path("id") id: Int): Observable<BaseHttpResult<String>>
 
     // 取消我的收藏

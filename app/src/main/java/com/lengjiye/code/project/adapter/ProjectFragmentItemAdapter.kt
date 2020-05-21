@@ -25,7 +25,7 @@ class ProjectFragmentItemAdapter constructor(val context: Context, models: Mutab
             holder.binding.tvDesc.text = ResTool.fromHtml(it.desc).trim()
             holder.binding.tvTime.text = it.niceDate
             GlideUtils.loadRoundedCornersImage(context, it.envelopePic, R.dimen.d_2, holder.binding.ivEnvelope)
-
+            GlideUtils.loadImage(context, if (it.collect) R.drawable.collect_icon_pre else R.drawable.collect_icon_nor, holder.binding.ivCollect)
             holder.binding.ivCollect.setOnClickListener { view ->
                 listener?.invoke(view, position, item)
             }
