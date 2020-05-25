@@ -1,6 +1,6 @@
 package ${applicaitionId}.${packageName}.activity
 
-import com.lengjiye.base.BaseActivity
+import com.lengjiye.code.base.BaseActivity
 import ${applicaitionId}.R
 import ${applicaitionId}.databinding.Activity${functionName}Binding
 import ${applicaitionId}.${packageName}.viewmodel.${functionName}ViewModel
@@ -14,13 +14,5 @@ class ${functionName}Activity : BaseActivity<Activity${functionName}Binding, ${f
 
     override fun getLayoutId(): Int {
         return R.layout.activity_${packageName}
-    }
-
-    override fun getViewModel(): Class<${functionName}ViewModel> {
-        return ${functionName}ViewModel::class.java
-    }
-
-    override fun bindViewModel() {
-        mBinding.viewModel = mViewModel
     }
 }

@@ -11,7 +11,4 @@ import com.lengjiye.base.viewmodel.BaseViewModel
 class ${functionName}ViewModel(application: Application) : BaseViewModel(application) {
     override fun onCreate() {
     }
-
-    override fun onDestroy() {
-    }
 }
