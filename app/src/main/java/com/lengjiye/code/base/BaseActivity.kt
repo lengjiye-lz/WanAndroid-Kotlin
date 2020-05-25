@@ -1,6 +1,5 @@
 package com.lengjiye.code.base
 
-import android.content.Context
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.lengjiye.code.databinding.ActivityBaseBinding
 import com.lengjiye.code.utils.inter.ScrollToTopInterface
 import com.lengjiye.code.utils.toast
 import com.lengjiye.code.widgets.FloatingHolder
-import com.lengjiye.tools.log.LogTool
 
 /**
  * 基类
