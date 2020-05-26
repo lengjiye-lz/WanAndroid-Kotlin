@@ -13,8 +13,9 @@ import com.lengjiye.base.activity.ParentActivity
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityBaseBinding
+import com.lengjiye.code.todo.activity.TodoActivity
 import com.lengjiye.code.utils.inter.ScrollToTopInterface
-import com.lengjiye.code.utils.toast
+import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.widgets.FloatingHolder
 
 /**
@@ -34,7 +35,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : ParentAct
         (baseBinding as ActivityBaseBinding).flLayout.addView(floatingView, floatingParams)
         FloatingHolder.singleton.addObserver((baseBinding as ActivityBaseBinding).flLayout)
         (baseBinding as ActivityBaseBinding).flLayout.setOnClickListener {
-            "我是悬浮球".toast()
+            startActivity<TodoActivity>()
         }
     }
 

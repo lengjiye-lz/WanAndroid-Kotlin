@@ -28,16 +28,16 @@ class LoginModel : BaseModel() {
 
     fun login(username: String, password: String, observer: Observer<UserBean>) {
         val observable = getServe()?.login(username, password)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun register(username: String, password: String, rePassword: String, observer: Observer<UserBean>) {
         val observable = getServe()?.register(username, password, rePassword)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 
     fun logout(observer: Observer<String>) {
         val observable = getServe()?.logout()?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+        makeSubscribe(observable, observer)
     }
 }

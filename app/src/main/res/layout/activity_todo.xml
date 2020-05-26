@@ -15,5 +15,67 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints">
 
+        <include layout="@layout/layout_tool_bar" />
+
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:tabIndicatorColor="@color/c_E24333"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/c_FF2B33"
+                app:tabTextAppearance="@style/first_tab_text_style"
+                app:tabTextColor="@color/c_1a" />
+
+        <include
+                layout="@layout/widget_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d_1"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+
+        <Button
+                android:id="@+id/btn_no_suc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/s_37"
+                app:layout_constraintEnd_toStartOf="@+id/btn_suc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_line" />
+
+        <Button
+                android:id="@+id/btn_suc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/s_38"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_no_suc"
+                app:layout_constraintTop_toTopOf="@+id/btn_no_suc" />
+
+        <ImageView
+                android:id="@+id/tool_iv_top_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_title_bar_shadow"
+                app:layout_constraintTop_toBottomOf="@+id/btn_no_suc" />
+
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/srl_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_no_suc">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rl_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

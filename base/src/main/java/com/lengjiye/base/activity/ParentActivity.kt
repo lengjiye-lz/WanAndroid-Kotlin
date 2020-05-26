@@ -50,6 +50,7 @@ abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
 
     /**
      * 在原有的布局外面添加一些公共的控件，比如悬浮窗，异常界面等
+     * 如果不需要显示则重写此方法，返回null
      *
      * 可以使用<merge>标签优化
      */

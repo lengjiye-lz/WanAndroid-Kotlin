@@ -53,7 +53,7 @@ public class PersistentCookieStore implements CookieStore {
 
             String[] cookieNameArr = cookieNames.split(",");
             for (String name : cookieNameArr) {
-                String encodedCookie = this.cookiePrefs.getString("cookie_" + name, null);
+                String encodedCookie = this.cookiePrefs.getString(COOKIE_NAME_PREFIX + name, null);
                 if (encodedCookie == null) {
                     continue;
                 }

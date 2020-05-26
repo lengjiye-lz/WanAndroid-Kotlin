@@ -38,5 +38,7 @@
     <string name="s_32">项目列表</string>
     <string name="s_35">操作成功</string>
     <string name="s_36">操作失败</string>
+    <string name="s_37">未完成</string>
+    <string name="s_38">完成</string>
 
 </resources>
