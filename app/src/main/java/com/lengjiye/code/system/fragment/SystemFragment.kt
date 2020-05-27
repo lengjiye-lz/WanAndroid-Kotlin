@@ -9,8 +9,10 @@ import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentSystemBinding
 import com.lengjiye.code.system.adapter.SystemAdapter
+import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.LogTool
 
 /**
  * 体系
@@ -34,15 +36,27 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
         mBinding.viewPager.currentItem = 0
         mBinding.tabLayout.setupWithViewPager(mBinding.viewPager)
         setDivider()
-
-        mBinding.tabLayout.getTabAt(0)?.select()
     }
 
     override fun initLiveDataListener() {
         super.initLiveDataListener()
         mViewModel.tree.observe(this, Observer {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
+            if (adapter.count <= 0) {
+                adapter.treeBeans = it
+                adapter.notifyDataSetChanged()
+            } else {
+                if (adapter.treeBeans?.equals(it) == false) {
+                    adapter.treeBeans = it
+                    adapter.notifyDataSetChanged()
+                    // 更新数据库
+                    SystemModel.singleton.installTree2Room(it)
+                    mBinding.tabLayout.post {
+                        mBinding.tabLayout.getTabAt(0)?.select()
+                    }
+                } else {
+                    LogTool.d("数据相同, 不更新")
+                }
+            }
         })
     }
 

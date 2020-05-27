@@ -23,7 +23,7 @@ import com.lengjiye.tools.ResTool
  */
 class ProjectViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<Pair<Boolean, List<ProjectTreeEntity>>>
+    private lateinit var loadingObserver: LoadingObserver<List<ProjectTreeEntity>>
     private lateinit var loadingArticleObserver: LoadingObserver<ArticleBean>
     private lateinit var loadingArticleRoomObserver: LoadingObserver<ArticleBean>
     private lateinit var loadingDefault: LoadingObserver<String>
@@ -33,12 +33,9 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
     private var cid = 0
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, List<ProjectTreeEntity>>>() {
-            override fun observerOnNext(data: Pair<Boolean, List<ProjectTreeEntity>>?) {
-                projectTree.value = data?.second
-                if (data?.first == false) {
-                    ProjectModel.singleton.installTree2Room(data.second)
-                }
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<ProjectTreeEntity>>() {
+            override fun observerOnNext(data: List<ProjectTreeEntity>?) {
+                projectTree.value = data
             }
 
             override fun observerOnError(e: ApiException) {

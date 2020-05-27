@@ -32,19 +32,15 @@ class ProjectModel : BaseModel() {
         return ServeHolder.singleton.getServe(ProjectServe::class.java)
     }
 
-    fun getProjectTree(observer: Observer<Pair<Boolean, List<ProjectTreeEntity>>>) {
+    fun getProjectTree(observer: Observer<List<ProjectTreeEntity>>) {
         val roomData = RxUtil.create2(object : RxUtil.RXSimpleTask<List<ProjectTreeEntity>>() {
             override fun doSth(): List<ProjectTreeEntity>? {
                 val dao = AppDatabase.getInstance(CodeApplication.instance).projectTreeDao()
                 return dao.queryAll()
             }
-        })?.map {
-            Pair(true, it)
-        }
+        })
 
-        val network = getServe()?.getProjectTree()?.map(HttpResultFunc())?.map {
-            Pair(false, it)
-        }
+        val network = getServe()?.getProjectTree()?.map(HttpResultFunc())
 
         val observable = Observable.concat(roomData, network)
          makeSubscribe(observable, observer)

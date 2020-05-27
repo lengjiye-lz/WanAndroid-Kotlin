@@ -132,7 +132,6 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
                 mBinding.srlLayout.finishRefresh()
                 return@Observer
             }
-            LogTool.e("lz", "first:${it.first}")
             if (it.first) {
                 if (adapter.itemCount <= 0) {
                     adapter.removeAll()

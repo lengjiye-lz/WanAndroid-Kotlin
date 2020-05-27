@@ -129,7 +129,7 @@ dependencies {
     implementation project(':tools')
     implementation project(':room')
 
-    implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
+//    implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
     implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
     // 查看数据库
     debugImplementation "com.facebook.stetho:stetho:$cfgs.stetho"

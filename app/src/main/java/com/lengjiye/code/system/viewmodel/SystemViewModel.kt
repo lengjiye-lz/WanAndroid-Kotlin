@@ -16,7 +16,7 @@ import com.lengjiye.tools.ResTool
 
 class SystemViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<Pair<Boolean, List<SystemTreeEntity>>>
+    private lateinit var loadingObserver: LoadingObserver<List<SystemTreeEntity>>
     private lateinit var loadingObserverArticleBean: LoadingObserver<ArticleBean>
     private lateinit var loadingObserverArticleBean2Room: LoadingObserver<ArticleBean>
     private lateinit var loadingDefault: LoadingObserver<String>
@@ -26,12 +26,9 @@ class SystemViewModel(application: Application) : BaseViewModel(application) {
     private var cid = 0
 
     override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, List<SystemTreeEntity>>>() {
-            override fun observerOnNext(data: Pair<Boolean, List<SystemTreeEntity>>?) {
-                tree.value = data?.second
-                if (data?.first == false) {
-                    SystemModel.singleton.installTree2Room(data.second)
-                }
+        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<List<SystemTreeEntity>>() {
+            override fun observerOnNext(data: List<SystemTreeEntity>?) {
+                tree.value = data
             }
 
             override fun observerOnError(e: ApiException) {

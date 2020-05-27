@@ -27,20 +27,14 @@ class SystemModel : BaseModel() {
         return ServeHolder.singleton.getServe(SystemServe::class.java)
     }
 
-    fun getTree(observer: Observer<Pair<Boolean, List<SystemTreeEntity>>>) {
+    fun getTree(observer: Observer<List<SystemTreeEntity>>) {
         val roomData = RxUtil.create2(object : RxUtil.RXSimpleTask<List<SystemTreeEntity>>() {
             override fun doSth(): List<SystemTreeEntity>? {
                 val dao = AppDatabase.getInstance(CodeApplication.instance).systemTreeDao()
                 return dao.queryAll()
             }
-        })?.map {
-            Pair(true, it)
-        }
-
-        val network = getServe()?.getTree()?.map(HttpResultFunc())?.map {
-            Pair(false, it)
-        }
-
+        })
+        val network = getServe()?.getTree()?.map(HttpResultFunc())
         val observable = Observable.concat(roomData, network)
         makeSubscribe(observable, observer)
     }

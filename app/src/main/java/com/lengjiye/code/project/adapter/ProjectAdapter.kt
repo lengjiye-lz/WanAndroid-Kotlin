@@ -18,12 +18,8 @@ import com.lengjiye.tools.ResTool
  */
 class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private var treeBeans: List<ProjectTreeEntity>? = null
+    var treeBeans: List<ProjectTreeEntity>? = null
     var fragment: Fragment? = null
-
-    fun setDatas(treeBeans: List<ProjectTreeEntity>?) {
-        this.treeBeans = treeBeans
-    }
 
     override fun getItem(position: Int): Fragment {
         val tree = treeBeans?.get(position)

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import com.lengjiye.code.constant.ConstantKey
 import com.lengjiye.code.system.fragment.SystemFragmentItem
 import com.lengjiye.room.entity.SystemTreeEntity
@@ -12,12 +13,8 @@ import com.lengjiye.tools.ResTool
 
 class SystemAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    private var treeBeans: List<SystemTreeEntity>? = null
+    var treeBeans: List<SystemTreeEntity>? = null
     var fragment: Fragment? = null
-
-    fun setData(treeBeans: List<SystemTreeEntity>?) {
-        this.treeBeans = treeBeans
-    }
 
     override fun getItem(position: Int): Fragment {
         val trees = treeBeans?.get(position)

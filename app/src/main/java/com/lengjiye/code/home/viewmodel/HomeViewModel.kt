@@ -43,7 +43,6 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
 
         loadingRefreshObserver = LoadingObserver(object : LoadingObserver.ObserverListener<Pair<Boolean, List<HomeEntity>>>() {
             override fun observerOnNext(data: Pair<Boolean, List<HomeEntity>>?) {
-                LogTool.e("lz", "data:${data?.first}")
                 homeRefreshList.value = data
                 if (data?.first == false) {
                     HomeModel.singleton.installHome2Room(data.second as MutableList<HomeEntity>)

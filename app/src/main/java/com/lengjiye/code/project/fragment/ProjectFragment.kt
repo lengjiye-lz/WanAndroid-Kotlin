@@ -9,9 +9,12 @@ import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentProjectBinding
 import com.lengjiye.code.project.adapter.ProjectAdapter
+import com.lengjiye.code.project.model.ProjectModel
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
 import com.lengjiye.code.system.fragment.SystemFragmentItem
+import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.LogTool
 
 /**
  * @Author: lz
@@ -43,11 +46,22 @@ class ProjectFragment : ParentFragment<FragmentProjectBinding, ProjectViewModel>
     override fun initLiveDataListener() {
         super.initLiveDataListener()
         mViewModel.projectTree.observe(this, Observer {
-            if (it.isEmpty()) {
-                return@Observer
+            if (adapter.count <= 0) {
+                adapter.treeBeans = it
+                adapter.notifyDataSetChanged()
+            } else {
+                if (adapter.treeBeans?.equals(it) == false) {
+                    adapter.treeBeans = it
+                    adapter.notifyDataSetChanged()
+                    // 更新数据库
+                    ProjectModel.singleton.installTree2Room(it)
+                    mBinding.tabLayout.post {
+                        mBinding.tabLayout.getTabAt(0)?.select()
+                    }
+                } else {
+                    LogTool.d("数据相同, 不更新")
+                }
             }
-            adapter.setDatas(it)
-            adapter.notifyDataSetChanged()
         })
     }
 
