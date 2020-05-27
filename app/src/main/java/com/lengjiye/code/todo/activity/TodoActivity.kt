@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
+import com.google.android.material.tabs.TabLayout
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityTodoBinding
@@ -63,7 +64,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         addTabLayout()
-        setDivider()
+
         mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
         mBinding.rlList.adapter = adapter
     }
@@ -77,10 +78,23 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
     }
 
     private fun addTabLayout() {
+        setDivider()
         mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.All.type))
         mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.WORK.type))
         mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.LIFE.type))
         mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.RECREATION.type))
+        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+        })
+
     }
 
     override fun initData() {

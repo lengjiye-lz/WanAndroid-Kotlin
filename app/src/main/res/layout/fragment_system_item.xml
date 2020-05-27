@@ -22,6 +22,7 @@
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:tabIndicator="@drawable/tab_layout_indicator"
                 app:tabIndicatorColor="@color/c_E24333"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/c_FF2B33"

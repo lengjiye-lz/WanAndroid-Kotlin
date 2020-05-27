@@ -25,11 +25,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:tabIndicator="@drawable/tab_layout_indicator"
                 app:tabIndicatorColor="@color/c_E24333"
-                app:tabMode="scrollable"
+                app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/c_FF2B33"
                 app:tabTextAppearance="@style/first_tab_text_style"
-                app:tabTextColor="@color/c_1a" />
+                app:tabTextColor="@color/c_1a"
+                app:tabUnboundedRipple="true" />
 
         <include
                 layout="@layout/widget_line"

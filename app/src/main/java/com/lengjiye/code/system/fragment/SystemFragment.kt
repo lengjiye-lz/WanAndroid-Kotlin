@@ -34,6 +34,8 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
         mBinding.viewPager.currentItem = 0
         mBinding.tabLayout.setupWithViewPager(mBinding.viewPager)
         setDivider()
+
+        mBinding.tabLayout.getTabAt(0)?.select()
     }
 
     override fun initLiveDataListener() {

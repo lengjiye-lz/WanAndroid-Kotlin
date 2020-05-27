@@ -182,6 +182,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
                 mBinding.tabLayout.addTab(tab)
             }
         }
+
+        mBinding.tabLayout.getTabAt(0)?.select()
     }
 
     @SuppressLint("ResourceType")

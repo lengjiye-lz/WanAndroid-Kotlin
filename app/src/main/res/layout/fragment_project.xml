@@ -18,6 +18,7 @@
         <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="0dp"
+                app:tabIndicator="@drawable/tab_layout_indicator"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
