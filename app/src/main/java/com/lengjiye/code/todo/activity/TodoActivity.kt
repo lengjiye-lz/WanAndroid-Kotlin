@@ -53,7 +53,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
         val toolbar = ToolBarUtils.Builder(findViewById(R.id.toolbar))
             .setType(ToolBarUtils.NORMAL_TYPE)
             .setNormalTitleColor(R.color.c_ff)
-            .setCloseListener {
+            .setBackListener {
                 finish()
             }
             .builder()

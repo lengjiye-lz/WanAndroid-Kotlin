@@ -163,7 +163,7 @@ class ToolBarUtils {
 
             toolIvBack.visibility = View.VISIBLE
             toolTvTitle.visibility = View.VISIBLE
-            toolIvClose.visibility = View.VISIBLE
+
 
             params.backRes?.let {
                 toolIvBack.setImageResource(it)
@@ -176,11 +176,25 @@ class ToolBarUtils {
             }
 
             params.closeRes?.let {
+                toolIvClose.visibility = View.VISIBLE
                 toolIvClose.setImageResource(it)
             }
 
             params.closeListener?.let { listener ->
+                toolIvClose.visibility = View.VISIBLE
                 toolIvClose.setOnClickListener {
+                    listener.invoke(it)
+                }
+            }
+
+            params.moreRes?.let {
+                toolIvMore.visibility = View.VISIBLE
+                toolIvMore.setImageResource(it)
+            }
+
+            params.moreListener?.let { listener ->
+                toolIvMore.visibility = View.VISIBLE
+                toolIvMore.setOnClickListener {
                     listener.invoke(it)
                 }
             }
@@ -297,6 +311,8 @@ class ToolBarUtils {
         var backListener: ((View) -> Unit?)? = null
         var closeListener: ((View) -> Unit?)? = null
         var closeRes: Int? = null
+        var moreListener: ((View) -> Unit?)? = null
+        var moreRes: Int? = null
         var normalTitleRes: Int? = null
         var normalTitle: String? = null
         var normalTitleColor: Int? = null
