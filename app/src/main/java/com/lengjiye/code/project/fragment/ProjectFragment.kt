@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
+import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentProjectBinding
@@ -21,7 +22,7 @@ import com.lengjiye.tools.log.LogTool
  * @Date: 2019-11-05
  * @Description: 项目
  */
-class ProjectFragment : ParentFragment<FragmentProjectBinding, ProjectViewModel>() {
+class ProjectFragment : LazyParentFragment<FragmentProjectBinding, ProjectViewModel>() {
 
     private val adapter by lazy { ProjectAdapter(childFragmentManager) }
 
@@ -38,8 +39,7 @@ class ProjectFragment : ParentFragment<FragmentProjectBinding, ProjectViewModel>
         setDivider()
     }
 
-    override fun initData() {
-        super.initData()
+    override fun refreshData() {
         mViewModel.getProjectTree()
     }
 
@@ -78,4 +78,6 @@ class ProjectFragment : ParentFragment<FragmentProjectBinding, ProjectViewModel>
         linearLayout.dividerDrawable = Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider))
         linearLayout.dividerPadding = ResTool.getDimens(R.dimen.d_16)
     }
+
+
 }

@@ -3,7 +3,9 @@ package com.lengjiye.code.project.fragment
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.lengjiye.base.fragment.LazyParentFragment
+import com.lengjiye.base.fragment.NewLazyParentFragment
 import com.lengjiye.base.fragment.ParentFragment
+import com.lengjiye.base.fragment.ViewPagerLazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.constant.ConstantKey
@@ -24,8 +26,9 @@ import com.scwang.smart.refresh.header.MaterialHeader
  * @Author: lz
  * @Date: 2019-11-05
  * @Description: 项目
+ * 使用新的viewpager加载方式  不能继承ViewPagerLazyParentFragment
  */
-class ProjectFragmentItem : LazyParentFragment<FragmentProjectItemBinding, ProjectViewModel>() {
+class ProjectFragmentItem : NewLazyParentFragment<FragmentProjectItemBinding, ProjectViewModel>() {
 
     private var projectTree: ProjectTreeEntity? = null
     private var pager = 1
@@ -89,12 +92,6 @@ class ProjectFragmentItem : LazyParentFragment<FragmentProjectItemBinding, Proje
         }
     }
 
-    override fun refreshData() {
-        LogTool.e("lz", "isRoom:$isRoom")
-        if (isRoom) mViewModel.getProjectArticle2Room()
-        refresh()
-    }
-
     fun refresh() {
         pager = 1
         if (getBaseActivity() is BaseActivity) {
@@ -145,5 +142,10 @@ class ProjectFragmentItem : LazyParentFragment<FragmentProjectItemBinding, Proje
             adapter.addAll(datas.toMutableList())
             pager = it.curPage + 1
         })
+    }
+
+    override fun refreshData() {
+        if (isRoom) mViewModel.getProjectArticle2Room()
+        refresh()
     }
 }
