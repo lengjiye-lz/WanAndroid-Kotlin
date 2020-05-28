@@ -20,7 +20,7 @@ class SystemAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         val trees = treeBeans?.get(position)
         return SystemFragmentItem.newInstance(Bundle().apply {
             putParcelable(ConstantKey.KEY_OBJECT, trees)
-            putInt(ConstantKey.KEY_ID, position)
+            putInt(ConstantKey.KEY_POSITION, position)
         })
     }
 

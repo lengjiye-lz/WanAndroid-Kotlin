@@ -25,6 +25,7 @@ class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVI
         val tree = treeBeans?.get(position)
         return ProjectFragmentItem.newInstance(Bundle().apply {
             putParcelable(ConstantKey.KEY_OBJECT, tree)
+            putInt(ConstantKey.KEY_POSITION, position)
         })
     }
 

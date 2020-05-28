@@ -21,6 +21,7 @@ import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.room.entity.SystemTreeEntity
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -35,7 +36,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
     private var isFirst = false
 
     // 是不是要加载缓存
-    private var isRoom = false
+    private var isRoom = true
+    private var selectPosition: Int? = 0
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_system_item
@@ -49,8 +51,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
     }
 
     override fun refreshData() {
-        refresh()
         if (isRoom) mViewModel.getTreeArticleList2Room()
+        refresh()
     }
 
     private fun loadMore() {
@@ -79,8 +81,10 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
-                val position = p0?.position
-                secondTree = position?.let { treeBean?.children?.get(it) }
+                selectPosition = p0?.position
+                secondTree = selectPosition?.let {
+                    treeBean?.children?.get(it)
+                }
                 if (isFirst) {
                     refresh()
                 }
@@ -124,7 +128,7 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
 
     override fun initData() {
         super.initData()
-        isRoom = arguments?.getInt(ConstantKey.KEY_ID, -1) == 0
+        isRoom = arguments?.getInt(ConstantKey.KEY_POSITION, -1) == 0 && selectPosition == 0
         treeBean = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
         if (treeBean == null) {
             return
@@ -163,6 +167,7 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
             (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rvView, 0)
         }
         mBinding.srlLayout.autoRefreshAnimationOnly()
+        isRoom = false
         loadMore()
     }
 

@@ -2,6 +2,7 @@ package com.lengjiye.code.project.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
@@ -15,6 +16,7 @@ import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.room.entity.ProjectTreeEntity
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -23,15 +25,12 @@ import com.scwang.smart.refresh.header.MaterialHeader
  * @Date: 2019-11-05
  * @Description: 项目
  */
-class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectViewModel>() {
+class ProjectFragmentItem : LazyParentFragment<FragmentProjectItemBinding, ProjectViewModel>() {
 
     private var projectTree: ProjectTreeEntity? = null
     private var pager = 1
     private var cid = 0
     private val adapter by lazy { ProjectFragmentItemAdapter(getBaseActivity(), null) }
-
-    // 数据只请求一次
-    private var isFirst = true
 
     // 是不是要加载缓存
     private var isRoom = false
@@ -90,8 +89,10 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
         }
     }
 
-    private fun loadMore() {
-        mViewModel.getProjectArticle(pager, cid)
+    override fun refreshData() {
+        LogTool.e("lz", "isRoom:$isRoom")
+        if (isRoom) mViewModel.getProjectArticle2Room()
+        refresh()
     }
 
     fun refresh() {
@@ -100,17 +101,25 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
             (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rlList, 0)
         }
         mBinding.srlLayout.autoRefreshAnimationOnly()
+        isRoom = false
         loadMore()
+    }
+
+    private fun loadMore() {
+        mViewModel.getProjectArticle(pager, cid)
     }
 
     override fun initData() {
         super.initData()
-        isRoom = arguments?.getInt(ConstantKey.KEY_ID, -1) == 0
+        isRoom = arguments?.getInt(ConstantKey.KEY_POSITION, -1) == 0
         projectTree = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
         projectTree?.let {
             cid = it.id
         }
+    }
 
+    override fun initLiveDataListener() {
+        super.initLiveDataListener()
         mViewModel.projectArticle.observe(this, Observer {
             if (it.cid != cid) {
                 mBinding.srlLayout.finishRefresh()
@@ -136,15 +145,5 @@ class ProjectFragmentItem : ParentFragment<FragmentProjectItemBinding, ProjectVi
             adapter.addAll(datas.toMutableList())
             pager = it.curPage + 1
         })
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        if (isFirst) {
-            if (isRoom) mViewModel.getProjectArticle2Room()
-            refresh()
-        }
-        isFirst = false
     }
 }
