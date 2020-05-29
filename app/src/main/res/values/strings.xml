@@ -40,5 +40,10 @@
     <string name="s_36">操作失败</string>
     <string name="s_37">未完成</string>
     <string name="s_38">完成</string>
+    <string name="s_39">备忘清单</string>
+    <string name="s_40">标题</string>
+    <string name="s_41">详情</string>
+    <string name="s_42">时间</string>
+    <string name="s_43">必填项</string>
 
 </resources>

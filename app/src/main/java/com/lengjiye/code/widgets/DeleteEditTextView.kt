@@ -106,7 +106,7 @@ class DeleteEditTextView(context: Context?, attrs: AttributeSet?, defStyleAttr: 
 
         et_text.setOnFocusChangeListener { view, b ->
             if (b) {
-                line.setBackgroundColor(ResTool.getColor(R.color.c_E24333))
+                line.setBackgroundColor(ResTool.getColor(R.color.c_e24333))
             } else {
                 line.setBackgroundColor(ResTool.getColor(R.color.c_4697fa))
             }

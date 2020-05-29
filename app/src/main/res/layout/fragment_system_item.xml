@@ -23,9 +23,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:tabIndicator="@drawable/tab_layout_indicator"
-                app:tabIndicatorColor="@color/c_E24333"
+                app:tabIndicatorColor="@color/c_e24333"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/c_FF2B33"
+                app:tabSelectedTextColor="@color/c_ff2b33"
                 app:tabTextAppearance="@style/second_tab_text_style"
                 app:tabTextColor="@color/c_1a" />
 

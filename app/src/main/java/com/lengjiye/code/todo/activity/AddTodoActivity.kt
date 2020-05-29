@@ -20,9 +20,9 @@ import com.lengjiye.tools.log.LogTool
 /**
  * @Author: lz
  * @Date: 2020-05-25
- * @Description: TODO工具
+ * @Description: 添加ODO工具
  */
-class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
+class AddTodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
 
     private val adapter by lazy { TodoAdapter(this, null) }
 

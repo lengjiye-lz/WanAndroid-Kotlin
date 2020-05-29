@@ -26,9 +26,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 app:tabIndicator="@drawable/tab_layout_indicator"
-                app:tabIndicatorColor="@color/c_E24333"
+                app:tabIndicatorColor="@color/c_e24333"
                 app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/c_FF2B33"
+                app:tabSelectedTextColor="@color/c_ff2b33"
                 app:tabTextAppearance="@style/first_tab_text_style"
                 app:tabTextColor="@color/c_1a"
                 app:tabUnboundedRipple="true" />
@@ -39,30 +39,55 @@
                 android:layout_height="@dimen/d_1"
                 app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
-        <Button
-                android:id="@+id/btn_no_suc"
-                android:layout_width="0dp"
+        <RadioGroup
+                android:id="@+id/rg_group"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/s_37"
-                app:layout_constraintEnd_toStartOf="@+id/btn_suc"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/v_line" />
+                android:layout_marginTop="@dimen/d_4"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/v_line">
 
-        <Button
-                android:id="@+id/btn_suc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/s_38"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_no_suc"
-                app:layout_constraintTop_toTopOf="@+id/btn_no_suc" />
+            <RadioButton
+                    android:id="@+id/rb_no_suc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d_15"
+                    android:layout_marginEnd="@dimen/d_7"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_rect_e24333_stro_e24333"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/d_8"
+                    android:paddingBottom="@dimen/d_8"
+                    android:text="@string/s_37"
+                    android:textColor="@drawable/color_black_white_check"
+                    android:textSize="@dimen/d_16" />
+
+            <RadioButton
+                    android:id="@+id/rb_suc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d_7"
+                    android:layout_marginEnd="@dimen/d_15"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_rect_009a61_stro_009a61"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/d_8"
+                    android:paddingBottom="@dimen/d_8"
+                    android:text="@string/s_38"
+                    android:textColor="@drawable/color_black_white_check"
+                    android:textSize="@dimen/d_16" />
+
+        </RadioGroup>
 
         <ImageView
                 android:id="@+id/tool_iv_top_shadow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/ic_title_bar_shadow"
-                app:layout_constraintTop_toBottomOf="@+id/btn_no_suc" />
+                app:layout_constraintTop_toBottomOf="@+id/rg_group" />
 
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -70,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_no_suc">
+                app:layout_constraintTop_toBottomOf="@+id/rg_group">
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rl_list"

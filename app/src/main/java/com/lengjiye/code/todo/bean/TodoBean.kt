@@ -16,8 +16,8 @@ data class TodoBean(
 )
 
 data class TodoData(
-    val completeDate: Any, // null
-    val completeDateStr: String,
+    val completeDate: Long?, // null
+    val completeDateStr: String?,
     val content: String,
     val date: Long, // 1590336000000
     val dateStr: String, // 2020-05-25

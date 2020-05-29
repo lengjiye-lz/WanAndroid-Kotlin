@@ -21,6 +21,10 @@ class TodoAdapter constructor(val context: Context, models: MutableList<TodoData
         item?.let {
             holder.binding.tvTitle.text = ResTool.fromHtml(it.title).trim()
             holder.binding.tvContent.text = ResTool.fromHtml(it.content).trim()
+            it.completeDateStr?.let { time ->
+                holder.binding.tvTime.visibility = View.VISIBLE
+                holder.binding.tvTime.text = time
+            }
         }
     }
 

@@ -31,20 +31,20 @@ class TagView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Line
         var view: View
         // 置顶
         if (type == 1) {
-            view = itemView("置顶", R.color.c_E24333, R.drawable.bg_rectangle_white_stroke_e24333)
+            view = itemView("置顶", R.color.c_e24333, R.drawable.bg_rect_white_stro_e24333_r4)
             addView(view)
         }
         // 新
         val nowTime = System.currentTimeMillis() - 24 * 60 * 60 * 1000
         if (time >= nowTime) {
-            view = itemView("新", R.color.c_FF2B33, R.drawable.bg_rectangle_white_stroke_ff2b33)
+            view = itemView("新", R.color.c_ff2b33, R.drawable.bg_rect_white_stro_ff2b33_r4)
             addView(view)
         }
 
         // 公众号
         tagEntityList?.let {
             it.forEach { tag ->
-                view = itemView(tag.name, R.color.c_009A61, R.drawable.bg_rectangle_white_stroke_009a61)
+                view = itemView(tag.name, R.color.c_009A61, R.drawable.bg_rect_white_stro_009a61_r4)
                 addView(view)
             }
         }

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.lengjiye.code.todo.viewmodel.TodoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints">
+
+        <include layout="@layout/layout_tool_bar" />
+
+        <ImageView
+                android:id="@+id/tool_iv_top_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_title_bar_shadow"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_10"
+                android:layout_marginTop="@dimen/d_15"
+                android:text="@string/s_40"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <EditText
+                android:id="@+id/ed_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_10"
+                android:layout_marginEnd="@dimen/d_10"
+                android:background="@drawable/bg_rect_white_stro_48_r5"
+                android:hint="@string/s_43"
+                android:paddingStart="@dimen/d_5"
+                android:paddingTop="@dimen/d_7"
+                android:paddingEnd="@dimen/d_5"
+                android:paddingBottom="@dimen/d_7"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/text_cursor"
+                android:textSize="@dimen/d_15"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+        <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_10"
+                android:layout_marginTop="@dimen/d_30"
+                android:paddingTop="@dimen/d_4"
+                android:text="@string/s_41"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <EditText
+                android:id="@+id/ed_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_10"
+                android:layout_marginEnd="@dimen/d_10"
+                android:background="@drawable/bg_rect_white_stro_48_r5"
+                android:gravity="top|left"
+                android:hint="@string/s_43"
+                android:minLines="5"
+                android:paddingStart="@dimen/d_5"
+                android:paddingTop="@dimen/d_7"
+                android:paddingEnd="@dimen/d_5"
+                android:paddingBottom="@dimen/d_7"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/text_cursor"
+                android:textSize="@dimen/d_15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_content"
+                app:layout_constraintTop_toTopOf="@+id/tv_content" />
+
+
+        <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_10"
+                android:layout_marginTop="@dimen/d_30"
+                android:text="@string/s_42"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_content" />
+
+        <EditText
+                android:id="@+id/ed_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_10"
+                android:layout_marginEnd="@dimen/d_10"
+                android:background="@drawable/bg_rect_white_stro_48_r5"
+                android:hint="@string/s_43"
+                android:paddingStart="@dimen/d_5"
+                android:paddingTop="@dimen/d_7"
+                android:paddingEnd="@dimen/d_5"
+                android:paddingBottom="@dimen/d_7"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/text_cursor"
+                android:textSize="@dimen/d_15"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_time" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

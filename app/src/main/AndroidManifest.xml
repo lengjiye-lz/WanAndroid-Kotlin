@@ -84,6 +84,11 @@
                 android:configChanges="keyboard|screenSize|orientation"
                 android:launchMode="singleTop" />
 
+        <activity
+                android:name=".todo.activity.AddTodoActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop" />
+
         <!--    service    -->
         <service android:name="com.lengjiye.tools.log.LogService" />
 

@@ -150,6 +150,15 @@ public class LogTool {
     }
 
     /**
+     * 平时调试使用
+     *
+     * @param message
+     */
+    public static void de(String message) {
+        e("lz", message);
+    }
+
+    /**
      * Get default tag name
      */
     public static String getDefaultTag(StackTraceElement stackTraceElement) {
