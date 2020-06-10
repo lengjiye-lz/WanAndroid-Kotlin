@@ -150,4 +150,7 @@ dependencies {
 
     implementation "com.google.android.material:material:$cfgs.material"
     implementation "androidx.constraintlayout:constraintlayout:$cfgs.constraintlayout"
+
+    // 时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
 }

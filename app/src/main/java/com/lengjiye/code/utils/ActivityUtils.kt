@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.me.activity.*
@@ -24,13 +24,13 @@ inline fun <reified T : Activity> Context.startActivity(bundle: Bundle?) {
 object ActivityUtils {
     fun startWebViewActivity(context: Context, url: String) {
         context.startActivity<WebViewActivity>(Bundle().apply {
-            putString(ConstantKey.KEY_WEB_URL, url)
+            putString(IntentKey.KEY_WEB_URL, url)
         })
     }
 
     fun startLoginActivity(context: Context, type: Int = LoginActivityType.TYPE_1) {
         context.startActivity<LoginActivity>(Bundle().apply {
-            putInt(ConstantKey.KEY_TYPE, type)
+            putInt(IntentKey.KEY_TYPE, type)
         })
     }
 
@@ -88,7 +88,7 @@ object ActivityUtils {
             return
         }
         context.startActivity<ShareArticleListActivity>(Bundle().apply {
-            putInt(ConstantKey.KEY_USER_ID, userId)
+            putInt(IntentKey.KEY_USER_ID, userId)
         })
     }
 

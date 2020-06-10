@@ -3,9 +3,9 @@
     <!-- Base applicationContext theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/c_008577</item>
+        <item name="colorPrimaryDark">@color/c_00574b</item>
+        <item name="colorAccent">@color/c_d81b60</item>
     </style>
 
     <style name="toolBar">

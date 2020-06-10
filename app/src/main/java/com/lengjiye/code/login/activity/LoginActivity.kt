@@ -4,7 +4,7 @@ import android.widget.TextView
 import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.constant.LoginActivityType
 import com.lengjiye.code.databinding.ActivityLoginBinding
 import com.lengjiye.code.login.fragment.LoginFragment
@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initData() {
         super.initData()
-        type = intent.extras?.getInt(ConstantKey.KEY_TYPE, LoginActivityType.TYPE_1)
+        type = intent.extras?.getInt(IntentKey.KEY_TYPE, LoginActivityType.TYPE_1)
         selectFragment()
     }
 

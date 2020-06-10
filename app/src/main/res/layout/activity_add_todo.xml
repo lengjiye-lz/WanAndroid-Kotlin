@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lengjiye.code.todo.viewmodel.TodoViewModel" />
+                type="com.lengjiye.code.todo.viewmodel.AddTodoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +104,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ed_content" />
 
-        <EditText
+        <TextView
                 android:id="@+id/ed_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -118,12 +118,27 @@
                 android:paddingBottom="@dimen/d_7"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textCursorDrawable="@drawable/text_cursor"
                 android:textSize="@dimen/d_15"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_time"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_time"
                 app:layout_constraintTop_toTopOf="@+id/tv_time" />
+
+        <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_60"
+                android:layout_marginTop="@dimen/d_60"
+                android:layout_marginEnd="@dimen/d_60"
+                android:background="@drawable/btn_submit_00574b"
+                android:enabled="false"
+                android:text="@string/s_45"
+                android:textColor="@color/white"
+                android:textSize="@dimen/d_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

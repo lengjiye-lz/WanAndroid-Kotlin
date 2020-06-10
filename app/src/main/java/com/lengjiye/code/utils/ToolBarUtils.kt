@@ -61,6 +61,16 @@ class ToolBarUtils {
             return this
         }
 
+        fun setMoreListener(moreListener: (view: View) -> Unit): Builder {
+            params.moreListener = moreListener
+            return this
+        }
+
+        fun setMoreRes(moreRes: Int): Builder {
+            params.moreRes = moreRes
+            return this
+        }
+
         fun setNormalTitle(normalTitleRes: Int): Builder {
             params.normalTitleRes = normalTitleRes
             return this

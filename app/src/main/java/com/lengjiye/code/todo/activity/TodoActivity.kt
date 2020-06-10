@@ -14,6 +14,7 @@ import com.lengjiye.code.todo.adapter.TodoAdapter
 import com.lengjiye.code.todo.viewmodel.TodoViewModel
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.ToolBarUtils
+import com.lengjiye.code.utils.startActivity
 import com.lengjiye.tools.ResTool
 import com.lengjiye.tools.log.LogTool
 
@@ -58,6 +59,10 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
             .setNormalTitleColor(R.color.c_ff)
             .setBackListener {
                 finish()
+            }
+            .setMoreRes(R.drawable.ic_add_circle_ffffff_24dp)
+            .setMoreListener {
+                startActivity<AddTodoActivity>()
             }
             .builder()
         this.setSupportActionBar(toolbar)

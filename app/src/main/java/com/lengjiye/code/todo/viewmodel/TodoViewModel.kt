@@ -17,8 +17,6 @@ import com.lengjiye.network.exception.ApiException
 class TodoViewModel(application: Application) : BaseViewModel(application) {
 
     private lateinit var loadingObserver: LoadingObserver<TodoBean>
-    private lateinit var loadingObserverAdd: LoadingObserver<String>
-    private lateinit var loadingObserverUpdate: LoadingObserver<String>
     private lateinit var loadingObserverUpdateDone: LoadingObserver<String>
     private lateinit var loadingObserverDelete: LoadingObserver<String>
 
@@ -37,24 +35,6 @@ class TodoViewModel(application: Application) : BaseViewModel(application) {
             }
         })
 
-        loadingObserverAdd = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
-            override fun observerOnNext(data: String?) {
-                super.observerOnNext(data)
-            }
-
-            override fun observerOnError(e: ApiException) {
-                super.observerOnError(e)
-            }
-        })
-        loadingObserverUpdate = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
-            override fun observerOnNext(data: String?) {
-                super.observerOnNext(data)
-            }
-
-            override fun observerOnError(e: ApiException) {
-                super.observerOnError(e)
-            }
-        })
 
         loadingObserverUpdateDone = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
             override fun observerOnNext(data: String?) {
@@ -81,15 +61,6 @@ class TodoViewModel(application: Application) : BaseViewModel(application) {
         TodoModel.singleton.getTodoList(page, status, type, loadingObserver)
     }
 
-    fun addTodo(title: String, content: String, date: String, type: Int?) {
-        loadingObserverAdd.cancelRequest()
-        TodoModel.singleton.addTodo(title, content, date, type, loadingObserverAdd)
-    }
-
-    fun updateTodo(id: Int, title: String, content: String, date: String, status: Int?, type: Int?) {
-        loadingObserverUpdate.cancelRequest()
-        TodoModel.singleton.updateTodo(id, title, content, date, status, type, loadingObserverUpdate)
-    }
 
     fun updateDoneTodo(id: Int, status: Int) {
         loadingObserverUpdateDone.cancelRequest()
@@ -104,8 +75,6 @@ class TodoViewModel(application: Application) : BaseViewModel(application) {
     override fun onCleared() {
         super.onCleared()
         loadingObserver.cancelRequest()
-        loadingObserverAdd.cancelRequest()
-        loadingObserverUpdate.cancelRequest()
         loadingObserverUpdateDone.cancelRequest()
         loadingObserverDelete.cancelRequest()
     }

@@ -1,12 +1,11 @@
 package com.lengjiye.code.project.adapter
 
 import android.os.Bundle
-import android.text.Html
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.project.fragment.ProjectFragmentItem
 import com.lengjiye.room.entity.ProjectTreeEntity
 import com.lengjiye.tools.ResTool
@@ -24,8 +23,8 @@ class ProjectAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVI
     override fun getItem(position: Int): Fragment {
         val tree = treeBeans?.get(position)
         return ProjectFragmentItem.newInstance(Bundle().apply {
-            putParcelable(ConstantKey.KEY_OBJECT, tree)
-            putInt(ConstantKey.KEY_POSITION, position)
+            putParcelable(IntentKey.KEY_OBJECT, tree)
+            putInt(IntentKey.KEY_POSITION, position)
         })
     }
 

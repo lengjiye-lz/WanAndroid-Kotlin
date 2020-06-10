@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.lengjiye.base.fragment.ViewPagerLazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.FragmentSystemItemBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
@@ -21,7 +21,6 @@ import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.room.entity.SystemTreeEntity
 import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -128,8 +127,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
 
     override fun initData() {
         super.initData()
-        isRoom = arguments?.getInt(ConstantKey.KEY_POSITION, -1) == 0 && selectPosition == 0
-        treeBean = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
+        isRoom = arguments?.getInt(IntentKey.KEY_POSITION, -1) == 0 && selectPosition == 0
+        treeBean = arguments?.getParcelable(IntentKey.KEY_OBJECT)
         if (treeBean == null) {
             return
         }

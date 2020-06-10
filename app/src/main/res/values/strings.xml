@@ -45,5 +45,7 @@
     <string name="s_41">详情</string>
     <string name="s_42">时间</string>
     <string name="s_43">必填项</string>
+    <string name="s_44">添加ToDo</string>
+    <string name="s_45">提交</string>
 
 </resources>

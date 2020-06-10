@@ -1,46 +1,34 @@
 package com.lengjiye.code.todo.activity
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.Observer
-import com.google.android.material.tabs.TabLayout
-import com.lengjiye.code.base.BaseActivity
+import com.bigkoo.pickerview.builder.TimePickerBuilder
+import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.lengjiye.code.R
-import com.lengjiye.code.databinding.ActivityTodoBinding
-import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
-import com.lengjiye.code.todo.adapter.TodoAdapter
-import com.lengjiye.code.todo.viewmodel.TodoViewModel
-import com.lengjiye.code.utils.LayoutManagerUtils
+import com.lengjiye.code.base.BaseActivity
+import com.lengjiye.code.constant.IntentKey
+import com.lengjiye.code.databinding.ActivityAddTodoBinding
+import com.lengjiye.code.todo.bean.TodoData
+import com.lengjiye.code.todo.viewmodel.AddTodoViewModel
 import com.lengjiye.code.utils.ToolBarUtils
-import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.DateTimeTool
+
 
 /**
  * @Author: lz
  * @Date: 2020-05-25
  * @Description: 添加ODO工具
  */
-class AddTodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
+class AddTodoActivity : BaseActivity<ActivityAddTodoBinding, AddTodoViewModel>(), TextWatcher {
 
-    private val adapter by lazy { TodoAdapter(this, null) }
+    private var todoData: TodoData? = null
 
-    private var page: Int = 1
-
-    //状态， 1-完成；0未完成
-    private var status: Int = 0
-    private var type = TodoType.All
-
-    private enum class TodoType(val type: String) {
-        All("全部"),
-        WORK("工作"),
-        LIFE("生活"),
-        RECREATION("娱乐")
-    }
+    private var type: Int? = null
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_todo
+        return R.layout.activity_add_todo
     }
 
     /**
@@ -54,7 +42,7 @@ class AddTodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
         super.initToolBar()
         val toolbar = ToolBarUtils.Builder(findViewById(R.id.toolbar))
             .setType(ToolBarUtils.NORMAL_TYPE)
-            .setNormalTitle(R.string.s_39)
+            .setNormalTitle(R.string.s_44)
             .setNormalTitleColor(R.color.c_ff)
             .setBackListener {
                 finish()
@@ -65,80 +53,65 @@ class AddTodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        addTabLayout()
+        //时间选择器
+        val pvTime = TimePickerBuilder(this@AddTodoActivity,
+            OnTimeSelectListener { date, v ->
+                mBinding.edTime.text = DateTimeTool.getFormatDate(date)
+            }).addOnCancelClickListener {
+            setSubmitEnable()
+        }.build()
+        mBinding.edTime.setOnClickListener {
+            pvTime.show()
+        }
 
-        mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
-        mBinding.rlList.adapter = adapter
-
-        mBinding.rgGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.rb_no_suc -> {
-                    status = 0
-                    page = 1
-                    loadData()
-                }
-                R.id.rb_suc -> {
-                    status = 1
-                    page = 1
-                    loadData()
-                }
+        mBinding.btnSubmit.setOnClickListener {
+            if (todoData == null) {
+                mViewModel.addTodo(mBinding.edTitle.text.toString(), mBinding.edContent.text.toString(), mBinding.edTime.text.toString(), type)
+            } else {
+                todoData?.dateStr = mBinding.edTime.text.toString()
+                todoData?.content = mBinding.edContent.text.toString()
+                todoData?.title = mBinding.edTitle.text.toString()
+                mViewModel.updateTodo(todoData!!)
             }
         }
+
+        mBinding.edTitle.addTextChangedListener(this)
+        mBinding.edContent.addTextChangedListener(this)
+    }
+
+    private fun setSubmitEnable() {
+        mBinding.btnSubmit.isEnabled = !(mBinding.edTitle.text.isNullOrEmpty() || mBinding.edContent.text.isNullOrEmpty() || mBinding.edTime.text.isNullOrEmpty())
+    }
+
+    override fun initIntent(savedInstanceState: Bundle?) {
+        super.initIntent(savedInstanceState)
+        todoData = intent?.extras?.getParcelable(IntentKey.KEY_OBJECT)
+        type = intent?.extras?.getInt(IntentKey.KEY_TYPE)
     }
 
     override fun initLiveDataListener() {
         super.initLiveDataListener()
-        mViewModel.todoBean.observe(this, Observer {
-            page = it.curPage
-            adapter.replaceAll(it.datas.toMutableList())
-        })
-    }
-
-    private fun addTabLayout() {
-        setDivider()
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.All.type))
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.WORK.type))
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.LIFE.type))
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(TodoType.RECREATION.type))
-        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                val position = tab?.position
-                type = TodoType.values()[position!!]
-                page = 1
-                status = 0
-                loadData()
-            }
+        mViewModel.operateResult.observe(this, Observer {
+            if (it) finish()
         })
     }
 
     override fun initData() {
         super.initData()
-        refresh()
+        todoData?.let {
+            mBinding.edTitle.setText(it.title)
+            mBinding.edContent.setText(it.content)
+            mBinding.edTitle.setText(it.dateStr)
+        }
     }
 
-    private fun refresh() {
-        page = 1
-        status = 0
-        type = TodoType.All
-        loadData()
+    override fun afterTextChanged(s: Editable?) {
+        setSubmitEnable()
     }
 
-    private fun loadData() {
-        mViewModel.getTodoList(page, status, type.ordinal)
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
     }
 
-    @SuppressLint("ResourceType")
-    private fun setDivider() {
-        val linearLayout = mBinding.tabLayout.getChildAt(0) as LinearLayout
-        linearLayout.showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
-        linearLayout.dividerDrawable = Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider))
-        linearLayout.dividerPadding = ResTool.getDimens(R.dimen.d_16)
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
     }
 }

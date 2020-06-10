@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.databinding.ActivityShareArticleBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.me.viewmodel.MeShareViewModel
@@ -61,7 +61,7 @@ class ShareArticleListActivity : BaseActivity<ActivityShareArticleBinding, MeSha
     override fun initIntent(savedInstanceState: Bundle?) {
         super.initIntent(savedInstanceState)
         intent.extras?.let {
-            userId = it.getInt(ConstantKey.KEY_USER_ID)
+            userId = it.getInt(IntentKey.KEY_USER_ID)
         }
     }
 

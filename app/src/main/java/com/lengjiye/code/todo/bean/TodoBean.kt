@@ -1,5 +1,8 @@
 package com.lengjiye.code.todo.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  * @Author: lz
  * @Date: 2020-05-25
@@ -15,16 +18,17 @@ data class TodoBean(
     val total: Int // 4
 )
 
+@Parcelize
 data class TodoData(
     val completeDate: Long?, // null
     val completeDateStr: String?,
-    val content: String,
+    var content: String,
     val date: Long, // 1590336000000
-    val dateStr: String, // 2020-05-25
+    var dateStr: String, // 2020-05-25
     val id: Int, // 23028
-    val priority: Int, // 0
-    val status: Int, // 0
-    val title: String, // 上档次说的出
-    val type: Int, // 0
+    var priority: Int, // 0
+    var status: Int, // 0
+    var title: String, // 上档次说的出
+    var type: Int, // 0
     val userId: Int // 1448
-)
+) : Parcelable

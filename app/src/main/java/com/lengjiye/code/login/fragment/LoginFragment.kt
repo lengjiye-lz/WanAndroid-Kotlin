@@ -71,7 +71,7 @@ class LoginFragment : ParentFragment<FragmentLoginBinding, LoginViewModel>() {
     private fun setTextColor() {
         val text = ResTool.getString(R.string.s_6)
         val spText = SpannableString(text)
-        spText.setSpan(ForegroundColorSpan(ResTool.getColor(R.color.colorPrimary)), 5, text.length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+        spText.setSpan(ForegroundColorSpan(ResTool.getColor(R.color.c_008577)), 5, text.length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
         mBinding.tvGoRegister.text = spText
     }
 }

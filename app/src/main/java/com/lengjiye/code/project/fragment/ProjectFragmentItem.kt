@@ -2,13 +2,10 @@ package com.lengjiye.code.project.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.lengjiye.base.fragment.LazyParentFragment
 import com.lengjiye.base.fragment.NewLazyParentFragment
-import com.lengjiye.base.fragment.ParentFragment
-import com.lengjiye.base.fragment.ViewPagerLazyParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.databinding.FragmentProjectItemBinding
 import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
@@ -18,7 +15,6 @@ import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.toast
 import com.lengjiye.room.entity.ProjectTreeEntity
 import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -108,8 +104,8 @@ class ProjectFragmentItem : NewLazyParentFragment<FragmentProjectItemBinding, Pr
 
     override fun initData() {
         super.initData()
-        isRoom = arguments?.getInt(ConstantKey.KEY_POSITION, -1) == 0
-        projectTree = arguments?.getParcelable(ConstantKey.KEY_OBJECT)
+        isRoom = arguments?.getInt(IntentKey.KEY_POSITION, -1) == 0
+        projectTree = arguments?.getParcelable(IntentKey.KEY_OBJECT)
         projectTree?.let {
             cid = it.id
         }

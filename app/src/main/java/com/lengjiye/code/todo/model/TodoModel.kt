@@ -2,6 +2,7 @@ package com.lengjiye.code.todo.model
 
 import com.lengjiye.code.constant.NetWorkParams
 import com.lengjiye.code.todo.bean.TodoBean
+import com.lengjiye.code.todo.bean.TodoData
 import com.lengjiye.code.todo.serve.TodoServe
 import com.lengjiye.network.BaseModel
 import com.lengjiye.network.HttpResultFunc
@@ -41,27 +42,21 @@ class TodoModel : BaseModel() {
         map[NetWorkParams.TITLE] = title
         map[NetWorkParams.CONTENT] = content
         map[NetWorkParams.DATE] = date
-        type?.let {
-            map[NetWorkParams.TYPE] = it.toString()
-        }
-        map[NetWorkParams.PRIORITY] = "1"
+        map[NetWorkParams.TYPE] = (type ?: 0).toString()
+        map[NetWorkParams.PRIORITY] = "2"
         val observable = getServe()?.addTodo(map)?.map(HttpResultFunc())
         makeSubscribe(observable, observer)
     }
 
-    fun updateTodo(id: Int, title: String, content: String, date: String, status: Int?, type: Int?, observer: Observer<String>) {
+    fun updateTodo(todoData: TodoData, observer: Observer<String>) {
         val map = hashMapOf<String, String>()
-        map[NetWorkParams.TITLE] = title
-        map[NetWorkParams.CONTENT] = content
-        map[NetWorkParams.DATE] = date
-        status?.let {
-            map[NetWorkParams.STATUS] = it.toString()
-        }
-        type?.let {
-            map[NetWorkParams.TYPE] = it.toString()
-        }
-        map[NetWorkParams.PRIORITY] = "1"
-        val observable = getServe()?.updateTodo(id, map)?.map(HttpResultFunc())
+        map[NetWorkParams.TITLE] = todoData.title
+        map[NetWorkParams.CONTENT] = todoData.content
+        map[NetWorkParams.DATE] = todoData.dateStr
+        map[NetWorkParams.STATUS] = todoData.status.toString()
+        map[NetWorkParams.TYPE] = todoData.type.toString()
+        map[NetWorkParams.PRIORITY] = "2"
+        val observable = getServe()?.updateTodo(todoData.id, map)?.map(HttpResultFunc())
         makeSubscribe(observable, observer)
     }
 

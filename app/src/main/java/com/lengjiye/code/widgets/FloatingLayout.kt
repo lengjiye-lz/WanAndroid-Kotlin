@@ -180,7 +180,7 @@ class FloatingLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
 
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        var b = false
+        var b = false // 点击的view 是不是目标view
         if (ev.action == MotionEvent.ACTION_DOWN) {
             val x = ev.x
             val y = ev.y

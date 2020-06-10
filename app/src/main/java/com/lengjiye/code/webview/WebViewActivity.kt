@@ -13,7 +13,7 @@ import com.just.agentweb.WebViewClient
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityWebviewBinding
-import com.lengjiye.code.constant.ConstantKey
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.log.LogTool
 
@@ -45,7 +45,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
     override fun initData() {
         super.initData()
-        val url = intent.extras?.getString(ConstantKey.KEY_WEB_URL) ?: return
+        val url = intent.extras?.getString(IntentKey.KEY_WEB_URL) ?: return
 
         val p = System.currentTimeMillis()
         mAgentWeb = AgentWeb.with(this)
