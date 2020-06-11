@@ -64,6 +64,14 @@ public class MasterApplication implements IApp {
         return iApp.baseUrl();
     }
 
+    @Override
+    public void logout() {
+        if (iApp == null) {
+            return;
+        }
+        iApp.logout();
+    }
+
     public void setIApp(IApp iApp) {
         this.iApp = iApp;
     }

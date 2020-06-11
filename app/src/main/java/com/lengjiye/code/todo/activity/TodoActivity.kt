@@ -145,13 +145,14 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
         })
     }
 
-    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             // 不处理拖动事件
             return false
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            LogTool.de("direction:$direction")
             // 滑动事件
             val position = viewHolder.adapterPosition
             adapter.getItems().removeAt(position)

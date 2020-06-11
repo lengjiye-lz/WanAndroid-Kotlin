@@ -27,6 +27,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         return R.layout.activity_login
     }
 
+    override fun getBaseLayoutId(): Int? {
+        return null
+    }
+
     override fun initToolBar() {
         super.initToolBar()
         ToolBarUtils.Builder(findViewById(R.id.toolbar)).setType(ToolBarUtils.NORMAL_TYPE)

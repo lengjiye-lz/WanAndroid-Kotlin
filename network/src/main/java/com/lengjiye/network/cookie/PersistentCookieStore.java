@@ -34,7 +34,7 @@ public class PersistentCookieStore implements CookieStore {
     /** Construct a persistent cookie store.  */
     public PersistentCookieStore() {
         this.cookiePrefs = MasterApplication.getInstance().applicationContext().getSharedPreferences(COOKIE_PREFS, 0);
-        this.cookies = new HashMap<String, ConcurrentHashMap<String, Cookie>>();
+        this.cookies = new HashMap<>();
 
         Map tempCookieMap = new HashMap<Object, Object>(cookiePrefs.getAll());
         for (Object key : tempCookieMap.keySet()) {

@@ -16,4 +16,6 @@ import android.content.Context;
     String buildType();
 
     String baseUrl();
+
+    void logout();
 }

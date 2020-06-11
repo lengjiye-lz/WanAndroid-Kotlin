@@ -1,6 +1,7 @@
 package com.lengjiye.network
 
 import com.google.gson.JsonSyntaxException
+import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.exception.ErrorCodeConstant
 import com.lengjiye.tools.log.LogTool
@@ -107,7 +108,7 @@ class LoadingObserver<T>() : Observer<T> {
         statusCode?.let {
             when (statusCode) {
                 ErrorCodeConstant.LOGIN_INVALID -> {
-                    // TODO 登录失效
+                    MasterApplication.getInstance().logout()
                 }
             }
         }

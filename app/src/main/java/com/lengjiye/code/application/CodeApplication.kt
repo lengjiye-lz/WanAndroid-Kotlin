@@ -3,10 +3,14 @@ package com.lengjiye.code.application
 import android.app.Application
 import android.content.Context
 import com.facebook.stetho.Stetho
+import com.lengjiye.base.activity.ActivityManager
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
+import com.lengjiye.code.login.activity.LoginActivity
+import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.CrashHandlerUtils
+import com.lengjiye.code.utils.startActivity
 
 /**
  * applicationContext
@@ -28,6 +32,15 @@ class CodeApplication : Application(), IApp {
 
     override fun versionCode(): Int {
         return BuildConfig.VERSION_CODE
+    }
+
+    /**
+     * 退出登录
+     */
+    override fun logout() {
+        AccountUtils.logout()
+        ActivityManager.singleton.removeCurrent()
+        startActivity<LoginActivity>()
     }
 
     override fun versionName(): String {
