@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.R
@@ -17,6 +19,8 @@ import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.tools.ResTool
 import com.lengjiye.tools.log.LogTool
+import com.scwang.smart.refresh.footer.BallPulseFooter
+import com.scwang.smart.refresh.header.MaterialHeader
 
 /**
  * @Author: lz
@@ -71,31 +75,51 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         addTabLayout()
+        mBinding.srlLayout.setRefreshHeader(MaterialHeader(this))
+        mBinding.srlLayout.setRefreshFooter(BallPulseFooter(this))
+
+        mBinding.srlLayout.setOnRefreshListener {
+            refresh()
+        }
+
+        mBinding.srlLayout.setOnLoadMoreListener {
+            loadData()
+        }
 
         mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
+        itemTouchHelper.attachToRecyclerView(mBinding.rlList)
         mBinding.rlList.adapter = adapter
 
         mBinding.rgGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
+            status = when (checkedId) {
                 R.id.rb_no_suc -> {
-                    status = 0
-                    page = 1
-                    loadData()
+                    0
                 }
                 R.id.rb_suc -> {
-                    status = 1
-                    page = 1
-                    loadData()
+                    1
+                }
+                else -> {
+                    0
                 }
             }
+            refresh()
         }
     }
 
     override fun initLiveDataListener() {
         super.initLiveDataListener()
         mViewModel.todoBean.observe(this, Observer {
+            if (it.over) {// 没有更多数据
+                mBinding.srlLayout.setEnableLoadMore(false)
+            }
+            if (page == 1) {
+                mBinding.srlLayout.finishRefresh()
+                adapter.replaceAll(it.datas.toMutableList())
+            } else {
+                mBinding.srlLayout.finishLoadMore()
+                adapter.addAll(it.datas.toMutableList())
+            }
             page = it.curPage
-            adapter.replaceAll(it.datas.toMutableList())
         })
     }
 
@@ -116,22 +140,35 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val position = tab?.position
                 type = TodoType.values()[position!!]
-                page = 1
-                status = 0
-                loadData()
+                refresh()
             }
         })
     }
 
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            // 不处理拖动事件
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            // 滑动事件
+            val position = viewHolder.adapterPosition
+            adapter.getItems().removeAt(position)
+            adapter.notifyItemRemoved(position)
+            adapter.notifyDataSetChanged()
+        }
+    })
+
     override fun initData() {
         super.initData()
+        type = TodoType.All
+        status = 0
         refresh()
     }
 
     private fun refresh() {
         page = 1
-        status = 0
-        type = TodoType.All
         loadData()
     }
 

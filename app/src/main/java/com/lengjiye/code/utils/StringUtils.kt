@@ -11,7 +11,7 @@ import com.lengjiye.base.application.MasterApplication
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 fun String.toast(duration: Int = Toast.LENGTH_SHORT) {
-    toast(com.lengjiye.base.application.MasterApplication.getInstance().applicationContext())
+    toast(MasterApplication.getInstance().applicationContext(),duration)
 }
 
 fun String.toast(context: Context, duration: Int = Toast.LENGTH_SHORT): Toast {

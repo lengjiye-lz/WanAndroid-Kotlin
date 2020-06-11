@@ -1,8 +1,9 @@
 package com.lengjiye.room.entity
 
+import androidx.annotation.Keep
 import androidx.room.*
 import com.lengjiye.room.entity.converter.TagEntityConverters
-
+@Keep
 @Entity(tableName = "system")
 @TypeConverters(TagEntityConverters::class)
 class SystemEntity : HomeEntity() {

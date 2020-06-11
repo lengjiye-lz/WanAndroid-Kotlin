@@ -1,7 +1,5 @@
 package com.lengjiye.code.me.bean
 
-import com.lengjiye.code.home.bean.ArticleBean
-
 /**
  * @Author: lz
  * @Date: 2019-11-05

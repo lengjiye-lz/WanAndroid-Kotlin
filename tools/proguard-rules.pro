@@ -28,4 +28,4 @@
     public static *** e(...);
 }
 
--keep class com.lengjiye.tools.** {*;}
+-keep class com.lengjiye.tools.log.** {*;}

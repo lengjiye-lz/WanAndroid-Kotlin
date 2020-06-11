@@ -26,7 +26,7 @@
 -dontwarn
 #记录生成的日志数据,gradle build时在本项目根目录输出
 #apk 包内所有 class 的内部结构
--dump class_files.txt
+#-dump class_files.txt
 #未混淆的类和成员
 -printseeds seeds.txt
 #列出从 apk 中删除的代码
@@ -205,8 +205,8 @@
 
 #=================  Serializable  =================
 
--keep public class * implements java.io.Serializable { *; }
-#-keep public interface * extends java.io.Serializable { *; }
+-keep  class * implements java.io.Serializable { *; }
+#-keep  interface * extends java.io.Serializable { *; }
 
 -keepnames class * implements java.io.Serializable
 -keepclassmembers class * implements java.io.Serializable {
@@ -302,8 +302,6 @@
 #==================app==========================
 
 -keep class com.lengjiye.code.*.model.** { *; }
--keep class com.lengjiye.code.*.service.** { *; }
+-keep class com.lengjiye.code.*.serve.** { *; }
 -keep class com.lengjiye.code.*.viewmodel.** { *; }
 -keep class com.lengjiye.code.*.bean.** { *; }
-
-

@@ -1,4 +1,4 @@
-package com.lengjiye.code.view;
+package com.lengjiye.code.widgets;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

@@ -20,21 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#=================  Serializable  =================
--keep public class * implements java.io.Serializable { *; }
--keep public interface * extends java.io.Serializable { *; }
-
--keepnames class * implements java.io.Serializable
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    private static final java.io.ObjectStreamField[] serialPersistentFields;
-    !static !transient <fields>;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
-
 #==================okio-1.6.0.jar==========================
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
@@ -99,10 +84,8 @@
 }
 
 #================== module ==========================
--keep class com.lengjiye.network.cookie.** { *; }
--keep class com.lengjiye.network.error.** { *; }
--keep class com.lengjiye.network.interceptor.** { *; }
 -keep class com.lengjiye.network.** { *; }
+-keep class com.lengjiye.network.*.** { *; }
 -keep class com.lengjiye.utils.** { *; }
 
 -dontwarn autodispose2.KotlinExtensions

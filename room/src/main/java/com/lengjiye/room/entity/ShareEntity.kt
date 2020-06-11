@@ -1,8 +1,9 @@
 package com.lengjiye.room.entity
 
+import androidx.annotation.Keep
 import androidx.room.*
 import com.lengjiye.room.entity.converter.TagEntityConverters
-
+@Keep
 @Entity(tableName = "share")
 @TypeConverters(TagEntityConverters::class)
 class ShareEntity : HomeEntity() {

@@ -30,5 +30,4 @@
 -dontnote com.google.android.material.**
 -dontwarn androidx.**
 
--keep class com.lengjiye.base.** {*;}
 -keep class com.lengjiye.base.*.** {*;}

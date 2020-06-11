@@ -1,10 +1,11 @@
 package com.lengjiye.room.entity.converter
 
+import androidx.annotation.Keep
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lengjiye.room.entity.TagEntity
-
+@Keep
 class TagEntityConverters {
     @TypeConverter
     fun stringToObject(value: String): List<TagEntity> {

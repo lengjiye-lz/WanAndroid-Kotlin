@@ -14,7 +14,6 @@ import com.lengjiye.network.LoadingObserver.ObserverListener
 import com.lengjiye.room.entity.HomeBannerEntity
 import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
 
 /**
  * 数据请求接口
