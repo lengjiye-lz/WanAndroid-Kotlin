@@ -35,23 +35,9 @@
 # 代码混淆的压缩比例(0-7) , 默认为5 , 一般不需要改
 -optimizationpasses 5
 
-# 混淆后类名都小写 (windows最后加上 , 因为windows大小写敏感)
--dontusemixedcaseclassnames
 
--dontoptimize
-# 不做预校验，preverify是proguard的4个步骤之一
-# Android不需要preverify，去掉这一步可加快混淆速度
--dontpreverify
-#-repackageclasses ''
 -allowaccessmodification
 -optimizations !code/simplification/arithmetic
--keepattributes *Annotation*
-
--keep class * implements java.lang.annotation.Annotation
-#-keep class * extends java.lang.annotation.Annotation {
-#   *;
-#}
-#-keep interface * extends java.lang.annotation.Annotation
 
 -keepattributes Signature
 #-dontwarn
@@ -63,37 +49,17 @@
 # 有了verbose这句话，混淆后就会生成映射文件
 # 包含有类名->混淆后类名的映射关系
 # 然后使用printmapping指定映射文件的名称
--verbose
+#-verbose
 -printmapping proguardMapping.txt
 
 -keepattributesEnclosingMethod
 
 
 
--keep class **.R$* {
-    *;
-}
 -keep public class * extends android.content.ContentProvider
 
 
--keep class * extends android.app.Fragment {
- public void setUserVisibleHint(boolean);
- public void onHiddenChanged(boolean);
- public void onResume();
- public void onPause();
-}
--keep class android.support.v4.app.Fragment {
- public void setUserVisibleHint(boolean);
- public void onHiddenChanged(boolean);
- public void onResume();
- public void onPause();
-}
--keep class * extends android.support.v4.app.Fragment {
- public void setUserVisibleHint(boolean);
- public void onHiddenChanged(boolean);
- public void onResume();
- public void onPause();
-}
+
 
 -assumenosideeffects class android.util.Log{
     public static *** d(...);
@@ -103,37 +69,14 @@
     public static *** e(...);
 }
 
--keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends com.laoyuegou.android.core.services.BaseService
 
--dontwarn android.support.v4.**
--dontnote android.support.v4.**
--keep class android.support.v4.** { *; }
--dontwarn android.support.v7.**
--dontnote android.support.v7.**
--keep class android.support.v7.** { *; }
--dontwarn android.support.annotation.**
--keep class android.support.annotation.** { *; }
--keep public class * extends android.app.Fragment
--keep public class * extends android.support.v4.app.** { *; }
--keep class android.support.graphics.drawable.** { *; }
--keep class android.support.design.widget.** { *; }
--keep public class * extends android.support.v4.**
--keep public class * extends android.support.v7.**
--keep public class * extends android.support.annotation.**
 
-# 保留自定义控件(继承自View)不能被混淆
--keep public class * extends android.view.View {
-    public <init>(android.content.Context);
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-    public void set*(...);
-    *** get* ();
-}
+-keep public class * extends android.app.Fragment{ *; }
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context);
@@ -155,11 +98,7 @@
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
 }
-# 枚举类不能被混淆
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
+
 -keepclassmembers class **.R$* {
     public static <fields>;
 }
@@ -175,36 +114,21 @@
     <init>(Java.lang.Throwable);
 }
 
--keepclasseswithmembernames class * {
-    native <methods>;
-}
+#-keepclasseswithmembernames class * {
+#    native <methods>;
+#}
 
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }
 
 
--keepclassmembers class * extends android.app.Activity {
-   public void *(android.view.View);
-}
-
-#=================  Parcelable  =================
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
--keepclassmembers class * implements android.os.Parcelable {
- public <fields>;
- private <fields>;
-}
-
--keep public class * implements android.os.Parcelable { *; }
-
--keepclassmembers class * {
-    @org.junit.internal.runners.statements.FailOnTimeout *;
-}
+#-keepclassmembers class * extends android.app.Activity {
+#   public void *(android.view.View);
+#}
 
 #=================  Serializable  =================
-
+#Android默认混淆文件没有添加  需要加上
 -keep  class * implements java.io.Serializable { *; }
 #-keep  interface * extends java.io.Serializable { *; }
 

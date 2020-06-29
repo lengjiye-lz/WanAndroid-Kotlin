@@ -11,12 +11,12 @@ import com.google.android.material.tabs.TabLayout
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ActivityTodoBinding
-import com.lengjiye.code.project.adapter.ProjectFragmentItemAdapter
 import com.lengjiye.code.todo.adapter.TodoAdapter
 import com.lengjiye.code.todo.viewmodel.TodoViewModel
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.code.utils.startActivity
+import com.lengjiye.code.widgets.MyItemTouchHelperCallback
 import com.lengjiye.tools.ResTool
 import com.lengjiye.tools.log.LogTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
@@ -87,7 +87,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
         }
 
         mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
-        itemTouchHelper.attachToRecyclerView(mBinding.rlList)
+        ItemTouchHelper(MyItemTouchHelperCallback(adapter)).attachToRecyclerView(mBinding.rlList)
         mBinding.rlList.adapter = adapter
 
         mBinding.rgGroup.setOnCheckedChangeListener { group, checkedId ->

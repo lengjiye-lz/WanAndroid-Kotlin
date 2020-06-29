@@ -68,8 +68,8 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources false
-            proguardFiles proguardPath
             signingConfig signingConfigs.wanAndroid
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), proguardPath
             buildConfigField("String", "BASE_URL", base_url_release)
         }
 
@@ -79,7 +79,9 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
-            proguardFiles proguardPath
+            // proguard-android.txt是android官方默认配置的一些不能混淆的类
+            //路径 /Android/sdk/tools/proguard/proguard-android.txt
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), proguardPath
             signingConfig signingConfigs.wanAndroid
             buildConfigField("String", "BASE_URL", base_url_release)
         }
@@ -90,7 +92,7 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
-            proguardFiles proguardPath
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), proguardPath
             signingConfig signingConfigs.wanAndroid
             buildConfigField("String", "BASE_URL", base_url_release)
         }

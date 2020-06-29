@@ -155,7 +155,7 @@ public class LogTool {
      * @param message
      */
     public static void de(String message) {
-        e("lz", message);
+        e("ceshi", message);
     }
 
     /**
