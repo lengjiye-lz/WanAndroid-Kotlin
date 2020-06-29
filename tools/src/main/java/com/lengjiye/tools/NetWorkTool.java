@@ -11,6 +11,10 @@ import com.lengjiye.base.application.MasterApplication;
  */
 public class NetWorkTool {
 
+    private NetWorkTool() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
     /**
      * 检测网络是否可用
      *

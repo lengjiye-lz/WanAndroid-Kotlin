@@ -12,7 +12,7 @@ import com.lengjiye.code.share.viewmodel.ShareViewModel
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
-import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader

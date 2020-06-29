@@ -19,7 +19,6 @@ public class LogTool {
     private static final String TAG_NAME = "WanAndroid";
 
     private LogTool() {
-        /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
@@ -155,7 +154,12 @@ public class LogTool {
      * @param message
      */
     public static void de(String message) {
-        e("ceshi", message);
+        if (BuildConfig.DEBUG) {
+            StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[3];
+            String mess = getLogInfo(stackTraceElement) + message;
+            Log.e("ceshi", mess);
+            showLog("ceshi", mess);
+        }
     }
 
     /**

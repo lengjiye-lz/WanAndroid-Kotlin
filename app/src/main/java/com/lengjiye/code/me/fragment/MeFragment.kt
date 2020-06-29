@@ -9,7 +9,7 @@ import com.lengjiye.code.databinding.FragmentMeBinding
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.ActivityUtils
-import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.toast
 import com.lengjiye.tools.ResTool
 
 /**

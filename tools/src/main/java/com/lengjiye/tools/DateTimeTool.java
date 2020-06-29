@@ -3,10 +3,12 @@ package com.lengjiye.tools;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 /**
  * 日期工具类
  */
 public class DateTimeTool {
+
     private final static String DATE_FORMAT = "yyyy-MM-dd";
 
     private final static String DATE_FORMAT_CN = "yyyy年MM月dd日";
@@ -18,6 +20,10 @@ public class DateTimeTool {
     private final static String MONTH_FORMAT = "yyyy-MM";
 
     private final static String DAY_FORMAT = "yyyyMMdd";
+
+    private DateTimeTool() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 取得当前系统时间，返回java.util.Date类型

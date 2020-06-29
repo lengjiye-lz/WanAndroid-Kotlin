@@ -9,7 +9,7 @@ import com.lengjiye.code.databinding.ActivityRankTableBinding
 import com.lengjiye.code.me.adapter.RankTableAdapter
 import com.lengjiye.code.me.viewmodel.MeViewModel
 import com.lengjiye.code.utils.ToolBarUtils
-import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader

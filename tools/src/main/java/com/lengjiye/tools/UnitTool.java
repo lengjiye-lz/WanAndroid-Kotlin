@@ -4,7 +4,14 @@ import android.util.TypedValue;
 
 import com.lengjiye.base.application.MasterApplication;
 
+/**
+ * dp转换
+ */
 public class UnitTool {
+
+    private UnitTool() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     public static int dp2px(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,

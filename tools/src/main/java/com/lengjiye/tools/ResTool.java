@@ -15,6 +15,10 @@ import com.lengjiye.base.application.MasterApplication;
  */
 public class ResTool {
 
+    private ResTool() {
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
     public static String getString(int resId) {
         if (MasterApplication.getInstance().applicationContext() == null) {
             return "";

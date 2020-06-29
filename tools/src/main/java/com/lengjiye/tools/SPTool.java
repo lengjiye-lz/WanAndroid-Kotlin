@@ -20,7 +20,6 @@ public class SPTool {
     private static String NAME = MasterApplication.getInstance().applicationContext().getPackageName();
 
     private SPTool() {
-        /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 

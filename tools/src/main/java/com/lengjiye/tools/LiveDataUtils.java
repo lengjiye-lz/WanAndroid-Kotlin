@@ -1,4 +1,4 @@
-package com.lengjiye.tools.log;
+package com.lengjiye.tools;
 
 import android.os.Handler;
 import android.os.Looper;

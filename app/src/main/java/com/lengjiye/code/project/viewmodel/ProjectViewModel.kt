@@ -1,15 +1,13 @@
 package com.lengjiye.code.project.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.code.project.model.ProjectModel
-import com.lengjiye.code.system.model.SystemModel
-import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
 import com.lengjiye.room.entity.ProjectEntity

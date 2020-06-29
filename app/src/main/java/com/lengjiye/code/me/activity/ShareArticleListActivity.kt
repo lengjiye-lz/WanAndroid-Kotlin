@@ -10,7 +10,7 @@ import com.lengjiye.code.databinding.ActivityShareArticleBinding
 import com.lengjiye.code.home.adapter.HomeFragmentAdapter
 import com.lengjiye.code.me.viewmodel.MeShareViewModel
 import com.lengjiye.code.utils.ToolBarUtils
-import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.toast
 import com.lengjiye.tools.ResTool
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader

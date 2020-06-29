@@ -7,7 +7,7 @@ import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivitySettingBinding
 import com.lengjiye.code.login.viewmodel.LoginViewModel
 import com.lengjiye.code.utils.ToolBarUtils
-import com.lengjiye.code.utils.toast
+import com.lengjiye.tools.toast
 import com.lengjiye.tools.ResTool
 
 class SettingActivity : BaseActivity<ActivitySettingBinding, LoginViewModel>() {

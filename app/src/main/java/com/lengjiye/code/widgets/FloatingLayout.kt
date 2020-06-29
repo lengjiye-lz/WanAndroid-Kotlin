@@ -4,14 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
 import com.lengjiye.code.R
-import com.lengjiye.code.utils.toast
 import com.lengjiye.tools.SPTool
-import com.lengjiye.tools.log.LogTool
 import java.util.*
 
 /**
