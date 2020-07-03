@@ -16,7 +16,6 @@ import com.lengjiye.code.todo.viewmodel.TodoViewModel
 import com.lengjiye.code.utils.LayoutManagerUtils
 import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.code.utils.startActivity
-import com.lengjiye.code.widgets.GamItemTouchCallback
 import com.lengjiye.code.widgets.MyItemTouchHelperCallback
 import com.lengjiye.tools.ResTool
 import com.lengjiye.tools.log.LogTool
@@ -89,7 +88,6 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
 
         mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
         ItemTouchHelper(MyItemTouchHelperCallback(adapter)).attachToRecyclerView(mBinding.rlList)
-//        ItemTouchHelper(GamItemTouchCallback(400)).attachToRecyclerView(mBinding.rlList)
         mBinding.rlList.adapter = adapter
 
         mBinding.rgGroup.setOnCheckedChangeListener { group, checkedId ->

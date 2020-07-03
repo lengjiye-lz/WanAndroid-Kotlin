@@ -4,26 +4,34 @@ import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.base.recycleview.BaseDBAdapter
-import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.ScreenTool
-import com.lengjiye.tools.log.LogTool
 import kotlin.math.roundToInt
 
 /**
  * 处理滑动删除
  */
 class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouchHelper.Callback() {
+    /**
+     * 开始拖动的位置
+     */
+    private var moveStartScrollX = 0
 
-    private var mCurrentScrollX = 0
+    /**
+     * 动画开始位置
+     */
+    private var animationStartScrollX = 0f
+
     private val mDefaultScrollX = 900
-
-    // 动画开始位置
-    private var currentScrollX = 0f
 
     /**
      * 滑动方向
      */
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+//        if (viewHolder.itemView is ViewGroup){
+//            (viewHolder.itemView as ViewGroup).addView(Button(recyclerView.context))
+//            LogTool.de("add Button")
+//        }
+
+
         // 向左滑动
         val swipeFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         return makeMovementFlags(0, swipeFlags)
@@ -84,8 +92,11 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
      * 针对swipe和drag状态，整个过程中一直会调用这个函数,随手指移动的view就是在super里面做到的(和ItemDecoration里面的onDraw()函数对应)
      */
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+        if (dX == 0f) {
+            moveStartScrollX = viewHolder.itemView.scrollX
+        }
         val scroll = viewHolder.itemView.scrollX
-        var sc = (mCurrentScrollX - dX).toInt()
+        var sc = (moveStartScrollX - dX).toInt()
         if (isCurrentlyActive) {
             // 手指滑动
             if (sc <= 0)
@@ -93,19 +104,19 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
             else if (sc >= mDefaultScrollX)
                 sc = mDefaultScrollX
             viewHolder.itemView.scrollTo(sc, 0)
-            currentScrollX = dX
+            animationStartScrollX = dX
         } else {
-            // 动画执行的百分比
             if (dX < 0) {
                 if (sc > mDefaultScrollX) {
                     return
                 }
-                val animatedFraction = (dX / currentScrollX * 100f).toInt() / 100f
+                // 获得动画执行的百分比
+                val animatedFraction = (dX / animationStartScrollX * 100f).toInt() / 100f
                 // 向左滑动
                 if (scroll < 300) {
                     viewHolder.itemView.scrollTo(sc.coerceAtLeast(0), 0)
                 } else {
-                    viewHolder.itemView.scrollTo((-currentScrollX + (mDefaultScrollX + currentScrollX) * (1f - animatedFraction)).toInt(), 0)
+                    viewHolder.itemView.scrollTo((-animationStartScrollX + (mDefaultScrollX + animationStartScrollX) * (1f - animatedFraction)).toInt(), 0)
                 }
             } else if (dX > 0) {
                 // 右滑动
