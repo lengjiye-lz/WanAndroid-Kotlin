@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.base.recycleview.BaseDBAdapter
+import com.lengjiye.tools.log.LogTool
 import kotlin.math.roundToInt
 
 /**
@@ -97,6 +98,7 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
         }
         val scroll = viewHolder.itemView.scrollX
         var sc = (moveStartScrollX - dX).toInt()
+//        LogTool.e("MyItemTouchHelperCallback", "dX:$dX scroll:$scroll sc:$sc animationStartScrollX:$animationStartScrollX isCurrentlyActive:$isCurrentlyActive")
         if (isCurrentlyActive) {
             // 手指滑动
             if (sc <= 0)
@@ -126,7 +128,8 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
                 if (scroll >= mDefaultScrollX - 300) {
                     viewHolder.itemView.scrollTo(mDefaultScrollX - dX.toInt(), 0)
                 } else {
-                    viewHolder.itemView.scrollTo(dX.roundToInt(), 0)
+                    val scr = dX.toInt().coerceAtMost(scroll - 20)
+                    viewHolder.itemView.scrollTo(scr.coerceAtLeast(0), 0)
                 }
             }
         }
