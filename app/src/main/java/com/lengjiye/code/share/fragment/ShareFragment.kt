@@ -42,7 +42,7 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
         mBinding.rlList.adapter = adapter
 
         mBinding.srlLayout.setOnRefreshListener {
-            refreshData()
+            lazyData()
         }
 
         mBinding.srlLayout.setOnLoadMoreListener {
@@ -75,9 +75,8 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
         }
     }
 
-    override fun initLiveDataListener() {
-        super.initLiveDataListener()
-
+    override fun lazyLiveDataListener() {
+        super.lazyLiveDataListener()
         mViewModel.shareRefreshList.observe(this, Observer {
             if (it.first) {
                 // 缓存  如果已经有数据就不再处理
@@ -113,7 +112,7 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
         mViewModel.getShareMoreList(pager)
     }
 
-    override fun refreshData() {
+    override fun lazyData() {
         if (getBaseActivity() is BaseActivity) {
             (getBaseActivity() as BaseActivity).goScrollToTopInterfaceAnimation(mBinding.rlList, 0)
         }

@@ -140,7 +140,7 @@ class ProjectFragmentItem : NewLazyParentFragment<FragmentProjectItemBinding, Pr
         })
     }
 
-    override fun refreshData() {
+    override fun lazyData() {
         if (isRoom) mViewModel.getProjectArticle2Room()
         refresh()
     }

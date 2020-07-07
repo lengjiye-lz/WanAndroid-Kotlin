@@ -39,12 +39,8 @@ class ProjectFragment : LazyParentFragment<FragmentProjectBinding, ProjectViewMo
         setDivider()
     }
 
-    override fun refreshData() {
-        mViewModel.getProjectTree()
-    }
-
-    override fun initLiveDataListener() {
-        super.initLiveDataListener()
+    override fun lazyLiveDataListener() {
+        super.lazyLiveDataListener()
         mViewModel.projectTree.observe(this, Observer {
             if (adapter.count <= 0) {
                 adapter.treeBeans = it
@@ -65,6 +61,10 @@ class ProjectFragment : LazyParentFragment<FragmentProjectBinding, ProjectViewMo
         })
     }
 
+    override fun lazyData() {
+        mViewModel.getProjectTree()
+    }
+
     fun refresh() {
         if (adapter.fragment is ProjectFragmentItem) {
             (adapter.fragment as ProjectFragmentItem).refresh()
@@ -78,6 +78,4 @@ class ProjectFragment : LazyParentFragment<FragmentProjectBinding, ProjectViewMo
         linearLayout.dividerDrawable = Drawable.createFromXml(resources, resources.getXml(R.drawable.tag_linearlayout_vertical_divider))
         linearLayout.dividerPadding = ResTool.getDimens(R.dimen.d_16)
     }
-
-
 }

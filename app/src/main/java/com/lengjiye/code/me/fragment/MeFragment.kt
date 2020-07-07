@@ -55,8 +55,8 @@ class MeFragment : LazyParentFragment<FragmentMeBinding, MeViewModel>() {
         }
     }
 
-    override fun initData() {
-        super.initData()
+    override fun lazyLiveDataListener() {
+        super.lazyLiveDataListener()
         mViewModel.rank.observe(this, Observer {
             mBinding.tvMeRank.visibility = View.VISIBLE
             mBinding.tvMeRank.text = ResTool.getStringFormat(R.string.s_14, it.coinCount, it.rank)
@@ -66,7 +66,7 @@ class MeFragment : LazyParentFragment<FragmentMeBinding, MeViewModel>() {
     /**
      * 请求接口
      */
-    override fun refreshData() {
+    override fun lazyData() {
         if (!AccountUtils.isLogin()) {
             mBinding.tvMeRank.visibility = View.GONE
             mBinding.tvMeName.visibility = View.GONE

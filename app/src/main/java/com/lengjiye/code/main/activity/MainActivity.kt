@@ -162,7 +162,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                             fragment.refresh()
                         }
                         is ShareFragment -> {
-                            fragment.refreshData()
+                            fragment.lazyData()
                         }
                         is SystemFragment -> {
                             fragment.refresh()

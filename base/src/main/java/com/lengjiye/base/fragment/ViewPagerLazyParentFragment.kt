@@ -13,8 +13,10 @@ import com.lengjiye.base.viewmodel.BaseViewModel
 abstract class ViewPagerLazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : ParentFragment<T, VM>() {
     // view是否创建成功  配合viewpager使用
     private var isViewCreated = false
+
     // fragment是否可见  配合viewpager使用
     private var isVisibleToUser = false
+
     // 是否已经加载过数据
     private var isDataLoaded = false
 
@@ -36,9 +38,19 @@ abstract class ViewPagerLazyParentFragment<T : ViewDataBinding, VM : BaseViewMod
     }
 
     /**
+     * 需要在懒加载时候处理的view
+     */
+    open fun lazyView() = Unit
+
+    /**
+     * 需要在懒加载时候处理的LiveData
+     */
+    open fun lazyLiveDataListener() = Unit
+
+    /**
      * 请求加在数据
      */
-    abstract fun refreshData()
+    abstract fun lazyData()
 
     /**
      * 开始请求数据
@@ -53,7 +65,9 @@ abstract class ViewPagerLazyParentFragment<T : ViewDataBinding, VM : BaseViewMod
         )
         if (isViewCreated && isVisibleToUser && isParentVisible() && (isNeedReload() || !isDataLoaded)) {
             Log.d("LazyBaseFragment", "viewpager loadData")
-            refreshData()
+            lazyView()
+            lazyLiveDataListener()
+            lazyData()
             isDataLoaded = true
             // 通知子fragment请求数据
             dispatchParentVisibleState()

@@ -26,11 +26,21 @@ abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Par
     }
 
     /**
+     * 需要在懒加载时候处理的view
+     */
+    open fun lazyView() = Unit
+
+    /**
+     * 需要在懒加载时候处理的LiveData
+     */
+    open fun lazyLiveDataListener() = Unit
+
+    /**
      * 请求加在数据
      *
-     * 加载第一次请求数据
+     * 懒加载处理数据请求
      */
-    abstract fun refreshData()
+    abstract fun lazyData()
 
     /**
      * fragment再次可见时，是否重新请求数据，默认为false 只请求一次数据
@@ -80,7 +90,9 @@ abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Par
         Log.d("LazyBaseFragment", "!isHiddenToUser:${!isHiddenToUser}")
         if (!isParentHidden() && (isNeedReload() || !isDataLoaded) && !isHiddenToUser) {
             Log.d("LazyBaseFragment", "loadData")
-            refreshData()
+            lazyView()
+            lazyLiveDataListener()
+            lazyData()
             isDataLoaded = true
             dispatchParentHiddenState()
         }

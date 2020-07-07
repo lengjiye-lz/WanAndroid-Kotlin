@@ -113,8 +113,8 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
 
-    override fun initLiveDataListener() {
-        super.initLiveDataListener()
+    override fun lazyLiveDataListener() {
+        super.lazyLiveDataListener()
         mViewModel.articleMoreList.observe(this, Observer {
             mBinding.srlLayout.finishLoadMore()
             val dates = it.datas
@@ -165,7 +165,7 @@ class HomeFragment : LazyParentFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
 
-    override fun refreshData() {
+    override fun lazyData() {
         mViewModel.getBanner()
         refresh()
     }

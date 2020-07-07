@@ -49,7 +49,7 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
         }
     }
 
-    override fun refreshData() {
+    override fun lazyData() {
         if (isRoom) mViewModel.getTreeArticleList2Room()
         refresh()
     }
@@ -125,8 +125,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
         }
     }
 
-    override fun initData() {
-        super.initData()
+    override fun lazyView() {
+        super.lazyView()
         isRoom = arguments?.getInt(IntentKey.KEY_POSITION, -1) == 0 && selectPosition == 0
         treeBean = arguments?.getParcelable(IntentKey.KEY_OBJECT)
         if (treeBean == null) {
@@ -135,8 +135,8 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
         initTitle(treeBean)
     }
 
-    override fun initLiveDataListener() {
-        super.initLiveDataListener()
+    override fun lazyLiveDataListener() {
+        super.lazyLiveDataListener()
         mViewModel.articleBean.observe(this, Observer {
             if (it.cid != secondTree?.id) {
                 mBinding.srlLayout.finishRefresh()

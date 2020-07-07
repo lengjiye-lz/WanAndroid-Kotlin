@@ -57,11 +57,13 @@ abstract class ParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragmen
      * 初始化数据
      * 设置数据
      * 请求接口等
+     * 懒加载不不建议使用此方法
      */
-    open fun initData() = Unit
+    protected open fun initData() = Unit
 
     /**
      * LiveData 数据监听
+     * 懒加载不建议使用此方法
      */
     open fun initLiveDataListener() = Unit
 

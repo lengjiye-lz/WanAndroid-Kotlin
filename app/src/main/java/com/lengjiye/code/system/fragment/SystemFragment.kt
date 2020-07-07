@@ -25,7 +25,7 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
         return R.layout.fragment_system
     }
 
-    override fun refreshData() {
+    override fun lazyData() {
         mViewModel.getTree()
     }
 
@@ -38,8 +38,8 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
         setDivider()
     }
 
-    override fun initLiveDataListener() {
-        super.initLiveDataListener()
+    override fun lazyLiveDataListener() {
+        super.lazyLiveDataListener()
         mViewModel.tree.observe(this, Observer {
             if (adapter.count <= 0) {
                 adapter.treeBeans = it
