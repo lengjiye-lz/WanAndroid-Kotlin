@@ -1,16 +1,27 @@
 package com.lengjiye.code.widgets
 
 import android.graphics.Canvas
+import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.tools.log.LogTool
-import kotlin.math.roundToInt
 
 /**
  * 处理滑动删除
  */
 class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouchHelper.Callback() {
+
+    /**
+     * 保存上次操作的view
+     */
+    private var viewHolder: RecyclerView.ViewHolder? = null
+
+    constructor(maxScrollX: Int, springBackScrollX: Int, adapter: BaseDBAdapter<*, *, *>) : this(adapter) {
+        this.mDefaultScrollX = maxScrollX
+        this.springBackScrollX = springBackScrollX
+    }
+
     /**
      * 开始拖动的位置
      */
@@ -21,7 +32,15 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
      */
     private var animationStartScrollX = 0f
 
-    private val mDefaultScrollX = 900
+    /**
+     * 滑动最大位置
+     */
+    private var mDefaultScrollX = 600
+
+    /**
+     * 回弹位置
+     */
+    private var springBackScrollX = 150
 
     /**
      * 滑动方向
@@ -80,6 +99,12 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
      */
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         super.onSelectedChanged(viewHolder, actionState)
+        this.viewHolder?.let {
+            if (viewHolder != null && it != viewHolder) {
+                resetViewLocation(it.itemView)
+            }
+        }
+        LogTool.e("MyItemTouchHelperCallback", "viewHolder:$viewHolder")
     }
 
     /**
@@ -109,23 +134,25 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
             animationStartScrollX = dX
         } else {
             if (dX < 0) {
+                // 向左滑动
                 if (sc > mDefaultScrollX) {
                     return
                 }
                 // 获得动画执行的百分比
                 val animatedFraction = (dX / animationStartScrollX * 100f).toInt() / 100f
-                // 向左滑动
-                if (scroll < 300) {
+                if (scroll < springBackScrollX) {
                     viewHolder.itemView.scrollTo(sc.coerceAtLeast(0), 0)
                 } else {
-                    viewHolder.itemView.scrollTo((-animationStartScrollX + (mDefaultScrollX + animationStartScrollX) * (1f - animatedFraction)).toInt(), 0)
+                    this.viewHolder = viewHolder
+                    val scr = (-animationStartScrollX + (mDefaultScrollX + animationStartScrollX) * (1f - animatedFraction)).toInt()
+                    viewHolder.itemView.scrollTo(scr.coerceAtMost(mDefaultScrollX), 0)
                 }
             } else if (dX > 0) {
                 // 右滑动
                 if (scroll <= 0) {
                     return
                 }
-                if (scroll >= mDefaultScrollX - 300) {
+                if (scroll >= mDefaultScrollX - springBackScrollX) {
                     viewHolder.itemView.scrollTo(mDefaultScrollX - dX.toInt(), 0)
                 } else {
                     val scr = dX.toInt().coerceAtMost(scroll - 20)
@@ -162,5 +189,12 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
      */
     override fun getSwipeVelocityThreshold(defaultValue: Float): Float {
         return super.getSwipeVelocityThreshold(defaultValue)
+    }
+
+    /**
+     * 重置view坐标
+     */
+    fun resetViewLocation(view: View? = viewHolder?.itemView) {
+        view?.scrollTo(0, 0)
     }
 }

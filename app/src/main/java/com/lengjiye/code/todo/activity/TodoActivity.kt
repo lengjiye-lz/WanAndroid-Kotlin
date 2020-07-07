@@ -37,6 +37,8 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
     private var status: Int = 0
     private var type = TodoType.All
 
+    private var itemHelperCallback: MyItemTouchHelperCallback? = null
+
     private enum class TodoType(val type: String) {
         All("全部"),
         WORK("工作"),
@@ -87,7 +89,10 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
         }
 
         mBinding.rlList.layoutManager = LayoutManagerUtils.verticalLinearLayoutManager(this)
-        ItemTouchHelper(MyItemTouchHelperCallback(adapter)).attachToRecyclerView(mBinding.rlList)
+        itemHelperCallback = MyItemTouchHelperCallback(adapter)
+        itemHelperCallback?.let {
+            ItemTouchHelper(it).attachToRecyclerView(mBinding.rlList)
+        }
         mBinding.rlList.adapter = adapter
 
         mBinding.rgGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -112,6 +117,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
             if (it.over) {// 没有更多数据
                 mBinding.srlLayout.setEnableLoadMore(false)
             }
+            itemHelperCallback?.resetViewLocation()
             if (page == 1) {
                 mBinding.srlLayout.finishRefresh()
                 adapter.replaceAll(it.datas.toMutableList())

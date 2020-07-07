@@ -25,6 +25,13 @@ class TodoAdapter constructor(val context: Context, models: MutableList<TodoData
                 holder.binding.tvTime.visibility = View.VISIBLE
                 holder.binding.tvTime.text = time
             }
+
+            holder.binding.btnDelete.setOnClickListener {
+                holder.itemView.scrollTo(0, 0)
+                getItems().removeAt(position)
+                notifyItemRemoved(position)
+                notifyDataSetChanged()
+            }
         }
     }
 
