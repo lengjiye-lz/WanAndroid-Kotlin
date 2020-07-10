@@ -48,5 +48,6 @@
     <string name="s_44">添加ToDo</string>
     <string name="s_45">提交</string>
     <string name="s_46">删除</string>
+    <string name="s_47">取消</string>
 
 </resources>

@@ -15,8 +15,6 @@ import com.lengjiye.tools.ResTool
 class TodoAdapter constructor(val context: Context, models: MutableList<TodoData>?) :
     BaseDBAdapter<TodoData, TodoAdapter.TodoHolderDB, ItemTodoBinding>(context, models) {
 
-    private var listener: ((view: View, position: Int, item: TodoData?) -> Unit)? = null
-
     override fun onBindViewHolder(holder: TodoHolderDB, position: Int, item: TodoData?) {
         item?.let {
             holder.binding.tvTitle.text = ResTool.fromHtml(it.title).trim()
@@ -33,10 +31,6 @@ class TodoAdapter constructor(val context: Context, models: MutableList<TodoData
                 notifyDataSetChanged()
             }
         }
-    }
-
-    fun collectClickListener(listener: ((view: View, position: Int, item: TodoData?) -> Unit)?) {
-        this.listener = listener
     }
 
     class TodoHolderDB(binding: ItemTodoBinding) : BaseDBViewHolder<ItemTodoBinding>(binding)

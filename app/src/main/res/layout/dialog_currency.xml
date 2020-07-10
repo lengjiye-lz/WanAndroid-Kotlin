@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_currency_dialog_bg"
+                android:paddingStart="@dimen/d_10"
+                android:paddingEnd="@dimen/d_10"
+                android:paddingBottom="@dimen/d_10"
+                app:layout_constraintBottom_toTopOf="@+id/v_horizontal_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed">
+
+            <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_10"
+                    android:textColor="@color/c_1a"
+                    android:textSize="@dimen/d_20"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_content"
+                    app:layout_constraintEnd_toEndOf="@+id/cl_content"
+                    app:layout_constraintStart_toStartOf="@+id/cl_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="标题" />
+
+            <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d_10"
+                    android:layout_marginTop="@dimen/d_10"
+                    android:layout_marginEnd="@dimen/d_10"
+                    android:letterSpacing="0.1"
+                    android:lineSpacingExtra="@dimen/d_3"
+                    android:textColor="@color/c_1a"
+                    android:textSize="@dimen/d_13"
+                    app:layout_constraintEnd_toEndOf="@+id/cl_content"
+                    app:layout_constraintStart_toStartOf="@+id/cl_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="内容内容内容内容内容内容内容内容内容内容" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+                android:id="@+id/v_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d_1"
+                android:background="@color/c_99"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/btn_cancel"
+                app:layout_constraintEnd_toEndOf="@+id/cl_content"
+                app:layout_constraintStart_toStartOf="@+id/cl_content"
+                app:layout_constraintTop_toBottomOf="@+id/cl_content" />
+
+        <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_currency_dialog_left_btn"
+                android:padding="@dimen/d_10"
+                android:text="@string/s_47"
+                android:textColor="@color/c_1a"
+                android:textSize="@dimen/d_15"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_submit"
+                app:layout_constraintStart_toStartOf="@+id/cl_content"
+                app:layout_constraintTop_toBottomOf="@+id/v_horizontal_line" />
+
+        <View
+                android:id="@+id/v_vertical_line"
+                android:layout_width="@dimen/d_1"
+                android:layout_height="0dp"
+                android:background="@color/c_99"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_cancel"
+                app:layout_constraintEnd_toStartOf="@+id/btn_submit"
+                app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+                app:layout_constraintTop_toBottomOf="@+id/v_horizontal_line" />
+
+        <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_1"
+                android:background="@drawable/bg_currency_dialog_right_btn"
+                android:padding="@dimen/d_10"
+                android:text="@string/s_45"
+                android:textColor="@color/c_1a"
+                android:textSize="@dimen/d_15"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/cl_content"
+                app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+                app:layout_constraintTop_toTopOf="@+id/btn_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

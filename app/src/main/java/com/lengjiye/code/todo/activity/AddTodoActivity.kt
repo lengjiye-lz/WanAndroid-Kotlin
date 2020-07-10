@@ -13,6 +13,7 @@ import com.lengjiye.code.databinding.ActivityAddTodoBinding
 import com.lengjiye.code.todo.bean.TodoData
 import com.lengjiye.code.todo.viewmodel.AddTodoViewModel
 import com.lengjiye.code.utils.ToolBarUtils
+import com.lengjiye.code.widgets.dialog.CurrencyDialog
 import com.lengjiye.tools.DateTimeTool
 
 
@@ -31,6 +32,7 @@ class AddTodoActivity : BaseActivity<ActivityAddTodoBinding, AddTodoViewModel>()
         return R.layout.activity_add_todo
     }
 
+
     /**
      * 此界面不需要显示悬浮窗
      */
@@ -45,7 +47,7 @@ class AddTodoActivity : BaseActivity<ActivityAddTodoBinding, AddTodoViewModel>()
             .setNormalTitle(R.string.s_44)
             .setNormalTitleColor(R.color.c_ff)
             .setBackListener {
-                finish()
+                showDialog()
             }
             .builder()
         this.setSupportActionBar(toolbar)
@@ -101,7 +103,7 @@ class AddTodoActivity : BaseActivity<ActivityAddTodoBinding, AddTodoViewModel>()
         todoData?.let {
             mBinding.edTitle.setText(it.title)
             mBinding.edContent.setText(it.content)
-            mBinding.edTitle.setText(it.dateStr)
+            mBinding.edTime.text = it.dateStr
         }
     }
 
@@ -113,5 +115,12 @@ class AddTodoActivity : BaseActivity<ActivityAddTodoBinding, AddTodoViewModel>()
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    }
+
+    private fun showDialog() {
+        CurrencyDialog.Builder().setContent("sdcsdc").setSubmitListener { view, dialog ->
+            dialog.dismiss()
+            finish()
+        }.build().show(supportFragmentManager)
     }
 }

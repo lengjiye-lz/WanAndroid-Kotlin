@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.R
+import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.databinding.ActivityTodoBinding
 import com.lengjiye.code.todo.adapter.TodoAdapter
 import com.lengjiye.code.todo.viewmodel.TodoViewModel
@@ -109,6 +110,13 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
             }
             refresh()
         }
+
+        adapter.setOnItemClickListener { v, position, item ->
+            startActivity<AddTodoActivity>(Bundle().apply {
+                putParcelable(IntentKey.KEY_OBJECT, item)
+            })
+        }
+
     }
 
     override fun initLiveDataListener() {
