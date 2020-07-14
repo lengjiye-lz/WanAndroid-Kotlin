@@ -34,7 +34,7 @@ dependencies {
     api "androidx.appcompat:appcompat:$cfgs.appcompat"
     implementation "androidx.core:core-ktx:$cfgs.android_ktx"
     testImplementation "junit:junit:$cfgs.junit"
-    androidTestImplementation "androidx.test.ext:junit:$cfgs.test_runner"
+    androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
 
     api "androidx.room:room-runtime:$room_version"

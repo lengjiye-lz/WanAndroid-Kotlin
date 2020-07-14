@@ -123,8 +123,8 @@ project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation "junit:junit:$cfgs.junit"
+    androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
-    androidTestImplementation "androidx.test.ext:junit:$cfgs.test_runner"
 
     implementation project(':base')
     implementation project(':network')
@@ -155,4 +155,5 @@ dependencies {
 
     // 时间选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6"
 }

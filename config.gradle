@@ -30,7 +30,7 @@ ext {
             cardview            : "1.0.0",
             leakcanary          : "2.0-alpha-3",
             smart_refresh_layout: "2.0.0",
-            glide               : "4.10.0",
+            glide               : "4.11.0",
             banner              : "1.4.10",
             agentweb            : "4.1.2",
             material            : "1.1.0",
