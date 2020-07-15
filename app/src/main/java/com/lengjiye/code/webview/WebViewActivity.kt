@@ -15,7 +15,7 @@ import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.ActivityWebviewBinding
 import com.lengjiye.code.constant.IntentKey
 import com.lengjiye.code.utils.ToolBarUtils
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logI
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
@@ -65,7 +65,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
 
         val n = System.currentTimeMillis()
-        LogTool.i("Info", "init used time:" + (n - p))
+        logI("Info", "init used time:" + (n - p))
     }
 
     private val mWebViewClient = object : WebViewClient() {
@@ -75,7 +75,7 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding, WebViewModel>() {
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             //do you  work
-            LogTool.i("Info", "BaseWebActivity onPageStarted")
+            logI("Info", "BaseWebActivity onPageStarted")
         }
     }
 

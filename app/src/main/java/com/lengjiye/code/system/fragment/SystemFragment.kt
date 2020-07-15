@@ -12,7 +12,7 @@ import com.lengjiye.code.system.adapter.SystemAdapter
 import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logD
 
 /**
  * 体系
@@ -54,7 +54,7 @@ class SystemFragment : LazyParentFragment<FragmentSystemBinding, SystemViewModel
                         mBinding.tabLayout.getTabAt(0)?.select()
                     }
                 } else {
-                    LogTool.d("数据相同, 不更新")
+                    logD("数据相同, 不更新")
                 }
             }
         })

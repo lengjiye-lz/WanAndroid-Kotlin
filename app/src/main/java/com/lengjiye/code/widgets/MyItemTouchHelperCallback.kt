@@ -5,7 +5,8 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.base.recycleview.BaseDBAdapter
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logE
+
 
 /**
  * 处理滑动删除
@@ -104,7 +105,7 @@ class MyItemTouchHelperCallback(val adapter: BaseDBAdapter<*, *, *>) : ItemTouch
                 resetViewLocation(it.itemView)
             }
         }
-        LogTool.e("MyItemTouchHelperCallback", "viewHolder:$viewHolder")
+        logE("MyItemTouchHelperCallback", "viewHolder:$viewHolder")
     }
 
     /**

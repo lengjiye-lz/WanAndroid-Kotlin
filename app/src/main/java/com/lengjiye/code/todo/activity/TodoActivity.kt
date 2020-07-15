@@ -19,7 +19,7 @@ import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.code.utils.startActivity
 import com.lengjiye.code.widgets.MyItemTouchHelperCallback
 import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.log
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 
@@ -166,7 +166,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding, TodoViewModel>() {
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            LogTool.de("direction:$direction")
+            log("direction:$direction")
             // 滑动事件
             val position = viewHolder.adapterPosition
             adapter.getItems().removeAt(position)

@@ -4,9 +4,9 @@ import com.google.gson.JsonSyntaxException
 import com.lengjiye.base.application.MasterApplication
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.exception.ErrorCodeConstant
-import com.lengjiye.tools.log.LogTool
 import com.lengjiye.tools.NetWorkTool
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.log.logE
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import java.lang.NullPointerException
@@ -50,7 +50,7 @@ class LoadingObserver<T>() : Observer<T> {
         val errorCode: Int?
         val errorMsg: String?
         val apiException: ApiException?
-        LogTool.e("message:${e.message}")
+        logE("message:${e.message}")
         when (e) {
             is NullPointerException -> {
                 observerListener?.observerOnNext(null)

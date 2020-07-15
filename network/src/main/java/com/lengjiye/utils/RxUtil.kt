@@ -1,13 +1,11 @@
 package com.lengjiye.utils
 
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logE
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import java.lang.reflect.Constructor
 import java.util.concurrent.TimeUnit
 
 object RxUtil {
@@ -69,7 +67,7 @@ object RxUtil {
      */
     fun justInIO(string: String = "", listener: (long: String) -> Unit): Disposable? {
         return Observable.just(string).observeOn(Schedulers.io()).subscribe(listener, {
-            LogTool.e("error:${it.message}")
+            logE("error:${it.message}")
         })
     }
 

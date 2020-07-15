@@ -1,6 +1,5 @@
 package com.lengjiye.code.widgets
 
-import com.lengjiye.tools.log.LogTool
 import java.util.*
 
 class FloatingHolder : Observable() {

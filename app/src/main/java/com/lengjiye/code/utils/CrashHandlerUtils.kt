@@ -1,6 +1,6 @@
 package com.lengjiye.code.utils
 
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logE
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -12,10 +12,10 @@ class CrashHandlerUtils : Thread.UncaughtExceptionHandler {
     private var handler: Thread.UncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
 
     override fun uncaughtException(p0: Thread, p1: Throwable) {
-        LogTool.e("程序出现异常了:Thread:${p0.name} \nerrorMessage:${p1.message}")
+        logE("程序出现异常了:Thread:${p0.name} \nerrorMessage:${p1.message}")
 
         val stackTraceInfo = getStackTraceInfo(p1)
-        LogTool.e("StackTraceInfo:$stackTraceInfo")
+        logE("StackTraceInfo:$stackTraceInfo")
 
         // 为了防止其他第三方收集不到错误信息  比如友盟
         handler.uncaughtException(p0, p1)

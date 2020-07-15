@@ -6,16 +6,13 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import com.lengjiye.base.fragment.LazyParentFragment
-import com.lengjiye.base.fragment.ParentFragment
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.FragmentProjectBinding
 import com.lengjiye.code.project.adapter.ProjectAdapter
 import com.lengjiye.code.project.model.ProjectModel
 import com.lengjiye.code.project.viewmodel.ProjectViewModel
-import com.lengjiye.code.system.fragment.SystemFragmentItem
-import com.lengjiye.code.system.model.SystemModel
 import com.lengjiye.tools.ResTool
-import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logD
 
 /**
  * @Author: lz
@@ -55,7 +52,7 @@ class ProjectFragment : LazyParentFragment<FragmentProjectBinding, ProjectViewMo
                         mBinding.tabLayout.getTabAt(0)?.select()
                     }
                 } else {
-                    LogTool.d("数据相同, 不更新")
+                    logD("数据相同, 不更新")
                 }
             }
         })
