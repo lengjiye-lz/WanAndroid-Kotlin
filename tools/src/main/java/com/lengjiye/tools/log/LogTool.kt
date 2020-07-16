@@ -63,7 +63,7 @@ object LogTool {
  * @param tag
  * @param message
  */
-inline fun logV(message: String, tag: String = LogTool.defaultTag) {
+fun logV(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
@@ -75,7 +75,7 @@ inline fun logV(message: String, tag: String = LogTool.defaultTag) {
  * @param tag
  * @param message
  */
-inline fun logD(message: String, tag: String = LogTool.defaultTag) {
+fun logD(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
@@ -87,7 +87,7 @@ inline fun logD(message: String, tag: String = LogTool.defaultTag) {
  * @param tag
  * @param message
  */
-inline fun logI(message: String, tag: String = LogTool.defaultTag) {
+fun logI(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
@@ -100,7 +100,7 @@ inline fun logI(message: String, tag: String = LogTool.defaultTag) {
  * @param tag
  * @param message
  */
-inline fun logW(message: String, tag: String = LogTool.defaultTag) {
+fun logW(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
@@ -113,7 +113,7 @@ inline fun logW(message: String, tag: String = LogTool.defaultTag) {
  * @param tag
  * @param message
  */
-inline fun logE(message: String, tag: String = LogTool.defaultTag) {
+fun logE(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
@@ -127,7 +127,7 @@ inline fun logE(message: String, tag: String = LogTool.defaultTag) {
  *
  * @param message
  */
-inline fun log(message: String) {
+fun log(message: String) {
     if (BuildConfig.DEBUG) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
