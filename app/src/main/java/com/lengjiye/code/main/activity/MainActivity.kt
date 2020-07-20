@@ -1,9 +1,15 @@
 package com.lengjiye.code.main.activity
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.lengjiye.code.R
@@ -20,9 +26,12 @@ import com.lengjiye.code.system.fragment.SystemFragment
 import com.lengjiye.code.utils.ActivityLifecycleCallback
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.ToolBarUtils
-import com.lengjiye.tools.log.LogServiceInstance
+import com.lengjiye.tools.FileTool
+import com.lengjiye.tools.log.*
 import com.lengjiye.utils.RxUtil
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.*
+import java.io.*
 
 /**
  * MainActivity
@@ -35,7 +44,29 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private var hotKeys: List<HotKey>? = null
 
     override fun getLayoutId(): Int {
+
         return R.layout.activity_main
+    }
+
+    private fun test() = runBlocking {
+        val job = GlobalScope.launch {
+            try {
+                repeat(1000) {
+                    log("I'm sleeping $it")
+                    delay(500)
+                }
+            } catch (e: Exception) {
+                log("I'm sleeping ${e.message}")
+            } finally {
+                withContext(NonCancellable) {
+                    log("I'm sleeping finally")
+                    delay(1000)
+                    log("I'm sleeping finally111111")
+                }
+            }
+        }
+        log("shushushu")
+        job.cancel()
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -46,6 +77,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         ToolBarUtils.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
             ActivityUtils.startSearchActivity(this)
         }
+        test()
     }
 
     override fun initToolBar() {
@@ -65,8 +97,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         supportFragmentManager.beginTransaction()
             .add(R.id.f_container, mTempFragment as HomeFragment)
             .show(mTempFragment as HomeFragment).commit()
-
-        mViewModel.getHotKeyList()
+        mViewModel.getHotKeyList1()
         // 显示悬浮窗
 //        LogServiceInstance.singleton.start(this)
     }

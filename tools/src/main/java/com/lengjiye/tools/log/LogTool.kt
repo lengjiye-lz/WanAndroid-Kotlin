@@ -4,6 +4,7 @@ import android.util.Log
 import com.lengjiye.tools.BuildConfig
 import com.lengjiye.tools.log.LogServiceInstance.Companion.isShow
 import com.lengjiye.tools.log.LogServiceInstance.Companion.singleton
+import com.lengjiye.tools.log.LogTool.logEnable
 
 /**
  * 类描述: 日志工具类
@@ -21,6 +22,12 @@ object LogTool {
      * Get default tag name
      */
     const val defaultTag = "WanAndroid"
+
+    /**
+     * 是否打印日志，全局设置
+     * 默认debug模式下打印
+     */
+    var logEnable: Boolean = false
 
     /**
      * Get default tag name
@@ -64,7 +71,7 @@ object LogTool {
  * @param message
  */
 fun logV(message: String, tag: String = LogTool.defaultTag) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.v(tag, mess)
@@ -76,7 +83,7 @@ fun logV(message: String, tag: String = LogTool.defaultTag) {
  * @param message
  */
 fun logD(message: String, tag: String = LogTool.defaultTag) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.d(tag, mess)
@@ -88,7 +95,7 @@ fun logD(message: String, tag: String = LogTool.defaultTag) {
  * @param message
  */
 fun logI(message: String, tag: String = LogTool.defaultTag) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.i(tag, mess)
@@ -101,7 +108,7 @@ fun logI(message: String, tag: String = LogTool.defaultTag) {
  * @param message
  */
 fun logW(message: String, tag: String = LogTool.defaultTag) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.w(tag, mess)
@@ -114,7 +121,7 @@ fun logW(message: String, tag: String = LogTool.defaultTag) {
  * @param message
  */
 fun logE(message: String, tag: String = LogTool.defaultTag) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.e(tag, mess)
@@ -128,7 +135,7 @@ fun logE(message: String, tag: String = LogTool.defaultTag) {
  * @param message
  */
 fun log(message: String) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.e("ceshi", mess)
