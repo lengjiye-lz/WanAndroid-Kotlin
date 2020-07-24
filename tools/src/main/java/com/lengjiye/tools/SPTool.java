@@ -3,7 +3,7 @@ package com.lengjiye.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.lengjiye.base.application.MasterApplication;
+import com.lengjiye.code.baseparameter.application.MasterApplication;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

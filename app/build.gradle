@@ -121,7 +121,7 @@ project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     testImplementation "junit:junit:$cfgs.junit"
     androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
@@ -130,6 +130,7 @@ dependencies {
     implementation project(':network')
     implementation project(':tools')
     implementation project(':room')
+    implementation project(':baseparameter')
 
 //    implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
     implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
@@ -155,6 +156,5 @@ dependencies {
 
     // 时间选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
-    //LiveEventBus
-    implementation 'com.jeremyliao:live-event-bus-x:1.7.2'
+
 }

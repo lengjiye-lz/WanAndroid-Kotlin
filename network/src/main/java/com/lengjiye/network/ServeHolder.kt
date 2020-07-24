@@ -1,6 +1,6 @@
 package com.lengjiye.network
 
-import com.lengjiye.base.application.MasterApplication
+import com.lengjiye.code.baseparameter.application.MasterApplication
 import java.util.*
 
 class ServeHolder {

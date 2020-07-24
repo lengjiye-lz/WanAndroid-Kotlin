@@ -2,7 +2,8 @@ package com.lengjiye.tools;
 
 import android.util.TypedValue;
 
-import com.lengjiye.base.application.MasterApplication;
+import com.lengjiye.code.baseparameter.application.MasterApplication;
+
 
 /**
  * dp转换

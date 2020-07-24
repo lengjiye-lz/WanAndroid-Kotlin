@@ -4,7 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.lengjiye.base.application.MasterApplication;
+import com.lengjiye.code.baseparameter.application.MasterApplication;
+
 
 /**
  * 网络相关

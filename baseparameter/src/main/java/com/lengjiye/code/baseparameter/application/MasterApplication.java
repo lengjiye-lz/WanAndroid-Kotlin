@@ -1,8 +1,10 @@
-package com.lengjiye.base.application;
+package com.lengjiye.code.baseparameter.application;
 
+import android.app.Application;
 import android.content.Context;
 
-import com.lengjiye.base.inter.IApp;
+import com.lengjiye.code.baseparameter.manager.ActivityLifecycleCallback;
+import com.lengjiye.code.baseparameter.inter.IApp;
 
 public class MasterApplication implements IApp {
 
@@ -14,6 +16,14 @@ public class MasterApplication implements IApp {
             return null;
         }
         return iApp.applicationContext();
+    }
+
+    @Override
+    public Application application() {
+        if (iApp == null) {
+            return null;
+        }
+        return iApp.application();
     }
 
     @Override
@@ -74,6 +84,8 @@ public class MasterApplication implements IApp {
 
     public void setIApp(IApp iApp) {
         this.iApp = iApp;
+        // 注册activity生命周期
+        iApp.application().registerActivityLifecycleCallbacks(new ActivityLifecycleCallback());
     }
 
     public static MasterApplication getInstance() {

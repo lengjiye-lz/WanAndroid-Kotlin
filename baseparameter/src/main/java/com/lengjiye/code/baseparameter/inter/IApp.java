@@ -1,9 +1,13 @@
-package com.lengjiye.base.inter;
+package com.lengjiye.code.baseparameter.inter;
 
+import android.app.Application;
 import android.content.Context;
- public interface IApp {
+
+public interface IApp {
 
     Context applicationContext();
+
+    Application application();
 
     String applicationId();
 

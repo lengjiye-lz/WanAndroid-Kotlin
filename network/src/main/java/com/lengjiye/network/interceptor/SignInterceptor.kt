@@ -1,6 +1,6 @@
 package com.lengjiye.network.interceptor
 
-import com.lengjiye.base.application.MasterApplication
+import com.lengjiye.code.baseparameter.application.MasterApplication
 import com.lengjiye.tools.log.logD
 import com.lengjiye.tools.log.logE
 import okhttp3.Interceptor

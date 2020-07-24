@@ -4,7 +4,8 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.lengjiye.base.application.MasterApplication;
+
+import com.lengjiye.code.baseparameter.application.MasterApplication;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

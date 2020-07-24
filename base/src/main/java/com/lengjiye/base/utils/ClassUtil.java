@@ -24,8 +24,8 @@ public class ClassUtil {
         return tClass;
     }
 
-    private static <T> Class<T> getGenericClass(Class<?> klass) {
-        Type type = klass.getGenericSuperclass();
+    private static <T> Class<T> getGenericClass(Class<?> mClass) {
+        Type type = mClass.getGenericSuperclass();
         if (!(type instanceof ParameterizedType)) return null;
         ParameterizedType parameterizedType = (ParameterizedType) type;
         // 获取范型集合

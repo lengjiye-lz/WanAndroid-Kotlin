@@ -3,10 +3,10 @@ package com.lengjiye.code.application
 import android.app.Application
 import android.content.Context
 import com.facebook.stetho.Stetho
-import com.lengjiye.base.activity.ActivityManager
-import com.lengjiye.base.application.MasterApplication
-import com.lengjiye.base.inter.IApp
 import com.lengjiye.code.BuildConfig
+import com.lengjiye.code.baseparameter.manager.AppActivityManager
+import com.lengjiye.code.baseparameter.application.MasterApplication
+import com.lengjiye.code.baseparameter.inter.IApp
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.CrashHandlerUtils
@@ -26,6 +26,10 @@ class CodeApplication : Application(), IApp {
         return applicationContext
     }
 
+    override fun application(): Application {
+        return this
+    }
+
     override fun applicationId(): String {
         return BuildConfig.APPLICATION_ID
     }
@@ -39,7 +43,7 @@ class CodeApplication : Application(), IApp {
      */
     override fun logout() {
         AccountUtils.logout()
-        ActivityManager.singleton.removeCurrent()
+        AppActivityManager.finishTopActivity()
         startActivity<LoginActivity>()
     }
 

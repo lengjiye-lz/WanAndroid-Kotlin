@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion cfgs.compileSdkVersion
+    buildToolsVersion cfgs.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion cfgs.minSdkVersion
+        targetSdkVersion cfgs.targetSdkVersion
+        versionCode cfgs.versionCode
+        versionName cfgs.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        debug {}
+        qa {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    testImplementation "junit:junit:$cfgs.junit"
+    androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:$cfgs.android_ktx"
+    implementation "androidx.appcompat:appcompat:$cfgs.appcompat"
+
+    //LiveEventBus
+    api 'com.jeremyliao:live-event-bus-x:1.7.2'
+}

@@ -8,7 +8,8 @@ import android.text.Spanned;
 
 import androidx.core.content.ContextCompat;
 
-import com.lengjiye.base.application.MasterApplication;
+import com.lengjiye.code.baseparameter.application.MasterApplication;
+
 
 /**
  * 获取资源文件

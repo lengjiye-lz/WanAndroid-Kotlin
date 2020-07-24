@@ -1,6 +1,5 @@
 package com.lengjiye.base.activity
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -37,7 +36,6 @@ abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
             window.setContentView(baseBinding.root)
         }
         mBinding.lifecycleOwner = this
-        ActivityManager.singleton.add(this)
         initIntent(savedInstanceState)
         initView(savedInstanceState)
         initToolBar()
@@ -97,10 +95,5 @@ abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
         val viewModelClass = ClassUtil.getViewModel<VM>(this) ?: return
         mViewModel = ViewModelProvider(this).get(viewModelClass)
         mViewModel.onCreate()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ActivityManager.singleton.remove(this)
     }
 }

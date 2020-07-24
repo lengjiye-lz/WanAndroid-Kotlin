@@ -3,7 +3,7 @@ package com.lengjiye.tools
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
-import com.lengjiye.base.application.MasterApplication
+import com.lengjiye.code.baseparameter.application.MasterApplication
 
 
 object ScreenTool {

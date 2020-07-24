@@ -6,6 +6,8 @@ import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.jeremyliao.liveeventbus.LiveEventBus
+import com.lengjiye.code.baseparameter.constant.BaseEventConstant
 import com.lengjiye.tools.LiveDataUtils
 
 /**
@@ -14,7 +16,6 @@ import com.lengjiye.tools.LiveDataUtils
 class LogServiceInstance {
 
     var logContent = MutableLiveData<String>()
-    var viewVisibility = MutableLiveData<Boolean>()
 
     companion object {
 
@@ -54,10 +55,10 @@ class LogServiceInstance {
     }
 
     fun hideLog() {
-        viewVisibility.value = false
+        LiveEventBus.get(BaseEventConstant.IS_BACK_GROUND, Boolean::class.java).post(true)
     }
 
     fun showLog() {
-        viewVisibility.value = true
+        LiveEventBus.get(BaseEventConstant.IS_BACK_GROUND, Boolean::class.java).post(false)
     }
 }

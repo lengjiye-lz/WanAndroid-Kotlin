@@ -1,10 +1,17 @@
 package com.lengjiye.tools.log
 
+import android.os.Environment
 import android.util.Log
+import com.lengjiye.code.baseparameter.application.MasterApplication
 import com.lengjiye.tools.BuildConfig
+import com.lengjiye.tools.DateTimeTool
+import com.lengjiye.tools.FileTool
 import com.lengjiye.tools.log.LogServiceInstance.Companion.isShow
 import com.lengjiye.tools.log.LogServiceInstance.Companion.singleton
 import com.lengjiye.tools.log.LogTool.logEnable
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.*
 
 /**
  * 类描述: 日志工具类
@@ -17,6 +24,8 @@ import com.lengjiye.tools.log.LogTool.logEnable
  */
 object LogTool {
     private const val SEPARATOR = ","
+    private var filePath = "/Log"
+    private var fileName = ""
 
     /**
      * Get default tag name
@@ -39,6 +48,10 @@ object LogTool {
         return "$defaultTag-$tag"
     }
 
+    init {
+        getFilePath()
+    }
+
     /**
      * get stack info
      */
@@ -59,10 +72,44 @@ object LogTool {
      * 在悬浮窗上显示log
      */
     fun showLog(tag: String, content: String) {
+        writeTxtToFile("$tag:$content")
         if (!isShow) {
             return
         }
         singleton.setMessage("$tag:$content")
+    }
+
+    private fun getFilePath() {
+        filePath = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+            Environment.getExternalStorageDirectory().absolutePath + filePath
+        } else {// 如果SD卡不存在，就保存到本应用的目录下
+            MasterApplication.getInstance().applicationContext().filesDir.absolutePath + filePath
+        }
+
+        val dir = FileTool.createOrExistsDir(filePath)
+        if (dir) {
+            fileName = DateTimeTool.getFormatDay(DateTimeTool.getCurrDate()) + ".txt"
+
+            val file = FileTool.createOrExistsFile(filePath + File.separator + fileName)
+            if (!file) {
+                return
+            }
+        }
+    }
+
+    fun writeTxtToFile(string: String) {
+        val content = string + "\r\n"
+        val file = File(filePath + File.separator + fileName)
+        GlobalScope.launch {
+            try {
+                val raf = FileOutputStream(file, true)
+                val out = OutputStreamWriter(raf, "GBK")
+                out.write(content)
+                out.close()
+                raf.close()
+            } catch (e: Exception) {
+            }
+        }
     }
 }
 
@@ -138,8 +185,9 @@ fun log(message: String) {
     if (BuildConfig.DEBUG || logEnable) {
         val stackTraceElement = Thread.currentThread().stackTrace[3]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
-        Log.e("ceshi", mess)
-        LogTool.showLog("ceshi", mess)
+        val tag = "ceshi"
+        Log.e(tag, mess)
+        LogTool.showLog(tag, mess)
     }
 }
 
