@@ -70,7 +70,6 @@ class CodeApplication : Application(), IApp {
         // 崩溃日志捕捉
         val handler = CrashHandlerUtils()
         Thread.setDefaultUncaughtExceptionHandler(handler)
-
         debugInit()
     }
 

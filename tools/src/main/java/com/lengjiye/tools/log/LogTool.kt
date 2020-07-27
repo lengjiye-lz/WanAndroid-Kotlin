@@ -6,7 +6,6 @@ import com.lengjiye.code.baseparameter.application.MasterApplication
 import com.lengjiye.tools.BuildConfig
 import com.lengjiye.tools.DateTimeTool
 import com.lengjiye.tools.FileTool
-import com.lengjiye.tools.log.LogServiceInstance.Companion.isShow
 import com.lengjiye.tools.log.LogServiceInstance.Companion.singleton
 import com.lengjiye.tools.log.LogTool.logEnable
 import kotlinx.coroutines.GlobalScope
@@ -24,7 +23,8 @@ import java.io.*
  */
 object LogTool {
     private const val SEPARATOR = ","
-    private var filePath = "/Log"
+    private var filePath = ""
+    private var path = "/log"
     private var fileName = ""
 
     /**
@@ -72,18 +72,16 @@ object LogTool {
      * 在悬浮窗上显示log
      */
     fun showLog(tag: String, content: String) {
-        writeTxtToFile("$tag:$content")
-        if (!isShow) {
-            return
-        }
-        singleton.setMessage("$tag:$content")
+        val timeTag = "${DateTimeTool.getCurrDateTimeStr()} $tag"
+        writeTxtToFile("$timeTag:$content")
+        singleton.setMessage("$timeTag:$content")
     }
 
     private fun getFilePath() {
         filePath = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            Environment.getExternalStorageDirectory().absolutePath + filePath
+            MasterApplication.getInstance().applicationContext().getExternalFilesDir(null)?.path + path
         } else {// 如果SD卡不存在，就保存到本应用的目录下
-            MasterApplication.getInstance().applicationContext().filesDir.absolutePath + filePath
+            MasterApplication.getInstance().applicationContext().filesDir.path + path
         }
 
         val dir = FileTool.createOrExistsDir(filePath)
@@ -97,17 +95,22 @@ object LogTool {
         }
     }
 
-    fun writeTxtToFile(string: String) {
+    private fun writeTxtToFile(string: String) {
         val content = string + "\r\n"
+        getFilePath()
         val file = File(filePath + File.separator + fileName)
         GlobalScope.launch {
+            var raf: FileOutputStream? = null
+            var out: OutputStreamWriter? = null
             try {
-                val raf = FileOutputStream(file, true)
-                val out = OutputStreamWriter(raf, "GBK")
-                out.write(content)
-                out.close()
-                raf.close()
+                raf = FileOutputStream(file, true)
+                out = OutputStreamWriter(raf, "GBK")
+                out?.write(content)
             } catch (e: Exception) {
+                log("写入文件报错:${e.message}")
+            } finally {
+                out?.close()
+                raf?.close()
             }
         }
     }

@@ -18,8 +18,7 @@ class LogServiceInstance {
     var logContent = MutableLiveData<String>()
 
     companion object {
-
-        var isShow = false
+        var isDestroy = true
 
         var singleton = Instance.holder
     }
@@ -29,7 +28,6 @@ class LogServiceInstance {
     }
 
     fun start(context: Context) {
-        isShow = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Settings.canDrawOverlays(context)) {
                 context.startService(Intent(context, LogService::class.java))
@@ -46,7 +44,6 @@ class LogServiceInstance {
     }
 
     fun stop(context: Context) {
-        isShow = false
         context.stopService(Intent(context, LogService::class.java))
     }
 

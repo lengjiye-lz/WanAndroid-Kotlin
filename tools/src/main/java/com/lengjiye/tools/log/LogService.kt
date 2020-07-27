@@ -1,9 +1,12 @@
 package com.lengjiye.tools.log
 
 import android.annotation.SuppressLint
+import android.app.Service
 import android.content.Context
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
+import android.os.IBinder
 import android.text.method.ScrollingMovementMethod
 import android.view.Gravity
 import android.view.MotionEvent
@@ -14,11 +17,17 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lengjiye.code.baseparameter.constant.BaseEventConstant
+import com.lengjiye.tools.LiveDataUtils
 import com.lengjiye.tools.R
 import com.lengjiye.tools.ResTool
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
@@ -34,6 +43,7 @@ class LogService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
+        LogServiceInstance.isDestroy = false
         getWindowManager()
         LogServiceInstance.singleton.logContent.observe(this, Observer {
             textView?.append(ResTool.fromHtml(it).toString() + "\n")
@@ -158,5 +168,7 @@ class LogService : LifecycleService() {
         super.onDestroy()
         mWindowManager?.removeView(re)
         mWindowManager = null
+        log("onDestroy")
+        LogServiceInstance.isDestroy = true
     }
 }

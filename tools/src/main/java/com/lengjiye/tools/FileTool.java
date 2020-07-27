@@ -52,7 +52,7 @@ public final class FileTool {
      * @param dirPath 文件路径
      * @return 文件目录名称
      */
-    public static List<String> getFiledirList(String dirPath) {
+    public static List<String> getFileDirList(String dirPath) {
         if (dirPath == null || !isDir(dirPath)) return null;
         List<String> stringList = new ArrayList<>();
         File f = new File(dirPath);
