@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -21,8 +22,10 @@ import com.lengjiye.code.system.fragment.SystemFragment
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.log.LogServiceInstance
+import com.lengjiye.tools.log.log
 import com.lengjiye.utils.RxUtil
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.*
 
 /**
  * MainActivity
@@ -44,6 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         ToolBarUtils.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
             ActivityUtils.startSearchActivity(this)
         }
+
     }
 
     override fun initToolBar() {
@@ -63,9 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         supportFragmentManager.beginTransaction()
             .add(R.id.f_container, mTempFragment as HomeFragment)
             .show(mTempFragment as HomeFragment).commit()
-        mViewModel.getHotKeyList1()
-        // 显示悬浮窗 不能在后台太久
-//        LogServiceInstance.singleton.start(this)
+        mViewModel.getHotKeyList()
     }
 
     override fun initLiveDataListener() {
@@ -74,14 +76,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             this.hotKeys = it
             interval()
         })
-
+        // 显示悬浮窗 不能在后台太久
+        LogServiceInstance.singleton.start(this)
         // service在后台太久会被杀掉，需要重启
         LiveEventBus.get(BaseEventConstant.IS_BACK_GROUND, Boolean::class.java).observeForever {
             if (!it && LogServiceInstance.isDestroy) {
                 LogServiceInstance.singleton.start(this)
             }
         }
-
     }
 
     override fun onStart() {

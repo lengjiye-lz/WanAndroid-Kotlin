@@ -6,6 +6,7 @@ interface ServerApi {
          * mian
          */
         const val HOT_KEY_LIST = "hotkey/json" // 关键字列表
+        const val HOT_KEY_LIST1 = "hotkey/json" // 关键字列表
 
         /**
          * 首页列表

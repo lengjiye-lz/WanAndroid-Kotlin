@@ -8,11 +8,8 @@ class RetrofitCoroutineDSL<T> {
     var api: (Call<BaseHttpResult<T>>)? = null
 
     internal var onSuccess: ((T) -> Unit)? = null
-        private set
     internal var onFail: ((msg: String, errorCode: Int) -> Unit)? = null
-        private set
     internal var onComplete: (() -> Unit)? = null
-        private set
 
     /**
      * 获取数据成功

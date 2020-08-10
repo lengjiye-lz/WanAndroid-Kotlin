@@ -3,11 +3,17 @@ package com.lengjiye.code.search.viewmodel
 import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.home.bean.ArticleBean
+import com.lengjiye.code.networkscope.Result
 import com.lengjiye.code.search.model.SearchModel
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.network.LoadingObserver
+import com.lengjiye.tools.log.log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @Author: lz
@@ -16,34 +22,25 @@ import com.lengjiye.network.LoadingObserver
  */
 class SearchViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<ArticleBean>
-
     var searchBean = MutableLiveData<ArticleBean>()
 
-    override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<ArticleBean>() {
-            override fun observerOnNext(data: ArticleBean?) {
-                searchBean.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-                errorCode.value = e
-            }
-        })
-    }
+    override fun onCreate() {}
 
     /**
      * 登出
      */
     fun search(page: Int, key: String) {
-        val newKey = key.replace(" ", ",")
-        loadingObserver.cancelRequest()
-        SearchModel.singleton.search(page, newKey, loadingObserver)
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            val newKey = key.replace(" ", ",")
+            val data = SearchModel.singleton.search(page, newKey)
+            if (data is Result.Success) {
+                withContext(Dispatchers.Main) {
+                    searchBean.value = data.data
+                }
+            } else {
+                log("失败")
+            }
+        }
 
-    override fun onCleared() {
-        super.onCleared()
-        loadingObserver.cancelRequest()
     }
-
 }

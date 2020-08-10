@@ -12,9 +12,9 @@ import com.lengjiye.code.databinding.FragmentRegisterBinding
 import com.lengjiye.code.login.activity.LoginActivity
 import com.lengjiye.code.login.viewmodel.LoginViewModel
 import com.lengjiye.code.utils.AccountUtils
-import com.lengjiye.tools.toast
 import com.lengjiye.network.exception.ApiException
 import com.lengjiye.tools.ResTool
+import com.lengjiye.tools.toast
 
 /**
  * @Author: lz

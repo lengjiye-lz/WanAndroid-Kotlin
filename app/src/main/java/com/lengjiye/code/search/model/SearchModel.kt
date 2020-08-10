@@ -1,12 +1,11 @@
 package com.lengjiye.code.search.model
 
-import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.home.bean.ArticleBean
+import com.lengjiye.code.networkscope.BaseRepository.apiCall
+import com.lengjiye.code.networkscope.Result
+import com.lengjiye.code.networkscope.ServeHolder
 import com.lengjiye.code.search.serve.SearchServe
 import com.lengjiye.network.BaseModel
-import com.lengjiye.network.HttpResultFunc
-import com.lengjiye.network.ServeHolder
-import io.reactivex.Observer
 
 /**
  * @Author: lz
@@ -26,8 +25,7 @@ class SearchModel : BaseModel() {
         return ServeHolder.singleton.getServe(SearchServe::class.java)
     }
 
-    fun search(page: Int, key: String, observer: Observer<ArticleBean>) {
-        val observable = getServe()?.search(page, key)?.map(HttpResultFunc())
-        observable?.let { makeSubscribe(it, observer) }
+    suspend fun search(page: Int, key: String): Result<ArticleBean>? {
+        return apiCall { getServe()?.search(page, key) }
     }
 }

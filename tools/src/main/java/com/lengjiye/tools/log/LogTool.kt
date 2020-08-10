@@ -97,7 +97,9 @@ object LogTool {
 
     private fun writeTxtToFile(string: String) {
         val content = string + "\r\n"
-        getFilePath()
+        if (filePath.isEmpty()) {
+            getFilePath()
+        }
         val file = File(filePath + File.separator + fileName)
         GlobalScope.launch {
             var raf: FileOutputStream? = null
@@ -122,7 +124,7 @@ object LogTool {
  */
 fun logV(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG || logEnable) {
-        val stackTraceElement = Thread.currentThread().stackTrace[3]
+        val stackTraceElement = Thread.currentThread().stackTrace[4]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.v(tag, mess)
     }
@@ -134,7 +136,7 @@ fun logV(message: String, tag: String = LogTool.defaultTag) {
  */
 fun logD(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG || logEnable) {
-        val stackTraceElement = Thread.currentThread().stackTrace[3]
+        val stackTraceElement = Thread.currentThread().stackTrace[4]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.d(tag, mess)
     }
@@ -146,7 +148,7 @@ fun logD(message: String, tag: String = LogTool.defaultTag) {
  */
 fun logI(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG || logEnable) {
-        val stackTraceElement = Thread.currentThread().stackTrace[3]
+        val stackTraceElement = Thread.currentThread().stackTrace[4]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.i(tag, mess)
         LogTool.showLog(tag, mess)
@@ -159,7 +161,7 @@ fun logI(message: String, tag: String = LogTool.defaultTag) {
  */
 fun logW(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG || logEnable) {
-        val stackTraceElement = Thread.currentThread().stackTrace[3]
+        val stackTraceElement = Thread.currentThread().stackTrace[4]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.w(tag, mess)
         LogTool.showLog(tag, mess)
@@ -172,7 +174,7 @@ fun logW(message: String, tag: String = LogTool.defaultTag) {
  */
 fun logE(message: String, tag: String = LogTool.defaultTag) {
     if (BuildConfig.DEBUG || logEnable) {
-        val stackTraceElement = Thread.currentThread().stackTrace[3]
+        val stackTraceElement = Thread.currentThread().stackTrace[4]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         Log.e(tag, mess)
         LogTool.showLog(tag, mess)
@@ -186,7 +188,7 @@ fun logE(message: String, tag: String = LogTool.defaultTag) {
  */
 fun log(message: String) {
     if (BuildConfig.DEBUG || logEnable) {
-        val stackTraceElement = Thread.currentThread().stackTrace[3]
+        val stackTraceElement = Thread.currentThread().stackTrace[4]
         val mess = LogTool.getLogInfo(stackTraceElement) + message
         val tag = "ceshi"
         Log.e(tag, mess)
