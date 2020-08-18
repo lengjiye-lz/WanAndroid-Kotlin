@@ -77,13 +77,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             interval()
         })
         // 显示悬浮窗 不能在后台太久
-        LogServiceInstance.singleton.start(this)
+//        LogServiceInstance.singleton.start(this)
         // service在后台太久会被杀掉，需要重启
-        LiveEventBus.get(BaseEventConstant.IS_BACK_GROUND, Boolean::class.java).observeForever {
-            if (!it && LogServiceInstance.isDestroy) {
-                LogServiceInstance.singleton.start(this)
-            }
-        }
+//        LiveEventBus.get(BaseEventConstant.IS_BACK_GROUND, Boolean::class.java).observeForever {
+//            if (!it && LogServiceInstance.isDestroy) {
+//                LogServiceInstance.singleton.start(this)
+//            }
+//        }
     }
 
     override fun onStart() {
