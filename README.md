@@ -23,7 +23,7 @@
   4. LiveData：数据通知
   5. Room：数据库
 
-* 网络框架：okhttp3 + retrofit2 + rxjava2
+* 网络框架：okhttp3 + retrofit2 + Flow
 * 图片框架：glide
 * banner：com.youth.banner.Banner
 * recycleview刷新加载：com.scwang.smart:refresh-layout-kernel
