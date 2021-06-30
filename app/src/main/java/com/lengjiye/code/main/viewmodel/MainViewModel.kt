@@ -2,10 +2,13 @@ package com.lengjiye.code.main.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.main.model.MainModel
-import com.lengjiye.network.LoadingObserver
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * Bessel
@@ -14,30 +17,14 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 
     var hotKeyList = MutableLiveData<List<HotKey>>()
 
-    private var loadingObserverHotKey: LoadingObserver<List<HotKey>>? = null
-
-    override fun onCreate() {
-        loadingObserverHotKey = LoadingObserver(object : LoadingObserver.ObserverListener<List<HotKey>>() {
-            override fun observerOnNext(data: List<HotKey>?) {
-                hotKeyList.value = data
-            }
-
-            override fun observerOnError(e: com.lengjiye.network.exception.ApiException): Unit = Unit
-        })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        loadingObserverHotKey?.cancelRequest()
-    }
-
     /**
      * 获取HotKey
      */
     fun getHotKeyList() {
-        loadingObserverHotKey?.cancelRequest()
-        loadingObserverHotKey?.let {
-            MainModel.singleton.getHotKeyList(it)
-        }
+        MainModel.singleton.getHotKeyList()?.onEach {
+            hotKeyList.value = it
+        }?.catch {
+
+        }?.launchIn(viewModelScope)
     }
 }

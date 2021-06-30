@@ -2,6 +2,7 @@ package com.lengjiye.code.login.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.constant.ErrorCode
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
@@ -9,8 +10,10 @@ import com.lengjiye.code.login.model.LoginModel
 import com.lengjiye.code.me.bean.UserBean
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.network.exception.ApiException
-import com.lengjiye.network.LoadingObserver
 import com.lengjiye.tools.ResTool
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * @Author: lz
@@ -18,54 +21,10 @@ import com.lengjiye.tools.ResTool
  * @Description:
  */
 class LoginViewModel(application: Application) : BaseViewModel(application) {
-
-    private lateinit var loadingObserver: LoadingObserver<UserBean>
-    private lateinit var loadingObserverRegister: LoadingObserver<UserBean>
-    private lateinit var loadingObserverLogout: LoadingObserver<String>
     var loginSuc = MutableLiveData<Boolean>()
     var registerSuc = MutableLiveData<Boolean>()
 
     var logoutSuc = MutableLiveData<Boolean>()
-
-    override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
-            override fun observerOnNext(data: UserBean?) {
-                data?.let {
-                    saveAccount(it)
-                    loginSuc.value = true
-                }
-            }
-
-            override fun observerOnError(e: ApiException) {
-                errorCode.value = e
-                loginSuc.value = false
-            }
-        })
-
-        loadingObserverRegister = LoadingObserver(object : LoadingObserver.ObserverListener<UserBean>() {
-            override fun observerOnNext(data: UserBean?) {
-                data?.let {
-                    saveAccount(it)
-                    registerSuc.value = true
-                }
-            }
-
-            override fun observerOnError(e: ApiException) {
-
-            }
-        })
-
-        loadingObserverLogout = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
-            override fun observerOnNext(data: String?) {
-                AccountUtils.logout()
-                logoutSuc.value = true
-            }
-
-            override fun observerOnError(e: ApiException) {
-                logoutSuc.value = false
-            }
-        })
-    }
 
     /**
      * 登录
@@ -80,8 +39,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             errorCode.value = ApiException(ErrorCode.passError, ResTool.getString(R.string.s_10), null)
             return
         }
-        loadingObserver.cancelRequest()
-        LoginModel.singleton.login(username, password, loadingObserver)
+        LoginModel.singleton.login(username, password)?.onEach {
+            it?.let {
+                saveAccount(it)
+                loginSuc.value = true
+            }
+        }?.catch {
+            errorCode.value = it
+            loginSuc.value = false
+        }?.launchIn(viewModelScope)
     }
 
     /**
@@ -102,16 +68,21 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             errorCode.value = ApiException(ErrorCode.rePassError, ResTool.getString(R.string.s_11), null)
             return
         }
-        loadingObserverRegister.cancelRequest()
-        LoginModel.singleton.register(username, password, rePassword, loadingObserverRegister)
+        LoginModel.singleton.register(username, password, rePassword)?.onEach {
+            it?.let {
+                saveAccount(it)
+                registerSuc.value = true
+            }
+        }?.catch {
+
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 登出
      */
     fun logout() {
-        loadingObserverLogout.cancelRequest()
-        LoginModel.singleton.logout(loadingObserverLogout)
+        LoginModel.singleton.logout()?.onEach {  }?.catch {  }?.launchIn(viewModelScope)
     }
 
     /**
@@ -120,12 +91,5 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private fun saveAccount(user: UserBean) {
         // TODO  保存到数据库
         AccountUtils.login(user)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        loadingObserver.cancelRequest()
-        loadingObserverRegister.cancelRequest()
-        loadingObserverLogout.cancelRequest()
     }
 }

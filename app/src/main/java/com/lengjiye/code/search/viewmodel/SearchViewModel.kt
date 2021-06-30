@@ -1,15 +1,12 @@
 package com.lengjiye.code.search.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.networkscope.Result
 import com.lengjiye.code.search.model.SearchModel
-import com.lengjiye.network.exception.ApiException
-import com.lengjiye.network.LoadingObserver
 import com.lengjiye.tools.log.log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,9 +19,7 @@ import kotlinx.coroutines.withContext
  */
 class SearchViewModel(application: Application) : BaseViewModel(application) {
 
-    var searchBean = MutableLiveData<ArticleBean>()
-
-    override fun onCreate() {}
+    var searchBean = MutableLiveData<ArticleBean?>()
 
     /**
      * 登出

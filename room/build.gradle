@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "androidx.appcompat:appcompat:$cfgs.appcompat"
+//    api "androidx.appcompat:appcompat:$cfgs.appcompat"
     implementation "androidx.core:core-ktx:$cfgs.android_ktx"
     testImplementation "junit:junit:$cfgs.junit"
     androidTestImplementation "androidx.test:runner:$cfgs.test_runner"

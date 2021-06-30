@@ -50,7 +50,7 @@ abstract class ParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragmen
     private fun initViewModel(){
         val viewModelClass = ClassUtil.getViewModel<VM>(this) ?: return
         mViewModel = ViewModelProvider(this).get(viewModelClass)
-        mViewModel.onCreate()
+//        mViewModel.onCreate()
     }
 
     /**

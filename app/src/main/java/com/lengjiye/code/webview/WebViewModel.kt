@@ -5,7 +5,4 @@ import com.lengjiye.base.viewmodel.BaseViewModel
 
 class WebViewModel(application: Application) : BaseViewModel(application) {
 
-    override fun onCreate() {
-
-    }
 }

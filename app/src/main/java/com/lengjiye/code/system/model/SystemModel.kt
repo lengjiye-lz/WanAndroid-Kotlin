@@ -4,15 +4,13 @@ import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.system.serve.SystemServe
 import com.lengjiye.network.BaseModel
-import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServeHolder
+import com.lengjiye.network.transform
 import com.lengjiye.room.AppDatabase
 import com.lengjiye.room.entity.HomeEntity
 import com.lengjiye.room.entity.SystemEntity
 import com.lengjiye.room.entity.SystemTreeEntity
-import com.lengjiye.utils.RxUtil
-import io.reactivex.Observable
-import io.reactivex.Observer
+import kotlinx.coroutines.flow.Flow
 
 class SystemModel : BaseModel() {
     companion object {
@@ -27,16 +25,13 @@ class SystemModel : BaseModel() {
         return ServeHolder.singleton.getServe(SystemServe::class.java)
     }
 
-    fun getTree(observer: Observer<List<SystemTreeEntity>>) {
-        val roomData = RxUtil.create2(object : RxUtil.RXSimpleTask<List<SystemTreeEntity>>() {
-            override fun doSth(): List<SystemTreeEntity>? {
-                val dao = AppDatabase.getInstance(CodeApplication.instance).systemTreeDao()
-                return dao.queryAll()
-            }
-        })
-        val network = getServe()?.getTree()?.map(HttpResultFunc())
-        val observable = Observable.concat(roomData, network)
-        makeSubscribe(observable, observer)
+    fun getTreeCache(): List<SystemTreeEntity>? {
+        val dao = AppDatabase.getInstance(CodeApplication.instance).systemTreeDao()
+        return dao.queryAll()
+    }
+
+    fun getTree(): Flow<List<SystemTreeEntity>?>? {
+        return getServe()?.getTree()?.transform()
     }
 
     /**
@@ -46,34 +41,26 @@ class SystemModel : BaseModel() {
         if (list.isEmpty()) {
             return
         }
-        RxUtil.justInIO {
-            val dao = AppDatabase.getInstance(CodeApplication.instance).systemTreeDao()
-            val oldData = dao.queryAll()
-            if (!oldData.isNullOrEmpty()) {
-                dao.deleteAll(oldData)
-            }
-            dao.insertAll(list)
+        val dao = AppDatabase.getInstance(CodeApplication.instance).systemTreeDao()
+        val oldData = dao.queryAll()
+        if (!oldData.isNullOrEmpty()) {
+            dao.deleteAll(oldData)
         }
+        dao.insertAll(list)
     }
 
-    fun getTreeArticleList(pager: Int, cid: Int, observer: Observer<ArticleBean>) {
-        val observableList = getServe()?.getTreeArticleList(pager, cid)?.map(HttpResultFunc())
-        makeSubscribe(observableList, observer)
+    fun getTreeArticleList(pager: Int, cid: Int): Flow<ArticleBean?>? {
+        return getServe()?.getTreeArticleList(pager, cid)?.transform()
     }
 
     /**
      * 获取缓存数据
      */
-    fun getTreeArticleList2Room(observer: Observer<ArticleBean>) {
+    fun getTreeArticleList2Room(): ArticleBean {
         // 本地缓存
-        val roomData = RxUtil.create2(object : RxUtil.RXSimpleTask<ArticleBean>() {
-            override fun doSth(): ArticleBean? {
-                val dao = AppDatabase.getInstance(CodeApplication.instance).systemDao()
-                val data = dao.queryAll()
-                return ArticleBean(0, data as List<HomeEntity>, 0, false, 0, 20, 0, 0)
-            }
-        })
-        makeSubscribe(roomData, observer)
+        val dao = AppDatabase.getInstance(CodeApplication.instance).systemDao()
+        val data = dao.queryAll()
+        return ArticleBean(0, data as List<HomeEntity>, 0, false, 0, 20, 0, 0)
     }
 
     /**
@@ -83,13 +70,11 @@ class SystemModel : BaseModel() {
         if (list.isEmpty()) {
             return
         }
-        RxUtil.justInIO {
-            val dao = AppDatabase.getInstance(CodeApplication.instance).systemDao()
-            val oldData = dao.queryAll()
-            if (!oldData.isNullOrEmpty()) {
-                dao.deleteAll(oldData)
-            }
-            dao.insertAll(list)
+        val dao = AppDatabase.getInstance(CodeApplication.instance).systemDao()
+        val oldData = dao.queryAll()
+        if (!oldData.isNullOrEmpty()) {
+            dao.deleteAll(oldData)
         }
+        dao.insertAll(list)
     }
 }

@@ -3,6 +3,7 @@ package com.lengjiye.code
 import android.util.Log
 import androidx.test.runner.AndroidJUnit4
 import com.lengjiye.tools.log.LogTool
+import com.lengjiye.tools.log.logE
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,21 +57,21 @@ class ExampleInstrumentedIApp {
      * 作用于集合对象，String等，用来迭代集合对象中的每个元素
      */
     private fun forEachTest() {
-        var array = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
+        val array = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
         array.forEach {
-            LogTool.e("lz", "forEach:$it")
+            logE( "forEach:$it")
             if (it == "2") return@forEachTest
-            Log.e("lz", "forEach:$it")
+            logE( "forEach:$it")
 
             for (i in 1..4) {
-                LogTool.e("lz", "for:$i")
+                logE( "for:$i")
                 if (i == 2) {
                     break
                 }
-                Log.e("lz", "for:$i")
+                logE( "for:$i")
             }
         }
-        LogTool.e("lz", "forEach:")
+        logE( "forEach:")
     }
 
     /**
@@ -79,7 +80,7 @@ class ExampleInstrumentedIApp {
     private fun forTest() {
         loop@ for (i in 1..4) {
             loop1@ for (j in 1..5) {
-                LogTool.e("lz", "for:$j")
+                logE( "for:$j")
                 if (j == 1) {
                     continue@loop
                 }
@@ -95,7 +96,7 @@ class ExampleInstrumentedIApp {
     private fun forTest1() {
         val list = listOf<String>("泰国", "新加坡", "印度尼西亚")
         for ((index: Int, element: String) in list.withIndex()) {
-            LogTool.e("lz", "第$index 个是$element")
+            logE( "第$index 个是$element")
         }
     }
 
@@ -107,7 +108,7 @@ class ExampleInstrumentedIApp {
     private fun forTest2() {
         val list = listOf<String>("泰国", "新加坡", "印度尼西亚")
         for (i in list.indices) {
-            LogTool.e("lz", "第$i 个元素")
+            logE( "第$i 个元素")
         }
     }
 
@@ -117,7 +118,7 @@ class ExampleInstrumentedIApp {
      */
     private fun repeatTest() {
         repeat(4) {
-            LogTool.e("lz", "第个元素")
+            logE( "第个元素")
         }
     }
 
@@ -127,7 +128,7 @@ class ExampleInstrumentedIApp {
     private fun whileTest() {
         var i = 0
         while (i < 10) {
-            LogTool.e("lz", "第$i 个元素")
+            logE( "第$i 个元素")
             i++
         }
     }
@@ -136,7 +137,7 @@ class ExampleInstrumentedIApp {
     fun arrayTest() {
         val array = Array(10) { num -> num * 10 }
         array.forEach {
-            LogTool.e("lz", "it:$it")
+            logE( "it:$it")
         }
     }
 
@@ -181,15 +182,15 @@ class ExampleInstrumentedIApp {
 //
 //        // 遍历
 //        for (en in map.entries) {
-//            LogTool.e("test", "en:key:${en.key} value:${en.value}")
+//            logE("test", "en:key:${en.key} value:${en.value}")
 //        }
 //        // 遍历 key
 //        for (key in map.keys) {
-//            LogTool.e("test", "key:$key")
+//            logE("test", "key:$key")
 //        }
 //        // 遍历 value
 //        for (value in map.values) {
-//            LogTool.e("test", "value:$value")
+//            logE("test", "value:$value")
 //        }
         testList()
     }
@@ -198,7 +199,7 @@ class ExampleInstrumentedIApp {
 
         Thread(Runnable {
             for (i in 1..200) {
-                LogTool.e("add list $i")
+                logE("add list $i")
                 list.add("a$i")
             }
         }).start()
@@ -206,7 +207,7 @@ class ExampleInstrumentedIApp {
         Thread(Runnable {
             Thread.sleep(1)
             for (i in 0..100) {
-                LogTool.e("list${list[i]}")
+                logE("list${list[i]}")
             }
         }).start()
     }

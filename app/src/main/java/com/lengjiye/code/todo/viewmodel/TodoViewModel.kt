@@ -2,12 +2,13 @@ package com.lengjiye.code.todo.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.todo.bean.TodoBean
-import com.lengjiye.code.todo.bean.TodoData
 import com.lengjiye.code.todo.model.TodoModel
-import com.lengjiye.network.LoadingObserver
-import com.lengjiye.network.exception.ApiException
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * @Author: lz
@@ -16,66 +17,32 @@ import com.lengjiye.network.exception.ApiException
  */
 class TodoViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<TodoBean>
-    private lateinit var loadingObserverUpdateDone: LoadingObserver<String>
-    private lateinit var loadingObserverDelete: LoadingObserver<String>
-
     val todoBean = MutableLiveData<TodoBean>()
 
-
-    override fun onCreate() {
-        loadingObserver = LoadingObserver(object : LoadingObserver.ObserverListener<TodoBean>() {
-            override fun observerOnNext(data: TodoBean?) {
-                super.observerOnNext(data)
-                todoBean.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-                super.observerOnError(e)
-            }
-        })
-
-
-        loadingObserverUpdateDone = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
-            override fun observerOnNext(data: String?) {
-                super.observerOnNext(data)
-            }
-
-            override fun observerOnError(e: ApiException) {
-                super.observerOnError(e)
-            }
-        })
-        loadingObserverDelete = LoadingObserver(object : LoadingObserver.ObserverListener<String>() {
-            override fun observerOnNext(data: String?) {
-                super.observerOnNext(data)
-            }
-
-            override fun observerOnError(e: ApiException) {
-                super.observerOnError(e)
-            }
-        })
-    }
-
     fun getTodoList(page: Int, status: Int, type: Int) {
-        loadingObserver.cancelRequest()
-        TodoModel.singleton.getTodoList(page, status, type, loadingObserver)
+        TodoModel.singleton.getTodoList(page, status, type)?.onEach {
+            todoBean.value = it
+        }?.catch {
+
+        }?.launchIn(viewModelScope)
     }
 
 
     fun updateDoneTodo(id: Int, status: Int) {
-        loadingObserverUpdateDone.cancelRequest()
-        TodoModel.singleton.updateDoneTodo(id, status, loadingObserverUpdateDone)
+        TodoModel.singleton.updateDoneTodo(id, status)?.onEach {
+
+        }?.catch {
+
+        }?.launchIn(viewModelScope)
     }
 
     fun deleteTodo(id: Int) {
-        loadingObserverDelete.cancelRequest()
-        TodoModel.singleton.deleteTodo(id, loadingObserverDelete)
+        TodoModel.singleton.deleteTodo(id)?.onEach {
+
+        }?.catch {
+
+        }?.launchIn(viewModelScope)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        loadingObserver.cancelRequest()
-        loadingObserverUpdateDone.cancelRequest()
-        loadingObserverDelete.cancelRequest()
-    }
+
 }

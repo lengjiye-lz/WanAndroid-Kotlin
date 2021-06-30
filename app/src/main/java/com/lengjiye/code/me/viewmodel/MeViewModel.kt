@@ -1,16 +1,16 @@
 package com.lengjiye.code.me.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.me.bean.CoinList
 import com.lengjiye.code.me.bean.Rank
 import com.lengjiye.code.me.bean.RankTable
 import com.lengjiye.code.me.model.MeModel
-import com.lengjiye.network.exception.ApiException
-import com.lengjiye.network.LoadingObserver
-import com.lengjiye.network.LoadingObserver.ObserverListener
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * @Author: lz
@@ -19,73 +19,34 @@ import com.lengjiye.network.LoadingObserver.ObserverListener
  */
 class MeViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserver: LoadingObserver<RankTable>
-    private lateinit var loadingObserverRank: LoadingObserver<Rank>
-    private lateinit var loadingObserverCoinList: LoadingObserver<CoinList>
-
     var rankTable = MutableLiveData<RankTable>()
     var rank = MutableLiveData<Rank>()
     var coinList = MutableLiveData<CoinList>()
-
-    override fun onCreate() {
-        loadingObserver = LoadingObserver(object : ObserverListener<RankTable>() {
-            override fun observerOnNext(data: RankTable?) {
-                rankTable.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-            }
-        })
-
-        loadingObserverRank = LoadingObserver(object : ObserverListener<Rank>() {
-            override fun observerOnNext(data: Rank?) {
-                rank.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-            }
-
-        })
-
-        loadingObserverCoinList = LoadingObserver(object : ObserverListener<CoinList>() {
-            override fun observerOnNext(data: CoinList?) {
-                coinList.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-            }
-
-        })
-    }
 
     /**
      * 积分排行榜
      */
     fun getCoinRank(page: Int) {
-        loadingObserver.cancelRequest()
-        MeModel.singleton.getCoinRank(page, loadingObserver)
+        MeModel.singleton.getCoinRank(page)?.onEach {
+            rankTable.value = it
+        }?.catch { }?.launchIn(viewModelScope)
     }
 
     /**
      * 个人积分信息
      */
     fun getCoinUserInfo() {
-        loadingObserverRank.cancelRequest()
-        MeModel.singleton.getCoinUserInfo(loadingObserverRank)
+        MeModel.singleton.getCoinUserInfo()?.onEach {
+            rank.value = it
+        }?.catch { }?.launchIn(viewModelScope)
     }
 
     /**
      * 个人积分获取明细
      */
     fun getCoinUserInfoList(page: Int) {
-        loadingObserverCoinList.cancelRequest()
-        MeModel.singleton.getCoinUserInfoList(page, loadingObserverCoinList)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        loadingObserver.cancelRequest()
-        loadingObserverRank.cancelRequest()
-        loadingObserverCoinList.cancelRequest()
+        MeModel.singleton.getCoinUserInfoList(page)?.onEach {
+            coinList.value = it
+        }?.catch { }?.launchIn(viewModelScope)
     }
 }

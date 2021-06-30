@@ -1,12 +1,11 @@
 package com.lengjiye.code.login.model
 
-import androidx.lifecycle.LifecycleOwner
 import com.lengjiye.code.login.serve.LoginServe
 import com.lengjiye.code.me.bean.UserBean
 import com.lengjiye.network.BaseModel
-import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServeHolder
-import io.reactivex.Observer
+import com.lengjiye.network.transform
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @Author: lz
@@ -26,18 +25,15 @@ class LoginModel : BaseModel() {
         return ServeHolder.singleton.getServe(LoginServe::class.java)
     }
 
-    fun login(username: String, password: String, observer: Observer<UserBean>) {
-        val observable = getServe()?.login(username, password)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+    fun login(username: String, password: String):Flow<UserBean?>? {
+        return getServe()?.login(username, password)?.transform()
     }
 
-    fun register(username: String, password: String, rePassword: String, observer: Observer<UserBean>) {
-        val observable = getServe()?.register(username, password, rePassword)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+    fun register(username: String, password: String, rePassword: String):Flow<UserBean?>? {
+        return getServe()?.register(username, password, rePassword)?.transform()
     }
 
-    fun logout(observer: Observer<String>) {
-        val observable = getServe()?.logout()?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+    fun logout():Flow<String?>? {
+        return getServe()?.logout()?.transform()
     }
 }

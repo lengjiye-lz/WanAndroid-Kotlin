@@ -4,7 +4,7 @@ import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.share.bean.ShareBean
 import com.lengjiye.network.BaseHttpResult
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.*
 
 /**
@@ -16,24 +16,24 @@ interface ShareServe {
 
     // 广场
     @GET(ServerApi.USER_ARTICLE_LIST)
-    fun getShareList(@Path("page") page: Int): Observable<BaseHttpResult<ArticleBean>>
+    fun getShareList(@Path("page") page: Int): Flow<BaseHttpResult<ArticleBean>>
 
     // 分享的数据（查看别人的）
     @GET(ServerApi.USER_SHARE_ARTICLES)
-    fun getUserShareArticles(@Path("user_id") userId: Int, @Path("page") page: Int): Observable<BaseHttpResult<ShareBean>>
+    fun getUserShareArticles(@Path("user_id") userId: Int, @Path("page") page: Int): Flow<BaseHttpResult<ShareBean>>
 
     // 自己的分享列表
     @GET(ServerApi.USER_PRIVATE_ARTICLES)
-    fun getUserPrivateArticles(@Path("page") page: Int): Observable<BaseHttpResult<ShareBean>>
+    fun getUserPrivateArticles(@Path("page") page: Int): Flow<BaseHttpResult<ShareBean>>
 
     // 删除分享
     @POST(ServerApi.USER_ARTICLE_DELETE)
     @FormUrlEncoded
-    fun userArticleDelete(@Path("article_id") articleId: Int): Observable<BaseHttpResult<String>>
+    fun userArticleDelete(@Path("article_id") articleId: Int): Flow<BaseHttpResult<String>>
 
     // 添加分享
     @POST(ServerApi.USER_ARTICLE_ADD)
     @FormUrlEncoded
-    fun userArticleAdd(@Field("title") title: String, @Field("link") link: String): Observable<BaseHttpResult<String>>
+    fun userArticleAdd(@Field("title") title: String, @Field("link") link: String): Flow<BaseHttpResult<String>>
 
 }

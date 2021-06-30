@@ -82,17 +82,17 @@ class ShareFragment : LazyParentFragment<FragmentShareBinding, ShareViewModel>()
                 // 缓存  如果已经有数据就不再处理
                 if (adapter.itemCount <= 0) {
                     adapter.removeAll()
-                    adapter.addAll(it.second.datas.toMutableList())
+                    adapter.addAll(it.second?.datas?.toMutableList())
                     adapter.notifyDataSetChanged()
                 }
             } else {
                 // 网络数据
                 mBinding.srlLayout.finishRefresh()
                 adapter.removeAll()
-                adapter.addAll(it.second.datas.toMutableList())
+                adapter.addAll(it.second?.datas?.toMutableList())
                 adapter.notifyDataSetChanged()
             }
-            pager = it.second.curPage
+            pager = it.second?.curPage ?: 0
         })
 
         mViewModel.shareMoreList.observe(this, Observer {

@@ -3,7 +3,7 @@ package com.lengjiye.code.login.serve
 import com.lengjiye.code.constant.ServerApi
 import com.lengjiye.code.me.bean.UserBean
 import com.lengjiye.network.BaseHttpResult
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.*
 
 /**
@@ -15,13 +15,13 @@ interface LoginServe {
 
     @POST(ServerApi.USER_LOGIN)
     @FormUrlEncoded
-    fun login(@Field("username") username: String, @Field("password") password: String): Observable<BaseHttpResult<UserBean>>
+    fun login(@Field("username") username: String, @Field("password") password: String): Flow<BaseHttpResult<UserBean>>
 
 
     @POST(ServerApi.USER_REGISTER)
     @FormUrlEncoded
-    fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword") rePassword: String): Observable<BaseHttpResult<UserBean>>
+    fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword") rePassword: String): Flow<BaseHttpResult<UserBean>>
 
     @GET(ServerApi.USER_LOGOUT)
-    fun logout(): Observable<BaseHttpResult<String>>
+    fun logout(): Flow<BaseHttpResult<String>>
 }

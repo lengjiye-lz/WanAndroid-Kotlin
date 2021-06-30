@@ -5,9 +5,9 @@ import com.lengjiye.code.todo.bean.TodoBean
 import com.lengjiye.code.todo.bean.TodoData
 import com.lengjiye.code.todo.serve.TodoServe
 import com.lengjiye.network.BaseModel
-import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServeHolder
-import io.reactivex.Observer
+import com.lengjiye.network.transform
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @Author: lz
@@ -27,28 +27,26 @@ class TodoModel : BaseModel() {
         return ServeHolder.singleton.getServe(TodoServe::class.java)
     }
 
-    fun getTodoList(page: Int, status: Int, type: Int, observer: Observer<TodoBean>) {
+    fun getTodoList(page: Int, status: Int, type: Int):Flow<TodoBean?>? {
         val map = hashMapOf<String, String>()
         map[NetWorkParams.STATUS] = "$status"
         map[NetWorkParams.TYPE] = "$type"
         if (status == 1) map[NetWorkParams.ORDER_BY] = "2" // 按完成时间逆序
         else map[NetWorkParams.ORDER_BY] = "4" // 按创建时间逆序
-        val observable = getServe()?.getTodoList(page, map)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+        return getServe()?.getTodoList(page, map)?.transform()
     }
 
-    fun addTodo(title: String, content: String, date: String, type: Int?, observer: Observer<String>) {
+    fun addTodo(title: String, content: String, date: String, type: Int? ):Flow<String?>? {
         val map = hashMapOf<String, String>()
         map[NetWorkParams.TITLE] = title
         map[NetWorkParams.CONTENT] = content
         map[NetWorkParams.DATE] = date
         map[NetWorkParams.TYPE] = (type ?: 0).toString()
         map[NetWorkParams.PRIORITY] = "2"
-        val observable = getServe()?.addTodo(map)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+        return getServe()?.addTodo(map)?.transform()
     }
 
-    fun updateTodo(todoData: TodoData, observer: Observer<String>) {
+    fun updateTodo(todoData: TodoData):Flow<String?>? {
         val map = hashMapOf<String, String>()
         map[NetWorkParams.TITLE] = todoData.title
         map[NetWorkParams.CONTENT] = todoData.content
@@ -56,17 +54,14 @@ class TodoModel : BaseModel() {
         map[NetWorkParams.STATUS] = todoData.status.toString()
         map[NetWorkParams.TYPE] = todoData.type.toString()
         map[NetWorkParams.PRIORITY] = "2"
-        val observable = getServe()?.updateTodo(todoData.id, map)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+       return getServe()?.updateTodo(todoData.id, map)?.transform()
     }
 
-    fun updateDoneTodo(id: Int, status: Int, observer: Observer<String>) {
-        val observable = getServe()?.updateDoneTodo(id, status)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+    fun updateDoneTodo(id: Int, status: Int):Flow<String?>? {
+        return getServe()?.updateDoneTodo(id, status)?.transform()
     }
 
-    fun deleteTodo(id: Int, observer: Observer<String>) {
-        val observable = getServe()?.deleteTodo(id)?.map(HttpResultFunc())
-        makeSubscribe(observable, observer)
+    fun deleteTodo(id: Int):Flow<String?>? {
+        return getServe()?.deleteTodo(id)?.transform()
     }
 }

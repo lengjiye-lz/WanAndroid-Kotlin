@@ -45,12 +45,12 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
 
-    api "io.reactivex.rxjava2:rxjava:$cfgs.rxjava2"
-    api "io.reactivex.rxjava2:rxandroid:$cfgs.rxandroid2"
+//    api "io.reactivex.rxjava2:rxjava:$cfgs.rxjava2"
+//    api "io.reactivex.rxjava2:rxandroid:$cfgs.rxandroid2"
     api "com.squareup.retrofit2:retrofit:$cfgs.retrofit2"
     api "com.squareup.retrofit2:converter-gson:$cfgs.retrofit2_gson"
-    api "com.squareup.retrofit2:adapter-rxjava2:$cfgs.retrofit2_rxjava"
-    api "com.google.code.gson:gson:$cfgs.gson"
+//    api "com.squareup.retrofit2:adapter-rxjava2:$cfgs.retrofit2_rxjava"
+//    api "com.google.code.gson:gson:$cfgs.gson"
 
     implementation project(':base')
     implementation project(':tools')

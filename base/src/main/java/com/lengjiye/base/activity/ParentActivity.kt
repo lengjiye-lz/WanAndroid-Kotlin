@@ -94,6 +94,6 @@ abstract class ParentActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
     private fun initViewModel() {
         val viewModelClass = ClassUtil.getViewModel<VM>(this) ?: return
         mViewModel = ViewModelProvider(this).get(viewModelClass)
-        mViewModel.onCreate()
+//        mViewModel.onCreate()
     }
 }

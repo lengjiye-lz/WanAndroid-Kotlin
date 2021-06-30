@@ -7,10 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
-import com.lengjiye.code.baseparameter.constant.BaseEventConstant
 import com.lengjiye.code.databinding.ActivityMainBinding
 import com.lengjiye.code.home.bean.HotKey
 import com.lengjiye.code.home.fragment.HomeFragment
@@ -22,9 +20,6 @@ import com.lengjiye.code.system.fragment.SystemFragment
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.log.LogServiceInstance
-import com.lengjiye.tools.log.log
-import com.lengjiye.utils.RxUtil
-import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.*
 
 /**
@@ -34,7 +29,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var mTempFragment: Fragment
 
-    private var disposable: Disposable? = null
     private var hotKeys: List<HotKey>? = null
 
     override fun getLayoutId(): Int {
@@ -85,29 +79,35 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //            }
 //        }
     }
-
-    override fun onStart() {
-        super.onStart()
-        if (disposable?.isDisposed == true && !hotKeys.isNullOrEmpty()) {
-            interval()
-        }
-    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        if (!hotKeys.isNullOrEmpty()) {
+//            interval()
+//        }
+//    }
 
     /**
      * 启动循环
      */
     private fun interval() {
-        disposable?.dispose()
         hotKeys?.let {
             val text = ToolBarUtils.getSearchTitle(findViewById(R.id.toolbar))
             if (text.visibility != View.VISIBLE) {
                 return
             }
-            val size = it.size
-            disposable = RxUtil.interval(3) { it1 ->
-                val index = (it1 % size).toInt()
-                text.setText(hotKeys?.get(index)?.name)
-                text.next()
+            text.setText(it[0].name)
+            lifecycleScope.launch {
+                // TODO:需要重写
+                repeat(Int.MAX_VALUE) { _ ->
+                    it.forEach {
+                        delay(3000)
+                        withContext(Dispatchers.Main) {
+                            text.setText(it.name)
+                            text.next()
+                        }
+                    }
+                }
             }
         }
     }
@@ -219,17 +219,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     }
 
-
-    override fun onPause() {
-        super.onPause()
-        disposable?.dispose()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
-        disposable?.dispose()
         MainFragmentManager.instance.destroy()
         LogServiceInstance.singleton.stop(this)
     }
-
 }

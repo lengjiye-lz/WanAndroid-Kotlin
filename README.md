@@ -41,5 +41,9 @@
   5. 添加日志实时显示功能 [LogServiceInstance](https://github.com/lengjiye-lz/WanAndroid-Kotlin/blob/v1.0.1/tools/src/main/java/com/lengjiye/tools/log/LogServiceInstance.kt)
   6. 修改bug
   7. 分离数据总线module。MasterApplication 这个类是 module 之间数据传输的基础，数据总线和生命周期监听也是，都是基础中的基础。
+* 2.0.1
+  1. 升级依赖库
+  2. 去掉rxjava2，改为协程和Flow。因为rxjava一直以来只用到线程切换功能，其他功能基本没有用到，所以舍弃rxjava2。
+  3. 修改网络请求框架，改为okhttp3 + retrofit2 + Flow
 
 ![Image text](./image/no_bug.jpg)

@@ -2,16 +2,17 @@ package com.lengjiye.code.me.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lengjiye.base.viewmodel.BaseViewModel
 import com.lengjiye.code.R
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.me.bean.Website
 import com.lengjiye.code.me.model.MeModel
 import com.lengjiye.tools.toast
-import com.lengjiye.network.exception.ApiException
-import com.lengjiye.network.LoadingObserver
-import com.lengjiye.network.LoadingObserver.ObserverListener
 import com.lengjiye.tools.ResTool
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * @Author: lz
@@ -20,114 +21,94 @@ import com.lengjiye.tools.ResTool
  */
 class MeCollectViewModel(application: Application) : BaseViewModel(application) {
 
-    private lateinit var loadingObserverCollectArticleList: LoadingObserver<ArticleBean>
-    private lateinit var loadingObserverCollectWebsiteList: LoadingObserver<List<Website>>
-    private lateinit var loadingDefault: LoadingObserver<String>
-
     var articleList = MutableLiveData<ArticleBean>()
     var websiteList = MutableLiveData<List<Website>>()
-
-    override fun onCreate() {
-        loadingObserverCollectArticleList = LoadingObserver(object : ObserverListener<ArticleBean>() {
-            override fun observerOnNext(data: ArticleBean?) {
-                articleList.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-            }
-
-        })
-
-        loadingObserverCollectWebsiteList = LoadingObserver(object : ObserverListener<List<Website>>() {
-            override fun observerOnNext(data: List<Website>?) {
-                websiteList.value = data
-            }
-
-            override fun observerOnError(e: ApiException) {
-            }
-
-        })
-
-        loadingDefault = LoadingObserver(object : ObserverListener<String>() {
-            override fun observerOnNext(data: String?) {
-                ResTool.getString(R.string.s_35).toast()
-            }
-
-            override fun observerOnError(e: ApiException) {
-                ResTool.getString(R.string.s_36).toast()
-            }
-
-        })
-    }
 
     /**
      * 获取收藏的文章的列表
      */
     fun getCollectArticleList(page: Int) {
-        loadingObserverCollectArticleList.cancelRequest()
-        MeModel.singleton.getCollectArticleList(page, loadingObserverCollectArticleList)
+        MeModel.singleton.getCollectArticleList(page)?.onEach {
+            articleList.value = it
+        }?.catch {
+
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 添加收藏
      */
     fun collectAddArticle(id: Int) {
-        loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddArticle(id, loadingDefault)
+        MeModel.singleton.collectAddArticle(id)?.onEach {
+            ResTool.getString(R.string.s_35).toast()
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 添加收藏
      */
     fun collectAddOtherArticle(title: String, author: String, link: String) {
-        loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddOtherArticle(title, author, link, loadingDefault)
+        MeModel.singleton.collectAddOtherArticle(title, author, link)?.onEach {
+            ResTool.getString(R.string.s_35).toast()
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 取消收藏
      */
     fun unMyCollectArticle(id: Int, originId: Int) {
-        loadingDefault.cancelRequest()
-        MeModel.singleton.unMyCollectArticle(id, originId, loadingDefault)
+        MeModel.singleton.unMyCollectArticle(id, originId)?.onEach {
+            ResTool.getString(R.string.s_35).toast()
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 获取收藏的网站的列表
      */
     fun getCollectWebsiteList() {
-        loadingObserverCollectWebsiteList.cancelRequest()
-        MeModel.singleton.getCollectWebsiteList(loadingObserverCollectWebsiteList)
+        MeModel.singleton.getCollectWebsiteList()?.onEach {
+            websiteList.value = it
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 添加收藏网站
      */
     fun collectAddWebsite(name: String, link: String) {
-        loadingDefault.cancelRequest()
-        MeModel.singleton.collectAddWebsite(name, link, loadingDefault)
+        MeModel.singleton.collectAddWebsite(name, link)?.onEach {
+            ResTool.getString(R.string.s_35).toast()
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 更新
      */
     fun collectUpdateWebsite(id: Int, name: String, link: String) {
-        loadingDefault.cancelRequest()
-        MeModel.singleton.collectUpdateWebsite(id, name, link, loadingDefault)
+        MeModel.singleton.collectUpdateWebsite(id, name, link)?.onEach {
+            ResTool.getString(R.string.s_35).toast()
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 
     /**
      * 删除
      */
     fun collectDeleteWebsite(id: Int) {
-        loadingDefault.cancelRequest()
-        MeModel.singleton.collectDeleteWebsite(id, loadingDefault)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        loadingObserverCollectArticleList.cancelRequest()
-        loadingObserverCollectWebsiteList.cancelRequest()
-        loadingDefault.cancelRequest()
+        MeModel.singleton.collectDeleteWebsite(id)?.onEach {
+            ResTool.getString(R.string.s_35).toast()
+        }?.catch {
+            ResTool.getString(R.string.s_36).toast()
+        }?.launchIn(viewModelScope)
     }
 }

@@ -4,15 +4,12 @@ import com.lengjiye.code.application.CodeApplication
 import com.lengjiye.code.home.bean.ArticleBean
 import com.lengjiye.code.home.serve.HomeServe
 import com.lengjiye.network.BaseModel
-import com.lengjiye.network.HttpResultFunc
 import com.lengjiye.network.ServeHolder
+import com.lengjiye.network.transform
 import com.lengjiye.room.AppDatabase
 import com.lengjiye.room.entity.HomeBannerEntity
 import com.lengjiye.room.entity.HomeEntity
-import com.lengjiye.utils.RxUtil
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.functions.BiFunction
+import kotlinx.coroutines.flow.*
 
 class HomeModel : BaseModel() {
     companion object {
@@ -27,37 +24,29 @@ class HomeModel : BaseModel() {
         return ServeHolder.singleton.getServe(HomeServe::class.java)
     }
 
-    fun getHomeListData(page: Int, observer: Observer<ArticleBean>) {
-        val observableList = getServe()?.getArticle(page)?.map(HttpResultFunc())
-        makeSubscribe(observableList, observer)
+    fun getHomeListData(page: Int): Flow<ArticleBean?>? {
+        return getServe()?.getArticle(page)?.transform()
+    }
+
+    fun getHomeTopAndFirstLocalListData(): List<HomeEntity>? {
+        val dao = AppDatabase.getInstance(CodeApplication.instance).homeDao()
+        return dao.queryAll()
     }
 
     /**
      * 获取首页置顶和第一页的数据
      */
-    fun getHomeTopAndFirstListData(observer: Observer<Pair<Boolean, List<HomeEntity>>>) {
-        val localData = RxUtil.create2(object : RxUtil.RXSimpleTask<List<HomeEntity>>() {
-            override fun doSth(): List<HomeEntity>? {
-                val dao = AppDatabase.getInstance(CodeApplication.instance).homeDao()
-                return dao.queryAll()
-            }
-        })?.map {
-            Pair(true, it)
+    fun getHomeTopAndFirstListData(): Flow<ArrayList<HomeEntity>>? {
+        val flowTop = getServe()?.getArticleTop()?.transform()
+        val flowList = getServe()?.getArticle(0)?.transform()?.map { t ->
+            t?.datas
         }
-
-        // 网络数据
-        val observableTop = getServe()?.getArticleTop()?.map(HttpResultFunc())
-        val observableList = getServe()?.getArticle(0)?.map(HttpResultFunc())?.map { t ->
-            t.datas
+        return flowTop?.combineTransform(flowList!!) { flowTop, flowList ->
+            val value = arrayListOf<HomeEntity>()
+            value.addAll(flowTop?.asIterable()!!)
+            value.addAll(flowList?.asIterable()!!)
+            emit(value)
         }
-        // 合并请求
-        val networkObservable = Observable.zip(observableTop, observableList,
-            BiFunction<List<HomeEntity>, List<HomeEntity>, List<HomeEntity>> { t1, t2 -> t1 + t2 })?.map {
-            Pair(false, it)
-        }
-
-        val observable = Observable.concat(localData, networkObservable)
-        makeSubscribe(observable, observer)
     }
 
     /**
@@ -67,30 +56,21 @@ class HomeModel : BaseModel() {
         if (list.isEmpty()) {
             return
         }
-        RxUtil.justInIO {
-            val dao = AppDatabase.getInstance(CodeApplication.instance).homeDao()
-            val oldData = dao.queryAll()
-            if (!oldData.isNullOrEmpty()) {
-                dao.deleteAll(oldData)
-            }
-            dao.insertAll(list)
+        val dao = AppDatabase.getInstance(CodeApplication.instance).homeDao()
+        val oldData = dao.queryAll()
+        if (!oldData.isNullOrEmpty()) {
+            dao.deleteAll(oldData)
         }
+        dao.insertAll(list)
     }
 
-    fun getBanner(observer: Observer<Pair<Boolean, List<HomeBannerEntity>>>) {
-        val room = RxUtil.create2(object : RxUtil.RXSimpleTask<List<HomeBannerEntity>>() {
-            override fun doSth(): List<HomeBannerEntity>? {
-                val dao = AppDatabase.getInstance(CodeApplication.instance).homeBannerDao()
-                return dao.queryAll()
-            }
-        })?.map {
-            Pair(true, it)
-        }
-        val network = getServe()?.getBanner()?.map(HttpResultFunc())?.map {
-            Pair(false, it)
-        }
-        val observable = Observable.concat(room, network)
-        makeSubscribe(observable, observer)
+    fun getBannerLocal(): List<HomeBannerEntity>? {
+        val dao = AppDatabase.getInstance(CodeApplication.instance).homeBannerDao()
+        return dao.queryAll()
+    }
+
+    fun getBanner(): Flow<List<HomeBannerEntity>?>? {
+        return getServe()?.getBanner()?.transform()
     }
 
     /**
@@ -100,15 +80,11 @@ class HomeModel : BaseModel() {
         if (list.isEmpty()) {
             return
         }
-        RxUtil.justInIO {
-            val dao = AppDatabase.getInstance(CodeApplication.instance).homeBannerDao()
-            val oldData = dao.queryAll()
-            if (!oldData.isNullOrEmpty()) {
-                dao.deleteAll(oldData)
-            }
-            dao.insertAll(list)
+        val dao = AppDatabase.getInstance(CodeApplication.instance).homeBannerDao()
+        val oldData = dao.queryAll()
+        if (!oldData.isNullOrEmpty()) {
+            dao.deleteAll(oldData)
         }
+        dao.insertAll(list)
     }
-
-
 }
