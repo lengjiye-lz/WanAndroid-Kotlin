@@ -10,16 +10,16 @@ import kotlinx.android.synthetic.main.widget_horizontal_navigation.view.*
 /**
  * 横向的导航条
  */
-class HorizontalNavigation(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context?) : this(context, null, 0)
+class HorizontalNavigation(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : ConstraintLayout(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context) : this(context, null, 0)
 
 
     init {
         LayoutInflater.from(context).inflate(R.layout.widget_horizontal_navigation, this)
-        val array = context?.obtainStyledAttributes(attrs, R.styleable.HorizontalNavigation)
-        val text = array?.getString(R.styleable.HorizontalNavigation_widgets_content)
-        array?.recycle()
+        val array = context.obtainStyledAttributes(attrs, R.styleable.HorizontalNavigation)
+        val text = array.getString(R.styleable.HorizontalNavigation_widgets_content)
+        array.recycle()
 
         setContent(text)
     }
