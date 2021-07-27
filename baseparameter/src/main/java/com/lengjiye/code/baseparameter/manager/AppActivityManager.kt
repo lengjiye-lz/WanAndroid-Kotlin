@@ -18,6 +18,6 @@ object AppActivityManager {
     }
 
     fun finishTopActivity() {
-        activity?.get()?.finish()
+        getTopActivity()?.finish()
     }
 }

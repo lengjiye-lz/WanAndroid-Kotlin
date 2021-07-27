@@ -115,7 +115,7 @@ class MVVMTask extends DefaultTask {
      * 加载模板
      */
     def makeTemplate(def templateName, def binding) {
-        File f = new File("../buildSrc/template/" + templateName)
+        File f = new File("./buildSrc/template/" + templateName)
         def engine = new groovy.text.GStringTemplateEngine()
         return engine.createTemplate(f).make(binding)
     }

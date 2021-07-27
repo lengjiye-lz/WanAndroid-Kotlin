@@ -9,7 +9,7 @@ import kotlinx.coroutines.coroutineScope
  */
 object BaseRepository {
 
-    suspend fun <T : Any> apiCall(call: suspend () -> BaseHttpResult<T>?): Result<T>? {
+    suspend fun <T : Any> apiCall(call: suspend () -> BaseHttpResult<T>?): Result<T> {
         val baseHttpResult = try {
             call()
         } catch (e: Exception) {

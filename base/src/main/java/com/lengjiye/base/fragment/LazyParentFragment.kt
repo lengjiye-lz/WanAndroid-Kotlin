@@ -98,6 +98,10 @@ abstract class LazyParentFragment<T : ViewDataBinding, VM : BaseViewModel> : Par
         }
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+    }
+
     /**
      * 父fragment是否隐藏
      *

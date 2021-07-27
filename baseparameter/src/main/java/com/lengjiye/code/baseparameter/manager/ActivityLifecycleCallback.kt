@@ -50,7 +50,7 @@ open class ActivityLifecycleCallback : Application.ActivityLifecycleCallbacks {
             return
         }
         val oldActivity = AppActivityManager.getTopActivity()
-        if (oldActivity != activity) {
+        if (activity != oldActivity) {
             AppActivityManager.activity = SoftReference(activity)
         }
     }

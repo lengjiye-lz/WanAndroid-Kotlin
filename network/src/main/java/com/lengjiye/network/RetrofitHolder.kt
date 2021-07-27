@@ -16,7 +16,6 @@ object RetrofitHolder {
         return Retrofit.Builder().baseUrl(url)
             .client(OkHttpClientHolder.createClient())
             .addConverterFactory(GsonConverterFactory.create(gson))
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addCallAdapterFactory(FlowCallAdapterFactory.create())
             .build()
     }

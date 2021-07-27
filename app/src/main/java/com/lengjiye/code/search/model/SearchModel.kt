@@ -25,7 +25,7 @@ class SearchModel : BaseModel() {
         return ServeHolder.singleton.getServe(SearchServe::class.java)
     }
 
-    suspend fun search(page: Int, key: String): Result<ArticleBean>? {
+    suspend fun search(page: Int, key: String): Result<ArticleBean> {
         return apiCall { getServe()?.search(page, key) }
     }
 }

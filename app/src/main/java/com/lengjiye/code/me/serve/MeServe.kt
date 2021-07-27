@@ -32,7 +32,7 @@ interface MeServe {
 
     // 收藏文章
     @POST(ServerApi.COLLECT_ADD_ARTICLE)
-    fun collectAddArticle(@Path("id") id: Int): Flow<BaseHttpResult<String>>
+    fun collectAddArticle(@Field("id") id: Int): Flow<BaseHttpResult<String>>
 
     // 收藏站外文章
     @POST(ServerApi.COLLECT_ADD_OTHER_ARTICLE)

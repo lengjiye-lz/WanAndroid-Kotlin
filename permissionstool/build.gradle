@@ -35,6 +35,4 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.core:core-ktx:$cfgs.android_ktx"
     implementation "androidx.appcompat:appcompat:$cfgs.appcompat"
-
-
 }
