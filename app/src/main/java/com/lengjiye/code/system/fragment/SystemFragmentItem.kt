@@ -18,6 +18,7 @@ import com.lengjiye.code.system.viewmodel.SystemViewModel
 import com.lengjiye.code.utils.AccountUtils
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.LayoutManagerUtils
+import com.lengjiye.room.entity.SystemTreeBean
 import com.lengjiye.tools.toast
 import com.lengjiye.room.entity.SystemTreeEntity
 import com.lengjiye.tools.ResTool
@@ -27,7 +28,7 @@ import com.scwang.smart.refresh.header.MaterialHeader
 class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding, SystemViewModel>() {
 
     private var treeBean: SystemTreeEntity? = null
-    private var secondTree: SystemTreeEntity? = null
+    private var secondTree: SystemTreeBean? = null
     private var pager = 0
     private val adapter by lazy { HomeFragmentAdapter(getBaseActivity(), null) }
 
@@ -82,7 +83,7 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 selectPosition = p0?.position
                 secondTree = selectPosition?.let {
-                    treeBean?.children?.get(it)
+                    treeBean?.childrens?.get(it)
                 }
                 if (isFirst) {
                     refresh()
@@ -172,12 +173,12 @@ class SystemFragmentItem : ViewPagerLazyParentFragment<FragmentSystemItemBinding
 
     private fun initTitle(treeBean: SystemTreeEntity?) {
         treeBean?.let {
-            val trees = it.children
+            val trees = it.childrens
             if (trees?.isEmpty() == true) {
                 mBinding.tabLayout.visibility = View.GONE
                 return@let
             }
-            secondTree = treeBean.children?.get(0)
+            secondTree = treeBean.childrens?.get(0)
             var tab: TabLayout.Tab
             trees?.forEachIndexed { index, tree ->
                 tab = mBinding.tabLayout.newTab()
