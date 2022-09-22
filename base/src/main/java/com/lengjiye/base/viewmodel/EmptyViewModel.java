@@ -11,9 +11,9 @@ import androidx.lifecycle.AndroidViewModel;
  * @Description 没有viewModel的情况
  */
 
-public class NoViewModel extends AndroidViewModel {
+public class EmptyViewModel extends AndroidViewModel {
 
-    public NoViewModel(@NonNull Application application) {
+    public EmptyViewModel(@NonNull Application application) {
         super(application);
     }
 }

@@ -3,7 +3,7 @@ package com.lengjiye.base.utils;
 
 import androidx.lifecycle.AndroidViewModel;
 
-import com.lengjiye.base.viewmodel.NoViewModel;
+import com.lengjiye.base.viewmodel.EmptyViewModel;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -18,7 +18,7 @@ public class ClassUtil {
     public static <T> Class<T> getViewModel(Object obj) {
         Class<?> currentClass = obj.getClass();
         Class<T> tClass = getGenericClass(currentClass);
-        if (tClass == null || tClass == AndroidViewModel.class || tClass == NoViewModel.class) {
+        if (tClass == null || tClass == AndroidViewModel.class || tClass == EmptyViewModel.class) {
             return null;
         }
         return tClass;
