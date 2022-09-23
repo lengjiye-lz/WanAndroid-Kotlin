@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply from: '../../config.gradle'
+
+android {
+    buildTypes {
+        debug {}
+        release{}
+    }
+}
+
+dependencies {
+    implementation project(':baselib:base')
+    implementation project(':baselib:baseparameter')
+}

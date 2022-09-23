@@ -1,10 +1,5 @@
-
 apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
+apply from: '../config.gradle'
 // 自定义插件 生成mvvm文件
 apply plugin: 'com.lengjiye.mvvm'
 
@@ -22,25 +17,11 @@ mvvm {
 def proguardPath = "../proguard/code/proguard-rules.pro"
 
 // 服务器地址
-def String base_url_release = "\"https://www.wanandroid.com\""
+def base_url_release = "\"https://www.wanandroid.com\""
 
 android {
-
-    compileSdkVersion cfgs.compileSdkVersion
-    buildToolsVersion cfgs.buildToolsVersion
-
     defaultConfig {
         applicationId "com.lengjiye.code"
-        minSdkVersion cfgs.minSdkVersion
-        targetSdkVersion cfgs.targetSdkVersion
-        versionCode cfgs.versionCode
-        versionName cfgs.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
     }
 
     signingConfigs {
@@ -52,10 +33,6 @@ android {
             keyPassword "ljy019916"
         }
 
-    }
-
-    dataBinding {
-        enabled = true
     }
 
     buildTypes {
@@ -100,13 +77,6 @@ android {
     androidExtensions {
         experimental = true
     }
-
-    android.applicationVariants.all { variant ->
-        variant.outputs.all {
-            outputFileName =  "WanAndroid-" + buildType.name + "-v" +
-                    defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
-        }
-    }
 }
 
 project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -121,39 +91,11 @@ project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
-    testImplementation "junit:junit:$cfgs.junit"
-    androidTestImplementation "androidx.test:runner:$cfgs.test_runner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$cfgs.test_core"
 
-    implementation project(':base')
-    implementation project(':network')
-    implementation project(':tools')
+    implementation project(':baselib:base')
+    implementation project(':baselib:network')
+    implementation project(':baselib:tools')
     implementation project(':room')
-    implementation project(':baseparameter')
-    implementation project(':networkscope')
-
-//    implementation "com.airbnb.android:lottie:$cfgs.lottieVersion"
-    implementation "com.ashokvarma.android:bottom-navigation-bar:$cfgs.navigationVersion"
-    // 查看数据库
-    debugImplementation "com.facebook.stetho:stetho:$cfgs.stetho"
-    // stetho 不实现版本，只是为了防止编译失败
-    releaseImplementation 'com.github.qiduzao:test:v3.0'
-    implementation "androidx.cardview:cardview:$cfgs.cardview"
-    //最新版本
-    implementation "com.youth.banner:banner:$cfgs.banner"
-    implementation "com.github.bumptech.glide:glide:$cfgs.glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$cfgs.glide"
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$cfgs.leakcanary"
-    // 刷新加载控件
-    implementation "com.scwang.smart:refresh-layout-kernel:$cfgs.smart_refresh_layout"      //核心必须依赖
-    implementation "com.scwang.smart:refresh-header-material:$cfgs.smart_refresh_layout"    //谷歌刷新头
-    implementation "com.scwang.smart:refresh-footer-ball:$cfgs.smart_refresh_layout"    //球脉冲加载
-    // webview
-    implementation "com.just.agentweb:agentweb:$cfgs.agentweb"
-
-    implementation "com.google.android.material:material:$cfgs.material"
-    implementation "androidx.constraintlayout:constraintlayout:$cfgs.constraintlayout"
-
-    // 时间选择器
-    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation project(':baselib:baseparameter')
+    implementation project(':baselib:networkscope')
 }

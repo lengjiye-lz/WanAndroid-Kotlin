@@ -1,8 +1,8 @@
 package ${applicaitionId}.${packageName}.model
 
 import ${applicaitionId}.${packageName}.serve.${functionName}Serve
-import com.lengjiye.network.BaseModel
-import com.lengjiye.network.ServeHolder
+import BaseModel
+import ServeHolder
 
 /**
  * @Author: ${author}

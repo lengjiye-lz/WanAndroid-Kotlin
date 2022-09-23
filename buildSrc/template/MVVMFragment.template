@@ -1,6 +1,6 @@
 package ${applicaitionId}.${packageName}.fragment
 
-import com.lengjiye.base.fragment.ParentFragment
+import ParentFragment
 import ${applicaitionId}.R
 import ${applicaitionId}.databinding.Fragment${functionName}Binding
 import ${applicaitionId}.${packageName}.viewmodel.${functionName}ViewModel

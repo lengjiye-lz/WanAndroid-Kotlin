@@ -1,8 +1,6 @@
 package com.lengjiye.code
 
-import android.util.Log
 import androidx.test.runner.AndroidJUnit4
-import com.lengjiye.tools.log.LogTool
 import com.lengjiye.tools.log.logE
 
 import org.junit.Test

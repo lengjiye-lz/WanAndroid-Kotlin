@@ -1,40 +1,131 @@
-ext {
-    // 统一版本号控制
-    cfgs = [
-            compileSdkVersion      : 31,
-            buildToolsVersion      : "29.0.0",
-            minSdkVersion          : 21,
-            targetSdkVersion       : 29,
-            versionCode            : 2,
-            versionName            : "1.0.1",
-            sqlVersion             : 1,
-            lifecycleVersion       : '2.3.1',
-            extensions             : '2.2.0',
-            viewpager2Version      : '1.0.0-alpha05',
-            lottieVersion          : '3.4.0',
-            navigationVersion      : '2.1.0',
-            junit                  : '4.13',
-            test_runner            : '1.1.1',
-            test_core              : '3.3.0-alpha02',
-            appcompat              : "1.2.0",
-            recycleview            : "1.2.1",
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
-            constraintlayout       : "2.0.4",
-            android_ktx            : "1.7.0",
-//            rxjava2                : "2.2.0",
-//            rxandroid2             : "2.1.1",
-            retrofit2              : "2.9.0",
-            retrofit2_gson         : "2.6.1",
-//            retrofit2_rxjava       : "2.6.1",
-            gson                   : "2.8.9",
-            stetho                 : "1.6.0",
-            cardview               : "1.0.0",
-            leakcanary             : "2.0-alpha-3",
-            smart_refresh_layout   : "2.0.0",
-            glide                  : "4.11.0",
-            banner                 : "1.4.10",
-            agentweb               : "4.1.2",
-            material               : "1.1.0",
-            kotlinCoroutinesVersion: "1.4.1",
-    ]
+
+//#定义混淆代码的路径
+def proguardPath = "../proguard/code/proguard-rules.pro"
+
+// 服务器地址
+def base_url_release = "\"https://www.wanandroid.com\""
+
+android {
+
+    compileSdkVersion 31
+    buildToolsVersion "29.0.0"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 2
+        versionName "1.0.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    signingConfigs {
+        wanAndroid {
+            //绝对路径和相对路径都可以
+            storeFile file("../keystores/lengjiye.keystore")  //签名文件
+            storePassword "ljy019916"                       //密码
+            keyAlias "lengjiye"
+            keyPassword "ljy019916"
+        }
+
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+
+        debug {
+            debuggable true
+            // 是否开启混淆
+            minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.wanAndroid
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), proguardPath
+            buildConfigField("String", "BASE_URL", base_url_release)
+        }
+
+        qa {
+            debuggable true
+            minifyEnabled true
+            zipAlignEnabled true
+            // proguard-android.txt是android官方默认配置的一些不能混淆的类
+            //路径 /Android/sdk/tools/proguard/proguard-android.txt
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), proguardPath
+            signingConfig signingConfigs.wanAndroid
+            buildConfigField("String", "BASE_URL", base_url_release)
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), proguardPath
+            signingConfig signingConfigs.wanAndroid
+            buildConfigField("String", "BASE_URL", base_url_release)
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+
+    implementation "com.ashokvarma.android:bottom-navigation-bar:2.1.0"
+    // 查看数据库
+    debugImplementation "com.facebook.stetho:stetho:1.6.0"
+    // stetho 不实现版本，只是为了防止编译失败
+    releaseImplementation 'com.github.qiduzao:test:v3.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    //最新版本
+    implementation "com.youth.banner:banner:1.4.10"
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.9.1"
+    // 刷新加载控件
+    implementation "com.scwang.smart:refresh-layout-kernel:2.0.3"      //核心必须依赖
+    implementation "com.scwang.smart:refresh-header-material:2.0.0"    //谷歌刷新头
+    implementation "com.scwang.smart:refresh-footer-ball:2.0.0"    //球脉冲加载
+    // webview
+    implementation "com.just.agentweb:agentweb:4.1.2"
+
+    implementation "com.google.android.material:material:1.4.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.0"
+
+    // 时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
+    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+
+    // kotlin 协程
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
+    implementation "androidx.core:core-ktx:1.7.0"
+
+    api "androidx.appcompat:appcompat:1.4.0"
+    api "androidx.recyclerview:recyclerview:1.2.1"
+
+    api "com.squareup.retrofit2:retrofit:2.9.0"
+    api "com.squareup.retrofit2:converter-gson:2.9.0"
 }

@@ -16,7 +16,8 @@ import com.lengjiye.code.utils.startActivity
  * applicationContext
  * 也可以通过 MasterApplication.instance 获取
  */
-class CodeApplication : Application(), IApp {
+class CodeApplication : Application(),
+    IApp {
 
     init {
         instance = this

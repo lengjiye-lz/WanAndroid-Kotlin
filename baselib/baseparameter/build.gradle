@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply from: '../../config.gradle'
+android {
+    buildTypes {
+        debug {}
+        release{}
+    }
+}

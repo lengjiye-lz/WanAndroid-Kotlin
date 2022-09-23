@@ -1,11 +1,8 @@
 package com.lengjiye.code.home.adapter
 
 import android.content.Context
-import android.os.Build
-import android.text.Html
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import com.lengjiye.base.recycleview.BaseDBAdapter
 import com.lengjiye.base.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
