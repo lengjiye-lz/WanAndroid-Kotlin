@@ -15,8 +15,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.room:room-runtime:2.4.2"
-    implementation "androidx.room:room-rxjava2:2.4.2"
-    implementation "androidx.room:room-compiler:2.4.2"
-    implementation "com.google.code.gson:gson:2.8.9"
+    api "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    api "com.google.code.gson:gson:2.8.9"
 }
