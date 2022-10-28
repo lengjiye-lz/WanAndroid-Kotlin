@@ -11,12 +11,12 @@ def base_url_release = "\"https://www.wanandroid.com\""
 
 android {
 
-    compileSdkVersion 31
-    buildToolsVersion "29.0.0"
+    compileSdkVersion 33
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 2
         versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,7 +35,6 @@ android {
             keyAlias "lengjiye"
             keyPassword "ljy019916"
         }
-
     }
 
     dataBinding {
@@ -106,8 +105,8 @@ dependencies {
     // webview
     implementation "com.just.agentweb:agentweb:4.1.2"
 
-    implementation "com.google.android.material:material:1.4.0"
-    implementation "androidx.constraintlayout:constraintlayout:2.1.0"
+    implementation "com.google.android.material:material:1.6.1"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.3"
 
     // 时间选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
@@ -116,19 +115,16 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
     // kotlin 协程
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
-    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
 
-    api "androidx.appcompat:appcompat:1.4.0"
-    api "androidx.recyclerview:recyclerview:1.2.1"
-
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 }

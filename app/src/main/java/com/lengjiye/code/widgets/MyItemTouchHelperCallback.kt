@@ -4,7 +4,7 @@ import android.graphics.Canvas
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.lengjiye.base.recycleview.BaseDBAdapter
+import com.lengjiye.code.recycleview.BaseDBAdapter
 import com.lengjiye.tools.log.logE
 
 

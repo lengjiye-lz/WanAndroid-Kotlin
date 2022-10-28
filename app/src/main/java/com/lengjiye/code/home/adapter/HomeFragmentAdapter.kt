@@ -3,8 +3,8 @@ package com.lengjiye.code.home.adapter
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import com.lengjiye.base.recycleview.BaseDBAdapter
-import com.lengjiye.base.recycleview.BaseDBViewHolder
+import com.lengjiye.code.recycleview.BaseDBAdapter
+import com.lengjiye.code.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.constant.HomeFragmentAdapterType
 import com.lengjiye.code.databinding.ItemHomeBinding

@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lengjiye.base.fragment.LazyParentFragment
-import com.lengjiye.base.recycleview.HeaderAndFooterWrapper
+import com.lengjiye.code.recycleview.HeaderAndFooterWrapper
 import com.lengjiye.code.R
 import com.lengjiye.code.base.BaseActivity
 import com.lengjiye.code.databinding.FragmentHomeBinding

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * recycleview item 间隔
+ * com.lengjiye.code.recycleview item 间隔
  */
 class SpaceDecoration : RecyclerView.ItemDecoration {
 

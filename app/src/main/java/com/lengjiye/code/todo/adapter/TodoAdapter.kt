@@ -2,8 +2,8 @@ package com.lengjiye.code.todo.adapter
 
 import android.content.Context
 import android.view.View
-import com.lengjiye.base.recycleview.BaseDBAdapter
-import com.lengjiye.base.recycleview.BaseDBViewHolder
+import com.lengjiye.code.recycleview.BaseDBAdapter
+import com.lengjiye.code.recycleview.BaseDBViewHolder
 import com.lengjiye.code.R
 import com.lengjiye.code.databinding.ItemTodoBinding
 import com.lengjiye.code.todo.bean.TodoData
