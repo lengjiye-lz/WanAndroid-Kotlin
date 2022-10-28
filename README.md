@@ -45,5 +45,8 @@
   1. 升级依赖库
   2. 去掉rxjava2，改为协程和Flow。因为rxjava一直以来只用到线程切换功能，其他功能基本没有用到，所以舍弃rxjava2。
   3. 修改网络请求框架，改为okhttp3 + retrofit2 + Flow
+* 2.0.2
+  1. 升级依赖库
+  2. 把基础库改成aar，提高编译速度。依赖库地址[base-lib](https://github.com/lengjiye-lz/base-lib)
 
 ![Image text](./image/no_bug.jpg)
