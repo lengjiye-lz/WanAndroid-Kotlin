@@ -90,12 +90,7 @@ project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
-
-    implementation project(':baselib:base')
-    implementation project(':baselib:network')
-    implementation project(':baselib:tools')
     implementation project(':room')
-    implementation project(':baselib:baseparameter')
-    implementation project(':baselib:networkscope')
+    implementation project(':common')
+
 }
