@@ -47,6 +47,6 @@
   3. 修改网络请求框架，改为okhttp3 + retrofit2 + Flow
 * 2.0.2
   1. 升级依赖库
-  2. 把基础库改成aar，提高编译速度。依赖库地址[base-lib](https://github.com/lengjiye-lz/base-lib)
+  2. 把基础库改成aar，提高编译速度。依赖库地址[base-lib](https://gitee.com/lengjiye/base-lib)
 
 ![Image text](./image/no_bug.jpg)
