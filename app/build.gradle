@@ -90,7 +90,5 @@ project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    implementation project(':room')
     implementation project(':common')
-
 }

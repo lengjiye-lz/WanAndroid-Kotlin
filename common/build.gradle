@@ -11,3 +11,7 @@ android {
         }
     }
 }
+
+dependencies {
+    api project(':room')
+}
