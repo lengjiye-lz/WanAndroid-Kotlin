@@ -32,3 +32,9 @@ data class TodoData(
     var type: Int, // 0
     val userId: Int // 1448
 ) : Parcelable
+
+@Parcelize
+data class TestBean(
+    val userId: Int, // 1448
+    val type: Int // 1448
+) : Parcelable

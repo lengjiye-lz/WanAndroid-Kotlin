@@ -35,6 +35,12 @@
                 android:windowSoftInputMode="stateAlwaysHidden|stateHidden" />
 
         <activity
+                android:name=".test.InjectActivity"
+                android:configChanges="keyboard|screenSize|orientation"
+                android:launchMode="singleTop"
+                android:windowSoftInputMode="stateAlwaysHidden|stateHidden" />
+
+        <activity
                 android:name=".me.activity.RankTableActivity"
                 android:configChanges="keyboard|screenSize|orientation"
                 android:launchMode="singleTop" />

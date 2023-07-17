@@ -1,5 +1,6 @@
 package com.lengjiye.code.main.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -16,7 +17,11 @@ import com.lengjiye.code.main.manager.MainFragmentManager
 import com.lengjiye.code.main.viewmodel.MainViewModel
 import com.lengjiye.code.project.fragment.ProjectFragment
 import com.lengjiye.code.share.fragment.ShareFragment
+import com.lengjiye.code.system.bean.TreeBean
 import com.lengjiye.code.system.fragment.SystemFragment
+import com.lengjiye.code.test.InjectActivity
+import com.lengjiye.code.todo.bean.TestBean
+import com.lengjiye.code.todo.bean.TodoData
 import com.lengjiye.code.utils.ActivityUtils
 import com.lengjiye.code.utils.ToolBarUtils
 import com.lengjiye.tools.log.LogServiceInstance
@@ -40,6 +45,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         initBottomNavigation()
         ToolBarUtils.getSearchTitle(findViewById(R.id.toolbar)).setOnClickListener {
             ActivityUtils.startSearchActivity(this)
+        }
+
+        mBinding.tvTest.setOnClickListener {
+            val intent = Intent(this, InjectActivity::class.java)
+            val arr = arrayOf(TestBean(1, 2), TestBean(2, 2))
+            intent.putExtra("test1", "asdasdc")
+            intent.putExtra("test2", 1)
+            intent.putExtra("test3", true)
+            intent.putExtra("test4", 1.111110f)
+            intent.putExtra("test5", 2.toDouble())
+            intent.putExtra("test6", arr)
+            startActivity(intent)
         }
 
     }
@@ -122,7 +139,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         if (fragment.isAdded) {
             supportFragmentManager.beginTransaction().hide(mTempFragment).show(fragment).commit()
         } else {
-            supportFragmentManager.beginTransaction().hide(mTempFragment).add(R.id.f_container, fragment).commit()
+            supportFragmentManager.beginTransaction().hide(mTempFragment)
+                .add(R.id.f_container, fragment).commit()
         }
         mTempFragment = fragment
     }
@@ -136,27 +154,32 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 .addItem(
                     BottomNavigationItem(R.drawable.ic_home_2cac77_24dp_pre, R.string.s_1)
                         .setInactiveIconResource(R.drawable.ic_home_a4aca9_24dp_nor)
-                        .setActiveColorResource(R.color.c_4697fa).setInActiveColorResource(R.color.c_99)
+                        .setActiveColorResource(R.color.c_4697fa)
+                        .setInActiveColorResource(R.color.c_99)
                 )
                 .addItem(
                     BottomNavigationItem(R.drawable.ic_data_usage_2cac77_24dp_pre, R.string.s_33)
                         .setInactiveIconResource(R.drawable.ic_data_usage_a4aca9_24dp_nor)
-                        .setActiveColorResource(R.color.c_4697fa).setInActiveColorResource(R.color.c_99)
+                        .setActiveColorResource(R.color.c_4697fa)
+                        .setInActiveColorResource(R.color.c_99)
                 )
                 .addItem(
                     BottomNavigationItem(R.drawable.ic_device_hub_2cac77_24dp_pre, R.string.s_2)
                         .setInactiveIconResource(R.drawable.ic_device_hub_a4aca9_24dp_nor)
-                        .setActiveColorResource(R.color.c_4697fa).setInActiveColorResource(R.color.c_99)
+                        .setActiveColorResource(R.color.c_4697fa)
+                        .setInActiveColorResource(R.color.c_99)
                 )
                 .addItem(
                     BottomNavigationItem(R.drawable.ic_mode_edit_2cac77_24dp_pre, R.string.s_3)
                         .setInactiveIconResource(R.drawable.ic_mode_edit_a4aca9_24dp_nor)
-                        .setActiveColorResource(R.color.c_4697fa).setInActiveColorResource(R.color.c_99)
+                        .setActiveColorResource(R.color.c_4697fa)
+                        .setInActiveColorResource(R.color.c_99)
                 )
                 .addItem(
                     BottomNavigationItem(R.drawable.ic_person_2cac77_24dp_pre, R.string.s_4)
                         .setInactiveIconResource(R.drawable.ic_person_a4aca9_24dp_nor)
-                        .setActiveColorResource(R.color.c_4697fa).setInActiveColorResource(R.color.c_99)
+                        .setActiveColorResource(R.color.c_4697fa)
+                        .setInActiveColorResource(R.color.c_99)
                 )
                 .initialise()
 

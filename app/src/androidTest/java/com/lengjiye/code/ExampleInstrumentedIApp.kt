@@ -1,10 +1,13 @@
 package com.lengjiye.code
 
-import androidx.test.runner.AndroidJUnit4
+import android.util.Log
 import com.lengjiye.tools.log.logE
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.runBlocking
 
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.*
 
 
 /**
@@ -30,13 +33,13 @@ import org.junit.runner.RunWith
  * ..................佛祖开光 ,永无BUG.................
  */
 @Suppress("DEPRECATION")
-@RunWith(AndroidJUnit4::class)
+@RunWith(androidx.test.ext.junit.runners.AndroidJUnit4::class)
 class ExampleInstrumentedIApp {
     var list = arrayListOf<String>()
 
     @Test
     fun useAppContext() {
-        testList()
+        quickSort()
     }
 
     /**
@@ -57,19 +60,19 @@ class ExampleInstrumentedIApp {
     private fun forEachTest() {
         val array = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
         array.forEach {
-            logE( "forEach:$it")
+            logE("forEach:$it")
             if (it == "2") return@forEachTest
-            logE( "forEach:$it")
+            logE("forEach:$it")
 
             for (i in 1..4) {
-                logE( "for:$i")
+                logE("for:$i")
                 if (i == 2) {
                     break
                 }
-                logE( "for:$i")
+                logE("for:$i")
             }
         }
-        logE( "forEach:")
+        logE("forEach:")
     }
 
     /**
@@ -78,7 +81,7 @@ class ExampleInstrumentedIApp {
     private fun forTest() {
         loop@ for (i in 1..4) {
             loop1@ for (j in 1..5) {
-                logE( "for:$j")
+                logE("for:$j")
                 if (j == 1) {
                     continue@loop
                 }
@@ -94,7 +97,7 @@ class ExampleInstrumentedIApp {
     private fun forTest1() {
         val list = listOf<String>("泰国", "新加坡", "印度尼西亚")
         for ((index: Int, element: String) in list.withIndex()) {
-            logE( "第$index 个是$element")
+            logE("第$index 个是$element")
         }
     }
 
@@ -106,7 +109,7 @@ class ExampleInstrumentedIApp {
     private fun forTest2() {
         val list = listOf<String>("泰国", "新加坡", "印度尼西亚")
         for (i in list.indices) {
-            logE( "第$i 个元素")
+            logE("第$i 个元素")
         }
     }
 
@@ -116,7 +119,7 @@ class ExampleInstrumentedIApp {
      */
     private fun repeatTest() {
         repeat(4) {
-            logE( "第个元素")
+            logE("第个元素")
         }
     }
 
@@ -126,7 +129,7 @@ class ExampleInstrumentedIApp {
     private fun whileTest() {
         var i = 0
         while (i < 10) {
-            logE( "第$i 个元素")
+            logE("第$i 个元素")
             i++
         }
     }
@@ -135,7 +138,7 @@ class ExampleInstrumentedIApp {
     fun arrayTest() {
         val array = Array(10) { num -> num * 10 }
         array.forEach {
-            logE( "it:$it")
+            logE("it:$it")
         }
     }
 
@@ -190,7 +193,42 @@ class ExampleInstrumentedIApp {
 //        for (value in map.values) {
 //            logE("test", "value:$value")
 //        }
-        testList()
+//        testList()
+        val flow1 =
+            mutableListOf<Int>().apply {
+                add(1)
+                add(2)
+                add(3)
+                add(4)
+                add(5)
+            }.asFlow()
+
+
+        val flow2 =
+            mutableListOf<String>().apply {
+                add("A")
+                add("B")
+                add("C")
+                add("D")
+                add("E")
+            }.asFlow()
+        val flow3 = mutableListOf<Flow<Any>>().apply {
+            add(flow1)
+            add(flow2)
+        }.asFlow()
+
+        runBlocking {
+            Log.e("lz", "it:${11111}")
+            flowOf(flow1, flow2).flattenMerge(1).collect {
+                Log.e("lz", "flattenMerge:${it}")
+            }
+
+            flow3.flattenConcat().collect {
+                Log.e("lz", "flattenConcat:${it}")
+            }
+            Log.e("lz", "it:${22222}")
+        }
+
     }
 
     fun testList() {
@@ -209,6 +247,99 @@ class ExampleInstrumentedIApp {
             }
         }).start()
     }
+
+    /**
+     * 归并排序
+     */
+    fun testGuiBing() {
+        val array = arrayOf(8, 4, 2, 5, 6, 3, 1, 7, 9, 0)
+        val temp = arrayOfNulls<Int>(array.size)
+        merges(array, 0, array.size - 1, temp)
+        logE("array:${Arrays.toString(array)}")
+    }
+
+    private fun merges(array: Array<Int>, left: Int, right: Int, temp: Array<Int?>) {
+        if (left < right) {
+            val mid = (left + right) / 2
+            merges(array, left, mid, temp)
+            merges(array, mid + 1, right, temp)
+            merge(array, left, mid, right, temp)
+        }
+    }
+
+
+    private fun merge(array: Array<Int>, left: Int, mid: Int, right: Int, temp: Array<Int?>) {
+        var i = left
+        var j = mid + 1
+        var t = 0
+        while (i <= mid && j <= right) {
+            if (array[i] < array[j]) {
+                temp[t] = array[i]
+                i += 1
+                t += 1
+            } else {
+                temp[t] = array[j]
+                j += 1
+                t += 1
+            }
+        }
+        while (i <= mid) {
+            temp[t] = array[i]
+            i += 1
+            t += 1
+        }
+
+        while (j <= right) {
+            temp[t] = array[j]
+            j += 1
+            t += 1
+        }
+
+        t = 0
+        var tempLeft = left
+        while (tempLeft <= right) {
+            array[tempLeft] = temp[t] ?: 0
+            t += 1
+            tempLeft += 1
+        }
+    }
+
+    private fun quickSort() {
+        val array = arrayOf(10, 3, 5, 7, 4, 3, 8, 9, 0, 1, 2)
+        quickSort(array, 0, array.size - 1)
+        logE("array:${Arrays.toString(array)}")
+    }
+
+    private fun quickSort(array: Array<Int>, low: Int, high: Int) {
+        if (low >= high) {
+            return
+        }
+        val pivot = partition(array, low, high)
+        quickSort(array, low, pivot - 1)
+
+        quickSort(array, pivot + 1, high)
+
+    }
+
+    private fun partition(array: Array<Int>, low: Int, high: Int): Int {
+        var lowt = low
+        var hight = high
+        val pivot = array[lowt]
+        while (lowt < hight) {
+            while (lowt < hight && array[hight] >= pivot) {
+                hight--
+            }
+            array[lowt] = array[hight]
+            while (lowt < hight && array[lowt] <= pivot) {
+                lowt++
+            }
+            array[hight] = array[lowt]
+        }
+        array[lowt] = pivot
+        return lowt
+    }
+
+
 }
 
 /**
