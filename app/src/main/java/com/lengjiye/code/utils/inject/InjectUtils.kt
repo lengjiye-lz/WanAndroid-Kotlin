@@ -23,6 +23,9 @@ object InjectUtils {
         }
     }
 
+    /**
+     * 笨办法
+     */
     private fun getClassType(
         type: String?,
         name: String,
@@ -69,6 +72,9 @@ object InjectUtils {
     }
 
 
+    /**
+     * 反射加注解
+     */
     fun injectExtras1(activity: AppCompatActivity) {
         val cls = activity.javaClass
         val declaredFields = cls.declaredFields
